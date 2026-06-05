@@ -344,10 +344,10 @@
             ></modal-cadastro-user>
             
             <header class="header-superior">
-                <img class="logo" src="src/assets/letter-logo.svg" alt="letter-logo">
+                <img class="logo" src="letter-logo.svg" alt="letter-logo">
                 <div class="item-sync">
                     <p style="margin-right:.4rem;">Em Aberto</p>
-                    <img class="logo-sync" src="src/assets/sync.svg" alt="letter-logo">
+                    <img class="logo-sync" src="sync.svg" alt="letter-logo">
                 </div>
                 <botao-tema></botao-tema>
             </header>
