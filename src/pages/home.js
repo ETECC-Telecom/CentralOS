@@ -228,10 +228,10 @@ export class Home_Page extends LitElement {
             ></modal-cadastro-user>
             
             <header class="header-superior">
-                <img class="logo" src="/public/letter-logo.svg" alt="letter-logo">
+                <img class="logo" src="public/letter-logo.svg" alt="letter-logo">
                 <div class="item-sync">
                     <p style="margin-right:.4rem;">Em Aberto</p>
-                    <img class="logo-sync" src="/public/sync.svg" alt="letter-logo">
+                    <img class="logo-sync" src="public/sync.svg" alt="letter-logo">
                 </div>
                 <botao-tema></botao-tema>
             </header>
