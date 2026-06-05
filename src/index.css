@@ -1,24 +1,75 @@
 :root {
-  color-scheme: light dark;
-  background-color: #ffffff;
+    /*Variáveis do Sistema*/
+    --background-color: #F5F5F5;
+    --header-color: #e4002b;
+    --cards-background: #FFFFFF;
+    --text-color: #212121;
+    --destaque-color: #ff3838;
+    --pattern-background: url(/src/assets/pattern-black.webp);
+    
+
+    /*Variáveis de Formulários*/
+    --btn-background-color: #F5F5F5;
+    --btn-text-background-color: #212121;
+    --btn-border-color: #E0E0E0;
+
+
+    --primary-color: #FFFFFF;
+    --secundary-color: #b81202;
+    --black-color: #1c0a0a;
+    --white-color: #FFFFFF;
+    --background-dark: #8B0000;
+    --background-white: #FFFFFF;
+    --border-color: #E0E0E0;
+    --button-bg: #555555;
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    background-color: #16171d;
-  }
+/* Tema Escuro (ativado pela classe no body) */
+body.dark-theme {
+    /*Variáveis do Sistema*/
+    --background-color: #121212;
+    --header-color: #1E1E1E;
+    --cards-background: #252525;
+    --text-color: #FFFFFF;
+    --destaque-color: #C62828;
+    --pattern-background: url(/src/assets/pattern-white.webp);
+    
+    /*Variáveis de Formulários*/
+    --btn-background-color: #121212;
+    --btn-text-background-color: #F5F5F5;
+    --btn-border-color: #212121;
+
+
+    --primary-color: #FFFFFF;
+    --secundary-color: #b81202;
+    --black-color: #1c0a0a;
+    --white-color: #FFFFFF;
+    --background-dark: #8B0000;
+    --background-white: #FFFFFF;
+    --border-color: #E0E0E0;
+    --button-bg: #fa0000;
 }
+
+
+@font-face {
+    font-family: 'Urbanist';
+    /* Nome que você vai usar no CSS */
+    src: url('assets/Urbanist-VariableFont_wght.ttf');
+    /* Caminho do arquivo */
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 
 body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 320px;
-  min-height: 100svh;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+    margin: 0;
+    font-family: 'Urbanist';
+    background-color: var(--background-color);
+    background-image: var(--pattern-background);
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 4rem;
+    
 }

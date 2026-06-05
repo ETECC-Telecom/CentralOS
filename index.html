@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#b81202">
@@ -8,11 +9,23 @@
     <link rel="manifest" href="./manifest.webmanifest">
     <title>Central OS</title>
     <link rel="stylesheet" href="./src/index.css" />
-    <script type="module" src="/src/my-element.js"></script>
-  </head>
-  <body>
-    <my-element>
-      <h1>Get started</h1>
-    </my-element>
-  </body>
+    <script type="module" src="/src/main.js"></script>
+
+</head>
+
+<body>
+    <main-element>
+
+    </main-element>
+
+
+</body>
+<script>
+    // Verifica se o usuário já tinha escolhido o tema escuro antes
+    const temaSalvo = localStorage.getItem('theme');
+    if (temaSalvo === 'dark') {
+        document.body.classList.add('dark-theme');
+    }
+</script>
+
 </html>

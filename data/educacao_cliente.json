@@ -1,0 +1,98 @@
+[
+	{
+		"titulo": "Necessidade de Reiniciar o Roteador",
+		"descricao": "Recomenda-se reiniciar o equipamento periodicamente (a cada 3 a 7 dias) para limpar o cache e otimizar o processamento interno. Essa ação previne travamentos e garante que o dispositivo opere com a máxima eficiência e estabilidade na rede."
+	},
+	{
+		"titulo": "Diferença entre as Redes 2.4 GHz e 5 GHz do WiFi",
+		"descricao": "A rede 2.4 GHz oferece maior alcance, enquanto a 5 GHz entrega velocidades superiores em curtas distâncias. Utilize a 5 GHz para streaming e jogos próximos ao roteador, e a 2.4 GHz para dispositivos distantes ou automação."
+	},
+	{
+		"titulo": "Distribuição de Banda Larga entre os ativos",
+		"descricao": "A velocidade contratada é compartilhada entre todos os dispositivos conectados simultaneamente à rede. O consumo elevado em um único aparelho, como downloads ou vídeos em 4K, pode reduzir o desempenho dos demais ativos conectados."
+	},
+	{
+		"titulo": "Problemas com TVBox e IPTV não Homologados",
+		"descricao": "Equipamentos não homologados pela Anatel podem apresentar instabilidade de conexão e riscos à segurança de seus dados. O uso desses dispositivos impacta o desempenho geral da rede e não possui garantia de suporte ou qualidade."
+	},
+	{
+		"titulo": "Manutenção da Limpeza dos Aparelhos",
+		"descricao": "Mantenha os aparelhos em locais ventilados e livres de poeira para evitar o superaquecimento dos componentes internos. Utilize apenas panos secos e evite produtos líquidos que possam causar danos permanentes ao hardware do roteador."
+	},
+	{
+		"titulo": "Como Evitar Interferências",
+		"descricao": "Posicione o roteador longe de micro-ondas, telefones sem fio e superfícies metálicas para reduzir a degradação do sinal Wi-Fi. Barreiras físicas como paredes de alvenaria e espelhos também bloqueiam a propagação, afetando a cobertura total."
+	},
+	{
+		"titulo": "Como Realizar Testes de Velocidade",
+		"descricao": "Para resultados precisos, realize o teste via cabo de rede em um dispositivo compatível com a velocidade contratada. Certifique-se de que nenhum outro aparelho esteja consumindo banda ou realizando atualizações durante a medição técnica."
+	},
+	{
+		"titulo": "Como Realizar Testes de Lentidão",
+		"descricao": "Identifique se a lentidão ocorre em um dispositivo específico ou em toda a rede para isolar possíveis falhas de hardware. Teste a conexão via cabo e reinicie o equipamento para verificar se a instabilidade persiste antes de acionar o suporte."
+	},
+	{
+		"titulo": "Necessidade de Cabear Ativos e o Porquê",
+		"descricao": "Conectar dispositivos fixos via cabo de rede garante estabilidade máxima e entrega integral da velocidade sem interferências externas. O cabeamento libera o espectro Wi-Fi para dispositivos móveis, melhorando a performance geral da rede."
+	},
+	{
+		"titulo": "Problema no Uso de Repetidores",
+		"descricao": "O uso de repetidores Wi-Fi convencionais pode reduzir a velocidade pela metade e aumentar a latência da conexão. Para expandir a cobertura com qualidade, recomendamos a instalação de sistemas Mesh ou pontos de acesso cabeados."
+	},
+	{
+		"titulo": "WiFi sem Rede",
+		"descricao": "A situação 'conectado, sem internet' ocorre quando há sinal entre o dispositivo e o roteador, mas a navegação falha por travamento ou instabilidade na rede. Recomendamos reiniciar o equipamento para tentar restabelecer o acesso de forma imediata e eficaz."
+	},
+	{
+		"titulo": "Oscilações em Períodos Específicos",
+		"descricao": "Instabilidades em horários determinados podem indicar interferências externas ou saturação de canais na sua região. Caso note um padrão, informe ao técnico os períodos exatos para uma análise de espectro e possível troca de canal."
+	},
+	{
+		"titulo": "Quantidade de Ativos conectados ao Roteador",
+		"descricao": "O excesso de dispositivos conectados simultaneamente sobrecarrega o processador do roteador, gerando lentidão e quedas de conexão. Avalie a capacidade do equipamento para suportar a demanda total de celulares, TVs e itens inteligentes."
+	},
+	{
+		"titulo": "Segundo Ponto",
+		"descricao": "A instalação de um segundo ponto de acesso via cabo é a solução ideal para ambientes amplos ou com muitas barreiras. Isso garante que o sinal chegue com 100% de qualidade em áreas onde o roteador principal não possui alcance."
+	},
+	{
+		"titulo": "Ativos Antigos",
+		"descricao": "Dispositivos com tecnologias de gerações anteriores podem apresentar dificuldades em processar altas velocidades ou manter a estabilidade da conexão sem fio. Essas limitações de hardware podem resultar em lentidões pontuais e quedas de sinal durante o uso diário."
+	},
+	{
+		"titulo": "Manutenção de Cabos de Rede",
+		"descricao": "Verifique periodicamente se os conectores estão firmes e se o cabo não apresenta dobras ou rompimentos visíveis. Evite passar cabos de rede junto à fiação elétrica para prevenir interferências eletromagnéticas que degradam o sinal."
+	},
+	{
+		"titulo": "Problemas do Router em Área Externa",
+		"descricao": "O roteador não deve ser instalado em locais expostos a sol, chuva ou umidade, sob risco de danos permanentes. Avarias causadas por exposição indevida ou mau uso do hardware podem acarretar custos de reposição ao cliente."
+	},
+	{
+		"titulo": "Interferência da Rede 2.4 em Apartamentos",
+		"descricao": "Em edifícios, a alta concentração de redes vizinhas na frequência 2.4 GHz causa saturação e quedas constantes. Priorize o uso da frequência 5 GHz e selecione canais menos congestionados para mitigar o problema de interferência."
+	},
+	{
+		"titulo": "Treinamento Básico de Análise de Rede",
+		"descricao": "Entender o funcionamento básico da rede ajuda na identificação rápida de problemas comuns de conectividade. Orientamos observar as luzes do equipamento e realizar testes simples antes de solicitar uma visita técnica presencial."
+	},
+	{
+		"titulo": "WiFiman: Análise de Canal e Distribuição",
+		"descricao": "O WiFiman é uma ferramenta técnica que mapeia a cobertura do sinal e identifica interferências de redes vizinhas em cada ambiente. O técnico utiliza este aplicativo para selecionar o canal de frequência mais limpo e otimizar a estabilidade do seu Wi-Fi."
+	},
+	{
+		"titulo": "SpeedTest: Teste de Velocidade",
+		"descricao": "O SpeedTest é a ferramenta padrão para validar se a entrega da banda está conforme o plano contratado. Lembre-se que testes via Wi-Fi sofrem variações naturais, sendo o teste via cabo o único método para aferição técnica oficial."
+	},
+	{
+		"titulo": "Downdetector",
+		"descricao": "O site Downdetector permite verificar em tempo real se há falhas gerais nos serviços da operadora ou em aplicativos específicos. Utilize esta consulta para distinguir se a falha é local ou um problema sistêmico externo de grande escala."
+	},
+	{
+		"titulo": "Recomendação de Melhoria na Rede Interna",
+		"descricao": "Durante o atendimento, orientamos sobre a possibilidade de melhorias na rede interna para melhor atender à demanda atual do ambiente. Essas melhorias podem incluir ajustes como reorganização de cabeamento, substituição do roteador por um modelo mais adequado ou ampliação da cobertura Wi-Fi (ex: rede mesh). A implementação pode ser realizada por conta própria ou, se preferir, com o apoio do nosso time de TI."
+	},
+	{
+		"titulo": "Avaliação de TI para Estrutura Empresarial",
+		"descricao":"Identificamos que o ambiente pode se beneficiar de uma estrutura de rede mais robusta, adequada para uso empresarial. Nesse caso, disponibilizamos uma avaliação técnica gratuita com nosso time de TI, que realizará uma análise no local e fornecerá um orçamento para uma possível reestruturação da rede. A execução das melhorias poderá ser feita conosco ou com um profissional de sua preferência."
+	}
+]
