@@ -1,4 +1,6 @@
 import { LitElement, html, css, unsafeCSS} from 'lit';
+import globalStyle from "./modal_cadastro_usuario.css?inline";
+
 import { Cadastrar_Usuario } from '../../controller/cadastrar_usuario';
 
 export class Modal_Cadastro_Usuario extends LitElement {
@@ -6,116 +8,9 @@ export class Modal_Cadastro_Usuario extends LitElement {
         aberto: { type: Boolean } 
     };
 
-    static styles = [
-        css`
-            #container {
-                position: fixed; 
-                top: 0;
-                left: 0;
-                padding: 2rem;
-                background-color: rgba(0, 0, 0, 0.6);
-                width: 100vw;  
-                height: 100vh; 
-                display: flex; 
-                flex-direction: column; 
-                justify-content: center;
-                align-items: center;
-                box-sizing: border-box;    
-
-                /* --- AJUSTES PARA A TRANSIÇÃO --- */
-                opacity: 0;
-                visibility: hidden;
-                transition: opacity 0.3s ease, visibility 0.3s ease;
-                z-index: 9999; /* Garante que fique por cima */
-            }
-
-            /* Quando o container receber a classe .visivel, ele aparece suavemente */
-            #container.visivel {
-                opacity: 1;
-                visibility: visible;
-            }
-
-            #modal {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                background-color: var(--background-white);
-                color: var(--black-color);
-                border-radius: 2rem;
-                text-align: center;
-                border-color: var(--border-color);
-                border-style: solid;
-                border-width: 2px;
-                box-shadow: 0 20px 50px 0 rgba(255, 255, 255, 0.22);
-                box-sizing: border-box;
-
-                /* --- AJUSTE: Efeito de 'subir' ou 'brotar' --- */
-                transform: scale(0.9) translateY(20px);
-                transition: transform 0.3s ease;
-            }
-
-            /* Quando o container estiver visível, o modal vai para a posição final */
-            #container.visivel #modal {
-                transform: scale(1) translateY(0);
-            }
-            
-            #modal svg {
-                fill: var(--black-color);
-                height: 5rem;
-            }
-            input {
-                margin: 1rem;
-                font-size: 1rem;
-                width: 15rem;
-                padding: 0.5rem;
-                background-color: var(--white-color);
-                color: var(--black-color);
-                border-radius: 100rem;
-                border: solid;
-                border-width: 0.1rem;
-                border-color: var(--border-color);
-                
-            }
-            button {
-                margin: 1rem;
-                font-size: 1rem;
-                width: 15rem;
-                padding: 0.5rem;
-                background-color: var(--background-dark);
-                color: var(--white-color);
-                border-radius: 100rem;
-                border: none;
-                transition: background-color 0.1s ease;
-            }
-            button:hover {
-                background-color: var(--secundary-color);
-                color: var(--white-color);
-            }
-            #close-button {
-                display: flex;
-                justify-content: flex-end;   
-                align-items: center;             
-                height: 2rem;
-                padding: .9rem;
-                margin: 0;
-            }
-            #close-button a svg {
-                fill: rgb(187, 0, 0);
-                width: 2.5rem;
-                transition: transform 0.2s ease;
-                transform-origin: center;
-            }
-            #close-button a svg:hover {
-                transform: scale(1.2);
-            }
-
-            @media (min-width: 1024px) {
-                #modal {
-                    width: 50%;
-                }
-            }
-        `
-    ];
+    static get styles(){
+        return css`${unsafeCSS(globalStyle)}`;
+    }
 
     constructor() {
         super();
@@ -132,12 +27,18 @@ export class Modal_Cadastro_Usuario extends LitElement {
             return;
         }
         Cadastrar_Usuario(nome);
+        this._dispararFechar()
+    }
+    _dispararFechar() {
         this.aberto = false;
+        // Avisa o componente pai (Home) que o estado mudou aqui dentro
+        this.dispatchEvent(new CustomEvent('ao-fechar', {
+        bubbles: true,
+        composed: true
+        }));
     }
 
-    Btn_Fechar_modal(e) {
-        this.aberto = false;
-    }
+
 
     render() {
         // REMOVIDO: if (!this.aberto) return html``;
@@ -146,7 +47,7 @@ export class Modal_Cadastro_Usuario extends LitElement {
             <div id="container" class="${this.aberto ? 'visivel' : ''}">
                 <div id="modal">
                     <div id="close-button">
-                        <a @click="${this.Btn_Fechar_modal}">
+                        <a @click="${this._dispararFechar}">
                             <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 143.93 143.93"><path d="M-231.1 674.3a69 69 0 0 0-97.52 0 69 69 0 0 0 0 97.52 69 69 0 0 0 97.52 0 69 69 0 0 0 0-97.52m-4.68 4.68a62.3 62.3 0 0 1 0 88.16 62.3 62.3 0 0 1-88.16 0 62.3 62.3 0 0 1 0-88.16 62.3 62.3 0 0 1 88.16 0m-10.68 8.72a3.3 3.3 0 0 0-4.68 0l-30.47 30.47-30.47-30.47a3.3 3.3 0 0 0-4.67 0 3.3 3.3 0 0 0 0 4.68l30.46 30.46-30.46 30.47a3.3 3.3 0 0 0 0 4.68 3.3 3.3 0 0 0 4.67 0l30.47-30.47 30.47 30.47a3.3 3.3 0 0 0 4.68 0 3.3 3.3 0 0 0 0-4.68l-30.47-30.47 30.47-30.46a3.3 3.3 0 0 0 0-4.68" style="baseline-shift:baseline;display:inline;overflow:visible;opacity:1;vector-effect:none;stroke-linecap:round;stroke-miterlimit:3.9;stop-color:#000;stop-opacity:1" transform="translate(351.83 -651.1)"/></svg>
                         </a>
                     </div>

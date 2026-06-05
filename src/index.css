@@ -6,22 +6,19 @@
     --text-color: #212121;
     --destaque-color: #ff3838;
     --pattern-background: url(/src/assets/pattern-black.webp);
+    --box-shadow: 0 20px 50px 0 rgba(255, 255, 255, 0.22);
     
 
     /*Variáveis de Formulários*/
-    --btn-background-color: #F5F5F5;
+    --btn-background-color: #fefcf4;
     --btn-text-background-color: #212121;
     --btn-border-color: #E0E0E0;
 
-
-    --primary-color: #FFFFFF;
-    --secundary-color: #b81202;
-    --black-color: #1c0a0a;
-    --white-color: #FFFFFF;
-    --background-dark: #8B0000;
-    --background-white: #FFFFFF;
-    --border-color: #E0E0E0;
-    --button-bg: #555555;
+    /*Escala de Textos*/
+    --header-1: 2rem;
+    --header-2: 1.5rem;
+    --header-3: 1.4rem;
+    --paragraph: 0.9rem;
 
 }
 
@@ -34,21 +31,12 @@ body.dark-theme {
     --text-color: #FFFFFF;
     --destaque-color: #C62828;
     --pattern-background: url(/src/assets/pattern-white.webp);
+    --box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.22);
     
     /*Variáveis de Formulários*/
-    --btn-background-color: #121212;
+    --btn-background-color: #191919;
     --btn-text-background-color: #F5F5F5;
     --btn-border-color: #212121;
-
-
-    --primary-color: #FFFFFF;
-    --secundary-color: #b81202;
-    --black-color: #1c0a0a;
-    --white-color: #FFFFFF;
-    --background-dark: #8B0000;
-    --background-white: #FFFFFF;
-    --border-color: #E0E0E0;
-    --button-bg: #fa0000;
 }
 
 

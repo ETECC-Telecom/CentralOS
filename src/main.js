@@ -2,9 +2,8 @@ import { LitElement, html, css, unsafeCSS } from 'lit';
 import { Router } from '@lit-labs/router';
 
 //Import das páginas
-import { Home_Page } from './pages/home';
-import { Modal_Cadastro_Usuario } from './components/modal_cadastro_usuario/modal_cadastro_usuario';
-
+import { Home_Page } from './pages/home/home';
+import { ADD_OS } from './pages/add_os/add_os';
 
 // Detecta se estamos no GitHub Pages ou Localhost
 const BASE_PATH = window.location.hostname.includes('github.io')
@@ -27,8 +26,8 @@ export class Main extends LitElement {
                 render: () => html`<home-page url_config="${BASE_PATH}"></home-page>`,
             },
             {
-                path: `${BASE_PATH}/modal`,
-                render: () => html`<modal-cadastro-user></modal-cadastro-user>`,
+                path: `${BASE_PATH}/addos`,
+                render: () => html`<add-os></add-os>`,
             },
             {
                 path: '/perfil/:name',
