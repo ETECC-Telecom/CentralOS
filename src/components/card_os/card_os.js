@@ -5,7 +5,10 @@ export class Card_OS extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
     static properties = {
         nome: { type: String },
-        url_config: { type: String }
+        url_config: { type: String },
+        titulo: {type: String},
+        descricao: {type: String},
+        icone: {type: Object}
     };
 
     static get styles() {
@@ -15,16 +18,20 @@ export class Card_OS extends LitElement {
     constructor() {
         super();
         this.url_config = ''
+        this.titulo = "valor padrão"
+        this.descricao = "valor padrão"
+        this.icone = "valor padrão"
     }
 
     render() {
         return html`
             <!--Retorno renderizado-->
             <a id="container-card-os" href="">
-                <img style="width: 5rem;" src="https://placehold.co/150">
+                <!--<img style="width: 5rem;" src="https://placehold.co/150">-->
+                ${this.icone}
                 <div>
-                    <h3>Titulo do Card</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean molestie et tortor eu luctus. Aenean faucibus condimentum tincidunt. Suspendisse consectetur molestie dolor. Duis tincidunt eget mauris vel mattis. Pellentesque et venenatis augue. Duis hendrerit dolor ac risus sagittis, non congue nisl ultricies. Aliquam a tempus lorem. </p>
+                    <h3>${this.titulo}</h3>
+                    <p>${this.descricao}</p>
                 </div>
             </a>
             
