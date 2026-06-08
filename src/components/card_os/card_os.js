@@ -8,7 +8,9 @@ export class Card_OS extends LitElement {
         url_config: { type: String },
         titulo: {type: String},
         descricao: {type: String},
-        icone: {type: Object}
+        icone: {type: Object},
+        cor_borda: {type: String},
+        link: {type: String},
     };
 
     static get styles() {
@@ -21,12 +23,13 @@ export class Card_OS extends LitElement {
         this.titulo = "valor padrão"
         this.descricao = "valor padrão"
         this.icone = "valor padrão"
+        this.link = "/"
     }
 
     render() {
         return html`
             <!--Retorno renderizado-->
-            <a id="container-card-os" href="">
+            <a id="container-card-os" href="${this.link}" style="border-color: ${this.cor_borda};">
                 <!--<img style="width: 5rem;" src="https://placehold.co/150">-->
                 ${this.icone}
                 <div>

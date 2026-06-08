@@ -4,6 +4,7 @@ import { Router } from '@lit-labs/router';
 //Import das páginas
 import { Home_Page } from './pages/home/home';
 import { ADD_OS } from './pages/add_os/add_os';
+import { Page_OS_Completa } from './pages/page_os_completa/page_os_completa';
 
 // Detecta se estamos no GitHub Pages ou Localhost
 const BASE_PATH = window.location.hostname.includes('github.io')
@@ -28,6 +29,10 @@ export class Main extends LitElement {
             {
                 path: `${BASE_PATH}/addos`,
                 render: () => html`<add-os></add-os>`,
+            },
+            {
+                path: `${BASE_PATH}/iniciar_os_completa`,
+                render: () => html`<page-os-completa></page-os-completa>`,
             },
             {
                 path: '/perfil/:name',

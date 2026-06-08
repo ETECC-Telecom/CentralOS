@@ -2,21 +2,22 @@ import { LitElement, html, css, unsafeCSS } from 'lit';
 
 import { Menu_Inferior } from '../../components/menu_inferior/menu_inferior';
 
-
 import globalStyle from "./home.css?inline";
 
 //Componentes
 import { BotaoTema } from '../../components/btn_thema/btn-tema';
+
+import { Ordem_Servico_Completa } from '../../model/objeto_os_completa';
 
 export class Home_Page extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
     static properties = {
         nome: { type: String },
         url_config: { type: String },
-        
+
     };
 
-    
+
 
     static get styles() {
         return css`${unsafeCSS(globalStyle)}`;
@@ -25,7 +26,8 @@ export class Home_Page extends LitElement {
     constructor() {
         super();
         this.url_config = ''
-        
+        console.log(Ordem_Servico_Completa)
+
 
     }
 
@@ -58,7 +60,7 @@ export class Home_Page extends LitElement {
                         <p class="dash-value">0</p>
                     </div>
                 </div>
-
+                
                 <!--OS em Andamento!-->
                 <div id="andamento">
                     <p>Script em Aberto!</p>
