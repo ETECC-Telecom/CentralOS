@@ -29,20 +29,20 @@ export class Page_OS_Completa extends LitElement {
         
         console.log("Iniciando o Construtor")
         // Inicia o objeto que controla a estrutura de OS.
+        
+        
+    }
+
+    async connectedCallback() {
+        super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
+
         if (this.tipo == 'novo') {
-            console.log(Ordem_Servico_Completa)
+            console.log("Objeto: ",Ordem_Servico_Completa)
             this.objeto_os = new Controller_Objeto_OS_Completa(Ordem_Servico_Completa);
         } else {
             this.objeto_os = new Controller_Objeto_OS_Completa();
             this.objeto_os.carregar_os_localstorage();
         }
-
-        console.log("Contrutor",this.objeto_os)
-
-    }
-
-    async connectedCallback() {
-        super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
 
         
         console.log(this.tipo);
