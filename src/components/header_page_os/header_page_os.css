@@ -1,0 +1,100 @@
+:host {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+#container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--header-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    /* Garante que o padding não quebre o tamanho de 100% */
+}
+
+#container h3 {
+    margin: 0;
+    padding: 0;
+}
+
+#container p {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 100;
+}
+
+#container span {
+    font-weight: 900;
+}
+
+/* Telas grandes: Desktops (a partir de 1024px de largura) */
+@media (min-width: 1024px) {
+    #container {
+        margin-top: 0.5rem;
+        padding: 0;
+        border-radius: 100rem;
+    }
+
+    #container_texto h3 {
+        font-size: 1rem;
+    }
+
+    #container_texto p {
+        font-size: .8rem;
+        padding: .3rem;
+    }
+
+    .coluna {
+        margin: 0;
+        padding: 0;
+    }
+
+    .btn-icone {
+        padding: 0;
+        margin: 0;
+        width: 1.1rem;
+    }
+
+    svg {
+        width: 1.5rem;
+    }
+
+}
+
+#container_texto {
+    text-align: center;
+
+}
+
+.coluna {
+    margin: 0.1rem;
+    padding: .5rem;
+
+}
+
+.btn-icone {
+    display: inline-flex;
+    /* Mantém o comportamento de link, mas aceita Flexbox interno */
+    justify-content: center;
+    align-items: center;
+    padding: .8rem;
+    margin: .4rem;
+    /* Cria um espaçamento igual em volta do SVG */
+    background-color: var(--btn-background-color);
+    /* Só para você ver o botão (opcional) */
+    border-radius: 50%;
+    /* Deixa o botão redondo (opcional) */
+
+}
+
+svg {
+    padding: 0;
+    fill: var(--text-color);
+    width: 1.5rem;
+}

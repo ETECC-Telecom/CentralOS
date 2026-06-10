@@ -6,6 +6,9 @@ import { Home_Page } from './pages/home/home';
 import { ADD_OS } from './pages/add_os/add_os';
 import { Page_OS_Completa } from './pages/page_os_completa/page_os_completa';
 
+//Import dos Componentes
+import { Notificacao } from './components/notificacao/notificacao';
+
 // Detecta se estamos no GitHub Pages ou Localhost
 const BASE_PATH = window.location.hostname.includes('github.io')
     ? '/Scripts-Lideran-a-Moto'
@@ -35,6 +38,10 @@ export class Main extends LitElement {
                 render: () => html`<page-os-completa></page-os-completa>`,
             },
             {
+                path: `${BASE_PATH}/iniciar_os_completa/:tipo?`,
+                render: (params) => html`<page-os-completa .tipo="${params.tipo || 'param_padrão'}"></page-os-completa>`,
+            },
+            {
                 path: '/perfil/:name',
                 // Os parâmetros da URL chegam como um objeto no primeiro argumento
                 render: (params) => html`<h2>👤 Usuário: ${params.name}</h2>`,
@@ -46,6 +53,7 @@ export class Main extends LitElement {
             }
         ]);
     }
+
     static styles = [
         // Transformamos o CSS importado em um objeto que o Lit entende
         css`
@@ -71,9 +79,10 @@ export class Main extends LitElement {
 
     render() {
         return html`
-      <main class="meu-container">
-        ${this._router.outlet()}
-      </main>
+        <componente-notificacao></componente-notificacao>
+        <main class="meu-container">
+            ${this._router.outlet()}
+        </main>
     `;
     }
 }

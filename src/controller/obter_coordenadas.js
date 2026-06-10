@@ -1,56 +1,60 @@
-
 export async function obterCoordenadas() {
-    return new Promise((resolve, reject) => {
-        // Verifica se o navegador suporta a API de Geolocalização
-        if (!navigator.geolocation) {
-            reject(new Error("Geolocalização não é suportada pelo seu navegador."));
-            return;
+
+    // Verifica suporte à Geolocalização
+    if (!navigator.geolocation) {
+        throw new Error("Geolocalização não é suportada pelo seu navegador.");
+    }
+
+    // Verifica o estado da permissão
+    if (navigator.permissions) {
+        const permissao = await navigator.permissions.query({
+            name: "geolocation"
+        });
+
+        // Se o usuário já negou anteriormente
+        if (permissao.state === "denied") {
+            throw new Error(
+                "Permissão de localização negada. Altere nas configurações do navegador."
+            );
         }
 
-        // Configurações opcionais para maior precisão
-        const opcoes = {
-            enableHighAccuracy: true, // Tenta obter a localização mais precisa possível (GPS)
-            timeout: 10000,          // Tempo máximo de espera (10 segundos)
-            maximumAge: 0            // Não aceita localização em cache
-        };
+        // Se estiver em "prompt", o getCurrentPosition()
+        // exibirá a solicitação automaticamente.
+    }
+
+    return new Promise((resolve, reject) => {
 
         navigator.geolocation.getCurrentPosition(
             (posicao) => {
-                const coordenadas = {
+                resolve({
                     latitude: posicao.coords.latitude,
                     longitude: posicao.coords.longitude,
-                    precisao: posicao.coords.accuracy // Em metros
-                };
-                resolve(coordenadas);
+                    precisao: posicao.coords.accuracy
+                });
             },
             (erro) => {
                 switch (erro.code) {
                     case erro.PERMISSION_DENIED:
                         reject(new Error("Usuário negou a permissão de Geolocalização."));
                         break;
+
                     case erro.POSITION_UNAVAILABLE:
                         reject(new Error("Informações de localização indisponíveis."));
                         break;
+
                     case erro.TIMEOUT:
                         reject(new Error("Tempo limite atingido ao obter localização."));
                         break;
+
                     default:
                         reject(new Error("Erro desconhecido ao obter localização."));
                 }
             },
-            opcoes
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
         );
     });
 }
-
-
-/*
-Utilização:
-dentro de uma função asincrona 
-const localizacao = await obterCoordenadas();
-
-resultado é um objeto 
-
-{latitude: -24.17983550860177, longitude: -46.78262720557638, precisao: 72}
-
-*/
