@@ -38,8 +38,8 @@ export class Main extends LitElement {
                 render: () => html`<page-os-completa></page-os-completa>`,
             },
             {
-                path: `${BASE_PATH}/iniciar_os_completa/:tipo?`,
-                render: (params) => html`<page-os-completa .tipo="${params.tipo || 'param_padrão'}"></page-os-completa>`,
+                path: `${BASE_PATH}/iniciar_os_completa/:tipo`,
+                render: (params) => html`<page-os-completa .tipo="${params.tipo}"></page-os-completa>`,
             },
             {
                 path: '/perfil/:name',

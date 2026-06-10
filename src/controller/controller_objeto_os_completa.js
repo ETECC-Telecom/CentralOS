@@ -24,6 +24,7 @@ export default class Controller_Objeto_OS_Completa {
     //Carregar a Localização do técnico:
     carregar_latitude_longitude(data = null) {
         if (data === null) {
+            
             disparar_notificacao("erro", "O Valor retornado ao método é Nulo")
             return
         }

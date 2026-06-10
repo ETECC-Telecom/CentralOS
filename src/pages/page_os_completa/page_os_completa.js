@@ -15,8 +15,7 @@ export class Page_OS_Completa extends LitElement {
         nome: { type: String },
         tipo: { type: String },
         objeto_os: { type: Object },
-        abaAtiva: { type: String },
-        teste: {type:String}
+        abaAtiva: { type: String }
     };
 
     static get styles() {
@@ -27,22 +26,26 @@ export class Page_OS_Completa extends LitElement {
         super();
         this.tipo = 'continue'
         this.abaAtiva = 'aba1';
-
+        
+        console.log("Iniciando o Construtor")
         // Inicia o objeto que controla a estrutura de OS.
         if (this.tipo == 'novo') {
+            console.log(Ordem_Servico_Completa)
             this.objeto_os = new Controller_Objeto_OS_Completa(Ordem_Servico_Completa);
         } else {
             this.objeto_os = new Controller_Objeto_OS_Completa();
             this.objeto_os.carregar_os_localstorage();
         }
 
-        console.log(this.objeto_os)
+        console.log("Contrutor",this.objeto_os)
 
     }
 
     async connectedCallback() {
         super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
 
+        
+        console.log(this.tipo);
         try {
             console.log("📡 Buscando coordenadas GPS...");
             
@@ -55,15 +58,6 @@ export class Page_OS_Completa extends LitElement {
             
             this.objeto_os.carregar_latitude_longitude(null);
         }
-    }
-
-    async obterCoordenadasteste(){
-        console.log('precionado')
-        const permissao = await navigator.permissions.query({
-            name: "geolocation"
-        });
-        //const coordenadas = await obterCoordenadas();
-        this.teste = JSON.stringify(permissao.state)
     }
 
     // A função que você pediu: recebe o evento e o nome da aba a ativar
@@ -84,10 +78,7 @@ export class Page_OS_Completa extends LitElement {
                 ${this.abaAtiva === 'aba1' ? html`
                     <div class="container-item">
                         <h1>Container 1 (Dados Gerais)</h1>
-                        <p style="color:white">Ola, ${this.teste}</p>
-                        <button 
-                            @click="${(e) => this.obterCoordenadasteste()}"
-                        >Caputra</button>
+                    
                     </div>
                 ` : ''}
 

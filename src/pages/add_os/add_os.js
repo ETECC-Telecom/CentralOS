@@ -31,7 +31,8 @@ export class ADD_OS extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
     static properties = {
         nome: { type: String },
-        url_config: { type: String }
+        router: { attribute: false }
+
     };
 
     static get styles() {
@@ -40,10 +41,7 @@ export class ADD_OS extends LitElement {
 
     constructor() {
         super();
-        this.url_config = ''
         
-        
-
     }
 
     render() {
@@ -55,7 +53,7 @@ export class ADD_OS extends LitElement {
 
             <div id="container-os">
                 <card-os
-                    link="iniciar_os_completa"
+                    link="iniciar_os_completa/novo"
                     titulo="ATENDIMENTO COMPLETO"
                     descricao="Oscilação Geral, Lentidão, Instalação/Troca de Equipamentos, Avaliação de Conexão..."
                     .icone=${icone_os_completa}
@@ -63,7 +61,7 @@ export class ADD_OS extends LitElement {
                 ></card-os>
 
                 <card-os
-                    link="iniciar_os_completa"
+                    link="iniciar_os_completa/novo"
                     titulo="ENCAMINHAR EQUIPE EXTERNA (LOS)"
                     descricao="Sem Sinal, Rompimento, outros..."
                     .icone=${icone_os_los}
@@ -71,7 +69,7 @@ export class ADD_OS extends LitElement {
                 ></card-os>
 
                 <card-os
-                    link="iniciar_os_completa"
+                    link="iniciar_os_completa/novo"
                     titulo="RETENÇÃO DE CLIENTE"
                     descricao="Negociação no Local..."
                     .icone=${icone_os_retencao}
@@ -79,7 +77,7 @@ export class ADD_OS extends LitElement {
                 ></card-os>
 
                 <card-os
-                    link="iniciar_os_completa"
+                    link="iniciar_os_completa/novo"
                     titulo="RETIRADA DE EQUIPAMENTO"
                     descricao="Cancelamento Concluído, recolhimento dos aparelhos comodatos..."
                     .icone=${icone_os_retirada}
@@ -87,7 +85,7 @@ export class ADD_OS extends LitElement {
                 ></card-os>
 
                 <card-os
-                    link="iniciar_os_completa"
+                    link="iniciar_os_completa/novo"
                     titulo="CI AUSÊNCIA"
                     descricao="Script para comunicado interno de ausência..."
                     .icone=${icone_script}
