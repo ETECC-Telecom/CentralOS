@@ -22,7 +22,18 @@ export const Ordem_Servico_Completa = {
 			precisao: 0,
 		},
 		anexo_fachada: false, //Foto da frente da casa anexada ao mk?
-		info_necessaria: false, // ordem de serviço gerada com as informações necessárias
+		info_necessaria: true, // ordem de serviço gerada com as informações necessárias
+		complemento_info_necessaria:{
+			//Usado quando as informações necessárias n foram complementares.
+			requerimentos: [], //informações necessárias que faltaram;
+			operador: null,
+			info_padrao:{
+				historico: false,
+				comodato: false,
+				descricao: false,
+				contratacao: false,
+			}
+		}
 	},
 	conferencia_tecnica:{
 		cabos_utp:[

@@ -12,7 +12,7 @@ export class Notificacao extends LitElement {
             .toast-container {
                 position: fixed;
                 top: 20px;
-                right: 20px;
+                right: 0px;
                 z-index: 9999;
                 display: flex;
                 flex-direction: column;
@@ -23,19 +23,51 @@ export class Notificacao extends LitElement {
             .toast {
                 padding: 15px 20px;
                 border-radius: 4px;
-                color: white;
+                
                 font-family: sans-serif;
-                font-weight: bold;
+                
                 box-shadow: 0 4px 12px rgba(0,0,0,0.15);
                 min-width: 250px;
                 animation: deslizar 0.3s ease-out;
             }
 
             /* Cores por Categoria */
-            .toast.sucesso { background-color: #28a745; }
-            .toast.erro { background-color: #dc3545; }
-            .toast.aviso { background-color: #ffc107; color: #212529; }
-            .toast.info { background-color: #17a2b8; }
+            .toast.sucesso {
+                color: #122c00;
+                background: rgba(0, 255, 145, 0.44);
+                backdrop-filter: blur(4px) saturate(176%);
+                -webkit-backdrop-filter: blur(4px) saturate(176%);
+                border: 1px solid rgba(255, 255, 255, 0.37);
+                border-radius: 19px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+                }
+            .toast.erro { 
+                color: #4e0008;
+                background: rgba(255, 133, 133, 0.5);
+                backdrop-filter: blur(4px) saturate(176%);
+                -webkit-backdrop-filter: blur(4px) saturate(176%);
+                border: 1px solid rgba(255, 255, 255, 0.37);
+                border-radius: 19px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);    
+            }
+            .toast.aviso { 
+                color: #302400;
+                background: rgba(251, 255, 0, 0.44);
+                backdrop-filter: blur(4px) saturate(176%);
+                -webkit-backdrop-filter: blur(4px) saturate(176%);
+                border: 1px solid rgba(255, 255, 255, 0.37);
+                border-radius: 19px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);    
+            }
+            .toast.info { 
+                color: #001417;
+                background: rgba(0, 247, 255, 0.44);
+                backdrop-filter: blur(4px) saturate(176%);
+                -webkit-backdrop-filter: blur(4px) saturate(176%);
+                border: 1px solid rgba(255, 255, 255, 0.37);
+                border-radius: 19px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);    
+            }
 
             /* Animação para surgir da direita */
             @keyframes deslizar {

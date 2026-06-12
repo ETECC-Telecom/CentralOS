@@ -8,6 +8,14 @@ import { Header_Page_OS } from '../../components/header_page_os/header_page_os';
 
 import { obterCoordenadas } from '../../controller/obter_coordenadas';
 import { disparar_notificacao } from '../../controller/disparar_notificacao';
+import { Select_Parentesco } from '../../components/componentes_formulario/select_parentesco/select_parentesco';
+import { Nome_Cliente } from '../../components/componentes_formulario/nome_cliente/nome_cliente';
+import { Area_Relato_Cliente } from '../../components/componentes_formulario/area_relato_cliente/area_relato_cliente';
+import { Fachada_Anexada } from '../../components/componentes_formulario/faxada_anexada/faxada_anexada';
+import { Informacao_na_OS } from '../../components/componentes_formulario/informacao_os/informacao_os';
+
+//Componentes de Formulário
+
 
 export class Page_OS_Completa extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -15,7 +23,8 @@ export class Page_OS_Completa extends LitElement {
         nome: { type: String },
         tipo: { type: String },
         objeto_os: { type: Object },
-        abaAtiva: { type: String }
+        abaAtiva: { type: String },
+
     };
 
     static get styles() {
@@ -26,37 +35,59 @@ export class Page_OS_Completa extends LitElement {
         super();
         this.tipo = 'continue'
         this.abaAtiva = 'aba1';
-        
+
+        //Atributos de Controle de exibição de informações extras!
+
+
         console.log("Iniciando o Construtor")
         // Inicia o objeto que controla a estrutura de OS.
-        
-        
+
+
     }
 
     async connectedCallback() {
         super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
 
         if (this.tipo == 'novo') {
-            console.log("Objeto: ",Ordem_Servico_Completa)
             this.objeto_os = new Controller_Objeto_OS_Completa(Ordem_Servico_Completa);
+            this.objeto_os.alterar_tipo_os("completa");
+
+            //Adiciona uma nova coordenada em uma OS recem criada!
+            try {
+
+                const coordenadas = await obterCoordenadas();
+                this.objeto_os.carregar_latitude_longitude(coordenadas);
+
+                disparar_notificacao('sucesso', 'OS atualizada com GPS');
+            } catch (erro) {
+                disparar_notificacao('erro', `Falha ao carregar coordenadas:\n${erro}`);
+
+                this.objeto_os.carregar_latitude_longitude(null);
+            }
         } else {
+            //Caso contrário, apenas carrega a OS já existente
             this.objeto_os = new Controller_Objeto_OS_Completa();
             this.objeto_os.carregar_os_localstorage();
         }
 
-        
-        console.log(this.tipo);
-        try {
-            console.log("📡 Buscando coordenadas GPS...");
-            
-            const coordenadas = await obterCoordenadas();
-            this.objeto_os.carregar_latitude_longitude(coordenadas);
+    }
 
-            disparar_notificacao('sucesso', 'OS atualizada com GPS');
-        } catch (erro) {
-            disparar_notificacao('erro', `Falha ao carregar coordenadas:\n${erro}`);
-            
-            this.objeto_os.carregar_latitude_longitude(null);
+    // Executado assim que o componente é renderizado na tela
+    firstUpdated() {
+        this.atualizarUrlParaContinue();
+    }
+
+    // Atualiza a URL da página para que em uma att acidental, o component n inicie um novo script, zerando oque o técnico estava trabalhando!
+    atualizarUrlParaContinue() {
+        // 1. Verifica se a URL atual termina com '/novo'
+        if (window.location.pathname.endsWith('/novo')) {
+
+            // 2. Define a nova rota substituindo 'novo' por 'continue'
+            const novaUrl = window.location.pathname.replace('/novo', '/continue');
+
+            // 3. Altera a URL no navegador sem recarregar a página
+            window.history.replaceState(null, '', novaUrl);
+
         }
     }
 
@@ -77,14 +108,112 @@ export class Page_OS_Completa extends LitElement {
                 
                 ${this.abaAtiva === 'aba1' ? html`
                     <div class="container-item">
-                        <h1>Container 1 (Dados Gerais)</h1>
-                    
+                        <h1>Tratativa Inicial com Cliente</h1>
+                        <hr><br>
+                        
+                        <nome-cliente
+                            .objeto_os = "${this.objeto_os}"
+                        ></nome-cliente>
+
+                        <select-parentesco
+                            .objeto_os = "${this.objeto_os}"
+                            ></select-parentesco  >
+                        
+                        <area-relato-cliente
+                            .objeto_os = "${this.objeto_os}"
+                        ></area-relato-cliente>
+                        <hr>
+                        <faxada-anexada
+                            .objeto_os = "${this.objeto_os}"
+                        ></faxada-anexada>
+
+                        <informacao-na-os
+                            .objeto_os = "${this.objeto_os}"
+                        ></informacao-na-os>
+
+                        <br><br><br>
+                       
                     </div>
                 ` : ''}
+ 
 
                 ${this.abaAtiva === 'aba2' ? html`
                     <div class="container-item">
                         <h1>Container 2 (Equipamentos)</h1>
+
+ <div class="form-container">
+    
+    <div class="form-group">
+        <label for="fname" class="form-label">First name:</label>
+        <input type="text" id="fname" name="fname" value="John" class="form-input">
+    </div>
+
+    <div class="form-group">
+        <label for="lname" class="form-label">Last name:</label>
+        <input type="text" id="lname" name="lname" value="Doe" class="form-input">
+    </div>
+
+    <div class="form-group">
+        <label for="cars" class="form-label">Choose a car:</label>
+        <select id="cars" name="cars" class="form-select">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="message" class="form-label">Message:</label>
+        <textarea id="message" name="message" rows="10" cols="30" class="form-textarea">The cat was playing in the garden.</textarea>
+    </div>
+
+    <div class="form-group">
+        <span class="form-label">Favorite Language:</span>
+        
+        <div class="form-group-row">
+            <input type="radio" id="html" name="fav_language" value="HTML" class="form-radio" checked>
+            <label for="html" class="form-label-inline">HTML</label>
+        </div>
+        
+        <div class="form-group-row">
+            <input type="radio" id="css" name="fav_language" value="CSS" class="form-radio">
+            <label for="css" class="form-label-inline">CSS</label>
+        </div>
+        
+        <div class="form-group-row">
+            <input type="radio" id="javascript" name="fav_language" value="JavaScript" class="form-radio">
+            <label for="javascript" class="form-label-inline">JavaScript</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <span class="form-label">Vehicles Owned:</span>
+        
+        <div class="form-group-row">
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" class="form-checkbox">
+            <label for="vehicle1" class="form-label-inline">I have a bike</label>
+        </div>
+        
+        <div class="form-group-row">
+            <input type="checkbox" id="vehicle2" name="vehicle2" value="Car" class="form-checkbox" checked>
+            <label for="vehicle2" class="form-label-inline">I have a car</label>
+        </div>
+        
+        <div class="form-group-row">
+            <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" class="form-checkbox">
+            <label for="vehicle3" class="form-label-inline">I have a boat</label>
+        </div>
+    </div>
+
+    <div class="form-group" style="margin-top: 10px;">
+        <button type="button" class="form-button" onclick="alert('Hello World!')">Click Me!</button>
+        <button type="button" class="form-button" onclick="alert('Hello World!')">Click Me!</button>
+        <button type="button" class="form-button" onclick="alert('Hello World!')">Click Me!</button>
+    </div>
+
+</div> 
+
                     </div>
                 ` : ''}
 

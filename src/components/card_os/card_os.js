@@ -40,7 +40,6 @@ export class Card_OS extends LitElement {
                     <p>${this.descricao}</p>
                 </div>
             </a>
-            
         `;
     }
 }

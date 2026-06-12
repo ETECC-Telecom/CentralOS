@@ -6,15 +6,17 @@ import globalStyle from "./home.css?inline";
 
 //Componentes
 import { BotaoTema } from '../../components/btn_thema/btn-tema';
+import { Card_Continuar_OS } from '../../components/card_continuar_os/card_continuar_os';
 
-import { Ordem_Servico_Completa } from '../../model/objeto_os_completa';
+import Controller_Objeto_OS_Completa from '../../controller/controller_objeto_os_completa';
 
 export class Home_Page extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
     static properties = {
         nome: { type: String },
         url_config: { type: String },
-
+        os_em_aberto: {type: Boolean},
+        url_nova_os: {type: String}
     };
 
 
@@ -25,9 +27,47 @@ export class Home_Page extends LitElement {
 
     constructor() {
         super();
-        this.url_config = ''
-        console.log(Ordem_Servico_Completa)
+        this.os_em_aberto = false;
+        this.url_nova_os = ""
 
+    }
+
+    connectedCallback() {
+    super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
+        this._checar_os_aberta();
+	}
+
+    _checar_os_aberta = () =>{
+        const ORDEM = new Controller_Objeto_OS_Completa();
+        const tipo_os = ORDEM.verificar_os_localstorage();
+        if (tipo_os === null){
+            this.os_em_aberto = false;
+        }
+
+
+        //
+        switch (tipo_os) {
+            case 'completa':
+                //OS Completa
+                this.url_nova_os = '/iniciar_os_completa/continue';
+                break;
+            case 'retencao':
+                //OS Retenção
+                this.url_nova_os = '/iniciar_os_completa/retencao';
+                break;
+            case 'retirada':
+                //OS Retirada
+                this.url_nova_os = '/iniciar_os_completa/retirada';
+                break;
+            case 'los':
+                //OS Encaminhar Externa
+                this.url_nova_os = '/iniciar_os_completa/los';
+                break;
+            default:
+                return
+        };
+
+        this.os_em_aberto = true;
 
     }
 
@@ -62,14 +102,11 @@ export class Home_Page extends LitElement {
                 </div>
                 
                 <!--OS em Andamento!-->
-                <div id="andamento">
-                    <p>Script em Aberto!</p>
-                    <a>
-                        Continuar Script...
-                    </a>
-                    
-                </div>
-
+                ${this.os_em_aberto ? html`
+                    <card-continuar-os
+                        url_acesso="${this.url_nova_os}"
+                        ></card-continuar-os>
+                ` : ''}
                 <!-- Botões de Ações-->
                 <div id="acoes"> 
                     <a href="/addos" class="coluna-acoes">
@@ -86,7 +123,7 @@ export class Home_Page extends LitElement {
 
             <menu-inferior></menu-inferior>
         `;
-    }
+    };
 }
 
 // 2. Em vez de @customElement, use o registro manual

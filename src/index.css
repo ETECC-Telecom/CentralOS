@@ -14,12 +14,14 @@
     --btn-text-background-color: #212121;
     --btn-border-color: #E0E0E0;
     --border-radius:1rem;
+    --color-text-info:#3c3c3c;
 
     /*Escala de Textos*/
-    --header-1: 2rem;
+    --header-1: 1.7rem;
     --header-2: 1.5rem;
     --header-3: 1.4rem;
     --paragraph: 0.9rem;
+    --paragraph-info: 0.8rem;
 
 }
 
@@ -38,6 +40,7 @@ body.dark-theme {
     --btn-background-color: #191919;
     --btn-text-background-color: #F5F5F5;
     --btn-border-color: #212121;
+    --color-text-info:#b0b0b0;
 }
 
 
