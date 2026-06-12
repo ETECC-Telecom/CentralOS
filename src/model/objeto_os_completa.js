@@ -158,18 +158,17 @@ export const Ordem_Servico_Completa = {
 		indicado: false, //Cliente passou indicação?
 		observacao: null //Numero de contato do indicado!
 	},
-	educacao_cliente:[
-		{
-			id_item: 0, //Id da lista de item de educação do cliente
-			titulo: null, //Informação passada ao cliente
-		}
-	],
-	atendimento_cliente:[
-		{
-			id_item: 0, //Id da lista de item de atendimento ao cliente
-			titulo: null, //Informação passada ao cliente
-		}
-	],
+	educacao_cliente:{
+		// id: { //Id chave do array de informações passadas ao cliente!
+		// 	titulo: null, //Informação passada ao cliente
+		// }
+	},
+	
+	atendimento_cliente:{
+		// id: { //Id chave do array de informações passadas ao cliente!
+		// 	titulo: null, //Informação passada ao cliente
+		// }
+	},
 	complemento_atendimento: [ //Informações Extras passadas ao cliente
 		{
 			titulo: null, 

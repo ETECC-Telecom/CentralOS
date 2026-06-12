@@ -13,6 +13,10 @@ import { Nome_Cliente } from '../../components/componentes_formulario/nome_clien
 import { Area_Relato_Cliente } from '../../components/componentes_formulario/area_relato_cliente/area_relato_cliente';
 import { Fachada_Anexada } from '../../components/componentes_formulario/faxada_anexada/faxada_anexada';
 import { Informacao_na_OS } from '../../components/componentes_formulario/informacao_os/informacao_os';
+import { Informacao_Passada_Cliente } from '../../components/componentes_formulario/info_passadas_cliente/info_passadas_cliente';
+import { Atendimento_Feito_Cliente } from '../../components/componentes_formulario/info_visita/info_visita';
+import { Informacao_Adicionais_Passadas } from '../../components/componentes_formulario/info_adicionais_passadas/info_adicionais_passadas';
+
 
 //Componentes de Formulário
 
@@ -219,7 +223,22 @@ export class Page_OS_Completa extends LitElement {
 
                 ${this.abaAtiva === 'aba3' ? html`
                     <div class="container-item">
-                        <h1>Container 3 (Peças / Serviços)</h1>
+                        <h1>Educação do Cliente</h1>
+                        <hr>
+                        <informacao-passada-cliente
+                            .objeto_os = "${this.objeto_os}"
+                        ></informacao-passada-cliente>
+                        
+                        <atendimento-feito-cliente
+                            .objeto_os = "${this.objeto_os}"
+                        ></atendimento-feito-cliente>
+
+                        <informacoes-adicionais-passadas
+                            .objeto_os = "${this.objeto_os}"
+                        ></informacoes-adicionais-passadas>
+                        
+                        
+                        <br><br><br>
                     </div>
                 ` : ''}
 
