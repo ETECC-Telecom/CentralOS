@@ -16,7 +16,8 @@ import { Informacao_na_OS } from '../../components/componentes_formulario/inform
 import { Informacao_Passada_Cliente } from '../../components/componentes_formulario/info_passadas_cliente/info_passadas_cliente';
 import { Atendimento_Feito_Cliente } from '../../components/componentes_formulario/info_visita/info_visita';
 import { Informacao_Adicionais_Passadas } from '../../components/componentes_formulario/info_adicionais_passadas/info_adicionais_passadas';
-
+import { Verificacao_Cabo_UTP } from '../../components/componentes_formulario/verificacao_cabo_upt/verificacao_cabo_upt';
+import { Verificacao_Fibra } from '../../components/componentes_formulario/verificacao_fibra/verificacao_fibra';
 
 //Componentes de Formulário
 
@@ -143,9 +144,48 @@ export class Page_OS_Completa extends LitElement {
 
                 ${this.abaAtiva === 'aba2' ? html`
                     <div class="container-item">
-                        <h1>Container 2 (Equipamentos)</h1>
+                        <h1>Conferência Técnica Completa</h1>
+                        <hr>
+                        <verificacao-cabo-utp
+                            .objeto_os = "${this.objeto_os}"
+                        ></verificacao-cabo-utp>
 
- <div class="form-container">
+                        <verificacao-fibra
+                            .objeto_os = "${this.objeto_os}"
+                        ></verificacao-fibra>
+
+
+                        <br><br><br><br>
+
+                    </div>
+                ` : ''}
+
+                ${this.abaAtiva === 'aba3' ? html`
+                    <div class="container-item">
+                        <h1>Educação do Cliente</h1>
+                        <hr>
+                        <informacao-passada-cliente
+                            .objeto_os = "${this.objeto_os}"
+                        ></informacao-passada-cliente>
+                        
+                        <atendimento-feito-cliente
+                            .objeto_os = "${this.objeto_os}"
+                        ></atendimento-feito-cliente>
+
+                        <informacoes-adicionais-passadas
+                            .objeto_os = "${this.objeto_os}"
+                        ></informacoes-adicionais-passadas>
+                        
+                        
+                        <br><br><br><br><br>
+                    </div>
+                ` : ''}
+
+                ${this.abaAtiva === 'aba4' ? html`
+                    <div class="container-item">
+                        <h1>Container 4 (Assinatura e Baixa)</h1>
+
+<div class="form-container">
     
     <div class="form-group">
         <label for="fname" class="form-label">First name:</label>
@@ -216,35 +256,12 @@ export class Page_OS_Completa extends LitElement {
         <button type="button" class="form-button" onclick="alert('Hello World!')">Click Me!</button>
     </div>
 
+
 </div> 
 
-                    </div>
-                ` : ''}
 
-                ${this.abaAtiva === 'aba3' ? html`
-                    <div class="container-item">
-                        <h1>Educação do Cliente</h1>
-                        <hr>
-                        <informacao-passada-cliente
-                            .objeto_os = "${this.objeto_os}"
-                        ></informacao-passada-cliente>
-                        
-                        <atendimento-feito-cliente
-                            .objeto_os = "${this.objeto_os}"
-                        ></atendimento-feito-cliente>
 
-                        <informacoes-adicionais-passadas
-                            .objeto_os = "${this.objeto_os}"
-                        ></informacoes-adicionais-passadas>
-                        
-                        
-                        <br><br><br>
-                    </div>
-                ` : ''}
 
-                ${this.abaAtiva === 'aba4' ? html`
-                    <div class="container-item">
-                        <h1>Container 4 (Assinatura e Baixa)</h1>
                     </div>
                 ` : ''}
 

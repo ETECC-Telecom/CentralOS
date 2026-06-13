@@ -37,12 +37,12 @@ export const Ordem_Servico_Completa = {
 	},
 	conferencia_tecnica:{
 		cabos_utp:[
-			{
-				cabo: null, // Cabo de rede da WAN, ou outros cabos;
-				checagens: [false, false, false], // Checagem se o Cabo é Giga/Teste Powermitter e Ping diretamente no cabo.
-				anexo_cabos: false, // Foto do cabo de Rede devidamente conectado;
-				observacao: null, // Observação adicional quando necessário.
-			}
+			// {
+			// 	cabo: null, // Cabo de rede da WAN, ou outros cabos;
+			// 	checagens: [false, false, false], // Checagem se o Cabo é Giga/Teste Powermitter e Ping diretamente no cabo.
+			// 	anexo_cabos: false, // Foto do cabo de Rede devidamente conectado;
+			// 	observacao: null, // Observação adicional quando necessário.
+			// }
 		],
 		fontes:{
 			mau_contato: false, //Checagem de mau contato nas fontes;
@@ -56,9 +56,11 @@ export const Ordem_Servico_Completa = {
 			observacao: null //Motivo de ser um local adeguado/não adeguado.
 		},
 		fibra: {
-			sinal: null, //Pode ser um valor float, ou uma string "LOS"
-			anexo_sinal: false, //anexo do sinal de fibra;
-			limpeza: false, //Se foi realizado a limpeza da fibra;
+			sinal_pto: null, //Pode ser um valor float, ou uma string "LOS"
+			sinal_pathcord: null, //Pode ser um valor float, ou uma string "LOS"
+			sinal_autoisp: null, //Pode ser um valor float, ou uma string "LOS"
+			anexo_sinal: true, //anexo do sinal de fibra;
+			limpeza: true, //Se foi realizado a limpeza da fibra;
 			observacao: null, // informações relacionadas a fibra.
 		},
 		conferencia_router:[
@@ -170,10 +172,7 @@ export const Ordem_Servico_Completa = {
 		// }
 	},
 	complemento_atendimento: [ //Informações Extras passadas ao cliente
-		{
-			titulo: null, 
-			descricao: null
-		}	
+		//Chave = ID do Array, Valor = Descrição!
 	],
 	relato_adicional: null, //Informaçoes adicionais relacionadas a Visita
 	relatorio_estabilidade: null, //campo para adição do .bat

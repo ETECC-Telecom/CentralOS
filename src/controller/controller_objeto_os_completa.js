@@ -46,6 +46,13 @@ export default class Controller_Objeto_OS_Completa {
         this.salvar_os_localstorage();
     }
 
+    //Função para Finalizar OS: 
+    /*
+        Essa função irá encerrar a OS gerando os script de info passadas ao cliente, e script final. A ideia é que, ao ser executada, ela faça algumas verificações
+        Consulte a documentação do projeto!
+
+    */
+
     //--------------------- Métodos para Alteração dos Atributos ---------------------
 
     alterar_tipo_os = (tipo) => {

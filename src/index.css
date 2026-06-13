@@ -6,7 +6,7 @@
     --text-color: #212121;
     --destaque-color: #ff3838;
     --pattern-background: url(/src/assets/pattern-black.webp);
-    --box-shadow: 0 20px 50px 0 rgba(255, 255, 255, 0.22);
+    --box-shadow: rgba(0, 0, 0, 0.125);
     
 
     /*Variáveis de Formulários*/
@@ -34,7 +34,7 @@ body.dark-theme {
     --text-color: #FFFFFF;
     --destaque-color: #C62828;
     --pattern-background: url(/src/assets/pattern-white.webp);
-    --box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.22);
+    --box-shadow: rgba(255, 255, 255, 0.125);
     
     /*Variáveis de Formulários*/
     --btn-background-color: #191919;
