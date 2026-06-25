@@ -1,0 +1,263 @@
+:host {
+    display: block;
+    box-sizing: border-box;
+    color: var(--text-color);
+}
+
+/* Reset básico para o Shadow DOM */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: var(--text-color);
+    text-align: center;
+}
+
+p {
+    font-size: var(--paragraph);
+    font-weight: 100;
+    text-align: left;
+}
+
+.container_modal_lista{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;    ;
+}
+
+.container-ativos {
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+}
+
+.container-ativo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: .5rem;
+    align-items: center;
+}
+
+.container-tipo {
+    background-color: var(--cards-background);
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: .5rem;
+}
+
+
+.botao-close {
+    display: inline-block;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    color: white;
+    height: 40px;
+    border-radius: 6px;
+    padding: 5px 12px;
+    cursor: pointer;
+    background-color: var(--destaque-color);
+}
+
+
+.form-button {
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: var(--destaque-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+}
+
+.form-button:hover {
+    background-color: var(--destaque-color);
+}
+
+.form-button:active {
+    background-color: var(--destaque-color);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilização das Labels */
+.form-label {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--btn-text-background-color);
+}
+
+.form-label-inline {
+    font-size: 14px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+/* Reset e Estilo Flat para Inputs de Texto, Select e Textarea */
+.form-input,
+.form-select,
+.form-textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Zera o visual padrão do navegador */
+
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 12px;
+
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    /* Bordas levemente arredondadas */
+    background-color: #f8fafc;
+    color: #1a202c;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Estados de Foco */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--destaque-color);
+    /* Azul Flat */
+    background-color: #ffffff;
+}
+
+/* Inputs de Seleção (Radio e Checkbox) */
+.form-radio,
+.form-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #f8fafc;
+    margin: 0;
+    font: inherit;
+    color: var(--destaque-color);
+    width: 18px;
+    height: 18px;
+    border: 2px solid #cbd5e1;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.form-radio {
+    border-radius: 50%;
+    /* Totalmente redondo para radio */
+}
+
+.form-checkbox {
+    border-radius: 4px;
+    /* Levemente arredondado para checkbox */
+}
+
+/* Indicadores internos para Checkbox e Radio ativos */
+.form-radio::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background-color: currentcolor;
+}
+
+.form-checkbox::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background-color: currentcolor;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    /* Formato de "Check" */
+}
+
+.form-radio:checked::before,
+.form-checkbox:checked::before {
+    transform: scale(1);
+}
+
+.form-radio:checked,
+.form-checkbox:checked {
+    border-color: var(--destaque-color);
+}
+
+.form-group-row {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.form-radio:focus,
+.form-checkbox:focus {
+    outline: 2px solid #ebf8ff;
+}
+
+/* Customizações específicas do Select */
+.form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+    /* Espaço para a seta customizada */
+}
+
+/* Estilos básicos para o Modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--cards-background);
+    color: var(--text-color);
+    padding: 20px;
+    border-radius: 8px;
+    width: 95%;
+}
+
+@media (min-width: 1024px) {
+    .modal-content {
+        width: 500px;
+    }
+}
+
+.item-lista {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.item-lista:hover {
+    background: #f5f5f5;
+}

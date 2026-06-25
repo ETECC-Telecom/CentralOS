@@ -85,6 +85,29 @@ export class Verificacao_Fibra extends LitElement {
         this.objeto_os.salvar_os_localstorage();
     }
 
+    _alterar_anexo_fibra = (e) =>{
+        const data = e.target.value.toLowerCase() === "true";
+
+        this.objeto_os.OS.conferencia_tecnica.fibra.anexo_sinal = data;
+
+        this.objeto_os.salvar_os_localstorage();
+    }
+
+    _alterar_limpeza_fibra = (e) =>{
+        const data = e.target.value.toLowerCase() === "true";
+
+        this.objeto_os.OS.conferencia_tecnica.fibra.limpeza = data;
+
+        this.objeto_os.salvar_os_localstorage();
+    }
+
+    _alterar_observacao_fibra = (e)=>{
+        const nome = e.target.value;
+
+        this.objeto_os.OS.conferencia_tecnica.fibra.observacao = nome;
+        this.objeto_os.salvar_os_localstorage();
+    }
+
 
     render() {
         return html`
@@ -130,13 +153,13 @@ export class Verificacao_Fibra extends LitElement {
                 <p class="texto_informativo">
                     A foto do sinal de Fibra Foi Anexada?
                 </p>
-                <div @change="" class="radio-input">
+                <div @change="${this._alterar_anexo_fibra}" class="radio-input">
                     <label>
-                        <input ?checked="" name="value-radio-anexo-fibra" id="value-1" type="radio" />
+                        <input ?checked="${this.objeto_os.OS.conferencia_tecnica.fibra.anexo_sinal === true}" name="value-radio-anexo-fibra" id="value-1" type="radio" />
                         <span>S i m</span>
                     </label>
                     <label>
-                        <input ?checked="" name="value-radio-anexo-fibra" id="value-2" type="radio" />
+                        <input ?checked="${this.objeto_os.OS.conferencia_tecnica.fibra.anexo_sinal === false}" name="value-radio-anexo-fibra" id="value-2" type="radio" />
                         <span>N ã o</span>
                     </label>
                     <span class="selection"></span>
@@ -147,24 +170,24 @@ export class Verificacao_Fibra extends LitElement {
                 </p>
                 <div @change="" class="radio-input">
                     <label>
-                        <input ?checked="" name="value-radio-limpeza-fibra" id="value-1" type="radio" />
+                        <input ?checked="${this.objeto_os.OS.conferencia_tecnica.fibra.limpeza === true}" name="value-radio-limpeza-fibra" id="value-1" type="radio" />
                         <span>S i m</span>
                     </label>
                     <label>
-                        <input ?checked="" name="value-radio-limpeza-fibra" id="value-2" type="radio" />
+                        <input ?checked="${this.objeto_os.OS.conferencia_tecnica.fibra.limpeza === false}" name="value-radio-limpeza-fibra" id="value-2" type="radio" />
                         <span>N ã o</span>
                     </label>
                     <span class="selection"></span>
                 </div>
                 <br>
-                <textarea 
+                <textarea
+                    @change="${this._alterar_observacao_fibra}" 
                     id="message" 
                     name="message" 
                     rows="5" 
                     placeholder="Caso tenha alguma observação relacionado a Fibra adicione aqui para omitir no relatório final!"
-                    class="form-textarea"></textarea>
-
-
+                    class="form-textarea"
+                    .value="${(this.objeto_os.OS.conferencia_tecnica.fibra.observacao === null)? "":this.objeto_os.OS.conferencia_tecnica.fibra.observacao}"></textarea>
                 `: ""}
         `;
     }

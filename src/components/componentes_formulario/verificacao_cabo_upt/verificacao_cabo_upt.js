@@ -94,7 +94,7 @@ export class Verificacao_Cabo_UTP extends LitElement {
         this.cabos_utp[ID_UTP].observacao = Valor;
 
 
-        // this.objeto_os.salvar_os_localstorage();
+        this.objeto_os.salvar_os_localstorage();
     }
 
     _alterar_anexo = (e, id) => {

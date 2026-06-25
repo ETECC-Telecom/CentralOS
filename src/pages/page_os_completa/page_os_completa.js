@@ -18,7 +18,8 @@ import { Atendimento_Feito_Cliente } from '../../components/componentes_formular
 import { Informacao_Adicionais_Passadas } from '../../components/componentes_formulario/info_adicionais_passadas/info_adicionais_passadas';
 import { Verificacao_Cabo_UTP } from '../../components/componentes_formulario/verificacao_cabo_upt/verificacao_cabo_upt';
 import { Verificacao_Fibra } from '../../components/componentes_formulario/verificacao_fibra/verificacao_fibra';
-
+import { Verificar_Fonte } from '../../components/componentes_formulario/verificar_fontes/verificar_fontes';
+import { Navegacao } from '../../components/componentes_formulario/navegacao/navegacao';
 //Componentes de Formulário
 
 
@@ -136,6 +137,7 @@ export class Page_OS_Completa extends LitElement {
                             .objeto_os = "${this.objeto_os}"
                         ></informacao-na-os>
 
+                        
                         <br><br><br>
                        
                     </div>
@@ -153,8 +155,14 @@ export class Page_OS_Completa extends LitElement {
                         <verificacao-fibra
                             .objeto_os = "${this.objeto_os}"
                         ></verificacao-fibra>
+                        <br><br>
+                        <verificar-fonte
+                            .objeto_os = "${this.objeto_os}"
+                        ></verificar-fonte>
 
-
+                        <navegacao-teste
+                            .objeto_os = "${this.objeto_os}"
+                        ></navegacao-teste>
                         <br><br><br><br>
 
                     </div>
