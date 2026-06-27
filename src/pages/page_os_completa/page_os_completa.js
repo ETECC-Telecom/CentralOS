@@ -20,6 +20,12 @@ import { Verificacao_Cabo_UTP } from '../../components/componentes_formulario/ve
 import { Verificacao_Fibra } from '../../components/componentes_formulario/verificacao_fibra/verificacao_fibra';
 import { Verificar_Fonte } from '../../components/componentes_formulario/verificar_fontes/verificar_fontes';
 import { Navegacao } from '../../components/componentes_formulario/navegacao/navegacao';
+import { Site_Survey } from '../../components/componentes_formulario/componente_site_survey/site_survey';
+import { Componente_Ping } from '../../components/componentes_formulario/componente_ping/componente_ping';
+import { Componente_Tracert } from '../../components/componentes_formulario/componente_tracert/componente_tracert';
+import { Componente_Velocidade } from '../../components/componentes_formulario/componente_velocidade/componente_velocidade';
+
+
 //Componentes de Formulário
 
 
@@ -163,6 +169,23 @@ export class Page_OS_Completa extends LitElement {
                         <navegacao-teste
                             .objeto_os = "${this.objeto_os}"
                         ></navegacao-teste>
+
+                        <site-survey
+                            .objeto_os = "${this.objeto_os}"
+                        ></site-survey>
+
+                        <componente-ping
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-ping>
+                        
+                        <componente-tracert
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-tracert>
+                        
+                        <componente-velocidade
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-velocidade>
+
                         <br><br><br><br>
 
                     </div>

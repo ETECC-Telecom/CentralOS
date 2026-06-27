@@ -1,5 +1,5 @@
-(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin===`use-credentials`?t.credentials=`include`:e.crossOrigin===`anonymous`?t.credentials=`omit`:t.credentials=`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=globalThis,t=e.ShadowRoot&&(e.ShadyCSS===void 0||e.ShadyCSS.nativeShadow)&&`adoptedStyleSheets`in Document.prototype&&`replace`in CSSStyleSheet.prototype,n=Symbol(),r=new WeakMap,i=class{constructor(e,t,r){if(this._$cssResult$=!0,r!==n)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o,n=this.t;if(t&&e===void 0){let t=n!==void 0&&n.length===1;t&&(e=r.get(n)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),t&&r.set(n,e))}return e}toString(){return this.cssText}},a=e=>new i(typeof e==`string`?e:e+``,void 0,n),o=(e,...t)=>new i(e.length===1?e[0]:t.reduce((t,n,r)=>t+(e=>{if(!0===e._$cssResult$)return e.cssText;if(typeof e==`number`)return e;throw Error(`Value passed to 'css' function must be a 'css' function result: `+e+`. Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.`)})(n)+e[r+1],e[0]),e,n),s=(n,r)=>{if(t)n.adoptedStyleSheets=r.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(let t of r){let r=document.createElement(`style`),i=e.litNonce;i!==void 0&&r.setAttribute(`nonce`,i),r.textContent=t.cssText,n.appendChild(r)}},c=t?e=>e:e=>e instanceof CSSStyleSheet?(e=>{let t=``;for(let n of e.cssRules)t+=n.cssText;return a(t)})(e):e,{is:l,defineProperty:u,getOwnPropertyDescriptor:d,getOwnPropertyNames:ee,getOwnPropertySymbols:te,getPrototypeOf:ne}=Object,f=globalThis,p=f.trustedTypes,re=p?p.emptyScript:``,ie=f.reactiveElementPolyfillSupport,m=(e,t)=>e,h={toAttribute(e,t){switch(t){case Boolean:e=e?re:null;break;case Object:case Array:e=e==null?e:JSON.stringify(e)}return e},fromAttribute(e,t){let n=e;switch(t){case Boolean:n=e!==null;break;case Number:n=e===null?null:Number(e);break;case Object:case Array:try{n=JSON.parse(e)}catch{n=null}}return n}},g=(e,t)=>!l(e,t),_={attribute:!0,type:String,converter:h,reflect:!1,useDefault:!1,hasChanged:g};Symbol.metadata??=Symbol(`metadata`),f.litPropertyMetadata??=new WeakMap;var v=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=_){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){let n=Symbol(),r=this.getPropertyDescriptor(e,n,t);r!==void 0&&u(this.prototype,e,r)}}static getPropertyDescriptor(e,t,n){let{get:r,set:i}=d(this.prototype,e)??{get(){return this[t]},set(e){this[t]=e}};return{get:r,set(t){let a=r?.call(this);i?.call(this,t),this.requestUpdate(e,a,n)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??_}static _$Ei(){if(this.hasOwnProperty(m(`elementProperties`)))return;let e=ne(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(m(`finalized`)))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(m(`properties`))){let e=this.properties,t=[...ee(e),...te(e)];for(let n of t)this.createProperty(n,e[n])}let e=this[Symbol.metadata];if(e!==null){let t=litPropertyMetadata.get(e);if(t!==void 0)for(let[e,n]of t)this.elementProperties.set(e,n)}this._$Eh=new Map;for(let[e,t]of this.elementProperties){let n=this._$Eu(e,t);n!==void 0&&this._$Eh.set(n,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){let t=[];if(Array.isArray(e)){let n=new Set(e.flat(1/0).reverse());for(let e of n)t.unshift(c(e))}else e!==void 0&&t.push(c(e));return t}static _$Eu(e,t){let n=t.attribute;return!1===n?void 0:typeof n==`string`?n:typeof e==`string`?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){let e=new Map,t=this.constructor.elementProperties;for(let n of t.keys())this.hasOwnProperty(n)&&(e.set(n,this[n]),delete this[n]);e.size>0&&(this._$Ep=e)}createRenderRoot(){let e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return s(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,n){this._$AK(e,n)}_$ET(e,t){let n=this.constructor.elementProperties.get(e),r=this.constructor._$Eu(e,n);if(r!==void 0&&!0===n.reflect){let i=(n.converter?.toAttribute===void 0?h:n.converter).toAttribute(t,n.type);this._$Em=e,i==null?this.removeAttribute(r):this.setAttribute(r,i),this._$Em=null}}_$AK(e,t){let n=this.constructor,r=n._$Eh.get(e);if(r!==void 0&&this._$Em!==r){let e=n.getPropertyOptions(r),i=typeof e.converter==`function`?{fromAttribute:e.converter}:e.converter?.fromAttribute===void 0?h:e.converter;this._$Em=r;let a=i.fromAttribute(t,e.type);this[r]=a??this._$Ej?.get(r)??a,this._$Em=null}}requestUpdate(e,t,n,r=!1,i){if(e!==void 0){let a=this.constructor;if(!1===r&&(i=this[e]),n??=a.getPropertyOptions(e),!((n.hasChanged??g)(i,t)||n.useDefault&&n.reflect&&i===this._$Ej?.get(e)&&!this.hasAttribute(a._$Eu(e,n))))return;this.C(e,t,n)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(e,t,{useDefault:n,reflect:r,wrapped:i},a){n&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,a??t??this[e]),!0!==i||a!==void 0)||(this._$AL.has(e)||(this.hasUpdated||n||(t=void 0),this._$AL.set(e,t)),!0===r&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}let e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(let[e,t]of this._$Ep)this[e]=t;this._$Ep=void 0}let e=this.constructor.elementProperties;if(e.size>0)for(let[t,n]of e){let{wrapped:e}=n,r=this[t];!0!==e||this._$AL.has(t)||r===void 0||this.C(t,void 0,n,r)}}let e=!1,t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(e=>e.hostUpdate?.()),this.update(t)):this._$EM()}catch(t){throw e=!1,this._$EM(),t}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(e){}firstUpdated(e){}};v.elementStyles=[],v.shadowRootOptions={mode:`open`},v[m(`elementProperties`)]=new Map,v[m(`finalized`)]=new Map,ie?.({ReactiveElement:v}),(f.reactiveElementVersions??=[]).push(`2.1.2`);var y=globalThis,ae=e=>e,b=y.trustedTypes,x=b?b.createPolicy(`lit-html`,{createHTML:e=>e}):void 0,S=`$lit$`,C=`lit$${Math.random().toFixed(9).slice(2)}$`,w=`?`+C,oe=`<${w}>`,T=document,E=()=>T.createComment(``),D=e=>e===null||typeof e!=`object`&&typeof e!=`function`,O=Array.isArray,se=e=>O(e)||typeof e?.[Symbol.iterator]==`function`,k=`[ 	
-\f\r]`,A=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,ce=/-->/g,j=/>/g,M=RegExp(`>|${k}(?:([^\\s"'>=/]+)(${k}*=${k}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,`g`),N=/'/g,P=/"/g,F=/^(?:script|style|textarea|title)$/i,I=(e=>(t,...n)=>({_$litType$:e,strings:t,values:n}))(1),L=Symbol.for(`lit-noChange`),R=Symbol.for(`lit-nothing`),z=new WeakMap,B=T.createTreeWalker(T,129);function V(e,t){if(!O(e)||!e.hasOwnProperty(`raw`))throw Error(`invalid template strings array`);return x===void 0?t:x.createHTML(t)}var le=(e,t)=>{let n=e.length-1,r=[],i,a=t===2?`<svg>`:t===3?`<math>`:``,o=A;for(let t=0;t<n;t++){let n=e[t],s,c,l=-1,u=0;for(;u<n.length&&(o.lastIndex=u,c=o.exec(n),c!==null);)u=o.lastIndex,o===A?c[1]===`!--`?o=ce:c[1]===void 0?c[2]===void 0?c[3]!==void 0&&(o=M):(F.test(c[2])&&(i=RegExp(`</`+c[2],`g`)),o=M):o=j:o===M?c[0]===`>`?(o=i??A,l=-1):c[1]===void 0?l=-2:(l=o.lastIndex-c[2].length,s=c[1],o=c[3]===void 0?M:c[3]===`"`?P:N):o===P||o===N?o=M:o===ce||o===j?o=A:(o=M,i=void 0);let d=o===M&&e[t+1].startsWith(`/>`)?` `:``;a+=o===A?n+oe:l>=0?(r.push(s),n.slice(0,l)+S+n.slice(l)+C+d):n+C+(l===-2?t:d)}return[V(e,a+(e[n]||`<?>`)+(t===2?`</svg>`:t===3?`</math>`:``)),r]},H=class e{constructor({strings:t,_$litType$:n},r){let i;this.parts=[];let a=0,o=0,s=t.length-1,c=this.parts,[l,u]=le(t,n);if(this.el=e.createElement(l,r),B.currentNode=this.el.content,n===2||n===3){let e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;(i=B.nextNode())!==null&&c.length<s;){if(i.nodeType===1){if(i.hasAttributes())for(let e of i.getAttributeNames())if(e.endsWith(S)){let t=u[o++],n=i.getAttribute(e).split(C),r=/([.?@])?(.*)/.exec(t);c.push({type:1,index:a,name:r[2],strings:n,ctor:r[1]===`.`?de:r[1]===`?`?fe:r[1]===`@`?pe:G}),i.removeAttribute(e)}else e.startsWith(C)&&(c.push({type:6,index:a}),i.removeAttribute(e));if(F.test(i.tagName)){let e=i.textContent.split(C),t=e.length-1;if(t>0){i.textContent=b?b.emptyScript:``;for(let n=0;n<t;n++)i.append(e[n],E()),B.nextNode(),c.push({type:2,index:++a});i.append(e[t],E())}}}else if(i.nodeType===8)if(i.data===w)c.push({type:2,index:a});else{let e=-1;for(;(e=i.data.indexOf(C,e+1))!==-1;)c.push({type:7,index:a}),e+=C.length-1}a++}}static createElement(e,t){let n=T.createElement(`template`);return n.innerHTML=e,n}};function U(e,t,n=e,r){if(t===L)return t;let i=r===void 0?n._$Cl:n._$Co?.[r],a=D(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(e),i._$AT(e,n,r)),r===void 0?n._$Cl=i:(n._$Co??=[])[r]=i),i!==void 0&&(t=U(e,i._$AS(e,t.values),i,r)),t}var ue=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:n}=this._$AD,r=(e?.creationScope??T).importNode(t,!0);B.currentNode=r;let i=B.nextNode(),a=0,o=0,s=n[0];for(;s!==void 0;){if(a===s.index){let t;s.type===2?t=new W(i,i.nextSibling,this,e):s.type===1?t=new s.ctor(i,s.name,s.strings,this,e):s.type===6&&(t=new me(i,this,e)),this._$AV.push(t),s=n[++o]}a!==s?.index&&(i=B.nextNode(),a++)}return B.currentNode=T,r}p(e){let t=0;for(let n of this._$AV)n!==void 0&&(n.strings===void 0?n._$AI(e[t]):(n._$AI(e,n,t),t+=n.strings.length-2)),t++}},W=class e{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,n,r){this.type=2,this._$AH=R,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=n,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=U(this,e,t),D(e)?e===R||e==null||e===``?(this._$AH!==R&&this._$AR(),this._$AH=R):e!==this._$AH&&e!==L&&this._(e):e._$litType$===void 0?e.nodeType===void 0?se(e)?this.k(e):this._(e):this.T(e):this.$(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==R&&D(this._$AH)?this._$AA.nextSibling.data=e:this.T(T.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:n}=e,r=typeof n==`number`?this._$AC(e):(n.el===void 0&&(n.el=H.createElement(V(n.h,n.h[0]),this.options)),n);if(this._$AH?._$AD===r)this._$AH.p(t);else{let e=new ue(r,this),n=e.u(this.options);e.p(t),this.T(n),this._$AH=e}}_$AC(e){let t=z.get(e.strings);return t===void 0&&z.set(e.strings,t=new H(e)),t}k(t){O(this._$AH)||(this._$AH=[],this._$AR());let n=this._$AH,r,i=0;for(let a of t)i===n.length?n.push(r=new e(this.O(E()),this.O(E()),this,this.options)):r=n[i],r._$AI(a),i++;i<n.length&&(this._$AR(r&&r._$AB.nextSibling,i),n.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let t=ae(e).nextSibling;ae(e).remove(),e=t}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},G=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,n,r,i){this.type=1,this._$AH=R,this._$AN=void 0,this.element=e,this.name=t,this._$AM=r,this.options=i,n.length>2||n[0]!==``||n[1]!==``?(this._$AH=Array(n.length-1).fill(new String),this.strings=n):this._$AH=R}_$AI(e,t=this,n,r){let i=this.strings,a=!1;if(i===void 0)e=U(this,e,t,0),a=!D(e)||e!==this._$AH&&e!==L,a&&(this._$AH=e);else{let r=e,o,s;for(e=i[0],o=0;o<i.length-1;o++)s=U(this,r[n+o],t,o),s===L&&(s=this._$AH[o]),a||=!D(s)||s!==this._$AH[o],s===R?e=R:e!==R&&(e+=(s??``)+i[o+1]),this._$AH[o]=s}a&&!r&&this.j(e)}j(e){e===R?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??``)}},de=class extends G{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===R?void 0:e}},fe=class extends G{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==R)}},pe=class extends G{constructor(e,t,n,r,i){super(e,t,n,r,i),this.type=5}_$AI(e,t=this){if((e=U(this,e,t,0)??R)===L)return;let n=this._$AH,r=e===R&&n!==R||e.capture!==n.capture||e.once!==n.once||e.passive!==n.passive,i=e!==R&&(n===R||r);r&&this.element.removeEventListener(this.name,this,n),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH==`function`?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},me=class{constructor(e,t,n){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=n}get _$AU(){return this._$AM._$AU}_$AI(e){U(this,e)}},he=y.litHtmlPolyfillSupport;he?.(H,W),(y.litHtmlVersions??=[]).push(`3.3.3`);var ge=(e,t,n)=>{let r=n?.renderBefore??t,i=r._$litPart$;if(i===void 0){let e=n?.renderBefore??null;r._$litPart$=i=new W(t.insertBefore(E(),e),e,void 0,n??{})}return i._$AI(e),i},K=globalThis,q=class extends v{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){let e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){let t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=ge(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return L}};q._$litElement$=!0,q.finalized=!0,K.litElementHydrateSupport?.({LitElement:q});var _e=K.litElementPolyfillSupport;_e?.({LitElement:q}),(K.litElementVersions??=[]).push(`4.2.2`);var J=new WeakMap,ve=e=>{if((e=>e.pattern!==void 0)(e))return e.pattern;let t=J.get(e);return t===void 0&&J.set(e,t=new URLPattern({pathname:e.path})),t},ye=class{constructor(e,t,n){this.routes=[],this.o=[],this.t={},this.i=e=>{if(e.routes===this)return;let t=e.routes;this.o.push(t),t.h=this,e.stopImmediatePropagation(),e.onDisconnect=()=>{this.o?.splice(this.o.indexOf(t)>>>0,1)};let n=be(this.t);n!==void 0&&t.goto(n)},(this.l=e).addController(this),this.routes=[...t],this.fallback=n?.fallback}link(e){if(e?.startsWith(`/`))return e;if(e?.startsWith(`.`))throw Error(`Not implemented`);return e??=this.u,(this.h?.link()??``)+e}async goto(e){let t;if(this.routes.length===0&&this.fallback===void 0)t=e,this.u=``,this.t={0:t};else{let n=this.p(e);if(n===void 0)throw Error(`No route found for `+e);let r=ve(n).exec({pathname:e})?.pathname.groups??{};if(t=be(r),typeof n.enter==`function`&&!1===await n.enter(r))return;this.v=n,this.t=r,this.u=t===void 0?e:e.substring(0,e.length-t.length)}if(t!==void 0)for(let e of this.o)e.goto(t);this.l.requestUpdate()}outlet(){return this.v?.render?.(this.t)}get params(){return this.t}p(e){let t=this.routes.find((t=>ve(t).test({pathname:e})));return t||this.fallback===void 0?t:this.fallback?{...this.fallback,path:`/*`}:void 0}hostConnected(){this.l.addEventListener(Y.eventName,this.i);let e=new Y(this);this.l.dispatchEvent(e),this._=e.onDisconnect}hostDisconnected(){this._?.(),this.h=void 0}},be=e=>{let t;for(let n of Object.keys(e))/\d+/.test(n)&&(t===void 0||n>t)&&(t=n);return t&&e[t]},Y=class e extends Event{constructor(t){super(e.eventName,{bubbles:!0,composed:!0,cancelable:!1}),this.routes=t}};Y.eventName=`lit-routes-connected`;var xe=location.origin||location.protocol+`//`+location.host,Se=class extends ye{constructor(){super(...arguments),this.m=e=>{let t=e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey;if(e.defaultPrevented||t)return;let n=e.composedPath().find((e=>e.tagName===`A`));if(n===void 0||n.target!==``||n.hasAttribute(`download`)||n.getAttribute(`rel`)===`external`)return;let r=n.href;if(r===``||r.startsWith(`mailto:`))return;let i=window.location;n.origin===xe&&(e.preventDefault(),r!==i.href&&(window.history.pushState({},``,r),this.goto(n.pathname)))},this.R=e=>{this.goto(window.location.pathname)}}hostConnected(){super.hostConnected(),window.addEventListener(`click`,this.m),window.addEventListener(`popstate`,this.R),this.goto(window.location.pathname)}hostDisconnected(){super.hostDisconnected(),window.removeEventListener(`click`,this.m),window.removeEventListener(`popstate`,this.R)}},Ce=`h1{font-size:var(--header-1)}h2{font-size:var(--header-2)}h3{font-size:var(--header-3)}p,a{font-size:var(--paragraph)}nav{background-color:var(--header-color);box-sizing:border-box;z-index:4000;justify-content:space-around;align-items:center;width:100%;margin-left:auto;margin-right:auto;padding:.2rem 0;display:flex;position:fixed;bottom:0}nav a svg{width:1.7rem;fill:var(--text-color)}nav a{text-align:center;width:7rem;color:var(--text-color);border-radius:.7rem;padding:.2rem;font-weight:600;text-decoration:none;transition:background-color .2s}nav a:hover{background-color:var(--destaque-color)}nav a p{margin:0;font-size:.8rem}@media (width>=1024px){nav{background-color:var(--background-color);border-radius:100rem;width:50%;margin-bottom:.5rem;padding:.4rem}nav a p{font-size:1rem}nav a{border-radius:100rem;width:9rem;padding-bottom:.1rem}}#container-drawer-ferramentas{flex-direction:column;justify-content:space-between;row-gap:1rem;padding:2rem 0 0;display:flex}#container-drawer-ferramentas a{flex-direction:row;align-items:center;gap:1rem;width:100%;display:flex}#container-drawer-ferramentas a svg{fill:var(--destaque-color)}`,we=`#container{box-sizing:border-box;opacity:0;visibility:hidden;z-index:9999;background-color:#0009;flex-direction:column;justify-content:center;align-items:center;width:100vw;height:100vh;padding:2rem;transition:opacity .3s,visibility .3s;display:flex;position:fixed;top:0;left:0}#container.visivel{opacity:1;visibility:visible}#modal{background-color:var(--background-color);color:var(--text-color);text-align:center;border-color:var(--btn-border-color);box-sizing:border-box;border-style:solid;border-width:2px;border-radius:2rem;flex-direction:column;justify-content:center;transition:transform .3s;display:flex;transform:scale(.9)translateY(20px);box-shadow:0 20px 50px #ffffff38}#container.visivel #modal{transform:scale(1)translateY(0)}#modal svg{fill:var(--text-color);height:5rem}input{background-color:var(--btn-background-color);width:15rem;color:var(--btn-text-background-color);border:.1rem solid;border-color:var(--btn-border-color);border-radius:100rem;margin:1rem;padding:.5rem;font-size:1rem}button{background-color:var(--btn-background-color);width:15rem;color:var(--text-color);border:none;border-radius:100rem;margin:1rem;padding:.5rem;font-size:1rem;transition:background-color .1s}button:hover{background-color:var(--destaque-color);color:var(--text-color)}#close-button{justify-content:flex-end;align-items:center;height:2rem;margin:0;padding:.9rem;display:flex}#close-button a svg{fill:#b00;transform-origin:50%;width:2.5rem;transition:transform .2s}#close-button a svg:hover{transform:scale(1.2)}@media (width>=1024px){#modal{width:50%}}`,Te=e=>{localStorage.setItem(`usuario`,e)},Ee=class extends q{static properties={aberto:{type:Boolean}};static get styles(){return o`${a(we)}`}constructor(){super(),this.url_config=``,this.aberto=!1}Btn_Cadastro(e){let t=e.target.form,n=new FormData(t).get(`nome`);n!==``&&(Te(n),this._dispararFechar())}_dispararFechar(){this.aberto=!1,this.dispatchEvent(new CustomEvent(`ao-fechar`,{bubbles:!0,composed:!0}))}render(){return I`
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin===`use-credentials`?t.credentials=`include`:e.crossOrigin===`anonymous`?t.credentials=`omit`:t.credentials=`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=globalThis,t=e.ShadowRoot&&(e.ShadyCSS===void 0||e.ShadyCSS.nativeShadow)&&`adoptedStyleSheets`in Document.prototype&&`replace`in CSSStyleSheet.prototype,n=Symbol(),r=new WeakMap,i=class{constructor(e,t,r){if(this._$cssResult$=!0,r!==n)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o,n=this.t;if(t&&e===void 0){let t=n!==void 0&&n.length===1;t&&(e=r.get(n)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),t&&r.set(n,e))}return e}toString(){return this.cssText}},a=e=>new i(typeof e==`string`?e:e+``,void 0,n),o=(e,...t)=>new i(e.length===1?e[0]:t.reduce((t,n,r)=>t+(e=>{if(!0===e._$cssResult$)return e.cssText;if(typeof e==`number`)return e;throw Error(`Value passed to 'css' function must be a 'css' function result: `+e+`. Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.`)})(n)+e[r+1],e[0]),e,n),s=(n,r)=>{if(t)n.adoptedStyleSheets=r.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(let t of r){let r=document.createElement(`style`),i=e.litNonce;i!==void 0&&r.setAttribute(`nonce`,i),r.textContent=t.cssText,n.appendChild(r)}},c=t?e=>e:e=>e instanceof CSSStyleSheet?(e=>{let t=``;for(let n of e.cssRules)t+=n.cssText;return a(t)})(e):e,{is:l,defineProperty:u,getOwnPropertyDescriptor:d,getOwnPropertyNames:ee,getOwnPropertySymbols:te,getPrototypeOf:ne}=Object,f=globalThis,p=f.trustedTypes,re=p?p.emptyScript:``,ie=f.reactiveElementPolyfillSupport,m=(e,t)=>e,h={toAttribute(e,t){switch(t){case Boolean:e=e?re:null;break;case Object:case Array:e=e==null?e:JSON.stringify(e)}return e},fromAttribute(e,t){let n=e;switch(t){case Boolean:n=e!==null;break;case Number:n=e===null?null:Number(e);break;case Object:case Array:try{n=JSON.parse(e)}catch{n=null}}return n}},g=(e,t)=>!l(e,t),_={attribute:!0,type:String,converter:h,reflect:!1,useDefault:!1,hasChanged:g};Symbol.metadata??=Symbol(`metadata`),f.litPropertyMetadata??=new WeakMap;var v=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=_){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){let n=Symbol(),r=this.getPropertyDescriptor(e,n,t);r!==void 0&&u(this.prototype,e,r)}}static getPropertyDescriptor(e,t,n){let{get:r,set:i}=d(this.prototype,e)??{get(){return this[t]},set(e){this[t]=e}};return{get:r,set(t){let a=r?.call(this);i?.call(this,t),this.requestUpdate(e,a,n)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??_}static _$Ei(){if(this.hasOwnProperty(m(`elementProperties`)))return;let e=ne(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(m(`finalized`)))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(m(`properties`))){let e=this.properties,t=[...ee(e),...te(e)];for(let n of t)this.createProperty(n,e[n])}let e=this[Symbol.metadata];if(e!==null){let t=litPropertyMetadata.get(e);if(t!==void 0)for(let[e,n]of t)this.elementProperties.set(e,n)}this._$Eh=new Map;for(let[e,t]of this.elementProperties){let n=this._$Eu(e,t);n!==void 0&&this._$Eh.set(n,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){let t=[];if(Array.isArray(e)){let n=new Set(e.flat(1/0).reverse());for(let e of n)t.unshift(c(e))}else e!==void 0&&t.push(c(e));return t}static _$Eu(e,t){let n=t.attribute;return!1===n?void 0:typeof n==`string`?n:typeof e==`string`?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){let e=new Map,t=this.constructor.elementProperties;for(let n of t.keys())this.hasOwnProperty(n)&&(e.set(n,this[n]),delete this[n]);e.size>0&&(this._$Ep=e)}createRenderRoot(){let e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return s(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,n){this._$AK(e,n)}_$ET(e,t){let n=this.constructor.elementProperties.get(e),r=this.constructor._$Eu(e,n);if(r!==void 0&&!0===n.reflect){let i=(n.converter?.toAttribute===void 0?h:n.converter).toAttribute(t,n.type);this._$Em=e,i==null?this.removeAttribute(r):this.setAttribute(r,i),this._$Em=null}}_$AK(e,t){let n=this.constructor,r=n._$Eh.get(e);if(r!==void 0&&this._$Em!==r){let e=n.getPropertyOptions(r),i=typeof e.converter==`function`?{fromAttribute:e.converter}:e.converter?.fromAttribute===void 0?h:e.converter;this._$Em=r;let a=i.fromAttribute(t,e.type);this[r]=a??this._$Ej?.get(r)??a,this._$Em=null}}requestUpdate(e,t,n,r=!1,i){if(e!==void 0){let a=this.constructor;if(!1===r&&(i=this[e]),n??=a.getPropertyOptions(e),!((n.hasChanged??g)(i,t)||n.useDefault&&n.reflect&&i===this._$Ej?.get(e)&&!this.hasAttribute(a._$Eu(e,n))))return;this.C(e,t,n)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(e,t,{useDefault:n,reflect:r,wrapped:i},a){n&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,a??t??this[e]),!0!==i||a!==void 0)||(this._$AL.has(e)||(this.hasUpdated||n||(t=void 0),this._$AL.set(e,t)),!0===r&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}let e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(let[e,t]of this._$Ep)this[e]=t;this._$Ep=void 0}let e=this.constructor.elementProperties;if(e.size>0)for(let[t,n]of e){let{wrapped:e}=n,r=this[t];!0!==e||this._$AL.has(t)||r===void 0||this.C(t,void 0,n,r)}}let e=!1,t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(e=>e.hostUpdate?.()),this.update(t)):this._$EM()}catch(t){throw e=!1,this._$EM(),t}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(e){}firstUpdated(e){}};v.elementStyles=[],v.shadowRootOptions={mode:`open`},v[m(`elementProperties`)]=new Map,v[m(`finalized`)]=new Map,ie?.({ReactiveElement:v}),(f.reactiveElementVersions??=[]).push(`2.1.2`);var y=globalThis,b=e=>e,x=y.trustedTypes,S=x?x.createPolicy(`lit-html`,{createHTML:e=>e}):void 0,C=`$lit$`,w=`lit$${Math.random().toFixed(9).slice(2)}$`,T=`?`+w,ae=`<${T}>`,E=document,D=()=>E.createComment(``),O=e=>e===null||typeof e!=`object`&&typeof e!=`function`,k=Array.isArray,oe=e=>k(e)||typeof e?.[Symbol.iterator]==`function`,A=`[ 	
+\f\r]`,j=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,se=/-->/g,ce=/>/g,M=RegExp(`>|${A}(?:([^\\s"'>=/]+)(${A}*=${A}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,`g`),N=/'/g,P=/"/g,F=/^(?:script|style|textarea|title)$/i,I=(e=>(t,...n)=>({_$litType$:e,strings:t,values:n}))(1),L=Symbol.for(`lit-noChange`),R=Symbol.for(`lit-nothing`),z=new WeakMap,B=E.createTreeWalker(E,129);function V(e,t){if(!k(e)||!e.hasOwnProperty(`raw`))throw Error(`invalid template strings array`);return S===void 0?t:S.createHTML(t)}var le=(e,t)=>{let n=e.length-1,r=[],i,a=t===2?`<svg>`:t===3?`<math>`:``,o=j;for(let t=0;t<n;t++){let n=e[t],s,c,l=-1,u=0;for(;u<n.length&&(o.lastIndex=u,c=o.exec(n),c!==null);)u=o.lastIndex,o===j?c[1]===`!--`?o=se:c[1]===void 0?c[2]===void 0?c[3]!==void 0&&(o=M):(F.test(c[2])&&(i=RegExp(`</`+c[2],`g`)),o=M):o=ce:o===M?c[0]===`>`?(o=i??j,l=-1):c[1]===void 0?l=-2:(l=o.lastIndex-c[2].length,s=c[1],o=c[3]===void 0?M:c[3]===`"`?P:N):o===P||o===N?o=M:o===se||o===ce?o=j:(o=M,i=void 0);let d=o===M&&e[t+1].startsWith(`/>`)?` `:``;a+=o===j?n+ae:l>=0?(r.push(s),n.slice(0,l)+C+n.slice(l)+w+d):n+w+(l===-2?t:d)}return[V(e,a+(e[n]||`<?>`)+(t===2?`</svg>`:t===3?`</math>`:``)),r]},H=class e{constructor({strings:t,_$litType$:n},r){let i;this.parts=[];let a=0,o=0,s=t.length-1,c=this.parts,[l,u]=le(t,n);if(this.el=e.createElement(l,r),B.currentNode=this.el.content,n===2||n===3){let e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;(i=B.nextNode())!==null&&c.length<s;){if(i.nodeType===1){if(i.hasAttributes())for(let e of i.getAttributeNames())if(e.endsWith(C)){let t=u[o++],n=i.getAttribute(e).split(w),r=/([.?@])?(.*)/.exec(t);c.push({type:1,index:a,name:r[2],strings:n,ctor:r[1]===`.`?de:r[1]===`?`?fe:r[1]===`@`?pe:G}),i.removeAttribute(e)}else e.startsWith(w)&&(c.push({type:6,index:a}),i.removeAttribute(e));if(F.test(i.tagName)){let e=i.textContent.split(w),t=e.length-1;if(t>0){i.textContent=x?x.emptyScript:``;for(let n=0;n<t;n++)i.append(e[n],D()),B.nextNode(),c.push({type:2,index:++a});i.append(e[t],D())}}}else if(i.nodeType===8)if(i.data===T)c.push({type:2,index:a});else{let e=-1;for(;(e=i.data.indexOf(w,e+1))!==-1;)c.push({type:7,index:a}),e+=w.length-1}a++}}static createElement(e,t){let n=E.createElement(`template`);return n.innerHTML=e,n}};function U(e,t,n=e,r){if(t===L)return t;let i=r===void 0?n._$Cl:n._$Co?.[r],a=O(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(e),i._$AT(e,n,r)),r===void 0?n._$Cl=i:(n._$Co??=[])[r]=i),i!==void 0&&(t=U(e,i._$AS(e,t.values),i,r)),t}var ue=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:n}=this._$AD,r=(e?.creationScope??E).importNode(t,!0);B.currentNode=r;let i=B.nextNode(),a=0,o=0,s=n[0];for(;s!==void 0;){if(a===s.index){let t;s.type===2?t=new W(i,i.nextSibling,this,e):s.type===1?t=new s.ctor(i,s.name,s.strings,this,e):s.type===6&&(t=new me(i,this,e)),this._$AV.push(t),s=n[++o]}a!==s?.index&&(i=B.nextNode(),a++)}return B.currentNode=E,r}p(e){let t=0;for(let n of this._$AV)n!==void 0&&(n.strings===void 0?n._$AI(e[t]):(n._$AI(e,n,t),t+=n.strings.length-2)),t++}},W=class e{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,n,r){this.type=2,this._$AH=R,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=n,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=U(this,e,t),O(e)?e===R||e==null||e===``?(this._$AH!==R&&this._$AR(),this._$AH=R):e!==this._$AH&&e!==L&&this._(e):e._$litType$===void 0?e.nodeType===void 0?oe(e)?this.k(e):this._(e):this.T(e):this.$(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==R&&O(this._$AH)?this._$AA.nextSibling.data=e:this.T(E.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:n}=e,r=typeof n==`number`?this._$AC(e):(n.el===void 0&&(n.el=H.createElement(V(n.h,n.h[0]),this.options)),n);if(this._$AH?._$AD===r)this._$AH.p(t);else{let e=new ue(r,this),n=e.u(this.options);e.p(t),this.T(n),this._$AH=e}}_$AC(e){let t=z.get(e.strings);return t===void 0&&z.set(e.strings,t=new H(e)),t}k(t){k(this._$AH)||(this._$AH=[],this._$AR());let n=this._$AH,r,i=0;for(let a of t)i===n.length?n.push(r=new e(this.O(D()),this.O(D()),this,this.options)):r=n[i],r._$AI(a),i++;i<n.length&&(this._$AR(r&&r._$AB.nextSibling,i),n.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let t=b(e).nextSibling;b(e).remove(),e=t}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},G=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,n,r,i){this.type=1,this._$AH=R,this._$AN=void 0,this.element=e,this.name=t,this._$AM=r,this.options=i,n.length>2||n[0]!==``||n[1]!==``?(this._$AH=Array(n.length-1).fill(new String),this.strings=n):this._$AH=R}_$AI(e,t=this,n,r){let i=this.strings,a=!1;if(i===void 0)e=U(this,e,t,0),a=!O(e)||e!==this._$AH&&e!==L,a&&(this._$AH=e);else{let r=e,o,s;for(e=i[0],o=0;o<i.length-1;o++)s=U(this,r[n+o],t,o),s===L&&(s=this._$AH[o]),a||=!O(s)||s!==this._$AH[o],s===R?e=R:e!==R&&(e+=(s??``)+i[o+1]),this._$AH[o]=s}a&&!r&&this.j(e)}j(e){e===R?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??``)}},de=class extends G{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===R?void 0:e}},fe=class extends G{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==R)}},pe=class extends G{constructor(e,t,n,r,i){super(e,t,n,r,i),this.type=5}_$AI(e,t=this){if((e=U(this,e,t,0)??R)===L)return;let n=this._$AH,r=e===R&&n!==R||e.capture!==n.capture||e.once!==n.once||e.passive!==n.passive,i=e!==R&&(n===R||r);r&&this.element.removeEventListener(this.name,this,n),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH==`function`?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},me=class{constructor(e,t,n){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=n}get _$AU(){return this._$AM._$AU}_$AI(e){U(this,e)}},he=y.litHtmlPolyfillSupport;he?.(H,W),(y.litHtmlVersions??=[]).push(`3.3.3`);var ge=(e,t,n)=>{let r=n?.renderBefore??t,i=r._$litPart$;if(i===void 0){let e=n?.renderBefore??null;r._$litPart$=i=new W(t.insertBefore(D(),e),e,void 0,n??{})}return i._$AI(e),i},K=globalThis,q=class extends v{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){let e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){let t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=ge(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return L}};q._$litElement$=!0,q.finalized=!0,K.litElementHydrateSupport?.({LitElement:q});var _e=K.litElementPolyfillSupport;_e?.({LitElement:q}),(K.litElementVersions??=[]).push(`4.2.2`);var J=new WeakMap,ve=e=>{if((e=>e.pattern!==void 0)(e))return e.pattern;let t=J.get(e);return t===void 0&&J.set(e,t=new URLPattern({pathname:e.path})),t},ye=class{constructor(e,t,n){this.routes=[],this.o=[],this.t={},this.i=e=>{if(e.routes===this)return;let t=e.routes;this.o.push(t),t.h=this,e.stopImmediatePropagation(),e.onDisconnect=()=>{this.o?.splice(this.o.indexOf(t)>>>0,1)};let n=be(this.t);n!==void 0&&t.goto(n)},(this.l=e).addController(this),this.routes=[...t],this.fallback=n?.fallback}link(e){if(e?.startsWith(`/`))return e;if(e?.startsWith(`.`))throw Error(`Not implemented`);return e??=this.u,(this.h?.link()??``)+e}async goto(e){let t;if(this.routes.length===0&&this.fallback===void 0)t=e,this.u=``,this.t={0:t};else{let n=this.p(e);if(n===void 0)throw Error(`No route found for `+e);let r=ve(n).exec({pathname:e})?.pathname.groups??{};if(t=be(r),typeof n.enter==`function`&&!1===await n.enter(r))return;this.v=n,this.t=r,this.u=t===void 0?e:e.substring(0,e.length-t.length)}if(t!==void 0)for(let e of this.o)e.goto(t);this.l.requestUpdate()}outlet(){return this.v?.render?.(this.t)}get params(){return this.t}p(e){let t=this.routes.find((t=>ve(t).test({pathname:e})));return t||this.fallback===void 0?t:this.fallback?{...this.fallback,path:`/*`}:void 0}hostConnected(){this.l.addEventListener(Y.eventName,this.i);let e=new Y(this);this.l.dispatchEvent(e),this._=e.onDisconnect}hostDisconnected(){this._?.(),this.h=void 0}},be=e=>{let t;for(let n of Object.keys(e))/\d+/.test(n)&&(t===void 0||n>t)&&(t=n);return t&&e[t]},Y=class e extends Event{constructor(t){super(e.eventName,{bubbles:!0,composed:!0,cancelable:!1}),this.routes=t}};Y.eventName=`lit-routes-connected`;var xe=location.origin||location.protocol+`//`+location.host,Se=class extends ye{constructor(){super(...arguments),this.m=e=>{let t=e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey;if(e.defaultPrevented||t)return;let n=e.composedPath().find((e=>e.tagName===`A`));if(n===void 0||n.target!==``||n.hasAttribute(`download`)||n.getAttribute(`rel`)===`external`)return;let r=n.href;if(r===``||r.startsWith(`mailto:`))return;let i=window.location;n.origin===xe&&(e.preventDefault(),r!==i.href&&(window.history.pushState({},``,r),this.goto(n.pathname)))},this.R=e=>{this.goto(window.location.pathname)}}hostConnected(){super.hostConnected(),window.addEventListener(`click`,this.m),window.addEventListener(`popstate`,this.R),this.goto(window.location.pathname)}hostDisconnected(){super.hostDisconnected(),window.removeEventListener(`click`,this.m),window.removeEventListener(`popstate`,this.R)}},Ce=`h1{font-size:var(--header-1)}h2{font-size:var(--header-2)}h3{font-size:var(--header-3)}p,a{font-size:var(--paragraph)}nav{background-color:var(--header-color);box-sizing:border-box;z-index:4000;justify-content:space-around;align-items:center;width:100%;margin-left:auto;margin-right:auto;padding:.2rem 0;display:flex;position:fixed;bottom:0}nav a svg{width:1.7rem;fill:var(--text-color)}nav a{text-align:center;width:7rem;color:var(--text-color);border-radius:.7rem;padding:.2rem;font-weight:600;text-decoration:none;transition:background-color .2s}nav a:hover{background-color:var(--destaque-color)}nav a p{margin:0;font-size:.8rem}@media (width>=1024px){nav{background-color:var(--background-color);border-radius:100rem;width:50%;margin-bottom:.5rem;padding:.4rem}nav a p{font-size:1rem}nav a{border-radius:100rem;width:9rem;padding-bottom:.1rem}}#container-drawer-ferramentas{flex-direction:column;justify-content:space-between;row-gap:1rem;padding:2rem 0 0;display:flex}#container-drawer-ferramentas a{flex-direction:row;align-items:center;gap:1rem;width:100%;display:flex}#container-drawer-ferramentas a svg{fill:var(--destaque-color)}`,we=`#container{box-sizing:border-box;opacity:0;visibility:hidden;z-index:9999;background-color:#0009;flex-direction:column;justify-content:center;align-items:center;width:100vw;height:100vh;padding:2rem;transition:opacity .3s,visibility .3s;display:flex;position:fixed;top:0;left:0}#container.visivel{opacity:1;visibility:visible}#modal{background-color:var(--background-color);color:var(--text-color);text-align:center;border-color:var(--btn-border-color);box-sizing:border-box;border-style:solid;border-width:2px;border-radius:2rem;flex-direction:column;justify-content:center;transition:transform .3s;display:flex;transform:scale(.9)translateY(20px);box-shadow:0 20px 50px #ffffff38}#container.visivel #modal{transform:scale(1)translateY(0)}#modal svg{fill:var(--text-color);height:5rem}input{background-color:var(--btn-background-color);width:15rem;color:var(--btn-text-background-color);border:.1rem solid;border-color:var(--btn-border-color);border-radius:100rem;margin:1rem;padding:.5rem;font-size:1rem}button{background-color:var(--btn-background-color);width:15rem;color:var(--text-color);border:none;border-radius:100rem;margin:1rem;padding:.5rem;font-size:1rem;transition:background-color .1s}button:hover{background-color:var(--destaque-color);color:var(--text-color)}#close-button{justify-content:flex-end;align-items:center;height:2rem;margin:0;padding:.9rem;display:flex}#close-button a svg{fill:#b00;transform-origin:50%;width:2.5rem;transition:transform .2s}#close-button a svg:hover{transform:scale(1.2)}@media (width>=1024px){#modal{width:50%}}`,Te=e=>{localStorage.setItem(`usuario`,e)},Ee=class extends q{static properties={aberto:{type:Boolean}};static get styles(){return o`${a(we)}`}constructor(){super(),this.url_config=``,this.aberto=!1}Btn_Cadastro(e){let t=e.target.form,n=new FormData(t).get(`nome`);n!==``&&(Te(n),this._dispararFechar())}_dispararFechar(){this.aberto=!1,this.dispatchEvent(new CustomEvent(`ao-fechar`,{bubbles:!0,composed:!0}))}render(){return I`
             <div id="container" class="${this.aberto?`visivel`:``}">
                 <div id="modal">
                     <div id="close-button">
@@ -319,7 +319,7 @@
             </div>
             
             <menu-inferior></menu-inferior>
-        `}};customElements.define(`add-os`,Ue);var We=`h1{color:var(--btn-text-background-color);text-align:center}a.ativo{background-color:var(--destaque-color)}h1{font-size:var(--header-1)}h2{font-size:var(--header-2)}h3{font-size:var(--header-3)}p,a{font-size:var(--paragraph)}nav{background-color:var(--header-color);box-sizing:border-box;z-index:4000;justify-content:space-around;align-items:center;width:100%;margin-left:auto;margin-right:auto;padding:.2rem 0;display:flex;position:fixed;bottom:0}nav a svg{width:1.7rem;fill:var(--text-color)}nav a{text-align:center;width:7rem;color:var(--text-color);border-radius:.7rem;padding:.2rem;font-weight:600;text-decoration:none;transition:background-color .2s}nav a:hover{background-color:var(--destaque-color)}nav a p{margin:0;font-size:.8rem}.container-item{padding:1rem}@media (width>=1024px){.container-item{padding:0}nav{background-color:var(--background-color);border-radius:100rem;width:50%;margin-bottom:.5rem;padding:.4rem}nav a p{font-size:1rem}nav a{border-radius:100rem;width:9rem;padding-bottom:.1rem}}#container-drawer-ferramentas{flex-direction:column;justify-content:space-between;row-gap:1rem;padding:2rem 0 0;display:flex}#container-drawer-ferramentas a{flex-direction:row;align-items:center;gap:1rem;width:100%;display:flex}#container-drawer-ferramentas a svg{fill:var(--destaque-color)}.form-container{max-width:auto;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}.form-group{flex-direction:column;margin-bottom:20px;display:flex}.form-group-row{align-items:center;gap:8px;margin-bottom:15px;display:flex}.form-label{color:var(--btn-text-background-color);margin-bottom:6px;font-size:17px;font-weight:600}.form-label-inline{color:#333;cursor:pointer;font-size:14px}.form-input,.form-select,.form-textarea{appearance:none;box-sizing:border-box;color:#1a202c;background-color:#f8fafc;border:2px solid #e2e8f0;border-radius:6px;width:100%;padding:10px 12px;font-family:inherit;font-size:15px;transition:border-color .2s,background-color .2s}.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--destaque-color);background-color:#fff;outline:none}.form-select{cursor:pointer;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");background-position:right 12px center;background-repeat:no-repeat;background-size:16px;padding-right:40px}.form-textarea{resize:vertical;min-height:100px}.form-radio,.form-checkbox{appearance:none;font:inherit;color:#3182ce;cursor:pointer;background-color:#f8fafc;border:2px solid #cbd5e1;place-content:center;width:18px;height:18px;margin:0;transition:border-color .2s;display:grid}.form-radio{border-radius:50%}.form-checkbox{border-radius:4px}.form-radio:before{content:"";background-color:currentColor;border-radius:50%;width:8px;height:8px;transition:transform .12s ease-in-out;transform:scale(0)}.form-checkbox:before{content:"";clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%);background-color:currentColor;width:10px;height:10px;transition:transform .12s ease-in-out;transform:scale(0)}.form-radio:checked:before,.form-checkbox:checked:before{transform:scale(1)}.form-radio:checked,.form-checkbox:checked{border-color:#3182ce}.form-radio:focus,.form-checkbox:focus{outline:2px solid #ebf8ff}.form-button{appearance:none;color:#fff;cursor:pointer;background-color:#3182ce;border:none;border-radius:6px;width:100%;padding:12px 24px;font-family:inherit;font-size:15px;font-weight:600;transition:background-color .2s}.form-button:hover{background-color:#2b6cb0}.form-button:active{background-color:#2c5282}`,Ge={config_OS:{tipo_os:null,finalizada:!1,info_encaminhadas:!1,id:null},info_cliente:{nome_cliente:null,parentesco:null,parentesco_info:null,relato_cliente:null},endereco_info_os:{coordenadas:{latitude:null,longitude:null,precisao:0},anexo_fachada:!1,info_necessaria:!0,complemento_info_necessaria:{requerimentos:[],operador:null,info_padrao:{historico:!1,comodato:!1,descricao:!1,contratacao:!1}}},conferencia_tecnica:{cabos_utp:[],fontes:{mau_contato:!0,amperagem:!0,uso:!0,observacao:null},fibra:{sinal_pto:null,sinal_pathcord:null,sinal_autoisp:null,anexo_sinal:!0,limpeza:!0,observacao:null},conferencia_router:[{router:null,dns:null,outro_dns:null,largura_banda:null,upnp:!1,ipv6:!1,acesso_remoto:!1,ativos_anormal:{verdadeiro:!1,observacao:null},atividade:{verdadeiro:!1,observacao:null},firware_router:!1,local_equipamento:{adequado:!1,ciente:!0,observacao:null}}],teste_navegacao:[{ativos_cliente:!1,tipo_ativo:`celular`,observacao:null},{ativos_cliente:!1,tipo_ativo:`computador`,observacao:null},{ativos_cliente:!0,tipo_ativo:`computador`,observacao:`Teste de escrita`}],mapa_calor:{realizado:!1,pontos_sobra:!1,observacao:null},ping_adicional:[{titulo:null,tipo:null,pacotes:[0,0,0],latencia:[0,0,0]}],observacao_ping:null,tracert_adicional:[{ativo:null,url:null}],observacao_tracert:null,velocidade_adicional:[{titulo:null,tipo:null,down:0,up:0,ping:0}],observacao_velocidade:null,encaminhar_externa:{necessidade:!1,observacao:null},troca_equipamento:{ativos:[{ativo:null,mac:null}],trocas:{ativos_retirados:[{ativo:null,mac:null}],ativos_inseridos:[{ativo:null,mac:null}],outros_ativos:[{ativo:null,mac:null}]}}},ajuda_interna:{verdadeiro:!1,setor:null,nome:null},indicacao:{solicitado:!1,indicado:!1,observacao:null},educacao_cliente:{},atendimento_cliente:{},complemento_atendimento:[],relato_adicional:null,relatorio_estabilidade:null},Ke=`:host{margin:0;padding:0;display:block}#container{background-color:var(--header-color);color:var(--text-color);box-sizing:border-box;justify-content:space-between;align-items:center;margin:0;padding:0;display:flex}#container h3{margin:0;padding:0}#container p{margin:0;padding:0;font-size:1rem;font-weight:100}#container span{font-weight:900}@media (width>=1024px){#container{border-radius:100rem;margin-top:.5rem;padding:0}#container_texto h3{font-size:1rem}#container_texto p{padding:.3rem;font-size:.8rem}.coluna{margin:0;padding:0}.btn-icone{width:1.1rem;margin:0;padding:0}svg{width:1.5rem}}#container_texto{text-align:center}.coluna{margin:.1rem;padding:.5rem}.btn-icone{background-color:var(--btn-background-color);border-radius:50%;justify-content:center;align-items:center;margin:.4rem;padding:.8rem;display:inline-flex}svg{fill:var(--text-color);width:1.5rem;padding:0}`,qe=()=>{let e=localStorage.getItem(`usuario`);return e===null&&(e=`Técnico Não Cadastrato`),e},Je=class extends q{static properties={nome:{type:String}};static get styles(){return o`${a(Ke)}`}constructor(){super(),this.nome_tecnico=qe()}render(){return I`
+        `}};customElements.define(`add-os`,Ue);var We=`h1{color:var(--btn-text-background-color);text-align:center}a.ativo{background-color:var(--destaque-color)}h1{font-size:var(--header-1)}h2{font-size:var(--header-2)}h3{font-size:var(--header-3)}p,a{font-size:var(--paragraph)}nav{background-color:var(--header-color);box-sizing:border-box;z-index:4000;justify-content:space-around;align-items:center;width:100%;margin-left:auto;margin-right:auto;padding:.2rem 0;display:flex;position:fixed;bottom:0}nav a svg{width:1.7rem;fill:var(--text-color)}nav a{text-align:center;width:7rem;color:var(--text-color);border-radius:.7rem;padding:.2rem;font-weight:600;text-decoration:none;transition:background-color .2s}nav a:hover{background-color:var(--destaque-color)}nav a p{margin:0;font-size:.8rem}.container-item{padding:1rem}@media (width>=1024px){.container-item{padding:0}nav{background-color:var(--background-color);border-radius:100rem;width:50%;margin-bottom:.5rem;padding:.4rem}nav a p{font-size:1rem}nav a{border-radius:100rem;width:9rem;padding-bottom:.1rem}}#container-drawer-ferramentas{flex-direction:column;justify-content:space-between;row-gap:1rem;padding:2rem 0 0;display:flex}#container-drawer-ferramentas a{flex-direction:row;align-items:center;gap:1rem;width:100%;display:flex}#container-drawer-ferramentas a svg{fill:var(--destaque-color)}.form-container{max-width:auto;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}.form-group{flex-direction:column;margin-bottom:20px;display:flex}.form-group-row{align-items:center;gap:8px;margin-bottom:15px;display:flex}.form-label{color:var(--btn-text-background-color);margin-bottom:6px;font-size:17px;font-weight:600}.form-label-inline{color:#333;cursor:pointer;font-size:14px}.form-input,.form-select,.form-textarea{appearance:none;box-sizing:border-box;color:#1a202c;background-color:#f8fafc;border:2px solid #e2e8f0;border-radius:6px;width:100%;padding:10px 12px;font-family:inherit;font-size:15px;transition:border-color .2s,background-color .2s}.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--destaque-color);background-color:#fff;outline:none}.form-select{cursor:pointer;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");background-position:right 12px center;background-repeat:no-repeat;background-size:16px;padding-right:40px}.form-textarea{resize:vertical;min-height:100px}.form-radio,.form-checkbox{appearance:none;font:inherit;color:#3182ce;cursor:pointer;background-color:#f8fafc;border:2px solid #cbd5e1;place-content:center;width:18px;height:18px;margin:0;transition:border-color .2s;display:grid}.form-radio{border-radius:50%}.form-checkbox{border-radius:4px}.form-radio:before{content:"";background-color:currentColor;border-radius:50%;width:8px;height:8px;transition:transform .12s ease-in-out;transform:scale(0)}.form-checkbox:before{content:"";clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%);background-color:currentColor;width:10px;height:10px;transition:transform .12s ease-in-out;transform:scale(0)}.form-radio:checked:before,.form-checkbox:checked:before{transform:scale(1)}.form-radio:checked,.form-checkbox:checked{border-color:#3182ce}.form-radio:focus,.form-checkbox:focus{outline:2px solid #ebf8ff}.form-button{appearance:none;color:#fff;cursor:pointer;background-color:#3182ce;border:none;border-radius:6px;width:100%;padding:12px 24px;font-family:inherit;font-size:15px;font-weight:600;transition:background-color .2s}.form-button:hover{background-color:#2b6cb0}.form-button:active{background-color:#2c5282}`,Ge={config_OS:{tipo_os:null,finalizada:!1,info_encaminhadas:!1,id:null},info_cliente:{nome_cliente:null,parentesco:null,parentesco_info:null,relato_cliente:null},endereco_info_os:{coordenadas:{latitude:null,longitude:null,precisao:0},anexo_fachada:!1,info_necessaria:!0,complemento_info_necessaria:{requerimentos:[],operador:null,info_padrao:{historico:!1,comodato:!1,descricao:!1,contratacao:!1}}},conferencia_tecnica:{cabos_utp:[],fontes:{mau_contato:!0,amperagem:!0,uso:!0,observacao:null},fibra:{sinal_pto:null,sinal_pathcord:null,sinal_autoisp:null,anexo_sinal:!0,limpeza:!0,observacao:null},conferencia_router:[{router:null,dns:null,outro_dns:null,largura_banda:null,upnp:!1,ipv6:!1,acesso_remoto:!1,ativos_anormal:{verdadeiro:!1,observacao:null},atividade:{verdadeiro:!1,observacao:null},firware_router:!1,local_equipamento:{adequado:!1,ciente:!0,observacao:null}}],teste_navegacao:[{ativos_cliente:!1,tipo_ativo:`celular`,observacao:null},{ativos_cliente:!1,tipo_ativo:`computador`,observacao:null},{ativos_cliente:!0,tipo_ativo:`celular`,observacao:null}],mapa_calor:{realizado:!1,pontos_sobra:!1,ponto_adicional:null,observacao:null},ping_adicional:[],observacao_ping:null,tracert_adicional:[],observacao_tracert:null,velocidade_adicional:[],observacao_velocidade:null,encaminhar_externa:{necessidade:!1,observacao:null},troca_equipamento:{ativos:[{ativo:null,mac:null}],trocas:{ativos_retirados:[{ativo:null,mac:null}],ativos_inseridos:[{ativo:null,mac:null}],outros_ativos:[{ativo:null,mac:null}]}}},ajuda_interna:{verdadeiro:!1,setor:null,nome:null},indicacao:{solicitado:!1,indicado:!1,observacao:null},educacao_cliente:{},atendimento_cliente:{},complemento_atendimento:[],relato_adicional:null,relatorio_estabilidade:null},Ke=`:host{margin:0;padding:0;display:block}#container{background-color:var(--header-color);color:var(--text-color);box-sizing:border-box;justify-content:space-between;align-items:center;margin:0;padding:0;display:flex}#container h3{margin:0;padding:0}#container p{margin:0;padding:0;font-size:1rem;font-weight:100}#container span{font-weight:900}@media (width>=1024px){#container{border-radius:100rem;margin-top:.5rem;padding:0}#container_texto h3{font-size:1rem}#container_texto p{padding:.3rem;font-size:.8rem}.coluna{margin:0;padding:0}.btn-icone{width:1.1rem;margin:0;padding:0}svg{width:1.5rem}}#container_texto{text-align:center}.coluna{margin:.1rem;padding:.5rem}.btn-icone{background-color:var(--btn-background-color);border-radius:50%;justify-content:center;align-items:center;margin:.4rem;padding:.8rem;display:inline-flex}svg{fill:var(--text-color);width:1.5rem;padding:0}`,qe=()=>{let e=localStorage.getItem(`usuario`);return e===null&&(e=`Técnico Não Cadastrato`),e},Je=class extends q{static properties={nome:{type:String}};static get styles(){return o`${a(Ke)}`}constructor(){super(),this.nome_tecnico=qe()}render(){return I`
             <!--Retorno renderizado-->
             <div id="container">
                 <div class="coluna" style="flex:1">
@@ -1368,7 +1368,8 @@
                             @click=${()=>this._Abrir_Modal_Edicao(t)}
                             ><span class="container-tipo">${e.ativos_cliente===!0?`Ativo do Cliente`:`Ativo da Empresa`}</span> - ${e.tipo_ativo}</a>
                         <button 
-                            @click="${e=>{this._Deletar_item_Lista(e,t)}}"                            type="button" class="botao-close">–</button>
+                            @click="${e=>{this._Deletar_item_Lista(e,t)}}"
+                            type="button" class="botao-close">–</button>
                     </div>
                 `)}
                 
@@ -1449,8 +1450,504 @@
                 </div>
             `:``}
 
-            <br><br><br><br><br><br><br>
-        `}};customElements.define(`navegacao-teste`,yt);var bt=class extends q{static properties={nome:{type:String},tipo:{type:String},objeto_os:{type:Object},abaAtiva:{type:String}};static get styles(){return o`${a(We)}`}constructor(){super(),this.tipo=`continue`,this.abaAtiva=`aba1`,console.log(`Iniciando o Construtor`)}async connectedCallback(){if(super.connectedCallback(),this.tipo==`novo`){this.objeto_os=new Z(Ge),this.objeto_os.alterar_tipo_os(`completa`);try{let e=await Ye();this.objeto_os.carregar_latitude_longitude(e),X(`sucesso`,`OS atualizada com GPS`)}catch(e){X(`erro`,`Falha ao carregar coordenadas:\n${e}`),this.objeto_os.carregar_latitude_longitude(null)}}else this.objeto_os=new Z,this.objeto_os.carregar_os_localstorage()}firstUpdated(){this.atualizarUrlParaContinue()}atualizarUrlParaContinue(){if(window.location.pathname.endsWith(`/novo`)){let e=window.location.pathname.replace(`/novo`,`/continue`);window.history.replaceState(null,``,e)}}_alterarAba(e,t){e.preventDefault(),this.abaAtiva=t}render(){return I`
+        `}};customElements.define(`navegacao-teste`,yt);var bt=`:host{box-sizing:border-box;color:var(--text-color);display:block}*,:before,:after{box-sizing:inherit;margin:0;padding:0}h2{color:var(--text-color);text-align:center}p{font-size:var(--paragraph);text-align:left;font-weight:100}.form-label{color:var(--btn-text-background-color);margin-bottom:6px;font-size:17px;font-weight:600}.form-label-inline{color:var(--text-color);cursor:pointer;font-size:14px}.form-group{flex-direction:column;margin-bottom:20px;display:flex}.form-group-row{justify-content:space-between;align-items:center;gap:8px;margin-bottom:15px;display:flex}.form-input,.form-select,.form-textarea{appearance:none;box-sizing:border-box;color:#1a202c;background-color:#f8fafc;border:2px solid #e2e8f0;border-radius:6px;width:100%;padding:10px 12px;font-family:inherit;font-size:15px;transition:border-color .2s,background-color .2s}.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--destaque-color);background-color:#fff;outline:none}.form-textarea{resize:vertical;width:100%;min-height:100px}.radio-input input{display:none}.radio-input{--container_width:100%;color:#000;width:var(--container_width);background-color:#fff;border:1px solid #3534343a;border-radius:10px;align-items:center;display:flex;position:relative;overflow:hidden}.radio-input label{cursor:pointer;z-index:1;letter-spacing:-1px;justify-content:center;align-items:center;width:100%;padding:10px;font-size:14px;font-weight:600;display:flex}.selection{z-index:0;width:50%;height:100%;transition:all .15s;display:none;position:absolute;top:0;left:0}.radio-input label:has(input:checked){color:#fff}.radio-input label:has(input:checked)~.selection{background-color:var(--destaque-color);display:inline-block}.radio-input label:first-child:has(input:checked)~.selection{transform:translateX(calc(50% / 20%))}.radio-input label:nth-child(2):has(input:checked)~.selection{transform:translate(100%)}`,xt=class extends q{static properties={objeto_os:{type:Object},estado_obs_extra:{type:Boolean},data_site:{type:Object}};static get styles(){return o`${a(bt)}`}constructor(){super(),this.objeto_os={},this.data_site={},this.estado_obs_extra=!1}firstUpdated(){}connectedCallback(){super.connectedCallback(),this.data_site=this.objeto_os.OS.conferencia_tecnica.mapa_calor,this.estado_obs_extra=this.data_site.pontos_sobra}_Alterar_Ponto_Sombra=e=>{let t=e.target.value===`true`;this.estado_obs_extra=t,this.data_site.pontos_sobra=t,this.objeto_os.salvar_os_localstorage()};_Alterar_checagem_mapa=e=>{let t=e.target.value===`true`;this.data_site.realizado=t,this.objeto_os.salvar_os_localstorage()};_Alterar_descricao_sombra=e=>{let t=e.target.value===``?null:e.target.value;this.data_site.ponto_adicional=t,this.objeto_os.salvar_os_localstorage()};_Alterar_descricao_geral=e=>{let t=e.target.value===``?null:e.target.value;this.data_site.observacao=t,this.objeto_os.salvar_os_localstorage()};render(){return I`
+            <!--Retorno renderizado-->
+            <br>
+            <h2>Site Survey</h2>
+            <div style="display:flex; gap:.5rem; align-items: end;">
+               <div style="flex:1;">
+                    <p style="margin-top:.5rem; text-align:center;" for="fname" class="form-label">Realizado Mapa de Calor?</p>
+                    <br>
+                    <div @change="${this._Alterar_checagem_mapa}" class="radio-input">
+                        <label>
+                            <input ?checked="${this.data_site.realizado===!0}" value="true" name="wifi-survey" id="value-1" type="radio" />
+                            <span>S i m</span>
+                        </label>
+                        <label>
+                            <input ?checked="${this.data_site.realizado===!1}" value="false" name="wifi-survey" id="value-2" type="radio" />
+                            <span>N ã o</span>
+                        </label>
+                        <span class="selection"></span>
+                    </div>
+                </div>
+
+                <div style="flex:1;">
+                    <p style="margin-top:.5rem; text-align:center" for="fname" class="form-label">Detectado pontos de sombra no local?</p>
+                    <br>
+                    <div @change="${this._Alterar_Ponto_Sombra}" class="radio-input">
+                        <label>
+                            <input ?checked="${this.data_site.pontos_sobra===!0}" value="true" name="wifi-survey-shadow" id="value-1" type="radio" />
+                            <span>S i m</span>
+                        </label>
+                        <label>
+                            <input ?checked="${this.data_site.pontos_sobra===!1}" value="false" name="wifi-survey-shadow" id="value-2" type="radio" />
+                            <span>N ã o</span>
+                        </label>
+                        <span class="selection"></span>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            ${this.estado_obs_extra?I`
+            <div class="form-group">
+                <label for="message" class="form-label">Em caso de Pontos de Sombra!</label>
+                <textarea
+                    @change="${this._Alterar_descricao_sombra}"
+                    .value="${this.data_site.ponto_adicional}"
+                    style="border-left: 5px solid #ff0000;" 
+                    placeholder="Explique se é viável um segundo ponto no local!"
+                    id="message" name="message" rows="2" class="form-textarea"></textarea>
+            </div>
+                `:``}
+            
+            <div class="form-group">
+                <label for="message" class="form-label">Observação do Site Survey</label>
+                <textarea
+                    @change="${this._Alterar_descricao_geral}"
+                    .value="${this.data_site.observacao}"
+                    style="border-left: 5px solid #ff0000;" 
+                    placeholder="Faça uma explicação sobre esse mapa de Calor!"
+                    id="message" name="message" rows="5" class="form-textarea"></textarea>
+            </div>
+
+            
+        `}};customElements.define(`site-survey`,xt);var St=`:host{box-sizing:border-box;color:var(--text-color);display:block}*,:before,:after{box-sizing:inherit;margin:0;padding:0}h2{color:var(--text-color);text-align:center}p{font-size:var(--paragraph);text-align:left;font-weight:100}.form-container{max-width:auto;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}.form-group{flex-direction:column;margin-bottom:20px;display:flex}.form-group-row{align-items:center;gap:8px;margin-bottom:15px;display:flex}.form-label{color:var(--btn-text-background-color);margin-bottom:6px;font-size:17px;font-weight:600}.form-label-inline{color:#333;cursor:pointer;font-size:14px}.container-pings{flex-direction:column;display:flex}.container-ping{flex-direction:column;gap:1rem;display:flex}.container-data-ping{flex-direction:row;justify-content:space-between;display:flex}.container-data-result{flex-direction:row;gap:.5rem;display:flex}.card-data-ping{background-color:var(--cards-background);color:var(--text-color);border-radius:.8rem;flex:1;padding:.5rem}.form-input,.form-select,.form-textarea{appearance:none;box-sizing:border-box;color:#1a202c;background-color:#f8fafc;border:2px solid #e2e8f0;border-radius:6px;width:100%;padding:10px 12px;font-family:inherit;font-size:15px;transition:border-color .2s,background-color .2s}.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--destaque-color);background-color:#fff;outline:none}.form-select{cursor:pointer;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");background-position:right 12px center;background-repeat:no-repeat;background-size:16px;padding-right:40px}.form-textarea{resize:vertical;min-height:100px}.form-radio,.form-checkbox{appearance:none;font:inherit;color:#3182ce;cursor:pointer;background-color:#f8fafc;border:2px solid #cbd5e1;place-content:center;width:18px;height:18px;margin:0;transition:border-color .2s;display:grid}.form-radio{border-radius:50%}.form-checkbox{border-radius:4px}.form-radio:before{content:"";background-color:currentColor;border-radius:50%;width:8px;height:8px;transition:transform .12s ease-in-out;transform:scale(0)}.form-checkbox:before{content:"";clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%);background-color:currentColor;width:10px;height:10px;transition:transform .12s ease-in-out;transform:scale(0)}.form-radio:checked:before,.form-checkbox:checked:before{transform:scale(1)}.form-radio:checked,.form-checkbox:checked{border-color:var(--destaque-color)}.form-radio:focus,.form-checkbox:focus{outline:2px solid #ebf8ff}.form-button{appearance:none;background-color:var(--destaque-color);color:#fff;cursor:pointer;border:none;border-radius:6px;width:100%;padding:12px 24px;font-family:inherit;font-size:15px;font-weight:600;transition:background-color .2s}.form-button:hover,.form-button:active{background-color:var(--destaque-color)}.botao-close{appearance:none;color:#fff;cursor:pointer;background-color:var(--destaque-color);border:none;border-radius:6px;height:30px;padding:5px 12px;display:inline-block}.modal-backdrop{z-index:9000;background:#00000080;justify-content:center;align-items:center;width:100%;height:100%;display:flex;position:fixed;top:0;left:0}.modal-content{background:var(--cards-background);color:var(--text-color);border-radius:8px;width:95%;padding:20px}@media (width>=1024px){.modal-content{width:500px}}.radio-input input{display:none}.radio-input{--container_width:100%;color:#000;width:var(--container_width);background-color:#fff;border:1px solid #3534343a;border-radius:10px;align-items:center;display:flex;position:relative;overflow:hidden}.radio-input label{cursor:pointer;z-index:1;letter-spacing:-1px;justify-content:center;align-items:center;width:100%;padding:10px;font-size:14px;font-weight:600;display:flex}.selection{z-index:0;width:50%;height:100%;transition:all .15s;display:none;position:absolute;top:0;left:0}.radio-input label:has(input:checked){color:#fff}.radio-input label:has(input:checked)~.selection{background-color:var(--destaque-color);display:inline-block}.radio-input label:first-child:has(input:checked)~.selection{transform:translateX(calc(50% / 20%))}.radio-input label:nth-child(2):has(input:checked)~.selection{transform:translate(100%)}`,Ct=class extends q{static properties={objeto_os:{type:Object},modal_aberto:{type:Boolean},objeto_ping:{type:Object},ativo:{type:Object}};static get styles(){return o`${a(St)}`}constructor(){super(),this.objeto_os={},this.modal_aberto=!1,this.objeto_ping=[],this.ativo={}}firstUpdated(){}connectedCallback(){super.connectedCallback(),this.objeto_ping=this.objeto_os.OS.conferencia_tecnica.ping_adicional}_Fechar_Modal=()=>{this.modal_aberto=!1};_Alterar_Descricao_Ping=e=>{let t=e.target.value===``?null:e.target.value;this.objeto_os.OS.conferencia_tecnica.observacao_ping=t,this.objeto_os.salvar_os_localstorage()};_deletar_Item=(e,t)=>{this.objeto_ping=this.objeto_ping.filter((e,n)=>n!==t),this.objeto_os.OS.conferencia_tecnica.ping_adicional=this.objeto_ping,this.objeto_os.salvar_os_localstorage(),this.objeto_ping=this.objeto_os.OS.conferencia_tecnica.ping_adicional};_Abrir_Modal_Edicao=(e,t)=>{this.acao=!0;let n=this.objeto_ping[t];this.ativo=n,this.modal_aberto=!0};_Abrir_Modal_criacao=e=>{this.acao=!1,this.objeto_ping,this.ativo={titulo:`empresa`,tipo:`ipv4`,destino:`google`,outro:null,pacotes:[200,200,0],latencia:[0,0,0]},this.modal_aberto=!0};_Editar_Ping=(e,t)=>{let n=this.renderRoot?.querySelector(`#titulo input[name="tipo_teste_ativo"]:checked`).value,r=this.renderRoot?.querySelector(`#destino`).value,i=null;this.renderRoot?.querySelector(`#outro-destino`)&&(i=this.renderRoot?.querySelector(`#outro-destino`).value===``?null:this.renderRoot?.querySelector(`#outro-destino`).value);let a=this.renderRoot?.querySelector(`#protocolo input[name="tipo_teste_ip"]:checked`).value,o=this.renderRoot?.querySelector(`#pacotes-enviado`).value,s=this.renderRoot?.querySelector(`#pacotes-recebidos`).value,c=this.renderRoot?.querySelector(`#pacotes-perdidos`).value,l=this.renderRoot?.querySelector(`#latencia-minima`).value,u=this.renderRoot?.querySelector(`#latencia-media`).value,d=this.renderRoot?.querySelector(`#latencia-maxima`).value;t?(this.ativo.titulo=n,this.ativo.destino=r,this.ativo.outro=i,this.ativo.tipo=a,this.ativo.pacotes[0]=parseInt(o),this.ativo.pacotes[1]=parseInt(s),this.ativo.pacotes[2]=parseInt(c),this.ativo.latencia[0]=parseInt(l),this.ativo.latencia[1]=parseInt(u),this.ativo.latencia[2]=parseInt(d)):(this.ativo.titulo=n,this.ativo.destino=r,this.ativo.outro=i,this.ativo.tipo=a,this.ativo.pacotes[0]=parseInt(o),this.ativo.pacotes[1]=parseInt(s),this.ativo.pacotes[2]=parseInt(c),this.ativo.latencia[0]=parseInt(l),this.ativo.latencia[1]=parseInt(u),this.ativo.latencia[2]=parseInt(d),this.objeto_ping.push(this.ativo),this.ativo={}),this.objeto_os.salvar_os_localstorage(),this._Fechar_Modal()};_Somar_Percas=()=>{let e=parseInt(this.renderRoot?.querySelector(`#pacotes-enviado`).value)-parseInt(this.renderRoot?.querySelector(`#pacotes-recebidos`).value);this.ativo.pacotes[2]=e,this.objeto_os.salvar_os_localstorage(),this.requestUpdate()};_Alterar_Tipo_Destino=e=>{let t=e.target.value;this.ativo.destino=t,this.requestUpdate()};render(){return I`
+            <!--Retorno renderizado-->
+            <br>
+            <h2>Relatório do Ping</h2>
+            <div class="form-group">
+                <label for="message" class="form-label">Relatório:</label>
+                <textarea
+                    @change="${this._Alterar_Descricao_Ping}"
+                    .value="${this.objeto_os.OS.conferencia_tecnica.observacao_ping}"
+                    style="border-left: 5px solid #ff0000;"
+                    id="message" 
+                    name="message" 
+                    rows="5" class="form-textarea"></textarea>
+            </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <button 
+                    @click="${this._Abrir_Modal_criacao}"
+                    type="button" class="form-button">Add Ping Manual</button>
+            </div>
+            <br>
+            <div class="container-pings">
+
+                ${this.objeto_ping.map((e,t)=>I`
+                    <div class="container-ping">
+                        <div class="container-data-ping">
+                            <div @click="${e=>this._Abrir_Modal_Edicao(e,t)}">
+                                <p><b>Ping ${e.tipo}</b> - Ativo ➔ ${e.titulo} (${e.destino})</p>
+                            </div>
+                            <div>
+                                <button 
+                                    @click="${e=>this._deletar_Item(e,t)}"
+                                    type="button" class="botao-close">–</button>
+                            </div>
+                        </div>
+                        <div class="container-data-result">
+                            <div class="card-data-ping">
+                                <p>Enviados: <strong>${e.pacotes[0]}</strong></p>
+                                <p>Recebidos: <strong>${e.pacotes[1]}</strong></p>
+                                <p>Perdidos: <strong>${e.pacotes[2]}</strong></p>
+                            </div>
+                            <div class="card-data-ping">
+                                <p>Mínimo: <strong>${e.latencia[0]}ms</strong></p>
+                                <p>Média: <strong>${e.latencia[1]}ms</strong></p>
+                                <p>Máxima: <strong>${e.latencia[2]}ms</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                `)}
+
+            </div>
+            
+
+
+            <!--Modal de Configuracao do Ping-->
+
+            ${this.modal_aberto?I`
+                <div
+                    class="modal-backdrop"
+                    @click=${this._Fechar_Modal}
+                >
+                    <div
+                        class="modal-content"
+                        
+                        @click=${e=>e.stopPropagation()}
+                    >
+                        <h3>Editar Ping</h3>
+                        <br>
+                        <br>
+                        <div class="form-group">
+                            <label for="cars" class="form-label">Ativo Testado:</label>
+
+                            <div id="titulo" class="radio-input">
+                                <label>
+                                    <input ?checked="${this.ativo.titulo===`empresa`}" value="empresa" name="tipo_teste_ativo" id="value-1" type="radio" />
+                                    <span>E m p r e s a</span>
+                                </label>
+                                <label>
+                                    <input ?checked="${this.ativo.titulo===`cliente`}" value="cliente" name="tipo_teste_ativo" id="value-2" type="radio" />
+                                    <span>C l i e n t e</span>
+                                </label>
+                                <span class="selection"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="destino" class="form-label">Selecione o destino:</label>
+                            <select 
+                                @change="${this._Alterar_Tipo_Destino}"
+                                id="destino" name="destino" class="form-select">
+                                <option ?selected="${this.ativo.destino===`google`}" value="google">Google</option>
+                                <option ?selected="${this.ativo.destino===`youtube`}" value="youtube">Youtube</option>
+                                <option ?selected="${this.ativo.destino===`facebook`}" value="facebook">Facebook</option>
+                                <option ?selected="${this.ativo.destino===`instagram`}" value="instagram">Instagram</option>
+                                <option ?selected="${this.ativo.destino===`gateway`}" value="gateway">Gateway</option>
+                                <option ?selected="${this.ativo.destino===`outro`}" value="outro">Outro</option>
+                            </select>
+                        </div>
+                        
+                        ${this.ativo.destino===`outro`?I`
+                        <div class="form-group">
+                            <label for="outro-destino" class="form-label">Em caso de "Outro"</label>
+                            <input type="text" id="outro-destino" name="outro-destino" .value="${this.ativo.outro}" class="form-input">
+                        </div>
+                            `:``}
+                        
+
+                        <div class="form-group">
+                            <label for="fname" class="form-label">Selecione o Protocolo</label>
+                            <div id="protocolo" class="radio-input">
+                                <label>
+                                    <input ?checked="${this.ativo.tipo===`ipv4`}" value="ipv4" name="tipo_teste_ip" id="value-1" type="radio" />
+                                    <span>I P v 4</span>
+                                </label>
+                                <label>
+                                    <input ?checked="${this.ativo.tipo===`ipv6`}" value="ipv6" name="tipo_teste_ip" id="value-2" type="radio" />
+                                    <span>I P v 6</span>
+                                </label>
+                                <span class="selection"></span>
+                            </div>
+                        </div>
+                        
+                        <div style="display:flex; flex-direction: row; gap:.5rem;">
+                            <div class="form-group">
+                                <label for="pacotes-enviado" class="form-label">Enviados</label>
+                                <input 
+                                    @change="${this._Somar_Percas}"
+                                    type="number" id="pacotes-enviado" name="pacotes-enviado" .value="${this.ativo.pacotes[0]}" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="pacotes-recebidos" class="form-label">Recebidos</label>
+                                <input 
+                                    @change="${this._Somar_Percas}"
+                                    type="number" id="pacotes-recebidos" name="pacotes-recebidos" .value="${this.ativo.pacotes[1]}" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="pacotes-perdidos" class="form-label">Perdidos</label>
+                                <input disabled type="number" id="pacotes-perdidos" name="pacotes-perdidos" .value="${this.ativo.pacotes[2]}" class="form-input">
+                            </div>
+                        </div>
+
+                        <div style="display:flex; flex-direction: row; gap:.5rem;">
+                            <div class="form-group">
+                                <label for="latencia-minima" class="form-label">Mínima</label>
+                                <input type="number" id="latencia-minima" name="latencia-minima" .value="${this.ativo.latencia[0]}" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="latencia-media" class="form-label">Média</label>
+                                <input type="number" id="latencia-media" name="latencia-media" .value="${this.ativo.latencia[1]}" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="latencia-maxima" class="form-label">Máxima</label>
+                                <input type="number" id="latencia-maxima" name="latencia-maxima" .value="${this.ativo.latencia[2]}" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 10px; display: flex; flex-direction: row; gap:.5rem">
+                            <button 
+                                @click="${e=>this._Editar_Ping(e,this.acao)}"
+                                style="background-color: var(--btn-background-color); color: var(--text-color);"
+                                type="button" class="form-button")">Salvar</button>
+                            <button 
+                                @click="${this._Fechar_Modal}"
+                                type="button" class="form-button")">Fechar</button>
+                        </div>
+
+                    </div>
+                </div>
+            `:``}
+
+            
+        `}};customElements.define(`componente-ping`,Ct);var wt=`:host{box-sizing:border-box;color:var(--text-color);display:block}*,:before,:after{box-sizing:inherit;margin:0;padding:0}h2{color:var(--text-color);text-align:center}p{font-size:var(--paragraph);text-align:left;font-weight:100}.form-container{max-width:auto;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}.form-group{flex-direction:column;margin-bottom:20px;display:flex}.form-group-row{align-items:center;gap:8px;margin-bottom:15px;display:flex}.form-label{color:var(--btn-text-background-color);margin-bottom:6px;font-size:17px;font-weight:600}.form-label-inline{color:#333;cursor:pointer;font-size:14px}.container-tracert{flex-direction:column;gap:.5rem;display:flex}.container-tracert-item{flex-direction:row;justify-content:space-between;display:flex}.destaque{background-color:var(--destaque-color);border-radius:.5rem;padding:.2rem}.form-input,.form-select,.form-textarea{appearance:none;box-sizing:border-box;color:#1a202c;background-color:#f8fafc;border:2px solid #e2e8f0;border-radius:6px;width:100%;padding:10px 12px;font-family:inherit;font-size:15px;transition:border-color .2s,background-color .2s}.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--destaque-color);background-color:#fff;outline:none}.form-select{cursor:pointer;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");background-position:right 12px center;background-repeat:no-repeat;background-size:16px;padding-right:40px}.form-textarea{resize:vertical;min-height:100px}.form-radio,.form-checkbox{appearance:none;font:inherit;color:#3182ce;cursor:pointer;background-color:#f8fafc;border:2px solid #cbd5e1;place-content:center;width:18px;height:18px;margin:0;transition:border-color .2s;display:grid}.form-radio{border-radius:50%}.form-checkbox{border-radius:4px}.form-radio:before{content:"";background-color:currentColor;border-radius:50%;width:8px;height:8px;transition:transform .12s ease-in-out;transform:scale(0)}.form-checkbox:before{content:"";clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%);background-color:currentColor;width:10px;height:10px;transition:transform .12s ease-in-out;transform:scale(0)}.form-radio:checked:before,.form-checkbox:checked:before{transform:scale(1)}.form-radio:checked,.form-checkbox:checked{border-color:var(--destaque-color)}.form-radio:focus,.form-checkbox:focus{outline:2px solid #ebf8ff}.form-button{appearance:none;background-color:var(--destaque-color);color:#fff;cursor:pointer;border:none;border-radius:6px;width:100%;padding:12px 24px;font-family:inherit;font-size:15px;font-weight:600;transition:background-color .2s}.form-button:hover,.form-button:active{background-color:var(--destaque-color)}.botao-close{appearance:none;color:#fff;cursor:pointer;background-color:var(--destaque-color);border:none;border-radius:6px;height:30px;padding:5px 12px;display:inline-block}.modal-backdrop{z-index:9000;background:#00000080;justify-content:center;align-items:center;width:100%;height:100%;display:flex;position:fixed;top:0;left:0}.modal-content{background:var(--cards-background);color:var(--text-color);border-radius:8px;width:95%;padding:20px}@media (width>=1024px){.modal-content{width:500px}}.radio-input input{display:none}.radio-input{--container_width:100%;color:#000;width:var(--container_width);background-color:#fff;border:1px solid #3534343a;border-radius:10px;align-items:center;display:flex;position:relative;overflow:hidden}.radio-input label{cursor:pointer;z-index:1;letter-spacing:-1px;justify-content:center;align-items:center;width:100%;padding:10px;font-size:14px;font-weight:600;display:flex}.selection{z-index:0;width:50%;height:100%;transition:all .15s;display:none;position:absolute;top:0;left:0}.radio-input label:has(input:checked){color:#fff}.radio-input label:has(input:checked)~.selection{background-color:var(--destaque-color);display:inline-block}.radio-input label:first-child:has(input:checked)~.selection{transform:translateX(calc(50% / 20%))}.radio-input label:nth-child(2):has(input:checked)~.selection{transform:translate(100%)}`,Tt=class extends q{static properties={objeto_os:{type:Object},modal_aberto:{type:Boolean},objeto_tracert:{type:Object},ativo:{type:Object}};static get styles(){return o`${a(wt)}`}constructor(){super(),this.objeto_os={},this.modal_aberto=!1,this.objeto_tracert=[],this.ativo={}}firstUpdated(){}connectedCallback(){super.connectedCallback(),this.objeto_tracert=this.objeto_os.OS.conferencia_tecnica.tracert_adicional}_Alterar_Descricao_Tracert=e=>{let t=e.target.value===``?null:e.target.value;this.objeto_os.OS.conferencia_tecnica.observacao_tracert=t,this.objeto_os.salvar_os_localstorage()};_Fechar_Modal=()=>{this.modal_aberto=!1};_Deletar_Item=(e,t)=>{this.objeto_tracert=this.objeto_tracert.filter((e,n)=>n!==t),this.objeto_os.OS.conferencia_tecnica.tracert_adicional=this.objeto_tracert,this.objeto_os.salvar_os_localstorage(),this.objeto_tracert=this.objeto_os.OS.conferencia_tecnica.tracert_adicional};_Abrir_Modal_Editar=(e,t)=>{this.ativo=this.objeto_tracert[t],this.acao=!0,this.modal_aberto=!0};_Abrir_Modal_Novo=()=>{this.ativo={ativo:`empresa`,protocolo:`ipv4`,url:`google`,outra_url:null},this.acao=!1,this.modal_aberto=!0};_Alterar_visibilidade_outro=e=>{let t=e.target.value;this.ativo.url=t,this.requestUpdate()};_Salvar_data=(e,t)=>{let n=this.renderRoot?.querySelector(`#titulo input[name='tipo_teste_ativo']:checked`).value,r=this.renderRoot?.querySelector(`#destino`).value,i=this.renderRoot?.querySelector(`#outro-destino`)===null?null:this.renderRoot?.querySelector(`#outro-destino`).value,a=this.renderRoot?.querySelector(`#protocolo input[name="tipo_teste_ip"]:checked`).value;t?(this.ativo.ativo=n,this.ativo.protocolo=a,this.ativo.url=r,this.ativo.outra_url=i):(this.ativo.ativo=n,this.ativo.protocolo=a,this.ativo.url=r,this.ativo.outra_url=i,this.objeto_tracert.push(this.ativo),this.ativo={}),this.objeto_os.salvar_os_localstorage(),this._Fechar_Modal()};render(){return I`
+            <!--Retorno renderizado-->
+            <br>
+            <h2>Relatório de Tracert</h2>
+            <div class="form-group">
+                <label for="message" class="form-label">Relatório:</label>
+                <textarea
+                    @change="${this._Alterar_Descricao_Tracert}"
+                    .value="${this.objeto_os.OS.conferencia_tecnica.observacao_tracert}"
+                    style="border-left: 5px solid #ff0000;"
+                    id="message" 
+                    name="message" 
+                    rows="5" class="form-textarea"></textarea>
+            </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <button 
+                    @click="${this._Abrir_Modal_Novo}"
+                    type="button" class="form-button">Add Tracert Manual</button>
+            </div>
+            <br>
+            <div class="container-tracert">
+                ${this.objeto_tracert.map((e,t)=>I`
+                <div class="container-tracert-item">
+                    
+                    <div @click="${e=>this._Abrir_Modal_Editar(e,t)}">
+                        <p>
+                            <span class="destaque"> Tracert:</span> Ativo - ${e.ativo} <span class="destaque">${e.protocolo}</span>
+                        </p>
+                        <br>
+                        <p>
+                            <span class="destaque"> Destino:</span> ${e.url}
+                        </p>
+                    </div>
+                    <button
+                        @click="${e=>this._Deletar_Item(e,t)}"
+                        type="button" class="botao-close">–</button>
+                </div>
+                <hr>
+                    `)}
+                
+
+            </div>
+
+            <!--Modal de Configuracao do Ping-->
+
+            ${this.modal_aberto?I`
+                <div
+                    class="modal-backdrop"
+                    @click=${this._Fechar_Modal}
+                >
+                    <div
+                        class="modal-content"
+                        
+                        @click=${e=>e.stopPropagation()}
+                    >
+                        <h3>Editar Tracert</h3>
+                        <br>
+                        <br>
+                        <div class="form-group">
+                            <label for="cars" class="form-label">Ativo Testado:</label>
+
+                            <div id="titulo" class="radio-input">
+                                <label>
+                                    <input ?checked="${this.ativo.ativo===`empresa`}" value="empresa" name="tipo_teste_ativo" id="value-1" type="radio" />
+                                    <span>E m p r e s a</span>
+                                </label>
+                                <label>
+                                    <input ?checked="${this.ativo.ativo===`cliente`}" value="cliente" name="tipo_teste_ativo" id="value-2" type="radio" />
+                                    <span>C l i e n t e</span>
+                                </label>
+                                <span class="selection"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="destino" class="form-label">Selecione o destino:</label>
+                            <select 
+                                @change="${this._Alterar_visibilidade_outro}"
+                                id="destino" name="destino" class="form-select">
+                                <option ?selected="${this.ativo.url===`google`}" value="google">Google</option>
+                                <option ?selected="${this.ativo.url===`youtube`}" value="youtube">Youtube</option>
+                                <option ?selected="${this.ativo.url===`facebook`}" value="facebook">Facebook</option>
+                                <option ?selected="${this.ativo.url===`instagram`}" value="instagram">Instagram</option>
+                                <option ?selected="${this.ativo.url===`outro`}" value="outro">Outro</option>
+                            </select>
+                        </div>
+                        
+                        ${this.ativo.url===`outro`?I`
+                        <div class="form-group">
+                            <label for="outro-destino" class="form-label">Em caso de "Outro"</label>
+                            <input type="text" id="outro-destino" name="outro-destino" .value="${this.ativo.outra_url}" class="form-input">
+                        </div>
+                            `:``}
+                        
+
+                        <div class="form-group">
+                            <label for="fname" class="form-label">Selecione o Protocolo</label>
+                            <div id="protocolo" class="radio-input">
+                                <label>
+                                    <input ?checked="${this.ativo.protocolo===`ipv4`}" value="ipv4" name="tipo_teste_ip" id="value-1" type="radio" />
+                                    <span>I P v 4</span>
+                                </label>
+                                <label>
+                                    <input ?checked="${this.ativo.protocolo===`ipv6`}" value="ipv6" name="tipo_teste_ip" id="value-2" type="radio" />
+                                    <span>I P v 6</span>
+                                </label>
+                                <span class="selection"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 10px; display: flex; flex-direction: row; gap:.5rem">
+                            <button 
+                                @click="${e=>this._Salvar_data(e,this.acao)}"
+                                style="background-color: var(--btn-background-color); color: var(--text-color);"
+                                type="button" class="form-button")">Salvar</button>
+                            <button 
+                                @click="${this._Fechar_Modal}"
+                                type="button" class="form-button")">Fechar</button>
+                        </div>
+
+                    </div>
+                </div>
+            `:``}
+            
+        `}};customElements.define(`componente-tracert`,Tt);var Et=`:host{box-sizing:border-box;color:var(--text-color);display:block}*,:before,:after{box-sizing:inherit;margin:0;padding:0}h2{color:var(--text-color);text-align:center}p{font-size:var(--paragraph);text-align:left;font-weight:100}.form-container{max-width:auto;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}.form-group{flex-direction:column;margin-bottom:20px;display:flex}.form-group-row{align-items:center;gap:8px;margin-bottom:15px;display:flex}.form-label{color:var(--btn-text-background-color);margin-bottom:6px;font-size:17px;font-weight:600}.form-label-inline{color:#333;cursor:pointer;font-size:14px}.container-velocidade{flex-direction:column;gap:.5rem;display:flex}.container-velocidade-item{flex-direction:row;justify-content:space-between;display:flex}.destaque{background-color:var(--destaque-color);border-radius:.5rem;padding:.2rem}.form-input,.form-select,.form-textarea{appearance:none;box-sizing:border-box;color:#1a202c;background-color:#f8fafc;border:2px solid #e2e8f0;border-radius:6px;width:100%;padding:10px 12px;font-family:inherit;font-size:15px;transition:border-color .2s,background-color .2s}.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--destaque-color);background-color:#fff;outline:none}.form-select{cursor:pointer;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");background-position:right 12px center;background-repeat:no-repeat;background-size:16px;padding-right:40px}.form-textarea{resize:vertical;min-height:100px}.form-radio,.form-checkbox{appearance:none;font:inherit;color:#3182ce;cursor:pointer;background-color:#f8fafc;border:2px solid #cbd5e1;place-content:center;width:18px;height:18px;margin:0;transition:border-color .2s;display:grid}.form-radio{border-radius:50%}.form-checkbox{border-radius:4px}.form-radio:before{content:"";background-color:currentColor;border-radius:50%;width:8px;height:8px;transition:transform .12s ease-in-out;transform:scale(0)}.form-checkbox:before{content:"";clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%);background-color:currentColor;width:10px;height:10px;transition:transform .12s ease-in-out;transform:scale(0)}.form-radio:checked:before,.form-checkbox:checked:before{transform:scale(1)}.form-radio:checked,.form-checkbox:checked{border-color:var(--destaque-color)}.form-radio:focus,.form-checkbox:focus{outline:2px solid #ebf8ff}.form-button{appearance:none;background-color:var(--destaque-color);color:#fff;cursor:pointer;border:none;border-radius:6px;width:100%;padding:12px 24px;font-family:inherit;font-size:15px;font-weight:600;transition:background-color .2s}.form-button:hover,.form-button:active{background-color:var(--destaque-color)}.botao-close{appearance:none;color:#fff;cursor:pointer;background-color:var(--destaque-color);border:none;border-radius:6px;height:30px;padding:5px 12px;display:inline-block}.modal-backdrop{z-index:9000;background:#00000080;justify-content:center;align-items:center;width:100%;height:100%;display:flex;position:fixed;top:0;left:0}.modal-content{background:var(--cards-background);color:var(--text-color);border-radius:8px;width:95%;padding:20px}@media (width>=1024px){.modal-content{width:500px}}.radio-input input{display:none}.radio-input{--container_width:100%;color:#000;width:var(--container_width);background-color:#fff;border:1px solid #3534343a;border-radius:10px;align-items:center;display:flex;position:relative;overflow:hidden}.radio-input label{cursor:pointer;z-index:1;letter-spacing:-1px;justify-content:center;align-items:center;width:100%;padding:10px;font-size:14px;font-weight:600;display:flex}.selection{z-index:0;width:50%;height:100%;transition:all .15s;display:none;position:absolute;top:0;left:0}.radio-input label:has(input:checked){color:#fff}.radio-input label:has(input:checked)~.selection{background-color:var(--destaque-color);display:inline-block}.radio-input label:first-child:has(input:checked)~.selection{transform:translateX(calc(50% / 20%))}.radio-input label:nth-child(2):has(input:checked)~.selection{transform:translate(100%)}`,Dt=class extends q{static properties={objeto_os:{type:Object},modal_aberto:{type:Boolean},objeto_velocidade:{type:Object},ativo:{type:Object}};static get styles(){return o`${a(Et)}`}constructor(){super(),this.objeto_os={},this.modal_aberto=!1,this.objeto_velocidade=[],this.ativo={}}firstUpdated(){}connectedCallback(){super.connectedCallback(),this.objeto_velocidade=this.objeto_os.OS.conferencia_tecnica.velocidade_adicional}_Alterar_Descricao=e=>{let t=e.target.value===``?null:e.target.value;this.objeto_os.OS.conferencia_tecnica.observacao_velocidade=t,this.objeto_os.salvar_os_localstorage()};_Fechar_Modal=()=>{this.modal_aberto=!1};_Abrir_Modal_Novo=e=>{this.ativo={ativo:`notebook`,dono:`empresa`,tipo:`cabo`,site:`SpeedTest`,jitter:0,down:null,up:null,ping:null,url:null},this.acao=!1,this.modal_aberto=!0};_Abrir_Modal_Editar=(e,t)=>{this.ativo=this.objeto_velocidade[t],this.acao=!0,this.modal_aberto=!0};_Deletar_Item=(e,t)=>{this.objeto_velocidade=this.objeto_velocidade.filter((e,n)=>n!==t),this.objeto_os.OS.conferencia_tecnica.velocidade_adicional=this.objeto_velocidade,this.objeto_os.salvar_os_localstorage(),this.objeto_velocidade=this.objeto_os.OS.conferencia_tecnica.velocidade_adicional};_Salvar_data=(e,t)=>{let n=this.renderRoot?.querySelector(`#responsabilidade input[name='tipo_teste_ativo']:checked`).value,r=this.renderRoot?.querySelector(`#teste input[name='tipo_teste']:checked`).value,i=this.renderRoot?.querySelector(`#destino`).value,a=this.renderRoot?.querySelector(`#ativo`).value,o=parseInt(this.renderRoot?.querySelector(`#down`).value),s=parseInt(this.renderRoot?.querySelector(`#up`).value),c=parseInt(this.renderRoot?.querySelector(`#ping`).value),l=parseFloat(this.renderRoot?.querySelector(`#jitter`).value);this.ativo.ativo=a,this.ativo.dono=n,this.ativo.tipo=r,this.ativo.site=i,this.ativo.jitter=l,this.ativo.down=o,this.ativo.up=s,this.ativo.ping=c,this.ativo.url=null,t||(this.objeto_velocidade.push(this.ativo),this.ativo={}),this.objeto_os.salvar_os_localstorage(),this._Fechar_Modal()};render(){return I`
+            <!--Retorno renderizado-->
+            <br>
+            <h2>Relatório de Velocidade</h2>
+             <div class="form-group">
+                <label for="message" class="form-label">Relatório:</label>
+                <textarea
+                    @change="${this._Alterar_Descricao}"
+                    .value="${this.objeto_os.OS.conferencia_tecnica.observacao_velocidade}"
+                    style="border-left: 5px solid #ff0000;"
+                    id="message" 
+                    name="message" 
+                    rows="5" class="form-textarea"></textarea>
+            </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <button 
+                    @click="${this._Abrir_Modal_Novo}"
+                    type="button" class="form-button">Add Velocidade Manual</button>
+            </div>
+            <br>
+            <div class="container-velocidade">
+                ${this.objeto_velocidade.map((e,t)=>I`
+                <div
+                    class="container-velocidade-item">
+                    <div 
+                        @click="${e=>this._Abrir_Modal_Editar(e,t)}"
+                        style="display:flex; gap:0.4rem; Flex-direction:column">
+                        <p>Velocidade: ${e.ativo} - ${e.dono} (${e.tipo})</p>
+                        <p>Down: <span class="destaque">${e.down}</span> UP: <span class="destaque">${e.up}</span> Ping: ${e.ping}</p>
+                    </div>
+                    <button
+                        @click="${e=>{this._Deletar_Item(e,t)}}"
+                        type="button" class="botao-close">–</button>
+                </div>
+                <hr>
+                `)}
+                
+            </div>
+
+            <!--Modal de Configuracao do Ping-->
+
+            ${this.modal_aberto?I`
+                <div
+                    class="modal-backdrop"
+                    @click=${this._Fechar_Modal}
+                >
+                    <div
+                        class="modal-content"
+                        
+                        @click=${e=>e.stopPropagation()}
+                    >
+                        <h3>Editar Velocidade</h3>
+                        <br>
+                        <br>
+                        <div class="form-group">
+                            <label for="cars" class="form-label">Ativo Testado:</label>
+
+                            <div style="display:flex;gap:.4rem">
+
+                                <div id="responsabilidade" class="radio-input">
+                                    <label>
+                                        <input ?checked="${this.ativo.dono===`empresa`}" value="empresa" name="tipo_teste_ativo" id="value-1" type="radio" />
+                                        <span>E m p r e s a</span>
+                                    </label>
+                                    <label>
+                                        <input ?checked="${this.ativo.dono===`cliente`}" value="cliente" name="tipo_teste_ativo" id="value-2" type="radio" />
+                                        <span>C l i e n t e</span>
+                                    </label>
+                                    <span class="selection"></span>
+                                </div>
+
+                                <div id="teste" class="radio-input">
+                                    <label>
+                                        <input ?checked="${this.ativo.tipo===`wifi`}" value="wifi" name="tipo_teste" id="value-1" type="radio" />
+                                        <span>W i F i</span>
+                                    </label>
+                                    <label>
+                                        <input ?checked="${this.ativo.tipo===`cabo`}" value="cabo" name="tipo_teste" id="value-2" type="radio" />
+                                        <span>C a b o</span>
+                                    </label>
+                                    <span class="selection"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="destino" class="form-label">Site do Teste</label>
+                            <input type="text" id="destino" name="destino" .value="${this.ativo.site}" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ativo" class="form-label">Selecione o Ativo Testado:</label>
+                            <select 
+                                @change=""
+                                id="ativo" name="ativo" class="form-select">
+                                <option ?selected="${this.ativo.ativo===`celular`}" value="celular">Celular</option>
+                                <option ?selected="${this.ativo.ativo===`notebook`}" value="notebook">Notebook</option>
+                                <option ?selected="${this.ativo.ativo===`computador`}" value="computador">Computador</option>
+                                <option ?selected="${this.ativo.ativo===`tv`}" value="tv">TV</option>
+                                <option ?selected="${this.ativo.ativo===`tvbox`}" value="tvbox">TVBox</option>
+                                <option ?selected="${this.ativo.ativo===`video game`}" value="video game">Video Game</option>
+                            </select>
+                        </div>                      
+
+                        <div style="display:flex; gap:.5rem">
+                            <div class="form-group">
+                                <label for="down" class="form-label">Download</label>
+                                <input type="number" id="down" name="down" .value="${this.ativo.down}" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="up" class="form-label">Upload</label>
+                                <input type="number" id="up" name="up" .value="${this.ativo.up}" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="ping" class="form-label">Ping</label>
+                                <input type="number" id="ping" name="ping" .value="${this.ativo.ping}" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jitter" class="form-label">Jitter</label>
+                            <input type="number" id="jitter" name="jitter" .value="${this.ativo.jitter}" class="form-input">
+                        </div>
+                        
+                        
+                        <div class="form-group" style="margin-top: 10px; display: flex; flex-direction: row; gap:.5rem">
+                            <button 
+                                @click="${e=>this._Salvar_data(e,this.acao)}"
+                                style="background-color: var(--btn-background-color); color: var(--text-color);"
+                                type="button" class="form-button")">Salvar</button>
+                            <button 
+                                @click="${this._Fechar_Modal}"
+                                type="button" class="form-button")">Fechar</button>
+                        </div>
+
+                    </div>
+                </div>
+            `:``}
+
+            <br><br><br><br><br><br>
+        `}};customElements.define(`componente-velocidade`,Dt);var Ot=class extends q{static properties={nome:{type:String},tipo:{type:String},objeto_os:{type:Object},abaAtiva:{type:String}};static get styles(){return o`${a(We)}`}constructor(){super(),this.tipo=`continue`,this.abaAtiva=`aba1`,console.log(`Iniciando o Construtor`)}async connectedCallback(){if(super.connectedCallback(),this.tipo==`novo`){this.objeto_os=new Z(Ge),this.objeto_os.alterar_tipo_os(`completa`);try{let e=await Ye();this.objeto_os.carregar_latitude_longitude(e),X(`sucesso`,`OS atualizada com GPS`)}catch(e){X(`erro`,`Falha ao carregar coordenadas:\n${e}`),this.objeto_os.carregar_latitude_longitude(null)}}else this.objeto_os=new Z,this.objeto_os.carregar_os_localstorage()}firstUpdated(){this.atualizarUrlParaContinue()}atualizarUrlParaContinue(){if(window.location.pathname.endsWith(`/novo`)){let e=window.location.pathname.replace(`/novo`,`/continue`);window.history.replaceState(null,``,e)}}_alterarAba(e,t){e.preventDefault(),this.abaAtiva=t}render(){return I`
             <!--Retorno renderizado-->
             <header-page-os></header-page-os>
            
@@ -1508,6 +2005,23 @@
                         <navegacao-teste
                             .objeto_os = "${this.objeto_os}"
                         ></navegacao-teste>
+
+                        <site-survey
+                            .objeto_os = "${this.objeto_os}"
+                        ></site-survey>
+
+                        <componente-ping
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-ping>
+                        
+                        <componente-tracert
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-tracert>
+                        
+                        <componente-velocidade
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-velocidade>
+
                         <br><br><br><br>
 
                     </div>
@@ -1651,7 +2165,7 @@
 
                 
             </nav>
-        `}};customElements.define(`page-os-completa`,bt);var xt=class extends q{static properties={notificacoes:{type:Array}};static get styles(){return o`
+        `}};customElements.define(`page-os-completa`,Ot);var kt=class extends q{static properties={notificacoes:{type:Array}};static get styles(){return o`
             /* Container fixo no canto superior direito */
             .toast-container {
                 position: fixed;
@@ -1727,7 +2241,7 @@
                 `)}
             </div>
 
-        `}};customElements.define(`componente-notificacao`,xt);var $=window.location.hostname.includes(`github.io`)?`/Scripts-Lideran-a-Moto`:``,St=class extends q{static properties={};constructor(){super(),this._router=new Se(this,[{path:`${$}/`,render:()=>I`<home-page url_config="${$}"></home-page>`},{path:`${$}/addos`,render:()=>I`<add-os></add-os>`},{path:`${$}/iniciar_os_completa`,render:()=>I`<page-os-completa></page-os-completa>`},{path:`${$}/iniciar_os_completa/:tipo`,render:e=>I`<page-os-completa .tipo="${e.tipo}"></page-os-completa>`},{path:`/perfil/:name`,render:e=>I`<h2>👤 Usuário: ${e.name}</h2>`},{path:`${$}/*`,render:()=>I`<erro-404></erro-404>`}])}static styles=[o`
+        `}};customElements.define(`componente-notificacao`,kt);var $=window.location.hostname.includes(`github.io`)?`/Scripts-Lideran-a-Moto`:``,At=class extends q{static properties={};constructor(){super(),this._router=new Se(this,[{path:`${$}/`,render:()=>I`<home-page url_config="${$}"></home-page>`},{path:`${$}/addos`,render:()=>I`<add-os></add-os>`},{path:`${$}/iniciar_os_completa`,render:()=>I`<page-os-completa></page-os-completa>`},{path:`${$}/iniciar_os_completa/:tipo`,render:e=>I`<page-os-completa .tipo="${e.tipo}"></page-os-completa>`},{path:`/perfil/:name`,render:e=>I`<h2>👤 Usuário: ${e.name}</h2>`},{path:`${$}/*`,render:()=>I`<erro-404></erro-404>`}])}static styles=[o`
         /* Estilo padrão: Celulares e telas pequenas */
         .meu-container {
           width: 100%;
@@ -1749,4 +2263,4 @@
         <main class="meu-container">
             ${this._router.outlet()}
         </main>
-    `}};customElements.define(`main-element`,St);
+    `}};customElements.define(`main-element`,At);

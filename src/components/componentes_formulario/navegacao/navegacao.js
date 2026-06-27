@@ -122,7 +122,8 @@ export class Navegacao extends LitElement {
                             @click=${() => this._Abrir_Modal_Edicao(index)}
                             ><span class="container-tipo">${ativo.ativos_cliente === true ? "Ativo do Cliente" : "Ativo da Empresa"}</span> - ${ativo.tipo_ativo}</a>
                         <button 
-                            @click="${(e) => { this._Deletar_item_Lista(e, index) }}"                            type="button" class="botao-close">–</button>
+                            @click="${(e) => { this._Deletar_item_Lista(e, index) }}"
+                            type="button" class="botao-close">–</button>
                     </div>
                 `)}
                 
@@ -203,7 +204,6 @@ export class Navegacao extends LitElement {
                 </div>
             ` : ''}
 
-            <br><br><br><br><br><br><br>
         `;
     }
 }

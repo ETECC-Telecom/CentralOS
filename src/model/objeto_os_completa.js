@@ -97,39 +97,26 @@ export const Ordem_Servico_Completa = {
 			},
 			{
 				ativos_cliente: true, // se true, é ativo da empresa,
-				tipo_ativo: "computador", //Notebook, TVBox e etc...
-				observacao: "Teste de escrita", //observação geral do que foi testado!
+				tipo_ativo: "celular", //Notebook, TVBox e etc...
+				observacao: null, //observação geral do que foi testado!
 			}
 		],
 		mapa_calor: {
 			realizado: false,
 			pontos_sobra: false,
+			ponto_adicional:null,
 			observacao: null
 		},
 		ping_adicional: [ //testes além do .bat
-			{
-				titulo: null, //exe.: Ativos da empresa/cliente
-				tipo: null, //ipv4/ipv6
-				pacotes: [0, 0, 0], //enviados, recebidos, perdidos
-				latencia: [0, 0, 0] //min, média, máx
-			}
+						
 		],
 		observacao_ping: null, // observações relacionadas aos testes gerais, como observações ou motivo de omissão do teste.
 		tracert_adicional: [ //testes além do .bat
-			{
-				ativo: null, //exe.: Notebook da empresa;
-				url: null, // ip/url utilizada;
-			}
+			
 		],
 		observacao_tracert: null, // observações relacionadas aos testes gerais, como observações ou motivo de omissão do teste.
 		velocidade_adicional: [ //testes além do .bat
-			{
-				titulo: null, // exe.: Notebook da empresa
-				tipo: null, // Wifi/Cabeado
-				down: 0,
-				up: 0,
-				ping: 0
-			}
+			
 		],
 		observacao_velocidade: null, // observações relacionadas aos testes gerais, como observações ou motivo de omissão do teste.
 		encaminhar_externa: {
