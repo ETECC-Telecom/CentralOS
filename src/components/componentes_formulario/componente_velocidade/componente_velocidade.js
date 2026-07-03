@@ -110,7 +110,7 @@ export class Componente_Velocidade extends LitElement {
             <!--Retorno renderizado-->
             <br>
             <h2>Relatório de Velocidade</h2>
-             <div class="form-group">
+            <div class="form-group">
                 <label for="message" class="form-label">Relatório:</label>
                 <textarea
                     @change="${this._Alterar_Descricao}"
@@ -244,8 +244,6 @@ export class Componente_Velocidade extends LitElement {
                     </div>
                 </div>
             ` : ''}
-
-            <br><br><br><br><br><br>
         `;
     }
 }

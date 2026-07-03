@@ -24,7 +24,13 @@ import { Site_Survey } from '../../components/componentes_formulario/componente_
 import { Componente_Ping } from '../../components/componentes_formulario/componente_ping/componente_ping';
 import { Componente_Tracert } from '../../components/componentes_formulario/componente_tracert/componente_tracert';
 import { Componente_Velocidade } from '../../components/componentes_formulario/componente_velocidade/componente_velocidade';
-
+import { Componente_Equipamentos_Local } from '../../components/componentes_formulario/componente_equipamentos_local/componente_equipamentos_local';
+import { Componente_Gatewat_Testado } from '../../components/componentes_formulario/componente_gateway_testados/componente_gateway_testados';
+import { Componente_Encaminhar_Externa } from '../../components/componentes_formulario/componente_encaminhar_externa/componente_encaminhar_externa';
+import { Componente_Ajuda_Interna } from '../../components/componentes_formulario/componente_ajuda_interna/componente_ajuda_interna';
+import { Componente_Indicacao } from '../../components/componentes_formulario/componente_indicacao/componente_indicacao';
+import { Componente_Info_Extra } from '../../components/componentes_formulario/componente_inforcao_extra/componente_inforcao_extra';
+import { Componente_Acoes } from '../../components/componentes_formulario/componente_acoes/componente_acoes';
 
 //Componentes de Formulário
 
@@ -46,7 +52,7 @@ export class Page_OS_Completa extends LitElement {
     constructor() {
         super();
         this.tipo = 'continue'
-        this.abaAtiva = 'aba1';
+        this.abaAtiva = 'aba4';
 
         //Atributos de Controle de exibição de informações extras!
 
@@ -64,11 +70,15 @@ export class Page_OS_Completa extends LitElement {
             this.objeto_os = new Controller_Objeto_OS_Completa(Ordem_Servico_Completa);
             this.objeto_os.alterar_tipo_os("completa");
 
-            //Adiciona uma nova coordenada em uma OS recem criada!
+            //Adiciona uma nova coordenada e data em uma OS recem criada!
             try {
 
                 const coordenadas = await obterCoordenadas();
+                const agoraCompleto = Temporal.Now.zonedDateTimeISO();
+
                 this.objeto_os.carregar_latitude_longitude(coordenadas);
+                this.objeto_os.OS.config_OS.data_criacao = agoraCompleto.toString();
+                this.objeto_os.salvar_os_localstorage();
 
                 disparar_notificacao('sucesso', 'OS atualizada com GPS');
             } catch (erro) {
@@ -154,9 +164,9 @@ export class Page_OS_Completa extends LitElement {
                     <div class="container-item">
                         <h1>Conferência Técnica Completa</h1>
                         <hr>
-                        <verificacao-cabo-utp
+                        <verificacao-utp
                             .objeto_os = "${this.objeto_os}"
-                        ></verificacao-cabo-utp>
+                        ></verificacao-utp>
 
                         <verificacao-fibra
                             .objeto_os = "${this.objeto_os}"
@@ -177,7 +187,7 @@ export class Page_OS_Completa extends LitElement {
                         <componente-ping
                             .objeto_os = "${this.objeto_os}"
                         ></componente-ping>
-                        
+
                         <componente-tracert
                             .objeto_os = "${this.objeto_os}"
                         ></componente-tracert>
@@ -185,7 +195,14 @@ export class Page_OS_Completa extends LitElement {
                         <componente-velocidade
                             .objeto_os = "${this.objeto_os}"
                         ></componente-velocidade>
+                        
+                        <componente-equipamentos-local
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-equipamentos-local>
 
+                        <gateway-test
+                            .objeto_os = "${this.objeto_os}"
+                        ></gateway-test>
                         <br><br><br><br>
 
                     </div>
@@ -214,88 +231,31 @@ export class Page_OS_Completa extends LitElement {
 
                 ${this.abaAtiva === 'aba4' ? html`
                     <div class="container-item">
-                        <h1>Container 4 (Assinatura e Baixa)</h1>
+                        <h1>Finalização do Script</h1>
 
-<div class="form-container">
-    
-    <div class="form-group">
-        <label for="fname" class="form-label">First name:</label>
-        <input type="text" id="fname" name="fname" value="John" class="form-input">
-    </div>
+                        <encaminhar-externa
+                            .objeto_os = "${this.objeto_os}"
+                        ></encaminhar-externa>
 
-    <div class="form-group">
-        <label for="lname" class="form-label">Last name:</label>
-        <input type="text" id="lname" name="lname" value="Doe" class="form-input">
-    </div>
+                        <componente-ajuda-interna
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-ajuda-interna>
 
-    <div class="form-group">
-        <label for="cars" class="form-label">Choose a car:</label>
-        <select id="cars" name="cars" class="form-select">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="fiat">Fiat</option>
-            <option value="audi">Audi</option>
-        </select>
-    </div>
+                        <componente-indicacao
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-indicacao>
 
-    <div class="form-group">
-        <label for="message" class="form-label">Message:</label>
-        <textarea id="message" name="message" rows="10" cols="30" class="form-textarea">The cat was playing in the garden.</textarea>
-    </div>
+                        <componente-info-extra
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-info-extra>
 
-    <div class="form-group">
-        <span class="form-label">Favorite Language:</span>
-        
-        <div class="form-group-row">
-            <input type="radio" id="html" name="fav_language" value="HTML" class="form-radio" checked>
-            <label for="html" class="form-label-inline">HTML</label>
-        </div>
-        
-        <div class="form-group-row">
-            <input type="radio" id="css" name="fav_language" value="CSS" class="form-radio">
-            <label for="css" class="form-label-inline">CSS</label>
-        </div>
-        
-        <div class="form-group-row">
-            <input type="radio" id="javascript" name="fav_language" value="JavaScript" class="form-radio">
-            <label for="javascript" class="form-label-inline">JavaScript</label>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <span class="form-label">Vehicles Owned:</span>
-        
-        <div class="form-group-row">
-            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" class="form-checkbox">
-            <label for="vehicle1" class="form-label-inline">I have a bike</label>
-        </div>
-        
-        <div class="form-group-row">
-            <input type="checkbox" id="vehicle2" name="vehicle2" value="Car" class="form-checkbox" checked>
-            <label for="vehicle2" class="form-label-inline">I have a car</label>
-        </div>
-        
-        <div class="form-group-row">
-            <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" class="form-checkbox">
-            <label for="vehicle3" class="form-label-inline">I have a boat</label>
-        </div>
-    </div>
-
-    <div class="form-group" style="margin-top: 10px;">
-        <button type="button" class="form-button" onclick="alert('Hello World!')">Click Me!</button>
-        <button type="button" class="form-button" onclick="alert('Hello World!')">Click Me!</button>
-        <button type="button" class="form-button" onclick="alert('Hello World!')">Click Me!</button>
-    </div>
-
-
-</div> 
-
-
-
+                        <componente-acoes
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-acoes>
 
                     </div>
                 ` : ''}
-
+                    <br><br><br>
             </main>
             <nav>
                 <a 

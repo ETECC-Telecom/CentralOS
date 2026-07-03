@@ -70,7 +70,7 @@ export class Componente_Ping extends LitElement {
 			destino: "google", //Google, Youtube, Facebook, Instagram, gateway, outro!
 			outro:null,
 			pacotes: [200, 200, 0], //enviados, recebidos, perdidos
-			latencia: [0, 0, 0] //min, média, máx
+			latencia: [null, null, null] //min, média, máx
         };
         this.modal_aberto = true
     }

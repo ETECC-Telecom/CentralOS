@@ -6,13 +6,17 @@ export const Ordem_Servico_Completa = {
 		finalizada: false,
 		info_encaminhadas: false, //informação copiada/enviada ao cliente
 		id: null, //id do banco
+		data_criacao: null,
+		data_alteracao: null,
 
 	},
 	info_cliente: {
 		nome_cliente: null, //Nome de quem acompanhou a visita;
+		nome_cadastro: null, //Nome do Cliente em Cadastro para Mensagens Altomáticas
 		parentesco: null, //Titular, Esposa'o, Filho'a, Funcionário, Avó'ô, Tio'a, outro
 		parentesco_info: null, //Em caso de outros
-		relato_cliente: null //O problema relatado pelo Cleinte;
+		relato_cliente: null, //O problema relatado pelo Cleinte;
+		telefone: null
 	},
 
 	endereco_info_os: {
@@ -60,43 +64,21 @@ export const Ordem_Servico_Completa = {
 			observacao: null, // informações relacionadas a fibra.
 		},
 		conferencia_router: [
-			{
-				router: null, //Informar se é primeiro ponto, segundo ou ativo do cliente.
-				dns: null, //Etecc, Google, outros,
-				outro_dns:null, //String contendo o outro DNS.
-				largura_banda: null, //20MHz, 40MHz, 20/40MHz
-				upnp: false, //Se está ativado ou não
-				ipv6: false, //ativado e com protocolo SLAAC,
-				acesso_remoto: false, //Se está ativo e configurado
-				ativos_anormal: {
-					verdadeiro: false, // Se tem ou não ativos acima do normal.
-					observacao: null // Caso ativos esteja acima do normal, quantos são?
-				},
-				atividade: { //Tempo de funcionamento do ativo acima do esperado
-					verdadeiro: false,
-					observacao: null // Caso ativos estejaligado a mais de 1 semana!
-				},
-				firware_router: false, //Se está devidamente atualizado.
-				local_equipamento: {
-					adequado: false, //Se o local está adequado,
-					ciente: true, //Se o cliente ta ciente da necessidade do remanejamento.
-					observacao: null //Motivo de ser um local adeguado/não adeguado.
-				},
-			}
+
 		],
 		teste_navegacao: [
 			{
-				ativos_cliente: false, // se true, é ativo da empresa,
+				ativos_cliente: false, // se true, é ativo do cliente,
 				tipo_ativo: "celular", //Notebook, TVBox e etc...
 				observacao: null, //observação geral do que foi testado!
 			},
 			{
-				ativos_cliente: false, // se true, é ativo da empresa,
+				ativos_cliente: false, // se true, é ativo do cliente,
 				tipo_ativo: "computador", //Notebook, TVBox e etc...
 				observacao: null, //observação geral do que foi testado!
 			},
 			{
-				ativos_cliente: true, // se true, é ativo da empresa,
+				ativos_cliente: true, // se true, é ativo do cliente,
 				tipo_ativo: "celular", //Notebook, TVBox e etc...
 				observacao: null, //observação geral do que foi testado!
 			}
@@ -107,60 +89,40 @@ export const Ordem_Servico_Completa = {
 			ponto_adicional:null,
 			observacao: null
 		},
-		ping_adicional: [ //testes além do .bat
-						
+		ping_adicional: [ //testes além do .bat					
 		],
 		observacao_ping: null, // observações relacionadas aos testes gerais, como observações ou motivo de omissão do teste.
 		tracert_adicional: [ //testes além do .bat
-			
 		],
 		observacao_tracert: null, // observações relacionadas aos testes gerais, como observações ou motivo de omissão do teste.
-		velocidade_adicional: [ //testes além do .bat
-			
+		velocidade_adicional: [ //testes além do .bat	
 		],
 		observacao_velocidade: null, // observações relacionadas aos testes gerais, como observações ou motivo de omissão do teste.
 		encaminhar_externa: {
 			necessidade: false, // Sim/Não
 			observacao: null, //motivo da necessidade de encaminhar externa.
 		},
-		troca_equipamento: {
+		equipamentos_local: {
+			troca: false,
+			pppoe: null,
+			cod_conexao: null,
+			motivo_troca: "solicitacao_cliente", // motivos de troca da planilha
+			observacao: null, //Caso tenha alguma observação extra
 			ativos: [
-				{
-					ativo: null, // ONT, ONU, Router, Outros...
-					mac: null
-				}
 			],
-			trocas: {
-				ativos_retirados: [
-					{
-						ativo: null, // ONT, ONU, Router, Outros...
-						mac: null
-					}
-				],
-				ativos_inseridos: [
-					{
-						ativo: null, // ONT, ONU, Router, Outros...
-						mac: null
-					}
-				],
-				outros_ativos: [ // Em caso de ativos já inseridos no local
-					{
-						ativo: null, // ONT, ONU, Router, Outros...
-						mac: null
-					}
-				],
-			}
 		},
 	},
 	ajuda_interna: {
 		verdadeiro: false,
-		setor: null, // Torre, TI, Supervisão
+		setor: "Torre", // Torre, TI, Supervisão
 		nome: null, //Quem auxiliou 
 	},
 	indicacao: {
 		solicitado: false,
 		indicado: false, //Cliente passou indicação?
-		observacao: null //Numero de contato do indicado!
+		nome: null, //Nome de contato do indicado!
+		contato: null, //Número de contato do indicado!
+		encaminhada: false, //Indicação levantada foi encaminhada?
 	},
 	educacao_cliente: {
 		// id: { //Id chave do array de informações passadas ao cliente!
@@ -178,6 +140,5 @@ export const Ordem_Servico_Completa = {
 	],
 	relato_adicional: null, //Informaçoes adicionais relacionadas a Visita
 	relatorio_estabilidade: null, //campo para adição do .bat
-
 }
 

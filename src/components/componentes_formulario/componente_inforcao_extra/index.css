@@ -59,23 +59,31 @@ p {
     cursor: pointer;
 }
 
-.container-lista{
+
+.container-gateways{
     display: flex;
     flex-direction:column;
     gap:.5rem;
     
 }
 
-
-.container-item{
+.container-item-gateway{
     display: flex;
     flex-direction: row;
     gap:.5rem;
     justify-content: space-between;
-    align-items: center;
 }
 
-.container-upt-item{
+.container-gateway{
+    display: flex;
+    flex-direction:row;
+    gap:.5rem;
+    background-color: var(--cards-background);
+    padding:.5rem;
+    border-radius: .5rem;
+}
+
+.container-velocidade-item{
     display: flex;
     flex-direction: row;
     justify-content: space-between;

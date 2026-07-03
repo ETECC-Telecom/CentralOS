@@ -121,6 +121,7 @@ export class Verificacao_Fibra extends LitElement {
                     style="flex:3"
                     type="number" 
                     placeholder="0.0"
+                    .value="${this.objeto_os.OS.conferencia_tecnica.fibra.sinal_pto === null?"":this.objeto_os.OS.conferencia_tecnica.fibra.sinal_pto}"
                     id="text_sinal_drop" name="fname" value="" class="form-input">
                 <button
                     @click="${this._desabilitar_por_LOS}"
@@ -137,6 +138,7 @@ export class Verificacao_Fibra extends LitElement {
                         @change="${this._adicionar_sinal_fibra}"
                         type="number" 
                         placeholder="0.0"
+                        .value="${this.objeto_os.OS.conferencia_tecnica.fibra.sinal_pathcord === null?"":this.objeto_os.OS.conferencia_tecnica.fibra.sinal_pathcord}"
                         id="text_sinal_pathcord" name="fname" value="" class="form-input">
                     </div>
                     <div>
@@ -146,6 +148,7 @@ export class Verificacao_Fibra extends LitElement {
                         @change="${this._adicionar_sinal_fibra}"
                         type="number" 
                         placeholder="0.0"
+                        .value="${this.objeto_os.OS.conferencia_tecnica.fibra.sinal_autoisp === null?"":this.objeto_os.OS.conferencia_tecnica.fibra.sinal_autoisp}"
                         id="text_sinal_autoisp" name="fname" value="" class="form-input">
                     </div>
                 </div>
@@ -168,7 +171,7 @@ export class Verificacao_Fibra extends LitElement {
                 <p class="texto_informativo">
                     Foi realizada a Limpeza dos conectores e emeda de Fibra?
                 </p>
-                <div @change="" class="radio-input">
+                <div @change="${this._alterar_limpeza_fibra}" class="radio-input">
                     <label>
                         <input ?checked="${this.objeto_os.OS.conferencia_tecnica.fibra.limpeza === true}" name="value-radio-limpeza-fibra" id="value-1" type="radio" />
                         <span>S i m</span>
@@ -183,7 +186,8 @@ export class Verificacao_Fibra extends LitElement {
                 <textarea
                     @change="${this._alterar_observacao_fibra}" 
                     id="message" 
-                    name="message" 
+                    name="message"
+                    style="border-left: 5px solid #ff0000;"
                     rows="5" 
                     placeholder="Caso tenha alguma observação relacionado a Fibra adicione aqui para omitir no relatório final!"
                     class="form-textarea"

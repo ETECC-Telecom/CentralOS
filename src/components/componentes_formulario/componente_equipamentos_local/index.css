@@ -11,6 +11,7 @@
     box-sizing: inherit;
     margin: 0;
     padding: 0;
+    
 }
 
 h2 {
@@ -22,6 +23,31 @@ p {
     font-size: var(--paragraph);
     font-weight: 100;
     text-align: left;
+}
+
+
+.container-equipamentos{
+    display: flex;
+    flex-direction: column;
+    gap:.5rem;
+}
+
+.container-equipamentos-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.destaque-troca{
+    background-color: var(--destaque-color);
+    padding: .2rem;
+    border-radius: .5rem;
+}
+
+.destaque-local{
+    background-color: #3182ce;
+    padding: .2rem;
+    border-radius: .5rem;
 }
 
 
@@ -59,23 +85,15 @@ p {
     cursor: pointer;
 }
 
-.container-lista{
+
+.container-velocidade{
     display: flex;
     flex-direction:column;
     gap:.5rem;
     
 }
 
-
-.container-item{
-    display: flex;
-    flex-direction: row;
-    gap:.5rem;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.container-upt-item{
+.container-velocidade-item{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -145,7 +163,7 @@ p {
     background-color: #f8fafc;
     margin: 0;
     font: inherit;
-    color: var(--destaque-color);
+    color: #3182ce;
     width: 18px;
     height: 18px;
     border: 2px solid #cbd5e1;
@@ -260,45 +278,6 @@ p {
     padding: 20px;
     border-radius: 8px;
     width: 95%;
-    
-}
-
-
-
-.container_scroll {
-  /* 1. Definição de Tamanho Fixo/Máximo */
-  width: 100%;             /* Ocupa a largura total do modal */
-  max-height: 600px;       /* Altura máxima antes de começar a rolar (ajuste conforme necessário) */
-  
-  /* 2. Ativação do Scroll */
-  overflow-y: auto;        /* Ativa o scroll vertical apenas se o conteúdo transbordar */
-  overflow-x: hidden;      /* Esconde o scroll horizontal para evitar quebras de layout */
-  
-  /* 3. Espaçamento Interno e Visual */
-  padding: 16px;           /* Afasta o conteúdo das bordas do container */
-  box-sizing: border-box;  /* Garante que o padding não aumente o tamanho final do container */
-  
-  /* 4. Estilização Elegante da Barra de Rolagem (Opcional - Webkit) */
-  scrollbar-width: thin;   /* Para Firefox: deixa a barra mais fina */
-}
-
-/* Customização do Scrollbar para Chrome, Edge e Safari */
-.container_scroll::-webkit-scrollbar {
-  width: 6px;              /* Largura da barra de rolagem vertical */
-}
-
-.container_scroll::-webkit-scrollbar-track {
-  background: #f1f1f1;     /* Cor do fundo da pista do scroll */
-  border-radius: 4px;
-}
-
-.container_scroll::-webkit-scrollbar-thumb {
-  background: #cbd5e1;     /* Cor da barra que se move (cinza neutro) */
-  border-radius: 4px;
-}
-
-.container_scroll::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;     /* Cor da barra ao passar o mouse */
 }
 
 @media (min-width: 1024px) {
@@ -307,74 +286,6 @@ p {
     }
 }
 
-.form-label-inline{
-    color: var(--text-color);
-}
-
-/* Inputs de Seleção (Radio e Checkbox) */
-.form-radio,
-.form-checkbox {
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: #f8fafc;
-    margin: 0;
-    font: inherit;
-    color: var(--destaque-color);
-    width: 18px;
-    height: 18px;
-    border: 2px solid #cbd5e1;
-    display: grid;
-    place-content: center;
-    cursor: pointer;
-    transition: border-color 0.2s ease;
-}
-
-.form-radio {
-    border-radius: 50%;
-    /* Totalmente redondo para radio */
-}
-
-.form-checkbox {
-    border-radius: 4px;
-    /* Levemente arredondado para checkbox */
-}
-
-/* Indicadores internos para Checkbox e Radio ativos */
-.form-radio::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    background-color: currentcolor;
-}
-
-.form-checkbox::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    background-color: currentcolor;
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-    /* Formato de "Check" */
-}
-
-.form-radio:checked::before,
-.form-checkbox:checked::before {
-    transform: scale(1);
-}
-
-.form-radio:checked,
-.form-checkbox:checked {
-    border-color: var(--destaque-color);
-}
-
-.form-radio:focus,
-.form-checkbox:focus {
-    outline: 2px solid #ebf8ff;
-}
 /* From Uiverse.io by Ghost-aft */
 .radio-input input {
     display: none;
@@ -433,78 +344,4 @@ p {
 .radio-input label:nth-child(2):has(input:checked)~.selection {
     transform: translateX(calc(50% * 2));
     
-}
-/* From Uiverse.io by ErzenXz */
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
-    cursor: pointer;
-}
-
-.toggle-switch input[type="checkbox"] {
-    display: none;
-}
-
-.toggle-switch-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #ddd;
-    border-radius: 20px;
-    box-shadow: inset 0 0 0 2px #ccc;
-    transition: background-color 0.3s ease-in-out;
-}
-
-.toggle-switch-handle {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-}
-
-.toggle-switch::before {
-    content: "";
-    position: absolute;
-    top: -25px;
-    right: -35px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #aaa;
-    text-shadow: 1px 1px #fff;
-    transition: color 0.3s ease-in-out;
-}
-
-.toggle-switch input[type="checkbox"]:checked+.toggle-switch-handle {
-    transform: translateX(5px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 0 0 3px var(--destaque-color);
-}
-
-.toggle-switch input[type="checkbox"]:checked+.toggle-switch-background {
-    background-color: var(--destaque-color);
-    box-shadow: inset 0 0 0 2px var(--destaque-color);
-}
-
-.toggle-switch input[type="checkbox"]:checked+.toggle-switch:before {
-    content: "On";
-    color: var(--destaque-color);
-    right: -5px;
-}
-
-.toggle-switch input[type="checkbox"]:checked+.toggle-switch-background .toggle-switch-handle {
-    transform: translateX(20px);
-}
-
-.container_item_utp{
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
 }

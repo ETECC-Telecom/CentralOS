@@ -59,7 +59,7 @@ export class Navegacao extends LitElement {
         if (comando) {
             const categoria = this.renderRoot?.querySelector('#cat_ativos').value;
             const valor = this.renderRoot?.querySelector('#valor_checks input[name="tipo"]:checked').value;
-            const descricao = this.renderRoot?.querySelector('#message').value;
+            const descricao = this.renderRoot?.querySelector('#message').value === ""? null:this.renderRoot?.querySelector('#message').value;
 
             //Verifica se é ativo da empresa ou cliente:
             const ativo_empresa = categoria === "cliente" ? true : false;
@@ -76,8 +76,7 @@ export class Navegacao extends LitElement {
         } else {
             const categoria = this.renderRoot?.querySelector('#cat_ativos').value;
             const valor = this.renderRoot?.querySelector('#valor_checks input[name="tipo"]:checked').value;
-            const descricao = this.renderRoot?.querySelector('#message').value;
-
+            const descricao = this.renderRoot?.querySelector('#message').value === ""? null:this.renderRoot?.querySelector('#message').value;
             //Verifica se é ativo da empresa ou cliente:
             const ativo_empresa = categoria === "cliente" ? true : false;
 

@@ -103,6 +103,7 @@ export class Area_Relato_Cliente extends LitElement {
             <div class="form-group">
                 <label for="message" class="form-label">Relato do Cliente</label>
                 <textarea
+                    @dblclick="${(e)=>{alert("Recebi um duplo clique!")}}"
                     @change="${this._alterar_data_cliente}"
                     placeholder="Em sua Tratativa inicial, qual foi o relato do cliente?"
                     id="message" name="message" rows="10" cols="30" class="form-textarea"

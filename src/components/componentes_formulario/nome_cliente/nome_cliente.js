@@ -85,11 +85,26 @@ export class Nome_Cliente extends LitElement {
     }
 
     _alterar_nome_cliente = (e)=>{
-        const nome = e.target.value;
+        const nome = e.target.value === ""? null:e.target.value;
 
         this.objeto_os.OS.info_cliente.nome_cliente = nome;
         this.objeto_os.salvar_os_localstorage();
     }
+
+    _alterar_nome_cadastro = (e) =>{
+        const nome = e.target.value === ""? null:e.target.value;
+
+        this.objeto_os.OS.info_cliente.nome_cadastro = nome;
+        this.objeto_os.salvar_os_localstorage();
+    }
+
+    _alterar_telefone_contato = (e) =>{
+        const nome = e.target.value === ""? null:e.target.value;
+
+        this.objeto_os.OS.info_cliente.telefone = nome;
+        this.objeto_os.salvar_os_localstorage();
+    }
+
 
 
     render() {
@@ -101,7 +116,24 @@ export class Nome_Cliente extends LitElement {
                     @change="${this._alterar_nome_cliente}"
                     placeholder="Nome de quem acompanhou a visita" type="text" id="fname" name="fname" value="${(this.objeto_os.OS.info_cliente.nome_cliente === null)? "":this.objeto_os.OS.info_cliente.nome_cliente}" class="form-input">
             </div>
-
+            <p style="color:var(--color-text-info);">É necessário que você preencha o nome do cadastro desse cliente para as mensagens altomáticas.<p>
+            <div style="display:flex; gap:1rem; align-items: flex-end;">
+                <div class="form-group; flex:2">
+                    <label for="fname" class="form-label">Nome do Cadastro:</label>
+                    <input 
+                        @change="${this._alterar_nome_cadastro}"
+                        placeholder="Nome do Cliente em Cadastro" type="text" id="fname" name="fname" 
+                        .value="${this.objeto_os.OS.info_cliente.nome_cadastro}" class="form-input">
+                </div>
+                <div class="form-group; flex:1">
+                    <label for="fname" class="form-label">Telefone:</label>
+                    <input 
+                        @change="${this._alterar_telefone_contato}"
+                        placeholder="Telefone de contato atualizado!" type="text" id="fname" name="fname" 
+                        .value="${this.objeto_os.OS.info_cliente.telefone}" class="form-input">
+                </div>
+            </div>
+            <br>
             
         `;
     }
