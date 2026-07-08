@@ -1,6 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
-
+import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
 
 export class Navegacao extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -184,6 +184,7 @@ export class Navegacao extends LitElement {
                         <div class="form-group">
                             <label for="message" class="form-label">Observação</label>
                             <textarea
+                                @dblclick="${(e) => estourar_drawer(e.target, 'Outros')}"
                                 style="border-left: 5px solid #ff0000;" 
                                 id="message" 
                                 name="message" 

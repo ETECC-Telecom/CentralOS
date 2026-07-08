@@ -5,6 +5,7 @@ import { Router } from '@lit-labs/router';
 import { Home_Page } from './pages/home/home';
 import { ADD_OS } from './pages/add_os/add_os';
 import { Page_OS_Completa } from './pages/page_os_completa/page_os_completa';
+import { Gerenciar_Scripts } from './pages/gerenciar_scripts/gerenciar_scripts';
 
 //Import dos Componentes
 import { Notificacao } from './components/notificacao/notificacao';
@@ -32,6 +33,10 @@ export class Main extends LitElement {
             {
                 path: `${BASE_PATH}/addos`,
                 render: () => html`<add-os></add-os>`,
+            },
+            {
+                path: `${BASE_PATH}/gerenciar_script`,
+                render: () => html`<gerenciar-script></gerenciar-script>`,
             },
             {
                 path: `${BASE_PATH}/iniciar_os_completa`,

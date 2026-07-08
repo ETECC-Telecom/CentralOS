@@ -1,6 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
-
+import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
 
 export class Site_Survey extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -101,6 +101,7 @@ export class Site_Survey extends LitElement {
             <div class="form-group">
                 <label for="message" class="form-label">Em caso de Pontos de Sombra!</label>
                 <textarea
+                    @dblclick="${(e) => estourar_drawer(e.target, 'Site Survey')}"
                     @change="${this._Alterar_descricao_sombra}"
                     .value="${this.data_site.ponto_adicional}"
                     style="border-left: 5px solid #ff0000;" 
@@ -112,6 +113,7 @@ export class Site_Survey extends LitElement {
             <div class="form-group">
                 <label for="message" class="form-label">Observação do Site Survey</label>
                 <textarea
+                    @dblclick="${(e) => estourar_drawer(e.target, 'Site Survey')}"
                     @change="${this._Alterar_descricao_geral}"
                     .value="${this.data_site.observacao}"
                     style="border-left: 5px solid #ff0000;" 

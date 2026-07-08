@@ -1,5 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
+import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
 
 
 export class Verificacao_Fibra extends LitElement {
@@ -184,6 +185,7 @@ export class Verificacao_Fibra extends LitElement {
                 </div>
                 <br>
                 <textarea
+                    @dblclick="${(e) => estourar_drawer(e.target, 'Fibra')}"
                     @change="${this._alterar_observacao_fibra}" 
                     id="message" 
                     name="message"

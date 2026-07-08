@@ -1,5 +1,7 @@
 import { disparar_notificacao } from "./disparar_notificacao";
-
+import { Capturar_Nome_Tecnico } from "./capturar_nome_tecnico";
+import educacao_cliente from "/src/data/educacao_cliente.json";
+import atendimento_cliente from "/src/data/atendimento_cliente.json";
 
 export default class Controller_Objeto_OS_Completa {
     constructor(estrura_os = {}) {
@@ -46,6 +48,51 @@ export default class Controller_Objeto_OS_Completa {
         this.salvar_os_localstorage();
     }
 
+    // Função para Exportar a mensagem encaminhada ao Cliente:
+    Export_Mensagem_Encaminhada_Cliente = () => {
+        
+        let nome_tecnico = Capturar_Nome_Tecnico();
+
+        let corpo = `Boa tarde! 😊\n\nAqui é *${nome_tecnico}* da Etecc Telecom, fui quem realizou o seu atendimento técnico. Para deixar tudo bem organizado e registrado, vou te encaminhar um resumo com os principais pontos que conversamos.\n\nNesse descritivo também incluí algumas orientações técnicas importantes que vão te ajudar bastante no dia a dia.\n\nQualquer dúvida que surgir depois, estamos à disposição 24h pelo *(13) 3421-1999*, combinado? 👍\n\nAvalie seu atendimento em menos de 1 minuto.\n Sua opinião faz toda a diferença!\n\nhttps://forms.gle/MVCCx1YfLhKVsh9i8\n\n`;
+
+        //logica da estrutura da lista de infomações passadas ao cliente:
+        let estaVazio = Object.keys(this.OS.educacao_cliente).length === 0;
+
+        if(!estaVazio){
+            let chaves = Object.keys(this.OS.educacao_cliente);
+            corpo += "> *Orientações Técnicas:*\n\n"
+            chaves.map(chave => {
+                corpo += `- ${educacao_cliente[chave].descricao}\n\n`; 
+            })
+                       
+        }
+
+        // Adicionando as Informações complementares, casos existam:
+        estaVazio = this.OS.complemento_atendimento.length === 0;
+
+        if(!estaVazio){
+            this.OS.complemento_atendimento.map(item =>{
+                corpo += `- ${item}\n\n`; 
+            })       
+        }
+
+        //Estruturando o atendimento ao cliente:
+        estaVazio = Object.keys(this.OS.atendimento_cliente).length === 0;
+
+        if(!estaVazio){
+            let chaves = Object.keys(this.OS.atendimento_cliente);
+            corpo += "> *Atendimento ao Cliente:*\n\n"
+            chaves.map(chave => {
+                corpo += `- ${atendimento_cliente[chave].descricao}\n\n`; 
+            })
+                       
+        }
+        
+        return corpo;
+        
+    }
+
+
     //Função para Finalizar OS: 
     /*
         Essa função irá encerrar a OS gerando os script de info passadas ao cliente, e script final. A ideia é que, ao ser executada, ela faça algumas verificações
@@ -67,7 +114,7 @@ export default class Controller_Objeto_OS_Completa {
 
         //Conferências técnicas:
 
-        script += '==========================================================================\n';
+        script += '\n==========================================================================\n';
         script += '\t\t\tCONFERÊNCIA TÉCNICA\n';
         script += '==========================================================================\n\n';
 
@@ -75,7 +122,8 @@ export default class Controller_Objeto_OS_Completa {
 
         //Relatório Final:
 
-        
+        script += this.relatorio_visita_simples();
+
         // Retornando o script Montado.
         return script;
     }
@@ -197,6 +245,10 @@ export default class Controller_Objeto_OS_Completa {
         corpo += this.conferencia_ativos_simples();
         corpo += this.conferencia_site_survey_simples();
         corpo += this.conferencia_ping_simples();
+        corpo += this.conferencia_tracert_simples();
+        corpo += this.conferencia_velocidade_simples();
+        corpo += this.conferencia_ativos_troca_simples();
+        corpo += this.conferencia_ativos_local_simples();
 
         return corpo;
     }
@@ -248,7 +300,7 @@ export default class Controller_Objeto_OS_Completa {
         return corpo;
     }
     conferencia_ativos_simples = () => {
-        let corpo = "\nATIVOS DO LOCAL TESTADOS\n--------------------------------------------\n\n";
+        let corpo = "\nDISPOSITIVOS FINAIS TESTADOS (END DEVICE)\n--------------------------------------------\n\n";
 
         const objeto = this.OS.conferencia_tecnica.teste_navegacao;
 
@@ -296,8 +348,360 @@ export default class Controller_Objeto_OS_Completa {
 
         return corpo
     }
+    conferencia_tracert_simples = () => {
+        let corpo = "TRACERT\n--------------------------------------------\n\n";
+        const objeto = this.OS.conferencia_tecnica.tracert_adicional;
+
+        if (objeto.length !== 0) {
+            objeto.map(item => {
+                let nome = `${item.url === "outro" ? item.outra_url : item.url}`;
+                corpo += `✓ Tracert ${nome} (${item.protocolo}) - Ativo ${item.ativo}\n`;
+
+                //- Tracert Google (IPv4) - Ativo da Empresa;
+            })
+        } else {
+            corpo += "> Não foram relatados informações sobre os testes de Tracert. Verifique o relatório final ou .Bat\n"
+        }
+
+        return corpo
+    }
+    conferencia_velocidade_simples = () => {
+        let corpo = "\nVELOCIDADE\n--------------------------------------------\n\n";;
+        const objeto = this.OS.conferencia_tecnica.velocidade_adicional;
+
+        if (objeto.length !== 0) {
+            objeto.map(item => {
+
+                corpo += `[${item.dono} - ${item.ativo}]\n`;
+                corpo += `  Provedor...........: ${item.site}\n`;
+                corpo += `  Conexão............: ${item.tipo}\n`;
+                corpo += `  Download...........: ${item.down}\n`;
+                corpo += `  Upload.............: ${item.up}\n`;
+                corpo += `  Ping...............: ${item.ping}\n`;
+                corpo += `  Jitter.............: ${item.jitter}\n`;
+                corpo += `  URL Consulta.......: ${item.jitter}\n`;
+
+                if (item.url !== null) {
+                    corpo += `  URL Consulta.......: ${item.url};\n`;
+                } else {
+                    corpo += "\n";
+                }
+                /*Estrutura desejada:
+                Teste de Velocidade: Ativo Empresa (Celular)
+                - Provedor: SpeedTest;
+                - Conexão: Cabo;
+                - Velocidade: UP (500) — DOWN (200) — Ping (5) — Jitter (0);
+                - URL de Consulta: www.speedteste.com/teste5547825
+                */
+            })
+        } else {
+            corpo += "> Não foram relatados informações sobre os testes de velocidade. Verifique o relatório final ou .Bat\n"
+        }
+
+        return corpo
+    }
+    conferencia_ativos_troca_simples = () => {
+        let corpo = '==========================================================================\n';
+        corpo += '\t\t\EQUIPAMENTOS\n';
+        corpo += '==========================================================================\n\n';
+
+        const objeto = this.OS.conferencia_tecnica.equipamentos_local;
+        corpo += `Houve troca..........: ${objeto.troca === true ? "Sim" : "Não"}\n`;
+
+        if (objeto.troca === true) {
+
+            let motivo = objeto.motivo_troca;
+
+            switch (motivo) {
+                case 'solicitacao_cliente':
+                    motivo = "Solicitação do Cliente";
+                    break;
+                case 'mau_funcionamento':
+                    motivo = "Mau Funcionamento";
+                    break;
+                case 'efeito_placebo':
+                    motivo = "Efeito Placebo";
+                    break;
+                case 'necessidade_tecnica':
+                    motivo = "Necessidade Técnica";
+                    break;
+                case 'solicitacao_sup_interno':
+                    motivo = "Solicitação Sup. Interno";
+                    break;
+                default:
+                    motivo = "Não Informado!"
+            }
+
+            corpo += `Código Conexão.......: ${objeto.cod_conexao === null ? "Não informado!" : objeto.cod_conexao};\n`;
+            corpo += `PPPoE................: ${objeto.pppoe === null ? "Não informado!" : objeto.pppoe};\n`;
+            corpo += `Motivo...............: ${motivo};\n\n`;
+        }
+
+        corpo += "Equipamentos:\n\n";
+
+        if (objeto.ativos.length !== 0) {
+            objeto.ativos.map(item => {
+                const servico = item.inserido === true ? "[+] INSERIDO" : "[-] RETIRADO";
+                corpo += `${servico}\n  ${item.ativo} ( ${item.mac} );\n\n`;
+            });
+        } else {
+            corpo += "> Não foram anexados ativos do local ou troca!\n"
+        }
+
+        return corpo;
 
 
+        /*Estrutura esperada
+            ### Histórico de Equipamentos e Troca
+
+            Houve Troca de Equipamento: Sim 
+            - Código de Conexão: 554855;
+            - PPPoE do Cliente: leitequente;
+            - Motivo da Troca: Solicitação do Cliente 
+
+            **Equipamentos:**
+            - Retirado: ONT ( 88.55.44.22.55.44 );
+            - Inserido: ONU ( 11.11.11.11.11 );
+            - Inserido: Router ( 11.11.11.11.11 );
+        */
+    }
+    conferencia_ativos_local_simples = () => {
+        let corpo = '==========================================================================\n';
+        corpo += '\t\t\ATIVOS NO LOCAL\n';
+        corpo += '==========================================================================\n\n';
+
+        const objeto = this.OS.conferencia_tecnica.conferencia_router;
+
+        if (objeto.length !== 0) {
+            objeto.map(item => {
+                let primeiro_ponto = item.router === true ? "Primeiro Ponto" : "Segundo Ponto";
+                let empresa = item.empresa === true ? "Empresa" : "Cliente";
+
+                let atividade;
+
+                if (item.atividade.verdadeiro === true) {
+                    atividade = `Anormal ( ${item.atividade.observacao} Dias )`;
+                } else {
+                    atividade = `Normal`;
+                }
+
+                let conectados;
+
+                if (item.ativos_anormal.verdadeiro === true) {
+                    conectados = `Anormal ( ${item.ativos_anormal.observacao} Ativos )`;
+                } else {
+                    conectados = `Normal`;
+                }
+
+                let dns = item.dns === "Outro" ? item.outro_dns : item.dns;
+
+
+                corpo += `ATIVO ${primeiro_ponto} ( ${empresa} )\n`;
+                corpo += `  Local...............: ${item.local}\n`;
+                corpo += `  Tempo de atividade..: ${atividade}\n`;
+                corpo += `  Ativos conectados...: ${conectados}\n`;
+                corpo += `  Firmware............: ${item.firware_router === true ? "Atualizado" : "Desatualizado"}\n`;
+                corpo += `  IPv6 SLAAC..........: ${item.ipv6 === true ? "Sim" : "Não"}\n`;
+                corpo += `  Rede 2.4 GHz........: ${item.largura_banda === true ? "Sim" : "Não"}\n`;
+                corpo += `  DNS.................: ${dns}\n`;
+                corpo += `  UPnP................: ${item.upnp === true ? "Sim" : "Não"}\n`;
+                corpo += `  Local adequado......: ${item.local_equipamento.adequado === true ? "Sim" : "Não"}\n`;
+
+                if (item.local_equipamento.adequado === false) {
+                    corpo += `  Cliente ciente......: ${item.local_equipamento.ciente === true ? "Sim" : "Não"}\n\n`;
+                    corpo += `Motivo do Local Inadequado: \n${item.local_equipamento.observacao === null ? "Não informado o motivo!" : item.local_equipamento.observacao}\n\n`;
+                }else{
+                    corpo += '\n';
+                }
+
+
+            });
+        }else{
+            corpo += "> O Técnico não anexou a configuração de nenhum ativo!\n";
+        }
+
+        return corpo;
+        /*Estrutura esperada
+        
+            ### Conferência Técnica nos Ativos
+
+            #### Ativo Primeiro Ponto (Empresa):
+            - Localização: Sala;
+            - Tempo Atividade: Anormal (50 dias )/Normal;
+            - Ativos Conectados: Anormal ( 150 Ativos )/Normal;
+            - Firmware Atualizado: Sim;
+            - Protocolo IPv6 em Slaac: Sim;
+            - Largura de Banda da rede 2.4: 20MHz;
+            - DNS configurado: ETECC;
+            - UPnP Habilitado: Sim;
+            - Equipamento em local Adequado: Não;
+            - Cliente está ciente que ativo não está em um local adequado: Sim;
+
+            **Motivo do Local Inadequado**: Ativo localizado dentro do lixo! 
+        */
+    }
+
+    // Função do Relatório da Visita
+
+    relatorio_visita_simples = ()=>{
+        let corpo = '';
+
+        corpo += this.relatorio_educacao_cliente_simples();
+        corpo += this.relatorio_bat_simples();
+
+        corpo += '\n\n==========================================================================\n';
+        corpo += '\t\t\tRELATÓRIO DA VISITA\n';
+        corpo += '==========================================================================\n\n';
+
+        corpo += this.relato_cliente_simples();
+        corpo += this.relatorio_complementar_simples();
+        corpo += this.relatorio_sinal_fibra_script_simples();
+        corpo += this.relatorio_fontes_script_simples();
+        corpo += this.relatorio_site_Survey_script_simples();
+        corpo += this.relatorio_ping_scriot_simples();
+        corpo += this.relatorio_tracert_scriot_simples();
+        corpo += this.relatorio_velocidade_scriot_simples();
+        corpo += this.relatorio_troca_ativo_script_simples();
+        
+        return corpo;
+    }
+    relato_cliente_simples = ()=>{
+        let corpo = "";
+        if (this.OS.info_cliente.relato_cliente !== null){
+            corpo += `RELATO DO CLIENTE:\n\n${this.OS.info_cliente.relato_cliente}\n\n`
+        }
+
+        return corpo;
+    }
+    relatorio_complementar_simples = ()=>{
+        let corpo = "";
+        if (!(this.OS.relato_adicional === null)) {
+            corpo += `${this.OS.relato_adicional}\n\n`;
+        }
+        return corpo
+
+    }
+    relatorio_sinal_fibra_script_simples = () => {
+        let corpo = "";
+
+        if (!(this.OS.conferencia_tecnica.fibra.observacao === null)) {
+            corpo += `RELATÓRIO DA FIBRA:\n${this.OS.conferencia_tecnica.fibra.observacao}\n`
+        }
+        return corpo;
+    }
+
+    relatorio_fontes_script_simples = () => {
+        let corpo = "";
+
+        if (!(this.OS.conferencia_tecnica.fontes.observacao === null)) {
+            corpo += `\nRELATÓRIO DAS FONTES:\n${this.OS.conferencia_tecnica.fontes.observacao}\n`
+        }
+        return corpo;
+    }
+
+    relatorio_ping_scriot_simples = () => {
+        let corpo = "";
+
+        if (this.OS.conferencia_tecnica.observacao_ping !== null) {
+            corpo = `\nRELATÓRIO DO PING:\n${this.OS.conferencia_tecnica.observacao_ping}\n`;
+        }
+
+        return corpo;
+    }
+    relatorio_tracert_scriot_simples = () => {
+        let corpo = "";
+
+        if (this.OS.conferencia_tecnica.observacao_tracert !== null) {
+            corpo = `\nRELATÓRIO DO TRACERT:\n${this.OS.conferencia_tecnica.observacao_tracert}\n`;
+        }
+
+        return corpo;
+    }
+    relatorio_velocidade_scriot_simples = () => {
+        let corpo = "";
+
+        if (this.OS.conferencia_tecnica.observacao_velocidade !== null) {
+            corpo = `\nRELATÓRIO DA VELOCIDADE:\n${this.OS.conferencia_tecnica.observacao_velocidade}\n`;
+        }
+
+        return corpo;
+    }
+
+    relatorio_troca_ativo_script_simples = () => {
+        let corpo = "";
+
+        if (this.OS.conferencia_tecnica.equipamentos_local.observacao !== null) {
+            corpo += `\nRELATÓRIO  DOS ROUTERS:\n${this.OS.conferencia_tecnica.equipamentos_local.observacao}\n`
+        }
+
+        return corpo;
+    }
+
+    relatorio_educacao_cliente_simples = () => {
+        let corpo = "";
+
+        //No final do Script adicionamos a educação do cliente:
+        let informacoes = "";
+        if (Object.keys(this.OS.educacao_cliente).length === 0 && this.OS.educacao_cliente.constructor === Object) {
+            informacoes = "> O técnico não passou informações adicionais ao Cliente!\n"
+        } else {
+            for (const chave in this.OS.educacao_cliente) {
+                informacoes += `    • ${this.OS.educacao_cliente[chave]};\n`
+            }
+        }
+
+        corpo += '==========================================================================\n';
+        corpo += '\t\t\tEDUCAÇÃO DO CLIENTE\n';
+        corpo += '==========================================================================\n\n';
+
+        corpo += `Informações passadas ao cliente:\n${informacoes}`
+        //Educação adicional fornecida pelo técnico:
+
+        informacoes = "";
+        if (this.OS.complemento_atendimento.length != 0) {
+            informacoes += "\nInformação Complementar da Visita!\n";
+            this.OS.complemento_atendimento.map(item => {
+                informacoes += `    • ${item};\n`;
+            })
+        } else {
+            informacoes = '';
+        }
+
+        corpo += informacoes;
+        return corpo;
+    }
+
+    relatorio_site_Survey_script_simples = () => {
+        let corpo = "\nSITE SURVEY:\n";
+
+        const objeto = this.OS.conferencia_tecnica.mapa_calor;
+
+        if (objeto.observacao !== null) {
+            corpo += `${objeto.observacao}\n\n`
+        } else {
+            corpo += "> O Técnico não relatou informações sobre o Mapa de Calor!\n";
+        }
+
+        if (objeto.ponto_adicional !== null) {
+            corpo += `${objeto.ponto_adicional}\n`
+        } else {
+            corpo += "> O Técnico não relatou informações sobre a necessidade de ponto adicional!\n";
+        }
+
+
+        return corpo;
+    }
+    relatorio_bat_simples = () =>{
+        let corpo = '\n==========================================================================\n';
+        corpo += '\t\t\RELATÓRIO .BAT SIMPLIFICADO\n';
+        corpo += '==========================================================================\n\n';
+        //Adicionando o .Bat:
+        if (!(this.OS.relatorio_estabilidade === null)) {
+            corpo += `${this.OS.relatorio_estabilidade}`;
+        }
+
+        return corpo;
+    }
 
     /*
         Funções Relacionadas a Exportação do Relatório completo no Formato do Markdown!
@@ -371,8 +775,16 @@ export default class Controller_Objeto_OS_Completa {
             parentesco = this.OS.info_cliente.parentesco;
         }
 
+        //construindo a formatação da data:
+
+        const data_original = this.OS.config_OS.data_criacao;
+        // 1. Converte a string para um objeto ZonedDateTime
+        const zonedDateTime = Temporal.ZonedDateTime.from(data_original);
+        // 2. Transforma de volta em string, ocultando o nome do fuso horário
+        const data_formatada = zonedDateTime.toString({ timeZoneName: 'never' });
+
         //Construindo a Introdução
-        corpo = `- **Criado:** ${this.OS.config_OS.data_criacao}\n- **Cliente:** ${this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro}\n- **Telefone Atualizado**: ${this.OS.info_cliente.telefone === null ? "Não Informado" : this.OS.info_cliente.telefone}\n- **Quem Acompanhou:** ${this.OS.info_cliente.nome_cliente===null?"Não Informado!":this.OS.info_cliente.nome_cliente} (${parentesco===null?"Não Informado":parentesco})`;
+        corpo = `- **Criado:** ${data_formatada}\n- **Cliente:** ${this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro}\n- **Telefone Atualizado**: ${this.OS.info_cliente.telefone === null ? "Não Informado" : this.OS.info_cliente.telefone}\n- **Quem Acompanhou:** ${this.OS.info_cliente.nome_cliente===null?"Não Informado!":this.OS.info_cliente.nome_cliente} (${parentesco===null?"Não Informado":parentesco})`;
 
         //Construindo as informações necessárias:
         let info_necessarias = '';

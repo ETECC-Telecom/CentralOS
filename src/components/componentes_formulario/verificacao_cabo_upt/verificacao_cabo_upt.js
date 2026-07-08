@@ -1,6 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
-
+import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
 
 export class Verificacao_Cabo_UTP extends LitElement {
     // 1. Em vez de @property, use o objeto static properties

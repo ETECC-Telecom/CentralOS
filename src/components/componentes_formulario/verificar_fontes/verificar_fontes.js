@@ -1,6 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
-
+import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
 
 export class Verificar_Fonte extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -103,6 +103,7 @@ export class Verificar_Fonte extends LitElement {
             </div>
             <br>
             <textarea
+                @dblclick="${(e) => estourar_drawer(e.target, 'Fonte')}"
                 @change="${this._alterar_relatorio_fonte}"
                 name="message" 
                 style="border-left: 5px solid #ff0000;"

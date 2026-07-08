@@ -1,13 +1,15 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 
+import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
+
 export class Area_Relato_Cliente extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
     static properties = {
-        objeto_os: {type: Object}
+        objeto_os: { type: Object }
     };
 
     static get styles() {
-	  return css`
+        return css`
 	    host: {
             
 	    }
@@ -77,7 +79,7 @@ export class Area_Relato_Cliente extends LitElement {
             min-height: 100px;
         }
 	  `;
-	}
+    }
 
     constructor() {
         super();
@@ -86,16 +88,15 @@ export class Area_Relato_Cliente extends LitElement {
 
     connectedCallback() {
         super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
-
+        
     }
 
-    _alterar_data_cliente = (e)=>{
+    _alterar_data_cliente = (e) => {
         const nome = e.target.value;
 
         this.objeto_os.OS.info_cliente.relato_cliente = nome;
         this.objeto_os.salvar_os_localstorage();
     }
-
 
     render() {
         return html`
@@ -103,11 +104,12 @@ export class Area_Relato_Cliente extends LitElement {
             <div class="form-group">
                 <label for="message" class="form-label">Relato do Cliente</label>
                 <textarea
-                    @dblclick="${(e)=>{alert("Recebi um duplo clique!")}}"
+                    @dblclick="${(e) => estourar_drawer(e.target, 'Relato do Cliente')}"
+                    style="border-left: 5px solid #ff0000;"
                     @change="${this._alterar_data_cliente}"
                     placeholder="Em sua Tratativa inicial, qual foi o relato do cliente?"
                     id="message" name="message" rows="10" cols="30" class="form-textarea"
-                    .value="${(this.objeto_os.OS.info_cliente.relato_cliente === null)? "":this.objeto_os.OS.info_cliente.relato_cliente}"></textarea>
+                    .value="${(this.objeto_os.OS.info_cliente.relato_cliente === null) ? "" : this.objeto_os.OS.info_cliente.relato_cliente}"></textarea>
             </div>
             
         `;

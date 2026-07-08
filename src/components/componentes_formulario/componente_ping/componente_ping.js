@@ -1,6 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
-
+import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
 
 export class Componente_Ping extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -160,6 +160,7 @@ export class Componente_Ping extends LitElement {
             <div class="form-group">
                 <label for="message" class="form-label">Relatório:</label>
                 <textarea
+                    @dblclick="${(e) => estourar_drawer(e.target, 'Ping')}"
                     @change="${this._Alterar_Descricao_Ping}"
                     .value="${this.objeto_os.OS.conferencia_tecnica.observacao_ping}"
                     style="border-left: 5px solid #ff0000;"

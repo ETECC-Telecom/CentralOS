@@ -8,6 +8,7 @@ import { Header_Page_OS } from '../../components/header_page_os/header_page_os';
 
 import { obterCoordenadas } from '../../controller/obter_coordenadas';
 import { disparar_notificacao } from '../../controller/disparar_notificacao';
+
 import { Select_Parentesco } from '../../components/componentes_formulario/select_parentesco/select_parentesco';
 import { Nome_Cliente } from '../../components/componentes_formulario/nome_cliente/nome_cliente';
 import { Area_Relato_Cliente } from '../../components/componentes_formulario/area_relato_cliente/area_relato_cliente';
@@ -52,7 +53,7 @@ export class Page_OS_Completa extends LitElement {
     constructor() {
         super();
         this.tipo = 'continue'
-        this.abaAtiva = 'aba4';
+        this.abaAtiva = 'aba1';
 
         //Atributos de Controle de exibição de informações extras!
 
@@ -91,6 +92,7 @@ export class Page_OS_Completa extends LitElement {
             this.objeto_os = new Controller_Objeto_OS_Completa();
             this.objeto_os.carregar_os_localstorage();
         }
+        this.abaAtiva = localStorage.getItem('aba');
 
     }
 
@@ -117,6 +119,7 @@ export class Page_OS_Completa extends LitElement {
     _alterarAba(evento, nomeAba) {
         evento.preventDefault(); // Caso seja um link ou submit
         this.abaAtiva = nomeAba; // O Lit vai notar a mudança e re-renderizar a tela
+        localStorage.setItem('aba', nomeAba);
     }
 
 

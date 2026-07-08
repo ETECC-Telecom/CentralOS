@@ -201,6 +201,7 @@ nav a p {
 .form-textarea {
     resize: vertical;
     min-height: 100px;
+    
 }
 
 /* Inputs de Seleção (Radio e Checkbox) */
