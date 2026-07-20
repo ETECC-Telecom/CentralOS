@@ -1,6 +1,7 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
 import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
+import { Caixa_Texto } from '../caixa_texto/caixa_texto';
 
 export class Componente_Encaminhar_Externa extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -68,16 +69,16 @@ export class Componente_Encaminhar_Externa extends LitElement {
             <br>
             ${this.necessario?html`
             <div class="form-group">
-                <label for="message" class="form-label">Relatório:</label>
-                <textarea
-                    @dblclick="${(e) => estourar_drawer(e.target, 'Encaminhar Externa')}"
-                    @change="${this._Alterar_descricao}"
-                    .value="${this.objeto_encaminhado.observacao}"
-                    placeholder="Informe o Mótivo do porque é necessário encaminhar para a equipe externa!"
-                    style="border-left: 5px solid #ff0000;"
-                    id="message" 
-                    name="message" 
-                    rows="5" class="form-textarea"></textarea>
+                <caixa-texto
+                    Titulo = "Relatório:"
+                    .Tamanho = ${5}
+                    .Texto = ${this.objeto_os.OS.conferencia_tecnica.encaminhar_externa.observacao}
+                    .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_encaminhar_externa.bind(this.objeto_os)}
+                    .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
+                    .Categoria = "Encaminhar Externa"
+                    Placeholder = "Informe o Mótivo do porque é necessário encaminhar para a equipe externa!"
+                ></caixa-texto>  
+            
             </div>
                 `:''}
             

@@ -1,0 +1,120 @@
+/* Helper para organizar os blocos sem usar <br> */
+:host {
+    display: block;
+    box-sizing: border-box;
+    color: var(--text-color);
+}
+
+/* Reset básico para o Shadow DOM */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: var(--text-color);
+    text-align: center;
+}
+
+p {
+    font-size: var(--paragraph);
+    font-weight: 100;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-row {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Estilização das Labels */
+.form-label {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--btn-text-background-color);
+}
+
+.form-label-inline {
+    font-size: 14px;
+    color: #333333;
+    cursor: pointer;
+}
+
+/* Reset e Estilo Flat para Inputs de Texto, Select e Textarea */
+.form-input,
+.form-select,
+.form-textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Zera o visual padrão do navegador */
+
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 12px;
+
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    /* Bordas levemente arredondadas */
+    background-color: #f8fafc;
+    color: #1a202c;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Estados de Foco */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--destaque-color);
+    /* Azul Flat */
+    background-color: #ffffff;
+}
+
+/* Customizações específicas do Textarea */
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.container-relativo {
+    position: relative;
+    /* Torna este elemento a referência para o botão */
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Botão Flat */
+.form-button {
+    position: absolute;
+    right: 10px;
+    /* Distância da borda direita */
+    bottom: 10px;
+    /* Distância da borda inferior */
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: inherit;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+}
+
+.form-button svg{
+    fill: #feca57;
+}

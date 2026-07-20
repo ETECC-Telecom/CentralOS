@@ -158,15 +158,16 @@ export class Componente_Ping extends LitElement {
             <br>
             <h2>Relatório do Ping</h2>
             <div class="form-group">
-                <label for="message" class="form-label">Relatório:</label>
-                <textarea
-                    @dblclick="${(e) => estourar_drawer(e.target, 'Ping')}"
-                    @change="${this._Alterar_Descricao_Ping}"
-                    .value="${this.objeto_os.OS.conferencia_tecnica.observacao_ping}"
-                    style="border-left: 5px solid #ff0000;"
-                    id="message" 
-                    name="message" 
-                    rows="5" class="form-textarea"></textarea>
+                <caixa-texto
+                    Titulo = "Relatório:"
+                    .Tamanho = ${5}
+                    .Texto = ${this.objeto_os.OS.conferencia_tecnica.observacao_ping}
+                    .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_ping.bind(this.objeto_os)}
+                    .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
+                    .Categoria = "Ping"
+                    Placeholder = "Adicione aqui qualquer observação relacionado aos testes de Ping!"
+                ></caixa-texto>
+
             </div>
             <div class="form-group" style="margin-top: 10px;">
                 <button 

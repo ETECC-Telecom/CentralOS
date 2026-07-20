@@ -1,6 +1,7 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
 import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
+import { Caixa_Texto } from '../caixa_texto/caixa_texto';
 
 export class Verificar_Fonte extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -102,16 +103,15 @@ export class Verificar_Fonte extends LitElement {
                 </div>
             </div>
             <br>
-            <textarea
-                @dblclick="${(e) => estourar_drawer(e.target, 'Fonte')}"
-                @change="${this._alterar_relatorio_fonte}"
-                name="message" 
-                style="border-left: 5px solid #ff0000;"
-                rows="5"
-                class="form-textarea"
-                .value="${this.objeto_os.OS.conferencia_tecnica.fontes.observacao}"
-                placeholder="Adicione aqui qualquer observação relacionado as Fontes checadas!"></textarea>
-            
+            <caixa-texto
+                Titulo = "Relatório Adicional da Fonte"
+                .Tamanho = ${5}
+                .Texto = ${this.objeto_os.OS.conferencia_tecnica.fontes.observacao}
+                .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_checagem_fontes.bind(this.objeto_os)}
+                .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
+                .Categoria = "Fonte"
+                Placeholder = "Adicione aqui qualquer observação relacionado as Fontes checadas!"
+            ></caixa-texto>
             
         `;
     }

@@ -1,6 +1,7 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
 import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
+import { Caixa_Texto } from '../caixa_texto/caixa_texto';
 
 
 export class Verificacao_Fibra extends LitElement {
@@ -184,16 +185,15 @@ export class Verificacao_Fibra extends LitElement {
                     <span class="selection"></span>
                 </div>
                 <br>
-                <textarea
-                    @dblclick="${(e) => estourar_drawer(e.target, 'Fibra')}"
-                    @change="${this._alterar_observacao_fibra}" 
-                    id="message" 
-                    name="message"
-                    style="border-left: 5px solid #ff0000;"
-                    rows="5" 
-                    placeholder="Caso tenha alguma observação relacionado a Fibra adicione aqui para omitir no relatório final!"
-                    class="form-textarea"
-                    .value="${(this.objeto_os.OS.conferencia_tecnica.fibra.observacao === null)? "":this.objeto_os.OS.conferencia_tecnica.fibra.observacao}"></textarea>
+                <caixa-texto
+                    Titulo = "Relatório Adicional da Fibra"
+                    .Tamanho = ${5}
+                    .Texto = ${this.objeto_os.OS.conferencia_tecnica.fibra.observacao}
+                    .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_checagem_fibra.bind(this.objeto_os)}
+                    .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
+                    .Categoria = "Fibra"
+                    Placeholder = "Caso tenha alguma observação relacionado a Fibra adicione aqui para omitir no relatório final!"
+                ></caixa-texto> 
                 `: ""}
         `;
     }

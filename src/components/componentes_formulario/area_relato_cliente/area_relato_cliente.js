@@ -2,6 +2,8 @@ import { LitElement, html, css, unsafeCSS } from 'lit';
 
 import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
 
+import { Caixa_Texto } from '../caixa_texto/caixa_texto';
+
 export class Area_Relato_Cliente extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
     static properties = {
@@ -102,16 +104,16 @@ export class Area_Relato_Cliente extends LitElement {
         return html`
             <!--Retorno renderizado-->
             <div class="form-group">
-                <label for="message" class="form-label">Relato do Cliente</label>
-                <textarea
-                    @dblclick="${(e) => estourar_drawer(e.target, 'Relato do Cliente')}"
-                    style="border-left: 5px solid #ff0000;"
-                    @change="${this._alterar_data_cliente}"
-                    placeholder="Em sua Tratativa inicial, qual foi o relato do cliente?"
-                    id="message" name="message" rows="10" cols="30" class="form-textarea"
-                    .value="${(this.objeto_os.OS.info_cliente.relato_cliente === null) ? "" : this.objeto_os.OS.info_cliente.relato_cliente}"></textarea>
+                 <caixa-texto
+                    Titulo = "Relato do Cliente"
+                    .Tamanho = ${10}
+                    .Texto = ${this.objeto_os.OS.info_cliente.relato_cliente}
+                    .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_relato_cliente.bind(this.objeto_os)}
+                    .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
+                    .Categoria = "Relato do Cliente"
+                    Placeholder = "Em sua Tratativa inicial, qual foi o relato do cliente?"
+                ></caixa-texto>  
             </div>
-            
         `;
     }
 }

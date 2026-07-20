@@ -70,7 +70,7 @@ export class Page_OS_Completa extends LitElement {
         if (this.tipo == 'novo') {
             this.objeto_os = new Controller_Objeto_OS_Completa(Ordem_Servico_Completa);
             this.objeto_os.alterar_tipo_os("completa");
-
+            localStorage.setItem('aba', "aba1");
             //Adiciona uma nova coordenada e data em uma OS recem criada!
             try {
 

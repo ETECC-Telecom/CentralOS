@@ -113,15 +113,15 @@ export class Componente_Tracert extends LitElement {
             <br>
             <h2>Relatório de Tracert</h2>
             <div class="form-group">
-                <label for="message" class="form-label">Relatório:</label>
-                <textarea
-                    @dblclick="${(e) => estourar_drawer(e.target, 'Tracert')}"
-                    @change="${this._Alterar_Descricao_Tracert}"
-                    .value="${this.objeto_os.OS.conferencia_tecnica.observacao_tracert}"
-                    style="border-left: 5px solid #ff0000;"
-                    id="message" 
-                    name="message" 
-                    rows="5" class="form-textarea"></textarea>
+                <caixa-texto
+                    Titulo = "Relatório:"
+                    .Tamanho = ${5}
+                    .Texto = ${this.objeto_os.OS.conferencia_tecnica.observacao_tracert}
+                    .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_tracert.bind(this.objeto_os)}
+                    .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
+                    .Categoria = "Tracert"
+                    Placeholder = "Adicione aqui qualquer observação relacionado aos testes de Tracert!"
+                ></caixa-texto>
             </div>
             <div class="form-group" style="margin-top: 10px;">
                 <button 

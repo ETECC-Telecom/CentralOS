@@ -31,8 +31,8 @@ export class ADD_OS extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
     static properties = {
         nome: { type: String },
-        router: { attribute: false }
-
+        router: { attribute: false },
+        
     };
 
     static get styles() {
@@ -41,8 +41,11 @@ export class ADD_OS extends LitElement {
 
     constructor() {
         super();
+        this.modal = true;
         
     }
+
+    
 
     render() {
         return html`
@@ -95,6 +98,9 @@ export class ADD_OS extends LitElement {
             </div>
             
             <menu-inferior></menu-inferior>
+
+            
+
         `;
     }
 }

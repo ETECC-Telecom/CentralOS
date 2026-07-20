@@ -1,6 +1,7 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
 import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
+import { Caixa_Texto } from '../caixa_texto/caixa_texto';
 
 export class Componente_Equipamentos_Local extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -167,15 +168,16 @@ export class Componente_Equipamentos_Local extends LitElement {
             </div>
 
             <div class="form-group">
-                <label for="message" class="form-label">Relatório:</label>
-                <textarea
-                    @dblclick="${(e) => estourar_drawer(e.target, 'Troca de Equipamento')}"
-                    @change="${this._Alterar_Observacao}"
-                    .value="${this.objeto_os.OS.conferencia_tecnica.equipamentos_local.observacao}"
-                    style="border-left: 5px solid #ff0000;"
-                    id="message" 
-                    name="message" 
-                    rows="3" class="form-textarea"></textarea>
+                <caixa-texto
+                    Titulo = "Relatório:"
+                    .Tamanho = ${5}
+                    .Texto = ${this.objeto_os.OS.conferencia_tecnica.equipamentos_local.observacao}
+                    .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_troca_equipamento.bind(this.objeto_os)}
+                    .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
+                    .Categoria = "Troca de Equipamento"
+                    Placeholder = "Informe o porque você realizou a troca de equipamento!"
+                ></caixa-texto>  
+
             </div>
             
                 `:""}

@@ -8,6 +8,7 @@ export const Ordem_Servico_Completa = {
 		id: null, //id do banco
 		data_criacao: null,
 		data_alteracao: null,
+		usado_resumo_ia: false,
 
 	},
 	info_cliente: {
@@ -140,5 +141,6 @@ export const Ordem_Servico_Completa = {
 	],
 	relato_adicional: null, //Informaçoes adicionais relacionadas a Visita
 	relatorio_estabilidade: null, //campo para adição do .bat
+	relatorio_externo:null, // Relatório carregado do aplicativo desktop
 }
 

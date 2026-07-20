@@ -184,8 +184,6 @@ export class Navegacao extends LitElement {
                         <div class="form-group">
                             <label for="message" class="form-label">Observação</label>
                             <textarea
-                                @dblclick="${(e) => estourar_drawer(e.target, 'Outros')}"
-                                style="border-left: 5px solid #ff0000;" 
                                 id="message" 
                                 name="message" 
                                 rows="5"

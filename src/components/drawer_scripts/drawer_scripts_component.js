@@ -7,7 +7,7 @@ export class Drawer_Scripts_Component extends LitElement {
         alvo: { type: Object },
         lista: {type: Array},
         categoria: {type:String},
-        cores: {type: Object}
+        cores: {type: Object},
     };
 
     static styles = css`
@@ -77,7 +77,6 @@ export class Drawer_Scripts_Component extends LitElement {
         this.alvo = {};
         this.lista = [];
         this.categoria = "Outro"
-
         this.cores = {
             "Ping" : "#1E3A8A",
             "Tracert" : "#065F46",
@@ -194,9 +193,10 @@ export class Drawer_Scripts_Component extends LitElement {
 
 customElements.define('drawer-scripts', Drawer_Scripts_Component);
 
-export function estourar_drawer(e, categoria) {
+export async function estourar_drawer(e, categoria) {
     const modalEl = document.createElement('drawer-scripts'); // Cria o elemento
     modalEl.alvo = e;
     modalEl.categoria = categoria;
+
     document.body.appendChild(modalEl);                  // Injeta na página
 }

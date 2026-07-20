@@ -50,7 +50,7 @@ export default class Controller_Objeto_OS_Completa {
 
     // Função para Exportar a mensagem encaminhada ao Cliente:
     Export_Mensagem_Encaminhada_Cliente = () => {
-        
+
         let nome_tecnico = Capturar_Nome_Tecnico();
 
         let corpo = `Boa tarde! 😊\n\nAqui é *${nome_tecnico}* da Etecc Telecom, fui quem realizou o seu atendimento técnico. Para deixar tudo bem organizado e registrado, vou te encaminhar um resumo com os principais pontos que conversamos.\n\nNesse descritivo também incluí algumas orientações técnicas importantes que vão te ajudar bastante no dia a dia.\n\nQualquer dúvida que surgir depois, estamos à disposição 24h pelo *(13) 3421-1999*, combinado? 👍\n\nAvalie seu atendimento em menos de 1 minuto.\n Sua opinião faz toda a diferença!\n\nhttps://forms.gle/MVCCx1YfLhKVsh9i8\n\n`;
@@ -58,38 +58,38 @@ export default class Controller_Objeto_OS_Completa {
         //logica da estrutura da lista de infomações passadas ao cliente:
         let estaVazio = Object.keys(this.OS.educacao_cliente).length === 0;
 
-        if(!estaVazio){
+        if (!estaVazio) {
             let chaves = Object.keys(this.OS.educacao_cliente);
             corpo += "> *Orientações Técnicas:*\n\n"
             chaves.map(chave => {
-                corpo += `- ${educacao_cliente[chave].descricao}\n\n`; 
+                corpo += `- ${educacao_cliente[chave].descricao}\n\n`;
             })
-                       
+
         }
 
         // Adicionando as Informações complementares, casos existam:
         estaVazio = this.OS.complemento_atendimento.length === 0;
 
-        if(!estaVazio){
-            this.OS.complemento_atendimento.map(item =>{
-                corpo += `- ${item}\n\n`; 
-            })       
+        if (!estaVazio) {
+            this.OS.complemento_atendimento.map(item => {
+                corpo += `- ${item}\n\n`;
+            })
         }
 
         //Estruturando o atendimento ao cliente:
         estaVazio = Object.keys(this.OS.atendimento_cliente).length === 0;
 
-        if(!estaVazio){
+        if (!estaVazio) {
             let chaves = Object.keys(this.OS.atendimento_cliente);
             corpo += "> *Atendimento ao Cliente:*\n\n"
             chaves.map(chave => {
-                corpo += `- ${atendimento_cliente[chave].descricao}\n\n`; 
+                corpo += `- ${atendimento_cliente[chave].descricao}\n\n`;
             })
-                       
+
         }
-        
+
         return corpo;
-        
+
     }
 
 
@@ -155,9 +155,9 @@ export default class Controller_Objeto_OS_Completa {
         // 2. Transforma de volta em string, ocultando o nome do fuso horário
         const data_formatada = zonedDateTime.toString({ timeZoneName: 'never' });
 
-        
+
         //Construindo a Introdução
-        corpo = `Criado..............: ${data_formatada}\nCliente.............: ${this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro}\nTelefone............: ${this.OS.info_cliente.telefone === null ? "Não Informado" : this.OS.info_cliente.telefone}\nAcompanhante........: ${this.OS.info_cliente.nome_cliente===null?"Não Informado!":this.OS.info_cliente.nome_cliente} (${parentesco===null?"Não Informado":parentesco})`;
+        corpo = `Criado..............: ${data_formatada}\nCliente.............: ${this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro}\nTelefone............: ${this.OS.info_cliente.telefone === null ? "Não Informado" : this.OS.info_cliente.telefone}\nAcompanhante........: ${this.OS.info_cliente.nome_cliente === null ? "Não Informado!" : this.OS.info_cliente.nome_cliente} (${parentesco === null ? "Não Informado" : parentesco})`;
 
         //Construindo as informações necessárias:
         let info_necessarias = '';
@@ -179,7 +179,7 @@ export default class Controller_Objeto_OS_Completa {
 
         }
 
-        corpo += `Informações anexadas.: ${this.OS.endereco_info_os.info_necessaria === true ? "Sim" : "Não"}\n${info_necessarias}`;
+        corpo += `\nInformações anexadas.: ${this.OS.endereco_info_os.info_necessaria === true ? "Sim\n" : "Não"}\n${info_necessarias}`;
 
         corpo += this.indicacao_Script_simples();
         corpo += this.ajuda_interna_Script_simples();
@@ -208,7 +208,7 @@ export default class Controller_Objeto_OS_Completa {
         return corpo;
     }
 
-     ajuda_interna_Script_simples = () => {
+    ajuda_interna_Script_simples = () => {
 
         let corpo = "\nAJUDA INTERNA\n--------------------------------------------\n";
         corpo += `Solicitada...........: ${this.OS.ajuda_interna.verdadeiro === true ? "Sim" : "Não"}\n`;
@@ -223,7 +223,7 @@ export default class Controller_Objeto_OS_Completa {
 
     encaminhar_externa_Script_simples = () => {
         let corpo = "\nEQUIPE EXTERNA\n--------------------------------------------\n";
-        
+
         corpo += `Necessária...........: ${this.OS.conferencia_tecnica.encaminhar_externa.necessidade === true ? "Sim" : "Não"}\n`;
         corpo += "\nObservação:\n"
         if (this.OS.conferencia_tecnica.encaminhar_externa.necessidade === true) {
@@ -236,8 +236,8 @@ export default class Controller_Objeto_OS_Completa {
     //Conferencia Técnica
 
     //Método pai:
-    conferencia_tecnica_script_simples = () =>{
-        let corpo ="";
+    conferencia_tecnica_script_simples = () => {
+        let corpo = "";
 
         corpo += this.conferencia_cabo_upt_simples();
         corpo += this.conferencia_fibra_simples();
@@ -282,9 +282,9 @@ export default class Controller_Objeto_OS_Completa {
             const anexo = `${this.OS.conferencia_tecnica.fibra.anexo_sinal === true ? "foto da medição anexada na OS." : "foto não anexada!"}`
 
             corpo += `${limpeza}, ${anexo}\n\n`;
-            corpo += `  • Sinal PTO............: ${this.OS.conferencia_tecnica.fibra.sinal_pto === null ? "Não Anexado" : "-"+this.OS.conferencia_tecnica.fibra.sinal_pto+" dBm"};\n`;
-            corpo += `  • Sinal Patchcord......: ${this.OS.conferencia_tecnica.fibra.sinal_pathcord === null ? "Não Anexado" : "-"+this.OS.conferencia_tecnica.fibra.sinal_pathcord+ " dBm"};\n`;
-            corpo += `  • Sinal AutoISP........: ${this.OS.conferencia_tecnica.fibra.sinal_autoisp === null ? "Não Anexado" : "-"+this.OS.conferencia_tecnica.fibra.sinal_autoisp+" dBm"};\n`;
+            corpo += `  • Sinal PTO............: ${this.OS.conferencia_tecnica.fibra.sinal_pto === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pto + " dBm"};\n`;
+            corpo += `  • Sinal Patchcord......: ${this.OS.conferencia_tecnica.fibra.sinal_pathcord === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pathcord + " dBm"};\n`;
+            corpo += `  • Sinal AutoISP........: ${this.OS.conferencia_tecnica.fibra.sinal_autoisp === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_autoisp + " dBm"};\n`;
 
         }
 
@@ -293,9 +293,9 @@ export default class Controller_Objeto_OS_Completa {
     conferencia_fontes_simples = () => {
         let corpo = "\nFONTES\n--------------------------------------------\n";
 
-        corpo += `  • Mau contato..........: ${this.OS.conferencia_tecnica.fontes.mau_contato === true ? "Sim" : "Não"};\n`;
-        corpo += `  • Amperagem correta....: ${this.OS.conferencia_tecnica.fontes.amperagem === true ? "Sim" : "Não"};\n`;
-        corpo += `  • Sinais de mau uso....: ${this.OS.conferencia_tecnica.fontes.uso === true ? "Sim" : "Não"};\n`;
+        corpo += `  • Mau contato..........: ${this.OS.conferencia_tecnica.fontes.mau_contato === true ? "Não identificado" : "Identificado mau contato no local"};\n`;
+        corpo += `  • Amperagem correta....: ${this.OS.conferencia_tecnica.fontes.amperagem === true ? "Correta" : "Incorreta"};\n`;
+        corpo += `  • Sinais de mau uso....: ${this.OS.conferencia_tecnica.fontes.uso === true ? "Não encontrados" : "Observado sinais de mau uso"};\n`;
 
         return corpo;
     }
@@ -510,13 +510,13 @@ export default class Controller_Objeto_OS_Completa {
                 if (item.local_equipamento.adequado === false) {
                     corpo += `  Cliente ciente......: ${item.local_equipamento.ciente === true ? "Sim" : "Não"}\n\n`;
                     corpo += `Motivo do Local Inadequado: \n${item.local_equipamento.observacao === null ? "Não informado o motivo!" : item.local_equipamento.observacao}\n\n`;
-                }else{
+                } else {
                     corpo += '\n';
                 }
 
 
             });
-        }else{
+        } else {
             corpo += "> O Técnico não anexou a configuração de nenhum ativo!\n";
         }
 
@@ -543,7 +543,7 @@ export default class Controller_Objeto_OS_Completa {
 
     // Função do Relatório da Visita
 
-    relatorio_visita_simples = ()=>{
+    relatorio_visita_simples = () => {
         let corpo = '';
 
         corpo += this.relatorio_educacao_cliente_simples();
@@ -553,6 +553,10 @@ export default class Controller_Objeto_OS_Completa {
         corpo += '\t\t\tRELATÓRIO DA VISITA\n';
         corpo += '==========================================================================\n\n';
 
+        // Verificando se foi gerado resumo da IA:
+    if (this.OS.config_OS.usado_resumo_ia){
+        corpo += this.OS.relato_adicional;
+    }else{
         corpo += this.relato_cliente_simples();
         corpo += this.relatorio_complementar_simples();
         corpo += this.relatorio_sinal_fibra_script_simples();
@@ -562,18 +566,20 @@ export default class Controller_Objeto_OS_Completa {
         corpo += this.relatorio_tracert_scriot_simples();
         corpo += this.relatorio_velocidade_scriot_simples();
         corpo += this.relatorio_troca_ativo_script_simples();
+    }
         
+
         return corpo;
     }
-    relato_cliente_simples = ()=>{
+    relato_cliente_simples = () => {
         let corpo = "";
-        if (this.OS.info_cliente.relato_cliente !== null){
+        if (this.OS.info_cliente.relato_cliente !== null) {
             corpo += `RELATO DO CLIENTE:\n\n${this.OS.info_cliente.relato_cliente}\n\n`
         }
 
         return corpo;
     }
-    relatorio_complementar_simples = ()=>{
+    relatorio_complementar_simples = () => {
         let corpo = "";
         if (!(this.OS.relato_adicional === null)) {
             corpo += `${this.OS.relato_adicional}\n\n`;
@@ -691,7 +697,7 @@ export default class Controller_Objeto_OS_Completa {
 
         return corpo;
     }
-    relatorio_bat_simples = () =>{
+    relatorio_bat_simples = () => {
         let corpo = '\n==========================================================================\n';
         corpo += '\t\t\RELATÓRIO .BAT SIMPLIFICADO\n';
         corpo += '==========================================================================\n\n';
@@ -784,7 +790,7 @@ export default class Controller_Objeto_OS_Completa {
         const data_formatada = zonedDateTime.toString({ timeZoneName: 'never' });
 
         //Construindo a Introdução
-        corpo = `- **Criado:** ${data_formatada}\n- **Cliente:** ${this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro}\n- **Telefone Atualizado**: ${this.OS.info_cliente.telefone === null ? "Não Informado" : this.OS.info_cliente.telefone}\n- **Quem Acompanhou:** ${this.OS.info_cliente.nome_cliente===null?"Não Informado!":this.OS.info_cliente.nome_cliente} (${parentesco===null?"Não Informado":parentesco})`;
+        corpo = `- **Criado:** ${data_formatada}\n- **Cliente:** ${this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro}\n- **Telefone Atualizado**: ${this.OS.info_cliente.telefone === null ? "Não Informado" : this.OS.info_cliente.telefone}\n- **Quem Acompanhou:** ${this.OS.info_cliente.nome_cliente === null ? "Não Informado!" : this.OS.info_cliente.nome_cliente} (${parentesco === null ? "Não Informado" : parentesco})`;
 
         //Construindo as informações necessárias:
         let info_necessarias = '';
@@ -902,9 +908,9 @@ export default class Controller_Objeto_OS_Completa {
             const anexo = `${this.OS.conferencia_tecnica.fibra.anexo_sinal === true ? "foto em anexo." : "foto não anexada!"}`
 
             corpo += `${limpeza}, ${anexo}\n`;
-            corpo += `- Sinal na PTO: ${this.OS.conferencia_tecnica.fibra.sinal_pto === null ? "Não Anexado" : "-"+this.OS.conferencia_tecnica.fibra.sinal_pto+" dBm"};\n`;
-            corpo += `- Sinal no Pathcord: ${this.OS.conferencia_tecnica.fibra.sinal_pathcord === null ? "Não Anexado" : "-"+this.OS.conferencia_tecnica.fibra.sinal_pathcord+ " dBm"};\n`;
-            corpo += `- Sinal AutoISP: ${this.OS.conferencia_tecnica.fibra.sinal_autoisp === null ? "Não Anexado" : "-"+this.OS.conferencia_tecnica.fibra.sinal_autoisp+" dBm"};\n`;
+            corpo += `- Sinal na PTO: ${this.OS.conferencia_tecnica.fibra.sinal_pto === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pto + " dBm"};\n`;
+            corpo += `- Sinal no Pathcord: ${this.OS.conferencia_tecnica.fibra.sinal_pathcord === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pathcord + " dBm"};\n`;
+            corpo += `- Sinal AutoISP: ${this.OS.conferencia_tecnica.fibra.sinal_autoisp === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_autoisp + " dBm"};\n`;
 
         }
 
@@ -913,9 +919,9 @@ export default class Controller_Objeto_OS_Completa {
 
     conferencia_fontes = () => {
         let corpo = "### Fontes\n";
-        corpo += `Verificado mau contato na fonte: ${this.OS.conferencia_tecnica.fontes.mau_contato === true ? "Sim" : "Não"};\n`;
+        corpo += `Verificado mau contato na fonte: ${this.OS.conferencia_tecnica.fontes.mau_contato === true ? "Não identificado" : "Identificado mau contato no local"};\n`;
         corpo += `Validado amperagens corretas das fontes: ${this.OS.conferencia_tecnica.fontes.amperagem === true ? "Sim" : "Não"};\n`;
-        corpo += `Verificado algum sinal de mau uso: ${this.OS.conferencia_tecnica.fontes.uso === true ? "Sim" : "Não"};\n`;
+        corpo += `Verificado algum sinal de mau uso: ${this.OS.conferencia_tecnica.fontes.uso === true ? "Não encontrado" : "Foi observado sinais de mau uso"};\n`;
 
         return corpo;
     }
@@ -1131,7 +1137,7 @@ export default class Controller_Objeto_OS_Completa {
 
 
             });
-        }else{
+        } else {
             corpo += "> O Técnico não anexou a configuração de nenhum ativo!\n";
         }
 
@@ -1160,7 +1166,7 @@ export default class Controller_Objeto_OS_Completa {
     relatorio_script = () => {
         let corpo = "";
 
-        if (this.OS.info_cliente.relato_cliente !== null){
+        if (this.OS.info_cliente.relato_cliente !== null) {
             corpo += `### Relato do Cliente no Local:\n\n${this.OS.info_cliente.relato_cliente}\n`
         }
 
@@ -1311,6 +1317,173 @@ export default class Controller_Objeto_OS_Completa {
         }
         this.salvar_os_localstorage();
 
+    }
+
+    // Método usado para carregar os dados json
+
+    adicionar_ping = (ping_estruturado) => {
+        this.OS.conferencia_tecnica.ping_adicional.push(ping_estruturado)
+    }
+
+    adicionar_tracert = (tracert_estruturado) => {
+        this.OS.conferencia_tecnica.tracert_adicional.push(tracert_estruturado)
+    }
+
+    adicionar_velocidade = (velocidade_estruturado) => {
+
+        const ITEM = {
+            ativo: "notebook",
+            dono: "empresa",
+            down: velocidade_estruturado.data.download_mbps,
+            up: velocidade_estruturado.data.upload_mbps,
+            ping: parseInt(velocidade_estruturado.data.ping_ms),
+            jitter: 0,
+            site: 'SpeedTest',
+            tipo: "cabo",
+            url: velocidade_estruturado.share_url,
+        }
+        console.log(ITEM)
+        this.OS.conferencia_tecnica.velocidade_adicional.push(ITEM)
+    }
+
+    async Carregar_dados_Externos(url_requisicao) {
+        let data = {}
+        const REQUISICAO = url_requisicao;
+
+        // Iniciar realizando a requisicao a partir da URL enviada!
+        try {
+            // Faz a requisição para a URL recebida
+            const resposta = await fetch(REQUISICAO);
+
+            // Verifica se a requisição foi bem-sucedida (status 200-299)
+            if (!resposta.ok) {
+                throw new Error(`Erro na requisição: ${resposta.status}`);
+                disparar_notificacao('erro', `Erro na requisição: ${resposta.status}`)
+            }
+
+            // Converte a resposta para JSON e armazena na sua variável
+            data = await resposta.json();
+
+
+        } catch (erro) {
+            // Trata eventuais erros de rede ou de conversão
+            console.error("Ops, algo deu errado:", erro);
+            disparar_notificacao("erro", `Ops, algo deu errado: ${erro}`)
+        }
+
+        //Iniar a construlçao dos dados
+        // Adicionando os dados no objeto OS:
+        this.OS.relatorio_externo = data; //Para uso futuro;
+
+        //Adicionando os Pings Recebidos
+        const PINGS = data.results.ping;
+
+        PINGS.map((item, chave) => {
+
+            this.adicionar_ping({
+                destino: item.target,
+                latencia: [item.latency_ms.min, item.latency_ms.avg, item.latency_ms.max],
+                outro: "",
+                pacotes: [item.packets_sent, item.packets_received, item.packets_lost],
+                tipo: item.protocol,
+                titulo: `HOST ${data.host_info.hostname}`
+            })
+
+        })
+
+        //Adicionando os Tracerts Recebidos
+        const TRACERT = data.results.traceroute;
+
+        TRACERT.map((item, chave) => {
+
+
+            this.adicionar_tracert({
+                ativo: `HOST ${data.host_info.hostname}`,
+                outra_url: item.target,
+                protocolo: item.protocol,
+                url: "outro"
+            })
+
+        })
+
+        //Adicionando a Velocidade Recebidos
+        const VELOCIDADE = data.results.speedtest;
+
+        if (VELOCIDADE.status === "success") {
+            this.adicionar_velocidade(VELOCIDADE)
+
+        }
+        this.salvar_os_localstorage();
+    }
+
+    callback_adicionar_texto_relato_cliente(data){
+        const DATA = data;
+        if (DATA !== ""){
+            this.OS.info_cliente.relato_cliente = DATA;
+        }
+    }
+    callback_adicionar_texto_checagem_fibra(data){
+        const DATA = data;
+        if (DATA !== ""){
+            this.OS.conferencia_tecnica.fibra.observacao = DATA;
+        }
+    }
+    callback_adicionar_texto_checagem_fontes(data){
+        const DATA = data;
+        if (DATA !== ""){
+            this.OS.conferencia_tecnica.fontes.observacao = DATA;
+        }
+    }
+    callback_adicionar_texto_sitesurvey_sombra(data){
+        const DATA = data;
+        if (DATA !== ""){
+            this.OS.conferencia_tecnica.mapa_calor.ponto_adicional = DATA;
+        }
+    }
+
+    callback_adicionar_texto_sitesurvey(data){
+        const DATA = data;
+        if (DATA !== ""){
+            this.OS.conferencia_tecnica.mapa_calor.observacao = DATA;
+        }
+    }
+
+    callback_adicionar_texto_ping(data){
+        const DATA = data;
+        if (DATA !== ""){
+            this.OS.conferencia_tecnica.observacao_ping = DATA;
+        }
+    }
+    callback_adicionar_texto_tracert(data){
+        const DATA = data;
+        if (DATA !== ""){
+            this.OS.conferencia_tecnica.observacao_tracert = DATA;
+        }
+    }
+    callback_adicionar_texto_velocidade(data){
+        const DATA = data;
+        if (DATA !== ""){
+            this.OS.conferencia_tecnica.observacao_velocidade = DATA;
+        }
+    }
+
+    callback_adicionar_texto_relatorio(data){
+        const DATA = data;
+        if (DATA !== ""){
+            this.OS.relato_adicional = DATA;
+        }
+    }
+    callback_adicionar_texto_troca_equipamento(data){
+        const DATA = data;
+        if (DATA !== ""){
+            this.OS.conferencia_tecnica.equipamentos_local.observacao = DATA;
+        }
+    }
+    callback_adicionar_texto_encaminhar_externa(data){
+        const DATA = data;
+        if (DATA !== ""){
+            this.OS.conferencia_tecnica.encaminhar_externa.observacao = DATA;
+        }
     }
 
 }

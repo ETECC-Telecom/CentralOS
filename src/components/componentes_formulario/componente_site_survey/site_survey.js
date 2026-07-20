@@ -1,6 +1,7 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
 import { estourar_drawer } from '../../drawer_scripts/drawer_scripts_component';
+import { Caixa_Texto } from '../caixa_texto/caixa_texto';
 
 export class Site_Survey extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -45,17 +46,6 @@ export class Site_Survey extends LitElement {
         this.objeto_os.salvar_os_localstorage();
     }
 
-    _Alterar_descricao_sombra = (e)=>{
-        const Texto = e.target.value === ""? null: e.target.value;
-        this.data_site.ponto_adicional = Texto;
-        this.objeto_os.salvar_os_localstorage();
-    }
-
-    _Alterar_descricao_geral = (e)=>{
-        const Texto = e.target.value === ""? null: e.target.value;
-        this.data_site.observacao = Texto;
-        this.objeto_os.salvar_os_localstorage();
-    }
 
     render() {
         return html`
@@ -99,29 +89,30 @@ export class Site_Survey extends LitElement {
 
             ${this.estado_obs_extra? html`
             <div class="form-group">
-                <label for="message" class="form-label">Em caso de Pontos de Sombra!</label>
-                <textarea
-                    @dblclick="${(e) => estourar_drawer(e.target, 'Site Survey')}"
-                    @change="${this._Alterar_descricao_sombra}"
-                    .value="${this.data_site.ponto_adicional}"
-                    style="border-left: 5px solid #ff0000;" 
-                    placeholder="Explique se é viável um segundo ponto no local!"
-                    id="message" name="message" rows="2" class="form-textarea"></textarea>
+                <caixa-texto
+                Titulo = "Em caso de Pontos de Sombra"
+                    .Tamanho = ${5}
+                    .Texto = ${this.objeto_os.OS.conferencia_tecnica.mapa_calor.ponto_adicional}
+                    .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_sitesurvey_sombra.bind(this.objeto_os)}
+                    .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
+                    .Categoria = "Site Survey"
+                    Placeholder = "Explique se é viável um segundo ponto no local!"
+                ></caixa-texto>
             </div>
                 `:""}
             
             <div class="form-group">
-                <label for="message" class="form-label">Observação do Site Survey</label>
-                <textarea
-                    @dblclick="${(e) => estourar_drawer(e.target, 'Site Survey')}"
-                    @change="${this._Alterar_descricao_geral}"
-                    .value="${this.data_site.observacao}"
-                    style="border-left: 5px solid #ff0000;" 
-                    placeholder="Faça uma explicação sobre esse mapa de Calor!"
-                    id="message" name="message" rows="5" class="form-textarea"></textarea>
-            </div>
-
-            
+                <caixa-texto
+                    Titulo = "Observação do Site Survey"
+                    .Tamanho = ${5}
+                    .Texto = ${this.objeto_os.OS.conferencia_tecnica.mapa_calor.observacao}
+                    .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_sitesurvey.bind(this.objeto_os)}
+                    .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
+                    .Categoria = "Site Survey"
+                    Placeholder = "Faça uma explicação sobre esse mapa de Calor!"
+                ></caixa-texto>
+               
+            </div>  
         `;
     }
 }

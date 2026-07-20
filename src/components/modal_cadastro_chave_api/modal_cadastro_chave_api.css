@@ -1,0 +1,114 @@
+
+#container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    /* --- AJUSTES PARA A TRANSIÇÃO --- */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 9999;
+    /* Garante que fique por cima */
+}
+
+/* Quando o container receber a classe .visivel, ele aparece suavemente */
+#container.visivel {
+    opacity: 1;
+    visibility: visible;
+}
+
+#modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-radius: 2rem;
+    text-align: center;
+    border-color: var(--btn-border-color);
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: 0 20px 50px 0 rgba(255, 255, 255, 0.22);
+    box-sizing: border-box;
+
+    /* --- AJUSTE: Efeito de 'subir' ou 'brotar' --- */
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+/* Quando o container estiver visível, o modal vai para a posição final */
+#container.visivel #modal {
+    transform: scale(1) translateY(0);
+}
+
+#modal svg {
+    fill: var(--text-color);
+    height: 5rem;
+}
+
+input {
+    margin: 1rem;
+    font-size: 1rem;
+    width: 15rem;
+    padding: 0.5rem;
+    background-color: var(--btn-background-color);
+    color: var(--btn-text-background-color);
+    border-radius: 100rem;
+    border: solid;
+    border-width: 0.1rem;
+    border-color: var(--btn-border-color);
+
+}
+
+button {
+    margin: 1rem;
+    font-size: 1rem;
+    width: 15rem;
+    padding: 0.5rem;
+    background-color: var(--btn-background-color);
+    color: var(--text-color);
+    border-radius: 100rem;
+    border: none;
+    transition: background-color 0.1s ease;
+}
+
+button:hover {
+    background-color: var(--destaque-color);
+    color: var(--text-color);
+}
+
+#close-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 2rem;
+    padding: .9rem;
+    margin: 0;
+}
+
+#close-button a svg {
+    fill: rgb(187, 0, 0);
+    width: 2.5rem;
+    transition: transform 0.2s ease;
+    transform-origin: center;
+}
+
+#close-button a svg:hover {
+    transform: scale(1.2);
+}
+
+@media (min-width: 1024px) {
+    #modal {
+        width: 50%;
+    }
+}
