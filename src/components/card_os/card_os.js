@@ -34,7 +34,7 @@ export class Card_OS extends LitElement {
     }
 
     Verificar_Nova_OS = (e) => {
-        const OS_Aberta = localStorage.getItem("OS") === null?false:true;
+        const OS_Aberta = localStorage.getItem("OS") === "null"?false:true;
         
         if (OS_Aberta){
             this.modal = true;

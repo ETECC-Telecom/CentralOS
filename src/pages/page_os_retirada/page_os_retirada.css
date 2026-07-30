@@ -1,0 +1,295 @@
+h1 {
+    color: var(--btn-text-background-color);
+    text-align: center;
+}
+
+a.ativo {
+    background-color: var(--destaque-color);
+}
+
+h1 {
+    font-size: var(--header-1)
+}
+
+h2 {
+    font-size: var(--header-2)
+}
+
+h3 {
+    font-size: var(--header-3)
+}
+
+p,
+a {
+    font-size: var(--paragraph)
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    padding: .2rem 0 .2rem 0;
+    align-items: center;
+    background-color: var(--header-color);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    z-index: 4000;
+    /* Garante que fique acima de tudo */
+}
+
+nav a svg {
+    width: 1.7rem;
+    fill: var(--text-color);
+}
+
+nav a {
+    padding: 0.2rem;
+    width: 7rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    border-radius: .7rem;
+    transition: background-color 0.2s ease;
+}
+
+nav a:hover {
+    background-color: var(--destaque-color);
+}
+
+nav a p {
+    margin: 0;
+    font-size: .8rem;
+}
+
+.container-item {
+    padding: 1rem;
+}
+
+
+@media (min-width: 1024px) {
+    .container-item {
+        padding: 0;
+    }
+
+    nav {
+        margin-bottom: 0.5rem;
+        padding: 0.4rem;
+        border-radius: 100rem;
+        background-color: var(--background-color);
+        width: 50%;
+
+    }
+
+    nav a p {
+        font-size: 1rem;
+    }
+
+    nav a {
+        border-radius: 100rem;
+        width: 9rem;
+        padding-bottom: 0.1rem;
+    }
+
+}
+
+
+#container-drawer-ferramentas {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    justify-content: space-between;
+    padding: 2rem 0 0 0;
+
+}
+
+#container-drawer-ferramentas a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+#container-drawer-ferramentas a svg {
+    fill: var(--destaque-color);
+}
+
+
+/* Reset & Estilos Base para o Formulário */
+.form-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: auto;
+}
+
+/* Helper para organizar os blocos sem usar <br> */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-row {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Estilização das Labels */
+.form-label {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--btn-text-background-color);
+}
+
+.form-label-inline {
+    font-size: 14px;
+    color: #333333;
+    cursor: pointer;
+}
+
+/* Reset e Estilo Flat para Inputs de Texto, Select e Textarea */
+.form-input,
+.form-select,
+.form-textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Zera o visual padrão do navegador */
+
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 12px;
+
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    /* Bordas levemente arredondadas */
+    background-color: #f8fafc;
+    color: #1a202c;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Estados de Foco */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--destaque-color);
+    /* Azul Flat */
+    background-color: #ffffff;
+}
+
+/* Customizações específicas do Select */
+.form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+    /* Espaço para a seta customizada */
+}
+
+/* Customizações específicas do Textarea */
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+    
+}
+
+/* Inputs de Seleção (Radio e Checkbox) */
+.form-radio,
+.form-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #f8fafc;
+    margin: 0;
+    font: inherit;
+    color: #3182ce;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #cbd5e1;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.form-radio {
+    border-radius: 50%;
+    /* Totalmente redondo para radio */
+}
+
+.form-checkbox {
+    border-radius: 4px;
+    /* Levemente arredondado para checkbox */
+}
+
+/* Indicadores internos para Checkbox e Radio ativos */
+.form-radio::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background-color: currentcolor;
+}
+
+.form-checkbox::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background-color: currentcolor;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    /* Formato de "Check" */
+}
+
+.form-radio:checked::before,
+.form-checkbox:checked::before {
+    transform: scale(1);
+}
+
+.form-radio:checked,
+.form-checkbox:checked {
+    border-color: #3182ce;
+}
+
+.form-radio:focus,
+.form-checkbox:focus {
+    outline: 2px solid #ebf8ff;
+}
+
+/* Botão Flat */
+.form-button {
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: #3182ce;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+}
+
+.form-button:hover {
+    background-color: #2b6cb0;
+}
+
+.form-button:active {
+    background-color: #2c5282;
+}

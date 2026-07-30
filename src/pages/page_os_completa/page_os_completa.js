@@ -57,8 +57,6 @@ export class Page_OS_Completa extends LitElement {
 
         //Atributos de Controle de exibição de informações extras!
 
-
-        console.log("Iniciando o Construtor")
         // Inicia o objeto que controla a estrutura de OS.
 
 
@@ -126,7 +124,10 @@ export class Page_OS_Completa extends LitElement {
     render() {
         return html`
             <!--Retorno renderizado-->
-            <header-page-os></header-page-os>
+            <header-page-os
+                titulo="Ordem de Serviço Completa"
+                retorno="/addos"
+            ></header-page-os>
            
             <!-- Campo que irá conter os fomulários -->
             <main id="container-form">

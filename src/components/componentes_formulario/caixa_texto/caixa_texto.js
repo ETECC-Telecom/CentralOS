@@ -50,6 +50,13 @@ export class Caixa_Texto extends LitElement {
         this.Campo_Texto(Valor);
         this.Atualizar_BD();
     }
+    _checar_vazio = () =>{
+        const Valor = this.textareaRef.value.value;
+        if(Valor === ""){
+            this.Campo_Texto(null);
+            this.Atualizar_BD();
+        }
+    }
 
     render() {
         return html`
@@ -60,6 +67,7 @@ export class Caixa_Texto extends LitElement {
                     <textarea
                     ${ref(this.textareaRef)}
                     style="border-left: 5px solid #ff0000;"
+                    @change="${this._checar_vazio}"
                     @input="${this._Atualizar_Campo}"
                     placeholder="${this.Placeholder}"
                     id="caixa_texto" name="message" rows="${this.Tamanho}" cols="30" class="form-textarea"

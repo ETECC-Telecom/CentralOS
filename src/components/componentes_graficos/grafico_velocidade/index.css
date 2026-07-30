@@ -1,0 +1,42 @@
+:host {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0; /* Removido o '0 auto' daqui para o flexbox pai controlar o espaçamento */
+    text-align: center;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Reset básico */
+*,
+*::before,
+*::after {
+    box-sizing: border-box; /* Alterado de inherit para border-box para evitar quebras de layout */
+    margin: 0;
+    padding: 0;
+}
+
+.gauge-container {
+    position: relative;
+    width: 80%; /* Mude de 80% para 100% para ocupar todo o max-width do :host */
+    max-width: 250px; /* Garante um tamanho agradável */
+    margin: 0 auto; /* Centraliza a rosca dentro do :host */
+}
+
+.gauge-label {
+    position: absolute;
+    bottom: 15%; /* Subido levemente para encaixar melhor no arco do semicírculo */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color, #0f172a);
+    width: 100%; /* Garante alinhamento de texto perfeito */
+    text-align: center;
+}
+
+.gauge-sublabel {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: normal;
+}

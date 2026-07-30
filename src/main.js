@@ -5,10 +5,18 @@ import { Router } from '@lit-labs/router';
 import { Home_Page } from './pages/home/home';
 import { ADD_OS } from './pages/add_os/add_os';
 import { Page_OS_Completa } from './pages/page_os_completa/page_os_completa';
+import { Page_OS_Los } from './pages/page_os_los/page_os_los';
+import { Page_OS_Chip } from './pages/page_os_chip/page_os_chip';
+import { Page_OS_Retencao } from './pages/page_os_retencao/page_os_retencao';
+import { Page_OS_Retirada } from './pages/page_os_retirada/page_os_retirada';
+
 import { Gerenciar_Scripts } from './pages/gerenciar_scripts/gerenciar_scripts';
+import { Page_Lista_OS } from './pages/page_lista_os/page_lista_os';
 
 //Import dos Componentes
 import { Notificacao } from './components/notificacao/notificacao';
+
+import { Page_Relatorio } from './pages/page_relatorio/page_relatorio';
 
 // Detecta se estamos no GitHub Pages ou Localhost
 const BASE_PATH = window.location.hostname.includes('github.io')
@@ -39,13 +47,56 @@ export class Main extends LitElement {
                 render: () => html`<gerenciar-script></gerenciar-script>`,
             },
             {
-                path: `${BASE_PATH}/iniciar_os_completa`,
-                render: () => html`<page-os-completa></page-os-completa>`,
+                path: `${BASE_PATH}/lista_os`,
+                render: () => html`<page-lista-os></page-lista-os>`,
             },
             {
                 path: `${BASE_PATH}/iniciar_os_completa/:tipo`,
                 render: (params) => html`<page-os-completa .tipo="${params.tipo}"></page-os-completa>`,
             },
+            {
+                path: `${BASE_PATH}/iniciar_os_completa`,
+                render: () => html`<page-os-completa></page-os-completa>`,
+            },
+            {
+                path: `${BASE_PATH}/iniciar_os_los`,
+                render: () => html`<page-os-los></page-os-los>`,
+            },
+            {
+                path: `${BASE_PATH}/iniciar_os_los/:tipo`,
+                render: (params) => html`<page-os-los .tipo="${params.tipo}"></page-os-los>`,
+            },
+            {
+                path: `${BASE_PATH}/iniciar_os_retencao`,
+                render: () => html`<page-os-retencao></page-os-retencao>`,
+            },
+            {
+                path: `${BASE_PATH}/iniciar_os_retencao/:tipo`,
+                render: (params) => html`<page-os-retencao .tipo="${params.tipo}"></page-os-retencao>`,
+            },
+
+            {
+                path: `${BASE_PATH}/iniciar_os_retirada/:tipo`,
+                render: (params) => html`<page-os-retirada .tipo="${params.tipo}"></page-os-retirada>`,
+            },
+            {
+                path: `${BASE_PATH}/iniciar_os_retirada`,
+                render: () => html`<page-os-retirada></page-os-retirada>`,
+            },
+
+            {
+                path: `${BASE_PATH}/iniciar_os_chip/:tipo`,
+                render: (params) => html`<page-os-chip .tipo="${params.tipo}"></page-os-chip>`,
+            },
+            {
+                path: `${BASE_PATH}/iniciar_os_chip`,
+                render: () => html`<page-os-chip></page-os-chip>`,
+            },
+            {
+                path: `${BASE_PATH}/relatorio_os`,
+                render: () => html`<page-relatorio></page-relatorio>`,
+            },
+
             {
                 path: '/perfil/:name',
                 // Os parâmetros da URL chegam como um objeto no primeiro argumento

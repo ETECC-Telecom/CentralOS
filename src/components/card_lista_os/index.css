@@ -1,0 +1,348 @@
+:host {
+    display: block;
+    box-sizing: border-box;
+    color: var(--text-color);
+}
+
+/* Reset básico para o Shadow DOM */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    
+}
+
+h2 {
+    color: var(--text-color);
+    text-align: center;
+}
+
+p {
+    font-size: var(--paragraph);
+    font-weight: 100;
+    text-align: left;
+}
+
+
+.container-itens {
+    display: flex;
+    gap:1rem;
+    flex-direction: column;
+    padding: 1rem 1rem;
+    background-color: var(--cards-background);
+    border: 2px solid var(--btn-border-color);
+    border-radius: 1rem;
+    color: var(--text-color);
+    width: 96vw;
+}
+
+.container-itens div span {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+}
+
+.tag-line{
+    background-color: #94a3b8;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    width: 150px;
+
+}
+
+/* Reset & Estilos Base para o Formulário */
+.form-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: auto;
+}
+
+/* Helper para organizar os blocos sem usar <br> */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-row {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Estilização das Labels */
+.form-label {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--btn-text-background-color);
+}
+
+.form-label-inline {
+    font-size: 14px;
+    color: #333333;
+    cursor: pointer;
+}
+
+
+.container-velocidade{
+    display: flex;
+    flex-direction:column;
+    gap:.5rem;
+    
+}
+
+.container-velocidade-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.destaque{
+    background-color: var(--destaque-color);
+    padding: .2rem;
+    border-radius: .5rem;
+}
+
+/* Reset e Estilo Flat para Inputs de Texto, Select e Textarea */
+.form-input,
+.form-select,
+.form-textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Zera o visual padrão do navegador */
+
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 12px;
+
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    /* Bordas levemente arredondadas */
+    background-color: #f8fafc;
+    color: #1a202c;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Estados de Foco */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--destaque-color);
+    /* Azul Flat */
+    background-color: #ffffff;
+}
+
+/* Customizações específicas do Select */
+.form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+    /* Espaço para a seta customizada */
+}
+
+/* Customizações específicas do Textarea */
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Inputs de Seleção (Radio e Checkbox) */
+.form-radio,
+.form-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #f8fafc;
+    margin: 0;
+    font: inherit;
+    color: #3182ce;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #cbd5e1;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.form-radio {
+    border-radius: 50%;
+    /* Totalmente redondo para radio */
+}
+
+.form-checkbox {
+    border-radius: 4px;
+    /* Levemente arredondado para checkbox */
+}
+
+/* Indicadores internos para Checkbox e Radio ativos */
+.form-radio::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background-color: currentcolor;
+}
+
+.form-checkbox::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background-color: currentcolor;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    /* Formato de "Check" */
+}
+
+.form-radio:checked::before,
+.form-checkbox:checked::before {
+    transform: scale(1);
+}
+
+.form-radio:checked,
+.form-checkbox:checked {
+    border-color: var(--destaque-color);
+}
+
+.form-radio:focus,
+.form-checkbox:focus {
+    outline: 2px solid #ebf8ff;
+}
+
+/* Botão Flat */
+.form-button {
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: var(--destaque-color);
+    color: var(--btn-text-background-color);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+}
+
+.form-button:hover {
+    background-color: var(--destaque-color);
+}
+
+.form-button:active {
+    background-color: var(--destaque-color);
+}
+
+.botao-close {
+    display: inline-block;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    color: white;
+    height: 30px;
+    border-radius: 6px;
+    padding: 5px 12px;
+    cursor: pointer;
+    background-color: var(--destaque-color);
+}
+
+/* Estilos básicos para o Modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9000;
+}
+
+.modal-content {
+    background: var(--cards-background);
+    color: var(--text-color);
+    padding: 20px;
+    border-radius: 8px;
+    width: 95%;
+}
+
+@media (min-width: 1024px) {
+    .modal-content {
+        width: 500px;
+    }
+}
+
+/* From Uiverse.io by Ghost-aft */
+.radio-input input {
+    display: none;
+}
+
+.radio-input {
+    --container_width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #000000;
+    width: var(--container_width);
+    overflow: hidden;
+    border: 1px solid rgba(53, 52, 52, 0.226);
+}
+
+.radio-input label {
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    font-weight: 600;
+    letter-spacing: -1px;
+    font-size: 14px;
+}
+
+.selection {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    transition: 0.15s ease;
+}
+
+.radio-input label:has(input:checked) {
+    color: #fff;
+}
+
+.radio-input label:has(input:checked)~.selection {
+    background-color: var(--destaque-color);
+    display: inline-block;
+}
+
+.radio-input label:nth-child(1):has(input:checked)~.selection {
+    transform: translateX(calc(50% / 20%));
+}
+
+.radio-input label:nth-child(2):has(input:checked)~.selection {
+    transform: translateX(calc(50% * 2));
+    
+}

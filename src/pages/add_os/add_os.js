@@ -64,7 +64,7 @@ export class ADD_OS extends LitElement {
                 ></card-os>
 
                 <card-os
-                    link="iniciar_os_completa/novo"
+                    link="iniciar_os_los/novo"
                     titulo="ENCAMINHAR EQUIPE EXTERNA (LOS)"
                     descricao="Sem Sinal, Rompimento, outros..."
                     .icone=${icone_os_los}
@@ -72,7 +72,7 @@ export class ADD_OS extends LitElement {
                 ></card-os>
 
                 <card-os
-                    link="iniciar_os_completa/novo"
+                    link="iniciar_os_retencao/novo"
                     titulo="RETENÇÃO DE CLIENTE"
                     descricao="Negociação no Local..."
                     .icone=${icone_os_retencao}
@@ -80,9 +80,17 @@ export class ADD_OS extends LitElement {
                 ></card-os>
 
                 <card-os
-                    link="iniciar_os_completa/novo"
+                    link="iniciar_os_retirada/novo"
                     titulo="RETIRADA DE EQUIPAMENTO"
                     descricao="Cancelamento Concluído, recolhimento dos aparelhos comodatos..."
+                    .icone=${icone_os_retirada}
+                    cor_borda="${cor_borda_os}"
+                ></card-os>
+
+                <card-os
+                    link="iniciar_os_chip/novo"
+                    titulo="ENTREGA DE CHIP"
+                    descricao="Script de OS relacionado a entrega de CHIP..."
                     .icone=${icone_os_retirada}
                     cor_borda="${cor_borda_os}"
                 ></card-os>

@@ -10,13 +10,13 @@ export class Componente_Acoes extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
     static properties = {
         objeto_os: { type: Object },
-        load_IA: {type:Object},
-        liberado: {type:Object},
-        color_IA: {type:String},
-        legenda_IA: {type: String},
-        legenda_botton: {type: String}, 
-        exibir_modal_sinc: {type: Boolean},
-        usando_ia: {type: Boolean},
+        load_IA: { type: Object },
+        liberado: { type: Object },
+        color_IA: { type: String },
+        legenda_IA: { type: String },
+        legenda_botton: { type: String },
+        exibir_modal_sinc: { type: Boolean },
+        usando_ia: { type: Boolean },
     };
 
     static get styles() {
@@ -29,8 +29,8 @@ export class Componente_Acoes extends LitElement {
         this.load_IA = false;
         this.liberado = false;
         this.color_IA = "white"
-        this.legenda_IA="";
-        this.legenda_botton= "";
+        this.legenda_IA = "";
+        this.legenda_botton = "";
         this.exibir_modal_sinc = false;
         this.usando_ia = false;
     }
@@ -43,19 +43,19 @@ export class Componente_Acoes extends LitElement {
         super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
         this.usando_ia = this.objeto_os.OS.config_OS.usado_resumo_ia
     }
-    _Desabilitar_uso_IA = ()=>{
+    _Desabilitar_uso_IA = () => {
         this.objeto_os.OS.config_OS.usado_resumo_ia = false;
         this.objeto_os.salvar_os_localstorage();
         this.usando_ia = false;
     }
-    async _Gerar_Resumo_IA(){
+    async _Gerar_Resumo_IA() {
         const texto = this.objeto_os.Finalizar_OS_Markdown();
         this.legenda_IA = "Iniciando Resumo por IA!"
         this.color_IA = "white"
         this.load_IA = true;
-        this.liberado=false
+        this.liberado = false
 
-        try{
+        try {
             const Resposta = await gerarConclusaoScript(texto)
 
             this.objeto_os.OS.relato_adicional = Resposta;
@@ -66,9 +66,9 @@ export class Componente_Acoes extends LitElement {
             this.legenda_botton = "Clique na tela para encerrar o processo!"
             this.color_IA = "#38b100"
             this.liberado = true
-            
-            
-        }catch(Erro){
+
+
+        } catch (Erro) {
             this.legenda_IA = "Ocorreu um Erro!"
             this.color_IA = "#e91700"
             this.legenda_botton = "Possivelmente seus Tokens expiraram!"
@@ -76,9 +76,9 @@ export class Componente_Acoes extends LitElement {
             console.log(Erro)
 
         }
-        
+
     }
-    _Fechar_Modal = (e)=>{
+    _Fechar_Modal = (e) => {
         this.load_IA = false;
     }
     _Gerar_Relatorio = (e) => {
@@ -87,13 +87,13 @@ export class Componente_Acoes extends LitElement {
 
             navigator.clipboard.writeText(Texto)
                 .then(() => {
-                    
-                    disparar_notificacao("sucesso","Texto copiado com sucesso");
+
+                    disparar_notificacao("sucesso", "Texto copiado com sucesso");
 
                 })
                 .catch(err => {
-                    disparar_notificacao("erro","Erro ao copiar o texto:", err)
-                 
+                    disparar_notificacao("erro", "Erro ao copiar o texto:", err)
+
                 });
         } catch (err) {
             disparar_notificacao("erro", err)
@@ -107,19 +107,19 @@ export class Componente_Acoes extends LitElement {
 
             navigator.clipboard.writeText(Texto)
                 .then(() => {
-                    
-                    disparar_notificacao("sucesso","Texto copiado com sucesso");
+
+                    disparar_notificacao("sucesso", "Texto copiado com sucesso");
 
 
                 })
                 .catch(err => {
-                    disparar_notificacao("erro","Erro ao copiar o texto:", err)
-                 
+                    disparar_notificacao("erro", "Erro ao copiar o texto:", err)
+
                 });
         } catch (err) {
             disparar_notificacao("erro", err)
         }
-        
+
     }
 
     _Gerar_Relatorio_MD = (e) => {
@@ -128,14 +128,14 @@ export class Componente_Acoes extends LitElement {
 
             navigator.clipboard.writeText(Texto)
                 .then(() => {
-                    
-                    disparar_notificacao("sucesso","Texto copiado com sucesso");
+
+                    disparar_notificacao("sucesso", "Texto copiado com sucesso");
 
 
                 })
                 .catch(err => {
-                    disparar_notificacao("erro","Erro ao copiar o texto:", err)
-                 
+                    disparar_notificacao("erro", "Erro ao copiar o texto:", err)
+
                 });
         } catch (err) {
             disparar_notificacao("erro", err)
@@ -143,12 +143,72 @@ export class Componente_Acoes extends LitElement {
 
     }
 
-    _Fechar_Modal_Sinc = (e) =>{
+    _Fechar_Modal_Sinc = (e) => {
         this.exibir_modal_sinc = false
     }
 
-    _Abrir_Modal_Sinc = (e) =>{
+    _Abrir_Modal_Sinc = (e) => {
         this.exibir_modal_sinc = true
+    }
+
+    _Encaminhar_Mensagem_Whatsapp = () => {
+
+        //Valida se o Formulário do Técnico está Cadastrado
+
+        const URL = localStorage.getItem("formulario_feedback");
+        if (URL === null) {
+            disparar_notificacao("erro", "Você precisa cadastrar seu Formulário de Feedback antes de encaminhar mensagem ao Cliente!")
+            return
+        }
+
+        const CONTATO = this.objeto_os.OS.info_cliente.telefone;
+        if (CONTATO === null) {
+            disparar_notificacao("erro", "Nenhum número de contato foi cadastrado para Envio!")
+            return
+        }
+
+        const Mensagem = this.objeto_os.Export_Mensagem_Encaminhada_Cliente();
+        const textoCodificado = encodeURIComponent(Mensagem);
+
+        const urlWhatsapp = `https://wa.me/55${CONTATO}?text=${textoCodificado}`;
+
+        // 4. Abre o WhatsApp em uma nova aba/app
+        window.open(urlWhatsapp, '_blank');
+
+        //Salva Alteração
+        this.objeto_os.OS.config_OS.info_encaminhadas = true;
+        this.objeto_os.salvar_os_localstorage();
+    }
+
+    async _Salvar_OS() {
+
+        const ID = this.objeto_os.OS.config_OS.id
+        let Retorno = ""
+        if (ID === null) {
+            Retorno = await this.objeto_os.salvar_OS_Banco();
+        } else {
+            Retorno = await this.objeto_os.editar_OS_Banco();
+        }
+
+        if (Retorno[0]) {
+            //Limpamos o objeto OS salvo no local storage:
+            try {
+                localStorage.setItem("OS", null);
+                localStorage.setItem("aba", 'aba1');
+                window.location.href = '/';
+                return true;
+            } catch (erro) {
+                disparar_notificacao("erro", `Não consegui Finalizar a OS:\n${erro}`);
+            }
+        }
+    }
+
+    _Ver_relatorio_OS = () => {
+        // 1. Altera a URL no navegador
+        window.history.pushState({}, '', '/relatorio_os');
+
+        // 2. Avisa o @lit-labs/router que a rota mudou
+        window.dispatchEvent(new PopStateEvent('popstate'));
     }
 
     render() {
@@ -191,12 +251,12 @@ export class Componente_Acoes extends LitElement {
                         style="display:flex; align-items: center; justify-content: center; gap:1rem; flex:2">
                         <span>Desabilitar IA</span></button>
     
-                        `:""}
+                        `: ""}
                     
                 </div>
 
                 <button 
-                    @click=""
+                    @click="${this._Encaminhar_Mensagem_Whatsapp}"
                     type="button" class="form-button"
                     style="display:flex; align-items: center; justify-content: center; gap:1rem">
                     <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2rem" height="2rem" viewBox="0 0 143.933 143.933"><path d="M-313.173 785.763c-1.115-.323-3.112-2.13-3.682-3.332-.42-.883-6.28-31.837-6.071-32.061.07-.075 30.222 21.426 32.004 22.822.524.411.523.42-.132.96-1.294 1.068-16.256 10.917-17.313 11.397-1.152.523-3.397.623-4.806.214m49.106-5.103c-.655-.19-1.629-.574-2.164-.852-1.19-.618-38.843-27.967-38.768-28.159.03-.075 16.663-16.492 36.963-36.482s39.648-39.08 42.995-42.422l6.086-6.076-15.478 12.16c-8.513 6.687-30.464 23.949-48.78 38.36l-33.3 26.2-13.663-9.923c-7.514-5.457-14.222-10.463-14.905-11.123-1.79-1.73-2.456-3.378-2.433-6.012.028-3.219 1.36-5.651 3.91-7.136 1.955-1.14 127.454-49.088 128.48-49.088.52 0 1.211.186 1.535.413.696.487 1.38 1.72 1.38 2.484 0 .68-40.304 111.063-41.2 112.835-.941 1.864-2.877 3.644-4.737 4.356-1.919.734-4.345.925-5.92.465" style="fill:white"; transform="translate(351.828 -651.095)"></svg>
@@ -208,9 +268,16 @@ export class Componente_Acoes extends LitElement {
                     style="display:flex; align-items: center; justify-content: center; gap:1rem">
                     <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2rem" height="2rem" viewBox="0 0 125.808 138.883"><path d="M-282.043 792.374a21.4 21.4 0 0 1-7.734-2.539c-1.158-.644-9.098-5.2-17.643-10.123a11809 11809 0 0 0-21.235-12.211c-8.447-4.832-11.834-8.479-13.524-14.562-.594-2.139-.83-53.53-.265-57.543.31-2.202.772-3.624 1.917-5.912 2.469-4.931 4.028-6.15 18.633-14.556 6.821-3.926 16.908-9.738 22.415-12.914s10.949-6.203 12.093-6.727c4.975-2.276 10.366-2.22 15.529.159.95.437 6.232 3.395 11.74 6.572 5.506 3.177 15.59 8.988 22.407 12.913 13.23 7.617 15.44 9.214 17.824 12.892.698 1.077 1.643 3.097 2.099 4.489l.828 2.53v28.14c0 31.442.132 29.604-2.489 34.61-1.836 3.507-4.758 6.02-11.522 9.909-3.118 1.792-12.661 7.289-21.207 12.214-8.545 4.926-16.624 9.54-17.954 10.252-3.73 2-8.135 2.89-11.912 2.407m12.31-16.971 22.045-12.711c7.976-4.6 15.029-8.778 15.674-9.285s1.46-1.46 1.812-2.116c.608-1.134.64-2.553.64-28.056 0-28.87.041-28.183-1.767-29.833-.83-.757-4.774-3.094-22.056-13.069-21.664-12.504-24.29-13.968-25.444-14.184-.665-.125-1.776-.057-2.47.151-.694.209-5.457 2.809-10.584 5.779a7594 7594 0 0 1-18.645 10.757c-15.824 9.093-17.348 10.037-18.372 11.38l-.963 1.262-.103 26.959c-.07 18.291.014 27.364.263 28.22.513 1.768 1.753 2.733 8.645 6.73 23.42 13.584 36.967 21.372 38.152 21.933 1.008.478 1.955.624 3.506.542 2.01-.105 2.533-.346 9.668-4.46zm-15.062-20.36c-3.979-.659-9.236-2.658-12.34-4.691l-.772-.507 2.81-4.11c1.545-2.26 2.92-4.109 3.054-4.109.135 0 .941.39 1.792.865 2.877 1.608 5.425 2.292 9.244 2.481 4.376.217 7.24-.36 11.049-2.225 3.602-1.765 7.967-6.126 9.76-9.752l1.28-2.59-3.381-.3-3.382-.301 6.174-5.885 6.174-5.884 1.657 1.697c.91.932 3.572 3.716 5.913 6.184l4.257 4.489-3.533.173-3.534.172-.972 2.81c-2.541 7.347-7.354 13.308-13.88 17.19-6.432 3.826-14.46 5.439-21.37 4.294m-25.602-31.14a579 579 0 0 1-5.81-6.187l-1.814-1.985h6.882l.782-2.33c4.517-13.462 16.247-22.16 30.04-22.275 5.982-.05 10.776 1.091 15.987 3.805 1.574.82 2.287 1.38 2.164 1.699-.1.262-1.306 2.142-2.679 4.178a852 852 0 0 0-2.564 3.813c-.036.06-.728-.307-1.537-.817-3.888-2.454-10.254-3.48-15.168-2.443-4.169.879-8.007 2.975-11.079 6.05-2.393 2.397-4.688 5.806-5.31 7.888-.214.721-.125.777 1.26.78.82.001 2.296.1 3.282.218l1.791.215-4.554 4.377c-2.504 2.407-5.256 5.015-6.115 5.796l-1.561 1.419z" style="fill:white; stroke-width:1" transform="translate(342.766 -653.62)"/></svg>
                     <span>Sincronizar Dados</span></button>
-
+                
                 <button 
-                    @click="${() => alert("Num quelu!")}"
+                    @click="${this._Ver_relatorio_OS}"
+                    type="button" class="form-button"
+                    style="display:flex; align-items: center; justify-content: center; gap:1rem">
+                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2rem" height="2rem" viewBox="0 0 135.92 135.928"><path d="M-339.883 790.643c-3.17-1.006-5.664-3.166-7.065-6.123l-.874-1.843v-72.591l.92-1.866c1.145-2.327 3.14-4.237 5.68-5.44l1.906-.904 21.403-.08c13.995-.051 21.877.023 22.772.215 3.404.73 6.607 3.285 8.039 6.412.408.893.84 2.536.986 3.757.15 1.242.226 16.551.18 35.767l-.08 33.596-.618 1.506c-1.419 3.461-4.55 6.285-8.23 7.422-1.779.55-2.584.568-22.865.55-16.15-.014-21.283-.102-22.154-.378m74.218-.01c-2.977-.94-5.612-3.245-6.991-6.113l-.886-1.843v-22.964l.9-1.9a11.23 11.23 0 0 1 5.422-5.422l1.9-.9h45.09l1.84.906a12.15 12.15 0 0 1 5.464 5.464l.905 1.84v22.42l-.916 1.863c-1.207 2.451-3.39 4.504-6.238 5.864l-2.201 1.05-21.547.057c-17.284.045-21.783-.018-22.742-.321m.516-51.64c-3.396-.913-6.025-3.092-7.6-6.301l-.793-1.614v-20.98l.792-1.614c1.665-3.39 4.73-5.78 8.28-6.457 1.208-.23 7.782-.299 22.681-.237l20.98.086 1.63.659c3.275 1.322 5.605 3.789 6.728 7.123.571 1.696.596 2.234.515 11.316l-.084 9.537-.834 1.7c-1.643 3.352-5.53 6.198-9.482 6.942-.949.18-9.064.281-21.405.27-16.435-.016-20.143-.09-21.408-.43zm-74.34-46.741c-3.257-.898-6.166-3.331-7.573-6.332l-.76-1.62v-20.98l.9-1.9a11.23 11.23 0 0 1 5.422-5.422l1.9-.9h119.358l1.9.9a11.23 11.23 0 0 1 5.421 5.422l.9 1.9v20.98l-.76 1.62c-1.435 3.064-4.33 5.45-7.702 6.347-2.08.554-116.996.539-119.006-.015" style="fill:white;stroke-width:1" transform="translate(347.822 -655.098)"/></svg>
+                    <span>Ver Relatório da OS</span></button>
+                    
+                <button 
+                    @click="${this._Salvar_OS}"
                     type="button" class="form-button"
                     style="display:flex; align-items: center; justify-content: center; gap:1rem">
                     <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2rem" height="2rem" viewBox="0 0 143.933 143.933"><path d="M-333.784 790.039c-2.165-.648-4.898-3.234-5.905-5.589-.658-1.537-.795-12.11-.795-61.306 0-40.517.195-59.967.612-61.074.912-2.418 3.969-5.313 6.29-5.958 1.126-.313 3.28-.57 4.79-.572h2.742v48.316l1.343 2.545c.739 1.4 2.45 3.324 3.803 4.277l2.459 1.732h48.876l2.504-1.74c1.463-1.017 3.043-2.807 3.802-4.308 1.286-2.542 1.3-2.82 1.3-26.695V655.54l3.608.022c6.274.022 6.816.458 22.89 18.384 7.998 8.92 14.92 17.126 15.384 18.234.713 1.706.842 8.79.842 46.164 0 29.727-.2 44.68-.613 45.774-.911 2.417-3.968 5.313-6.29 5.958-2.564.712-105.258.689-107.642-.024zm97.765-12.358c2.29-2.073 2.39-3.304 2.22-27.324l-.163-23.207-1.887-1.887-1.887-1.887-39.101-.157c-28.59-.113-39.534.024-40.713.511-.886.367-2.122 1.317-2.746 2.11-1.088 1.383-1.136 2.457-1.136 25.57v24.127l1.773 1.773 1.772 1.772 38.21.149c21.015.08 39.191-.022 40.391-.21 1.2-.196 2.67-.8 3.267-1.34zm-79.639-15.91v-5.205l37.961.148 37.962.149v9.815l-37.962.148-37.96.149zm0-21.358v-5.2h76.256l-.166 5.05-.167 5.053-37.962.148-37.96.149zm.289-32.719c-2.364-1.246-4.254-3.034-5.396-5.102-.843-1.53-.955-4.38-.955-24.25v-22.517l27.28-.15 27.28-.15v22.545c0 20.984-.076 22.694-1.093 24.688-1.35 2.646-2.662 3.86-5.405 5.006-3.195 1.336-39.16 1.274-41.711-.072z" style="fill:white;stroke-width:1" transform="translate(351.828 -651.095)"/></svg>
@@ -229,7 +296,7 @@ export class Componente_Acoes extends LitElement {
             <modal-qr
                 .objeto_os="${this.objeto_os}"
                 .exibir_modal="${this.exibir_modal_sinc}"
-                @fechar_modal="${e=>this._Fechar_Modal_Sinc(e)}"
+                @fechar_modal="${e => this._Fechar_Modal_Sinc(e)}"
             ></modal-qr>
             
         `;

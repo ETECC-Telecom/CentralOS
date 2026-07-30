@@ -9,6 +9,8 @@ export class Componente_Info_Extra extends LitElement {
         objeto_os: { type: Object},
         relatorio_ext: {type: String},
         relatorio_bat: {type: String},
+        exibir_relatorio_bar: {type: Boolean},
+        titulo: {type: String},
     };
 
     static get styles() {
@@ -20,6 +22,8 @@ export class Componente_Info_Extra extends LitElement {
         this.objeto_os = {};
         this.relatorio_ext = null;
         this.relatorio_bat = null;
+        this.exibir_relatorio_bar = true;
+        this.titulo = "Informações Adicionais da Visita"
     }
 
     // Executado assim que o componente é renderizado na tela
@@ -47,7 +51,7 @@ export class Componente_Info_Extra extends LitElement {
         return html`
             <!--Retorno renderizado-->
             <br>
-            <h2>Informações Adicionais da Visita</h2>
+            <h2>${this.titulo}</h2>
             <br>
             <div class="form-group">
                 <caixa-texto
@@ -62,13 +66,16 @@ export class Componente_Info_Extra extends LitElement {
 
             </div>
             <br>
-            <div class="form-group">
+            ${this.exibir_relatorio_bar?html`
+                <div class="form-group">
                 <label for="message" class="form-label">Relatório .BAT</label>
                 <textarea
                     @change="${this._Alterar_Relatorio_Bat}"
                     .value="${this.objeto_os.OS.relatorio_estabilidade}"
                     name="message" rows="10" class="form-textarea"></textarea>
-            </div>
+                </div>
+            `:""}
+            
         `;
     }
 }

@@ -2,10 +2,89 @@ import { disparar_notificacao } from "./disparar_notificacao";
 import { Capturar_Nome_Tecnico } from "./capturar_nome_tecnico";
 import educacao_cliente from "/src/data/educacao_cliente.json";
 import atendimento_cliente from "/src/data/atendimento_cliente.json";
+import { db_adicionar_OS } from "../model/Service_Ordens_Servico";
+import { db_adicionar_Troca } from "../model/Service_Ativos_Troca";
+import { db_editar_OS } from "../model/Service_Ordens_Servico";
 
 export default class Controller_Objeto_OS_Completa {
     constructor(estrura_os = {}) {
         this.OS = estrura_os;
+    }
+
+    //Funções para Manipualção do Banco de Dados:
+
+    async salvar_OS_Banco (){
+        //Coletando os dados para salvar no banco.
+        const cliente = this.OS.info_cliente.nome_cadastro === null?"Não Informado":this.OS.info_cliente.nome_cadastro;
+
+            // Cria um objeto contendo apenas a data
+        const date = Temporal.PlainDate.from(this.OS.config_OS.data_criacao);
+        const data_criacao = date.toString()
+        
+        const categoria = this.OS.config_OS.tipo_os;
+        
+        //Coloca a OS em estado de finalizada:
+        this.OS.config_OS.finalizada = true;
+
+        //Iniciando o Save no Banco de Dados:
+        const Resposta = await db_adicionar_OS(this.OS, cliente, data_criacao, categoria);
+        
+        //Valida se teve Trocas de Equipamentos:
+        const TROCA = this.OS.conferencia_tecnica.equipamentos_local.troca;
+        if (TROCA){
+            const Ativos = this.Estruturar_Troca_Equipamento(Resposta[1])
+            db_adicionar_Troca(Ativos)
+        }
+
+        return Resposta
+
+    }
+
+    async editar_OS_Banco (){
+        //Coletando os dados para salvar no banco.
+        const cliente = this.OS.info_cliente.nome_cadastro === null?"Não Informado":this.OS.info_cliente.nome_cadastro;
+
+            // Cria um objeto contendo apenas a data
+        const date = Temporal.PlainDate.from(this.OS.config_OS.data_criacao);
+        const data_criacao = date.toString()
+        
+        const categoria = this.OS.config_OS.tipo_os;
+        
+        const ID = this.OS.config_OS.id;
+
+        //Iniciando o Save no Banco de Dados:
+        const Resposta = await db_editar_OS(this.OS, ID, cliente, data_criacao, categoria);
+
+        return Resposta
+
+    }
+
+    Estruturar_Troca_Equipamento = (id_os_pai) =>{
+        const Data = {
+            inseridos : "",
+            retirados : "",
+            data : "",
+            cod_conexao : "",
+            pppoe : "",
+            id_os_pai : "",
+        }
+
+        Data.data = Temporal.PlainDate.from(this.OS.config_OS.data_criacao).toString();
+        Data.cod_conexao = this.OS.conferencia_tecnica.equipamentos_local.cod_conexao === null? 0:this.OS.conferencia_tecnica.equipamentos_local.cod_conexao;
+        Data.pppoe = this.OS.conferencia_tecnica.equipamentos_local.pppoe === null? 0:this.OS.conferencia_tecnica.equipamentos_local.pppoe;
+        Data.id_os_pai = id_os_pai;
+
+        // Gerendo os dados dos ativos trocados: 
+        this.OS.conferencia_tecnica.equipamentos_local.ativos.map((valor, chave)=>{
+            if(valor.inserido){
+                Data.inseridos += `${valor.mac} `;
+            }else{
+                Data.retirados += `${valor.mac} `;
+            }
+        })
+
+        return Data
+
     }
 
     //Usado para Salvar a estrutura de OS no local storage
@@ -52,8 +131,9 @@ export default class Controller_Objeto_OS_Completa {
     Export_Mensagem_Encaminhada_Cliente = () => {
 
         let nome_tecnico = Capturar_Nome_Tecnico();
-
-        let corpo = `Boa tarde! 😊\n\nAqui é *${nome_tecnico}* da Etecc Telecom, fui quem realizou o seu atendimento técnico. Para deixar tudo bem organizado e registrado, vou te encaminhar um resumo com os principais pontos que conversamos.\n\nNesse descritivo também incluí algumas orientações técnicas importantes que vão te ajudar bastante no dia a dia.\n\nQualquer dúvida que surgir depois, estamos à disposição 24h pelo *(13) 3421-1999*, combinado? 👍\n\nAvalie seu atendimento em menos de 1 minuto.\n Sua opinião faz toda a diferença!\n\nhttps://forms.gle/MVCCx1YfLhKVsh9i8\n\n`;
+        const URL = localStorage.getItem("formulario_feedback")
+        
+        let corpo = `Boa tarde!\n\nAqui é *${nome_tecnico}* da Etecc Telecom, fui quem realizou o seu atendimento técnico. Para deixar tudo bem organizado e registrado, vou te encaminhar um resumo com os principais pontos que conversamos.\n\nNesse descritivo também incluí algumas orientações técnicas importantes que vão te ajudar bastante no dia a dia.\n\nQualquer dúvida que surgir depois, estamos à disposição 24h pelo *(13) 3421-1999*, combinado?\n\nAvalie seu atendimento em menos de 1 minuto.\nSua opinião faz toda a diferença!\n\n${URL}\n\n`;
 
         //logica da estrutura da lista de infomações passadas ao cliente:
         let estaVazio = Object.keys(this.OS.educacao_cliente).length === 0;
@@ -157,7 +237,7 @@ export default class Controller_Objeto_OS_Completa {
 
 
         //Construindo a Introdução
-        corpo = `Criado..............: ${data_formatada}\nCliente.............: ${this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro}\nTelefone............: ${this.OS.info_cliente.telefone === null ? "Não Informado" : this.OS.info_cliente.telefone}\nAcompanhante........: ${this.OS.info_cliente.nome_cliente === null ? "Não Informado!" : this.OS.info_cliente.nome_cliente} (${parentesco === null ? "Não Informado" : parentesco})`;
+        corpo = `Criado...............: ${data_formatada}\nCliente..............: ${this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro}\nTelefone.............: ${this.OS.info_cliente.telefone === null ? "Não Informado" : this.OS.info_cliente.telefone}\nAcompanhante.........: ${this.OS.info_cliente.nome_cliente === null ? "Não Informado!" : this.OS.info_cliente.nome_cliente} (${parentesco === null ? "Não Informado" : parentesco})`;
 
         //Construindo as informações necessárias:
         let info_necessarias = '';
@@ -165,14 +245,14 @@ export default class Controller_Objeto_OS_Completa {
             info_necessarias = `Operador............: ${this.OS.endereco_info_os.complemento_info_necessaria.operador === null ? "Não informado" : this.OS.endereco_info_os.complemento_info_necessaria.operador}\n`;
 
             info_necessarias += `\nINFORMAÇÕES OMITIDAS:\n--------------------------------------------\n`;
-            info_necessarias += `${this.OS.endereco_info_os.complemento_info_necessaria.info_padrao.comodato === true ? "• Informação de Comodato;\n" : ''}`;
-            info_necessarias += `${this.OS.endereco_info_os.complemento_info_necessaria.info_padrao.contratacao === true ? "• Data de Contratação;\n" : ''}`;
-            info_necessarias += `${this.OS.endereco_info_os.complemento_info_necessaria.info_padrao.descricao === true ? "• Faltou um melhor detalhamento na abertura da OS;\n" : ''}`;
-            info_necessarias += `${this.OS.endereco_info_os.complemento_info_necessaria.info_padrao.historico === true ? "• Faltou o Histórico de Quedas;\n" : ''}`
+            info_necessarias += `${this.OS.endereco_info_os.complemento_info_necessaria.info_padrao.comodato === true ? "- Informação de Comodato;\n" : ''}`;
+            info_necessarias += `${this.OS.endereco_info_os.complemento_info_necessaria.info_padrao.contratacao === true ? "- Data de Contratação;\n" : ''}`;
+            info_necessarias += `${this.OS.endereco_info_os.complemento_info_necessaria.info_padrao.descricao === true ? "- Faltou um melhor detalhamento na abertura da OS;\n" : ''}`;
+            info_necessarias += `${this.OS.endereco_info_os.complemento_info_necessaria.info_padrao.historico === true ? "- Faltou o Histórico de Quedas;\n" : ''}`
 
             this.OS.endereco_info_os.complemento_info_necessaria.requerimentos.map(item => {
 
-                info_necessarias += `• ${item};\n`;
+                info_necessarias += `- ${item};\n`;
             })
             info_necessarias += "\n";
 
@@ -187,7 +267,7 @@ export default class Controller_Objeto_OS_Completa {
 
         //Construindo a localização:
         corpo += "\nENDEREÇO\n--------------------------------------------\n";
-        corpo += `Coordenada...........: ${mapa}\nFoto da frente.......: ${this.OS.endereco_info_os.anexo_fachada === true ? "Sim" : "Não"}\n`;
+        corpo += `Coordenada...........: ${mapa}\nFoto da frente.......: ${this.OS.endereco_info_os.anexo_fachada === true ? "Sim" : "Não Anexada"}\n`;
 
         return corpo;
     }
@@ -211,7 +291,7 @@ export default class Controller_Objeto_OS_Completa {
     ajuda_interna_Script_simples = () => {
 
         let corpo = "\nAJUDA INTERNA\n--------------------------------------------\n";
-        corpo += `Solicitada...........: ${this.OS.ajuda_interna.verdadeiro === true ? "Sim" : "Não"}\n`;
+        corpo += `Solicitada...........: ${this.OS.ajuda_interna.verdadeiro === true ? "Sim" : "Não foi necessário"}\n`;
 
         if (this.OS.ajuda_interna.verdadeiro === true) {
             corpo += `Setor................: ${this.OS.ajuda_interna.setor};\n`
@@ -224,7 +304,7 @@ export default class Controller_Objeto_OS_Completa {
     encaminhar_externa_Script_simples = () => {
         let corpo = "\nEQUIPE EXTERNA\n--------------------------------------------\n";
 
-        corpo += `Necessária...........: ${this.OS.conferencia_tecnica.encaminhar_externa.necessidade === true ? "Sim" : "Não"}\n`;
+        corpo += `Necessária...........: ${this.OS.conferencia_tecnica.encaminhar_externa.necessidade === true ? "Sim" : "Não foi necessário"}\n`;
         corpo += "\nObservação:\n"
         if (this.OS.conferencia_tecnica.encaminhar_externa.necessidade === true) {
             corpo += `${this.OS.conferencia_tecnica.encaminhar_externa.observacao === null ? "Técnico não informou o motivo da necessidade!" : this.OS.conferencia_tecnica.encaminhar_externa.observacao}\n`;
@@ -260,11 +340,11 @@ export default class Controller_Objeto_OS_Completa {
         if (this.OS.conferencia_tecnica.cabos_utp.length !== 0) {
             this.OS.conferencia_tecnica.cabos_utp.map(item => {
                 corpo += `\n[ ${item.cabo} ]\n`;
-                corpo += `  • Cabo Giga..........: ${item.checagens[0] === true ? "Sim" : "Não"};\n`
-                corpo += `  • Powermitter........: ${item.checagens[1] === true ? "Sim" : "Não"};\n`
-                corpo += `  • Ping...............: ${item.checagens[2] === true ? "Sim" : "Não"};\n`
-                corpo += `  • Defeito anexado....: ${item.anexo_cabos === true ? "Sim" : "Não"};\n`
-                corpo += `  • Observação.........: ${item.observacao === "" ? "Sem observação adicional!" : item.observacao};\n`
+                corpo += `  - Cabo Giga..........: ${item.checagens[0] === true ? "Sim" : "Não"};\n`
+                corpo += `  - Powermitter........: ${item.checagens[1] === true ? "Sim" : "Não"};\n`
+                corpo += `  - Ping...............: ${item.checagens[2] === true ? "Sim" : "Não"};\n`
+                corpo += `  - Defeito anexado....: ${item.anexo_cabos === true ? "Sim" : "Não"};\n`
+                corpo += `  - Observação.........: ${item.observacao === "" ? "Sem observação adicional!" : item.observacao};\n`
             })
         } else {
             corpo += "Técnico não realizou testes em cabos de rede no Local!\n"
@@ -282,9 +362,9 @@ export default class Controller_Objeto_OS_Completa {
             const anexo = `${this.OS.conferencia_tecnica.fibra.anexo_sinal === true ? "foto da medição anexada na OS." : "foto não anexada!"}`
 
             corpo += `${limpeza}, ${anexo}\n\n`;
-            corpo += `  • Sinal PTO............: ${this.OS.conferencia_tecnica.fibra.sinal_pto === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pto + " dBm"};\n`;
-            corpo += `  • Sinal Patchcord......: ${this.OS.conferencia_tecnica.fibra.sinal_pathcord === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pathcord + " dBm"};\n`;
-            corpo += `  • Sinal AutoISP........: ${this.OS.conferencia_tecnica.fibra.sinal_autoisp === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_autoisp + " dBm"};\n`;
+            corpo += `  - Sinal PTO............: ${this.OS.conferencia_tecnica.fibra.sinal_pto === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pto + " dBm"};\n`;
+            corpo += `  - Sinal Patchcord......: ${this.OS.conferencia_tecnica.fibra.sinal_pathcord === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pathcord + " dBm"};\n`;
+            corpo += `  - Sinal AutoISP........: ${this.OS.conferencia_tecnica.fibra.sinal_autoisp === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_autoisp + " dBm"};\n`;
 
         }
 
@@ -293,9 +373,9 @@ export default class Controller_Objeto_OS_Completa {
     conferencia_fontes_simples = () => {
         let corpo = "\nFONTES\n--------------------------------------------\n";
 
-        corpo += `  • Mau contato..........: ${this.OS.conferencia_tecnica.fontes.mau_contato === true ? "Não identificado" : "Identificado mau contato no local"};\n`;
-        corpo += `  • Amperagem correta....: ${this.OS.conferencia_tecnica.fontes.amperagem === true ? "Correta" : "Incorreta"};\n`;
-        corpo += `  • Sinais de mau uso....: ${this.OS.conferencia_tecnica.fontes.uso === true ? "Não encontrados" : "Observado sinais de mau uso"};\n`;
+        corpo += `  - ${this.OS.conferencia_tecnica.fontes.mau_contato === true ? "Foi realizada a verificação das conexões elétricas das fontes, não sendo identificado nenhum indício de mau contato." : "Não foi realizada a verificação das conexões elétricas das fontes durante este atendimento."};\n`;
+        corpo += `  - ${this.OS.conferencia_tecnica.fontes.amperagem === true ? "A amperagem das fontes foi aferida e encontra-se dentro dos parâmetros esperados de funcionamento." : "Não foi realizada a aferição da amperagem das fontes durante este atendimento."};\n`;
+        corpo += `  - ${this.OS.conferencia_tecnica.fontes.uso === true ? "Foi realizada a inspeção visual das fontes, não sendo encontrados sinais de mau uso ou danos aparentes." : "Não foi realizada a inspeção visual das fontes para verificação de sinais de mau uso durante este atendimento."};\n`;
 
         return corpo;
     }
@@ -343,13 +423,13 @@ export default class Controller_Objeto_OS_Completa {
                 */
             })
         } else {
-            corpo += "Não foram relatados informações sobre os testes de Ping. Verifique o relatório final ou .Bat\n"
+            corpo += "> Não foram relatados informações sobre os testes de Ping. Verifique o relatório final ou .Bat\n"
         }
 
         return corpo
     }
     conferencia_tracert_simples = () => {
-        let corpo = "TRACERT\n--------------------------------------------\n\n";
+        let corpo = "TRACERT\n\n--------------------------------------------\n\n";
         const objeto = this.OS.conferencia_tecnica.tracert_adicional;
 
         if (objeto.length !== 0) {
@@ -401,7 +481,7 @@ export default class Controller_Objeto_OS_Completa {
         return corpo
     }
     conferencia_ativos_troca_simples = () => {
-        let corpo = '==========================================================================\n';
+        let corpo = '\n==========================================================================\n';
         corpo += '\t\t\EQUIPAMENTOS\n';
         corpo += '==========================================================================\n\n';
 
@@ -441,7 +521,7 @@ export default class Controller_Objeto_OS_Completa {
 
         if (objeto.ativos.length !== 0) {
             objeto.ativos.map(item => {
-                const servico = item.inserido === true ? "[+] INSERIDO" : "[-] RETIRADO";
+                const servico = item.inserido === true ? "[+] INSERIDO/LOCAL" : "[-] RETIRADO";
                 corpo += `${servico}\n  ${item.ativo} ( ${item.mac} );\n\n`;
             });
         } else {
@@ -652,14 +732,14 @@ export default class Controller_Objeto_OS_Completa {
             informacoes = "> O técnico não passou informações adicionais ao Cliente!\n"
         } else {
             for (const chave in this.OS.educacao_cliente) {
-                informacoes += `    • ${this.OS.educacao_cliente[chave]};\n`
+                informacoes += `    - ${this.OS.educacao_cliente[chave]};\n`
             }
         }
 
         corpo += '==========================================================================\n';
         corpo += '\t\t\tEDUCAÇÃO DO CLIENTE\n';
         corpo += '==========================================================================\n\n';
-
+        corpo += `Mensagem Encaminhada via Whatsapp: ${this.OS.config_OS.info_encaminhadas === true? "Mensagem Encaminhada.":"Não Encaminhado."}\n\n`
         corpo += `Informações passadas ao cliente:\n${informacoes}`
         //Educação adicional fornecida pelo técnico:
 
@@ -667,7 +747,7 @@ export default class Controller_Objeto_OS_Completa {
         if (this.OS.complemento_atendimento.length != 0) {
             informacoes += "\nInformação Complementar da Visita!\n";
             this.OS.complemento_atendimento.map(item => {
-                informacoes += `    • ${item};\n`;
+                informacoes += `    - ${item};\n`;
             })
         } else {
             informacoes = '';
@@ -841,7 +921,7 @@ export default class Controller_Objeto_OS_Completa {
     }
 
     ajuda_interna_Script = () => {
-        let corpo = `\n**Solicitado Ajuda Interna**: ${this.OS.ajuda_interna.verdadeiro === true ? "Sim" : "Não"}\n`;
+        let corpo = `\n**Solicitado Ajuda Interna**: ${this.OS.ajuda_interna.verdadeiro === true ? "Sim" : "Não foi necessário!"}\n`;
 
         if (this.OS.ajuda_interna.verdadeiro === true) {
             corpo += `- Setor: ${this.OS.ajuda_interna.setor};\n`
@@ -852,7 +932,7 @@ export default class Controller_Objeto_OS_Completa {
     }
 
     encaminhar_externa_Script = () => {
-        let corpo = `\n**Necessário Encaminhar Equipe Externa**: ${this.OS.conferencia_tecnica.encaminhar_externa.necessidade === true ? "Sim" : "Não"}\n`;
+        let corpo = `\n**Necessário Encaminhar Equipe Externa**: ${this.OS.conferencia_tecnica.encaminhar_externa.necessidade === true ? "Sim" : "Não foi necessário"}\n`;
 
         if (this.OS.conferencia_tecnica.encaminhar_externa.necessidade === true) {
             corpo += `> ${this.OS.conferencia_tecnica.encaminhar_externa.observacao === null ? "Técnico não informou o motivo da necessidade!" : this.OS.conferencia_tecnica.encaminhar_externa.observacao}\n`;
@@ -919,9 +999,9 @@ export default class Controller_Objeto_OS_Completa {
 
     conferencia_fontes = () => {
         let corpo = "### Fontes\n";
-        corpo += `Verificado mau contato na fonte: ${this.OS.conferencia_tecnica.fontes.mau_contato === true ? "Não identificado" : "Identificado mau contato no local"};\n`;
-        corpo += `Validado amperagens corretas das fontes: ${this.OS.conferencia_tecnica.fontes.amperagem === true ? "Sim" : "Não"};\n`;
-        corpo += `Verificado algum sinal de mau uso: ${this.OS.conferencia_tecnica.fontes.uso === true ? "Não encontrado" : "Foi observado sinais de mau uso"};\n`;
+        corpo += `- ${this.OS.conferencia_tecnica.fontes.mau_contato === true ? "Foi realizada a verificação das conexões elétricas das fontes, não sendo identificado nenhum indício de mau contato." : "Não foi realizada a verificação das conexões elétricas das fontes durante este atendimento."};\n`;
+        corpo += `- ${this.OS.conferencia_tecnica.fontes.amperagem === true ? "A amperagem das fontes foi aferida e encontra-se dentro dos parâmetros esperados de funcionamento." : "Não foi realizada a aferição da amperagem das fontes durante este atendimento."};\n`;
+        corpo += `- ${this.OS.conferencia_tecnica.fontes.uso === true ? "Foi realizada a inspeção visual das fontes, não sendo encontrados sinais de mau uso ou danos aparentes." : "Não foi realizada a inspeção visual das fontes para verificação de sinais de mau uso durante este atendimento."};\n`;
 
         return corpo;
     }
@@ -1065,7 +1145,7 @@ export default class Controller_Objeto_OS_Completa {
 
         if (objeto.ativos.length !== 0) {
             objeto.ativos.map(item => {
-                const servico = item.inserido === true ? "INSERIDO" : "RETIRADO";
+                const servico = item.inserido === true ? "**INSERIDO/LOCAL**" : "**RETIRADO**";
                 corpo += `- ${servico}: ${item.ativo} ( ${item.mac} );\n`;
             });
         } else {
@@ -1242,7 +1322,7 @@ export default class Controller_Objeto_OS_Completa {
             }
         }
 
-        corpo += `### Educação do Cliente:\n\n**Informações passadas ao cliente**:\n${informacoes}`
+        corpo += `### Educação do Cliente:\n\n**Mensagem Encaminhada via Whatsapp:** ${this.OS.config_OS.info_encaminhadas === true? "Mensagem Encaminhada.":"Não Encaminhado."}\n\n**Informações passadas ao cliente**:\n${informacoes}`
         //Educação adicional fornecida pelo técnico:
 
         informacoes = "";
