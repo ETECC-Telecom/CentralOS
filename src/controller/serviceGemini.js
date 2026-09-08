@@ -1,9 +1,11 @@
 import { CAPTURAR_CHAVE_API } from "./controler_API_IA";
+import { registrarLog } from "./logger";
+
 
 export async function gerarConclusaoScript(scriptTexto) {
     // 1. Busca o token salvo pelo técnico no LocalStorage
     //const apiKey = localStorage.getItem('gemini_api_key');
-    const apiKey = CAPTURAR_CHAVE_API();
+    const apiKey = await CAPTURAR_CHAVE_API();
 
     if (!apiKey) {
         throw new Error("Chave de API do Gemini não encontrada. Configure-a no formulário técnica.");
@@ -70,6 +72,15 @@ Relatório:
 
     } catch (error) {
         console.error("Erro na integração com o Gemini:", error);
+        await registrarLog({
+            tipo: 'ERRO_EXECUCAO_USANDO_API_IA',
+            mensagem: error?.message || String(error),
+            fonte: 'serviceGemini.js',
+            linha: null,
+            coluna: null,
+            stack: error?.stack || null,
+            contexto: 'Ocorreu um erro ao tentar usar a API da IA'
+        });
         throw error;
     }
 }

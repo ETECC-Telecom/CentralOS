@@ -1,6 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
-
+import { registrarLog } from '../../controller/logger';
 
 export class Componente_Raw_Log extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -58,8 +58,9 @@ export class Componente_Raw_Log extends LitElement {
         try {
             // Converte a string JSON para um objeto manipulável
             parsedData = typeof this.content === 'string' ? JSON.parse(this.content) : this.content;
-        } catch (e) {
+        } catch (error) {
             return html`<p style="color: red;">Erro ao processar o JSON do log.</p>`;
+            
         }
 
         return html`

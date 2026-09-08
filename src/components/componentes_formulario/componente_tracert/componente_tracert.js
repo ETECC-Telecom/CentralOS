@@ -119,7 +119,7 @@ export class Componente_Tracert extends LitElement {
                     .Texto = ${this.objeto_os.OS.conferencia_tecnica.observacao_tracert}
                     .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_tracert.bind(this.objeto_os)}
                     .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
-                    .Categoria = "Tracert"
+                    categoria = "Tracert"
                     Placeholder = "Adicione aqui qualquer observação relacionado aos testes de Tracert!"
                 ></caixa-texto>
             </div>

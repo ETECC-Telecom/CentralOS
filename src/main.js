@@ -9,12 +9,17 @@ import { Page_OS_Los } from './pages/page_os_los/page_os_los';
 import { Page_OS_Chip } from './pages/page_os_chip/page_os_chip';
 import { Page_OS_Retencao } from './pages/page_os_retencao/page_os_retencao';
 import { Page_OS_Retirada } from './pages/page_os_retirada/page_os_retirada';
+import { Page_Lista_Troca } from './pages/page_lista_troca/page_lista_troca';
+
+import { Page_Config } from './pages/page_config/page_config';
+import { Page_Sobre } from './pages/page_sobre/page_sobre';
 
 import { Gerenciar_Scripts } from './pages/gerenciar_scripts/gerenciar_scripts';
 import { Page_Lista_OS } from './pages/page_lista_os/page_lista_os';
 
 //Import dos Componentes
 import { Notificacao } from './components/notificacao/notificacao';
+import { registrarLog } from './controller/logger';
 
 import { Page_Relatorio } from './pages/page_relatorio/page_relatorio';
 
@@ -23,6 +28,8 @@ const BASE_PATH = window.location.hostname.includes('github.io')
     ? '/Scripts-Lideran-a-Moto'
     : '';
 
+
+
 export class Main extends LitElement {
     static properties = {
         // Não precisamos mais de _routeView aqui, o Router cuida disso
@@ -30,6 +37,29 @@ export class Main extends LitElement {
 
     constructor() {
         super();
+
+        //Evento do Logger
+
+        // 2. Evento para erros gerais de execução (JS síncrono e falhas em DOM)
+        window.addEventListener('error', async (event) => {
+
+            if (event.message?.includes('ResizeObserver')) {
+                return;
+            }
+
+            const mensagem = event.error?.message || event.message || 'Erro sem mensagem';
+            const stack = event.error?.stack || null;
+            await registrarLog({
+                tipo: 'ERRO_EXECUCAO_GERAL',
+                mensagem: mensagem,
+                fonte: event.filename,
+                linha: event.lineno,
+                coluna: event.colno,
+                stack: stack
+            });
+        });
+
+
 
         // No JS puro, declaramos o router diretamente no 'this'
         // O primeiro argumento 'this' conecta o router ao ciclo de vida do Lit
@@ -49,6 +79,10 @@ export class Main extends LitElement {
             {
                 path: `${BASE_PATH}/lista_os`,
                 render: () => html`<page-lista-os></page-lista-os>`,
+            },
+            {
+                path: `${BASE_PATH}/lista_troca`,
+                render: () => html`<page-lista-troca></page-lista-troca>`,
             },
             {
                 path: `${BASE_PATH}/iniciar_os_completa/:tipo`,
@@ -96,6 +130,15 @@ export class Main extends LitElement {
                 path: `${BASE_PATH}/relatorio_os`,
                 render: () => html`<page-relatorio></page-relatorio>`,
             },
+            {
+                path: `${BASE_PATH}/configuracoes`,
+                render: () => html`<page-config></page-config>`,
+            },
+            {
+                path: `${BASE_PATH}/sobre`,
+                render: () => html`<page-sobre></page-sobre>`,
+            },
+            
 
             {
                 path: '/perfil/:name',
@@ -107,6 +150,7 @@ export class Main extends LitElement {
                 path: `${BASE_PATH}/*`,
                 render: () => html`<erro-404></erro-404>`,
             }
+
         ]);
     }
 

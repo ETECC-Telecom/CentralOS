@@ -33,6 +33,8 @@ import { Componente_Acoes_Simples } from '../../components/componentes_formulari
 
 //Componentes de Formulário
 
+import { registrarLog } from '../../controller/logger';
+
 export class Page_OS_Retencao extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
     static properties = {
@@ -55,31 +57,41 @@ export class Page_OS_Retencao extends LitElement {
     async connectedCallback() {
         super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
         if (this.tipo == 'novo') {
-                    this.objeto_os = new Controller_Objeto_OS_Retencao(Ordem_Servico_Retencao);
-                    this.objeto_os.alterar_tipo_os("retencao");
-                    localStorage.setItem('aba', "aba1");
-                    //Adiciona uma nova coordenada e data em uma OS recem criada!
-                    try {
-        
-                        const coordenadas = await obterCoordenadas();
-                        const agoraCompleto = Temporal.Now.zonedDateTimeISO();
-        
-                        this.objeto_os.carregar_latitude_longitude(coordenadas);
-                        this.objeto_os.OS.config_OS.data_criacao = agoraCompleto.toString();
-                        this.objeto_os.salvar_os_localstorage();
-        
-                        disparar_notificacao('sucesso', 'OS atualizada com GPS');
-                    } catch (erro) {
-                        disparar_notificacao('erro', `Falha ao carregar coordenadas:\n${erro}`);
-        
-                        this.objeto_os.carregar_latitude_longitude(null);
-                    }
-                } else {
-                    //Caso contrário, apenas carrega a OS já existente
-                    this.objeto_os = new Controller_Objeto_OS_Retencao();
-                    this.objeto_os.carregar_os_localstorage();
-                }
-                this.abaAtiva = localStorage.getItem('aba');
+            this.objeto_os = new Controller_Objeto_OS_Retencao(Ordem_Servico_Retencao);
+            this.objeto_os.alterar_tipo_os("retencao");
+            localStorage.setItem('aba', "aba1");
+            //Adiciona uma nova coordenada e data em uma OS recem criada!
+            try {
+
+                const coordenadas = await obterCoordenadas();
+                const agoraCompleto = Temporal.Now.zonedDateTimeISO();
+
+                this.objeto_os.carregar_latitude_longitude(coordenadas);
+                this.objeto_os.OS.config_OS.data_criacao = agoraCompleto.toString();
+                this.objeto_os.salvar_os_localstorage();
+
+                disparar_notificacao('sucesso', 'OS atualizada com GPS');
+            } catch (erro) {
+                disparar_notificacao('erro', `Falha ao carregar coordenadas:\n${erro}`);
+
+                this.objeto_os.carregar_latitude_longitude(null);
+
+                await registrarLog({
+                    tipo: 'ERRO_EXECUCAO_ADICIONANDO_COORDENADAS',
+                    mensagem: error?.message || String(error),
+                    fonte: 'page_os_retencao.js',
+                    linha: null,
+                    coluna: null,
+                    stack: error?.stack || null,
+                    contexto: 'Ocorreu um erro ao tentar adicionar uma nova coordenada a uma OS já criada.'
+                });
+            }
+        } else {
+            //Caso contrário, apenas carrega a OS já existente
+            this.objeto_os = new Controller_Objeto_OS_Retencao();
+            this.objeto_os.carregar_os_localstorage();
+        }
+        this.abaAtiva = localStorage.getItem('aba');
     }
 
     // Executado assim que o componente é renderizado na tela

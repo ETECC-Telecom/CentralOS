@@ -60,7 +60,7 @@ export class Componente_Info_Extra extends LitElement {
                     .Texto = ${this.objeto_os.OS.relato_adicional}
                     .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_relatorio.bind(this.objeto_os)}
                     .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
-                    .Categoria = "Outros"
+                    categoria = "Outros"
                     Placeholder = "Caso você tenha alguma obsevação adicional relacionada a visita, descreva nesse campo!"
                 ></caixa-texto>
 

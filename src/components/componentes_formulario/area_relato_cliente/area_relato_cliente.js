@@ -110,7 +110,7 @@ export class Area_Relato_Cliente extends LitElement {
                     .Texto = ${this.objeto_os.OS.info_cliente.relato_cliente}
                     .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_relato_cliente.bind(this.objeto_os)}
                     .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
-                    .Categoria = "Relato do Cliente"
+                    categoria = "Relato do Cliente"
                     Placeholder = "Em sua Tratativa inicial, qual foi o relato do cliente?"
                 ></caixa-texto>  
             </div>

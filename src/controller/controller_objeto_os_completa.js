@@ -6,6 +6,8 @@ import { db_adicionar_OS } from "../model/Service_Ordens_Servico";
 import { db_adicionar_Troca } from "../model/Service_Ativos_Troca";
 import { db_editar_OS } from "../model/Service_Ordens_Servico";
 
+import { registrarLog } from "./logger";
+
 export default class Controller_Objeto_OS_Completa {
     constructor(estrura_os = {}) {
         this.OS = estrura_os;
@@ -13,25 +15,25 @@ export default class Controller_Objeto_OS_Completa {
 
     //Funções para Manipualção do Banco de Dados:
 
-    async salvar_OS_Banco (){
+    async salvar_OS_Banco() {
         //Coletando os dados para salvar no banco.
-        const cliente = this.OS.info_cliente.nome_cadastro === null?"Não Informado":this.OS.info_cliente.nome_cadastro;
+        const cliente = this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro;
 
-            // Cria um objeto contendo apenas a data
+        // Cria um objeto contendo apenas a data
         const date = Temporal.PlainDate.from(this.OS.config_OS.data_criacao);
         const data_criacao = date.toString()
-        
+
         const categoria = this.OS.config_OS.tipo_os;
-        
+
         //Coloca a OS em estado de finalizada:
         this.OS.config_OS.finalizada = true;
 
         //Iniciando o Save no Banco de Dados:
         const Resposta = await db_adicionar_OS(this.OS, cliente, data_criacao, categoria);
-        
+
         //Valida se teve Trocas de Equipamentos:
         const TROCA = this.OS.conferencia_tecnica.equipamentos_local.troca;
-        if (TROCA){
+        if (TROCA) {
             const Ativos = this.Estruturar_Troca_Equipamento(Resposta[1])
             db_adicionar_Troca(Ativos)
         }
@@ -40,16 +42,16 @@ export default class Controller_Objeto_OS_Completa {
 
     }
 
-    async editar_OS_Banco (){
+    async editar_OS_Banco() {
         //Coletando os dados para salvar no banco.
-        const cliente = this.OS.info_cliente.nome_cadastro === null?"Não Informado":this.OS.info_cliente.nome_cadastro;
+        const cliente = this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro;
 
-            // Cria um objeto contendo apenas a data
+        // Cria um objeto contendo apenas a data
         const date = Temporal.PlainDate.from(this.OS.config_OS.data_criacao);
         const data_criacao = date.toString()
-        
+
         const categoria = this.OS.config_OS.tipo_os;
-        
+
         const ID = this.OS.config_OS.id;
 
         //Iniciando o Save no Banco de Dados:
@@ -59,26 +61,26 @@ export default class Controller_Objeto_OS_Completa {
 
     }
 
-    Estruturar_Troca_Equipamento = (id_os_pai) =>{
+    Estruturar_Troca_Equipamento = (id_os_pai) => {
         const Data = {
-            inseridos : "",
-            retirados : "",
-            data : "",
-            cod_conexao : "",
-            pppoe : "",
-            id_os_pai : "",
+            inseridos: "",
+            retirados: "",
+            data: "",
+            cod_conexao: "",
+            pppoe: "",
+            id_os_pai: "",
         }
 
         Data.data = Temporal.PlainDate.from(this.OS.config_OS.data_criacao).toString();
-        Data.cod_conexao = this.OS.conferencia_tecnica.equipamentos_local.cod_conexao === null? 0:this.OS.conferencia_tecnica.equipamentos_local.cod_conexao;
-        Data.pppoe = this.OS.conferencia_tecnica.equipamentos_local.pppoe === null? 0:this.OS.conferencia_tecnica.equipamentos_local.pppoe;
+        Data.cod_conexao = this.OS.conferencia_tecnica.equipamentos_local.cod_conexao === null ? 0 : this.OS.conferencia_tecnica.equipamentos_local.cod_conexao;
+        Data.pppoe = this.OS.conferencia_tecnica.equipamentos_local.pppoe === null ? 0 : this.OS.conferencia_tecnica.equipamentos_local.pppoe;
         Data.id_os_pai = id_os_pai;
 
         // Gerendo os dados dos ativos trocados: 
-        this.OS.conferencia_tecnica.equipamentos_local.ativos.map((valor, chave)=>{
-            if(valor.inserido){
+        this.OS.conferencia_tecnica.equipamentos_local.ativos.map((valor, chave) => {
+            if (valor.inserido) {
                 Data.inseridos += `${valor.mac} `;
-            }else{
+            } else {
                 Data.retirados += `${valor.mac} `;
             }
         })
@@ -132,7 +134,7 @@ export default class Controller_Objeto_OS_Completa {
 
         let nome_tecnico = Capturar_Nome_Tecnico();
         const URL = localStorage.getItem("formulario_feedback")
-        
+
         let corpo = `Boa tarde!\n\nAqui é *${nome_tecnico}* da Etecc Telecom, fui quem realizou o seu atendimento técnico. Para deixar tudo bem organizado e registrado, vou te encaminhar um resumo com os principais pontos que conversamos.\n\nNesse descritivo também incluí algumas orientações técnicas importantes que vão te ajudar bastante no dia a dia.\n\nQualquer dúvida que surgir depois, estamos à disposição 24h pelo *(13) 3421-1999*, combinado?\n\nAvalie seu atendimento em menos de 1 minuto.\nSua opinião faz toda a diferença!\n\n${URL}\n\n`;
 
         //logica da estrutura da lista de infomações passadas ao cliente:
@@ -634,20 +636,20 @@ export default class Controller_Objeto_OS_Completa {
         corpo += '==========================================================================\n\n';
 
         // Verificando se foi gerado resumo da IA:
-    if (this.OS.config_OS.usado_resumo_ia){
-        corpo += this.OS.relato_adicional;
-    }else{
-        corpo += this.relato_cliente_simples();
-        corpo += this.relatorio_complementar_simples();
-        corpo += this.relatorio_sinal_fibra_script_simples();
-        corpo += this.relatorio_fontes_script_simples();
-        corpo += this.relatorio_site_Survey_script_simples();
-        corpo += this.relatorio_ping_scriot_simples();
-        corpo += this.relatorio_tracert_scriot_simples();
-        corpo += this.relatorio_velocidade_scriot_simples();
-        corpo += this.relatorio_troca_ativo_script_simples();
-    }
-        
+        if (this.OS.config_OS.usado_resumo_ia) {
+            corpo += this.OS.relato_adicional;
+        } else {
+            corpo += this.relato_cliente_simples();
+            corpo += this.relatorio_complementar_simples();
+            corpo += this.relatorio_sinal_fibra_script_simples();
+            corpo += this.relatorio_fontes_script_simples();
+            corpo += this.relatorio_site_Survey_script_simples();
+            corpo += this.relatorio_ping_scriot_simples();
+            corpo += this.relatorio_tracert_scriot_simples();
+            corpo += this.relatorio_velocidade_scriot_simples();
+            corpo += this.relatorio_troca_ativo_script_simples();
+        }
+
 
         return corpo;
     }
@@ -739,7 +741,7 @@ export default class Controller_Objeto_OS_Completa {
         corpo += '==========================================================================\n';
         corpo += '\t\t\tEDUCAÇÃO DO CLIENTE\n';
         corpo += '==========================================================================\n\n';
-        corpo += `Mensagem Encaminhada via Whatsapp: ${this.OS.config_OS.info_encaminhadas === true? "Mensagem Encaminhada.":"Não Encaminhado."}\n\n`
+        corpo += `Mensagem Encaminhada via Whatsapp: ${this.OS.config_OS.info_encaminhadas === true ? "Mensagem Encaminhada." : "Não Encaminhado."}\n\n`
         corpo += `Informações passadas ao cliente:\n${informacoes}`
         //Educação adicional fornecida pelo técnico:
 
@@ -771,7 +773,7 @@ export default class Controller_Objeto_OS_Completa {
         if (objeto.ponto_adicional !== null) {
             corpo += `${objeto.ponto_adicional}\n`
         } else {
-            corpo += "> O Técnico não relatou informações sobre a necessidade de ponto adicional!\n";
+            corpo += "";
         }
 
 
@@ -1322,7 +1324,7 @@ export default class Controller_Objeto_OS_Completa {
             }
         }
 
-        corpo += `### Educação do Cliente:\n\n**Mensagem Encaminhada via Whatsapp:** ${this.OS.config_OS.info_encaminhadas === true? "Mensagem Encaminhada.":"Não Encaminhado."}\n\n**Informações passadas ao cliente**:\n${informacoes}`
+        corpo += `### Educação do Cliente:\n\n**Mensagem Encaminhada via Whatsapp:** ${this.OS.config_OS.info_encaminhadas === true ? "Mensagem Encaminhada." : "Não Encaminhado."}\n\n**Informações passadas ao cliente**:\n${informacoes}`
         //Educação adicional fornecida pelo técnico:
 
         informacoes = "";
@@ -1353,7 +1355,7 @@ export default class Controller_Objeto_OS_Completa {
         if (objeto.ponto_adicional !== null) {
             corpo += `${objeto.ponto_adicional}\n`
         } else {
-            corpo += "> O Técnico não relatou informações sobre a necessidade de ponto adicional!\n";
+            corpo += "";
         }
 
 
@@ -1445,10 +1447,19 @@ export default class Controller_Objeto_OS_Completa {
             data = await resposta.json();
 
 
-        } catch (erro) {
+        } catch (error) {
             // Trata eventuais erros de rede ou de conversão
-            console.error("Ops, algo deu errado:", erro);
-            disparar_notificacao("erro", `Ops, algo deu errado: ${erro}`)
+            disparar_notificacao("erro", `Ops, algo deu errado: ${error}`)
+
+            await registrarLog({
+                tipo: 'ERRO_EXECUCAO_CARREGAR_DADOS_EXTERNOS',
+                mensagem: error?.message || String(error),
+                fonte: 'controlller_objeto_os_completa.js',
+                linha: null,
+                coluna: null,
+                stack: error?.stack || null,
+                contexto: 'Ocorreu um erro ao tentar tratar os dados importados pelo aplicativo de teste externo.'
+            });
         }
 
         //Iniar a construlçao dos dados
@@ -1496,72 +1507,72 @@ export default class Controller_Objeto_OS_Completa {
         this.salvar_os_localstorage();
     }
 
-    callback_adicionar_texto_relato_cliente(data){
+    callback_adicionar_texto_relato_cliente(data) {
         const DATA = data;
-        if (DATA !== ""){
+        if (DATA !== "") {
             this.OS.info_cliente.relato_cliente = DATA;
         }
     }
-    callback_adicionar_texto_checagem_fibra(data){
+    callback_adicionar_texto_checagem_fibra(data) {
         const DATA = data;
-        if (DATA !== ""){
+        if (DATA !== "") {
             this.OS.conferencia_tecnica.fibra.observacao = DATA;
         }
     }
-    callback_adicionar_texto_checagem_fontes(data){
+    callback_adicionar_texto_checagem_fontes(data) {
         const DATA = data;
-        if (DATA !== ""){
+        if (DATA !== "") {
             this.OS.conferencia_tecnica.fontes.observacao = DATA;
         }
     }
-    callback_adicionar_texto_sitesurvey_sombra(data){
+    callback_adicionar_texto_sitesurvey_sombra(data) {
         const DATA = data;
-        if (DATA !== ""){
+        if (DATA !== "") {
             this.OS.conferencia_tecnica.mapa_calor.ponto_adicional = DATA;
         }
     }
 
-    callback_adicionar_texto_sitesurvey(data){
+    callback_adicionar_texto_sitesurvey(data) {
         const DATA = data;
-        if (DATA !== ""){
+        if (DATA !== "") {
             this.OS.conferencia_tecnica.mapa_calor.observacao = DATA;
         }
     }
 
-    callback_adicionar_texto_ping(data){
+    callback_adicionar_texto_ping(data) {
         const DATA = data;
-        if (DATA !== ""){
+        if (DATA !== "") {
             this.OS.conferencia_tecnica.observacao_ping = DATA;
         }
     }
-    callback_adicionar_texto_tracert(data){
+    callback_adicionar_texto_tracert(data) {
         const DATA = data;
-        if (DATA !== ""){
+        if (DATA !== "") {
             this.OS.conferencia_tecnica.observacao_tracert = DATA;
         }
     }
-    callback_adicionar_texto_velocidade(data){
+    callback_adicionar_texto_velocidade(data) {
         const DATA = data;
-        if (DATA !== ""){
+        if (DATA !== "") {
             this.OS.conferencia_tecnica.observacao_velocidade = DATA;
         }
     }
 
-    callback_adicionar_texto_relatorio(data){
+    callback_adicionar_texto_relatorio(data) {
         const DATA = data;
-        if (DATA !== ""){
+        if (DATA !== "") {
             this.OS.relato_adicional = DATA;
         }
     }
-    callback_adicionar_texto_troca_equipamento(data){
+    callback_adicionar_texto_troca_equipamento(data) {
         const DATA = data;
-        if (DATA !== ""){
+        if (DATA !== "") {
             this.OS.conferencia_tecnica.equipamentos_local.observacao = DATA;
         }
     }
-    callback_adicionar_texto_encaminhar_externa(data){
+    callback_adicionar_texto_encaminhar_externa(data) {
         const DATA = data;
-        if (DATA !== ""){
+        if (DATA !== "") {
             this.OS.conferencia_tecnica.encaminhar_externa.observacao = DATA;
         }
     }

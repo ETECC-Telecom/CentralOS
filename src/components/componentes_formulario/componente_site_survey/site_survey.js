@@ -95,7 +95,7 @@ export class Site_Survey extends LitElement {
                     .Texto = ${this.objeto_os.OS.conferencia_tecnica.mapa_calor.ponto_adicional}
                     .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_sitesurvey_sombra.bind(this.objeto_os)}
                     .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
-                    .Categoria = "Site Survey"
+                    categoria = "Site Survey"
                     Placeholder = "Explique se é viável um segundo ponto no local!"
                 ></caixa-texto>
             </div>
@@ -108,7 +108,7 @@ export class Site_Survey extends LitElement {
                     .Texto = ${this.objeto_os.OS.conferencia_tecnica.mapa_calor.observacao}
                     .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_sitesurvey.bind(this.objeto_os)}
                     .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
-                    .Categoria = "Site Survey"
+                    categoria = "Site Survey"
                     Placeholder = "Faça uma explicação sobre esse mapa de Calor!"
                 ></caixa-texto>
                

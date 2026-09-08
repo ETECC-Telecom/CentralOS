@@ -4,7 +4,7 @@ import { disparar_notificacao } from '../../../controller/disparar_notificacao';
 import { gerarConclusaoScript } from '../../../controller/serviceGemini';
 import { Modal_IA } from '../../modal_IA/modal_IA';
 import { Modal_QR_Code } from '../../modal_qr_code/modal_qr_code';
-
+import { registrarLog } from '../../../controller/logger';
 
 export class Componente_Acoes extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -68,12 +68,20 @@ export class Componente_Acoes extends LitElement {
             this.liberado = true
 
 
-        } catch (Erro) {
+        } catch (erro) {
             this.legenda_IA = "Ocorreu um Erro!"
             this.color_IA = "#e91700"
             this.legenda_botton = "Possivelmente seus Tokens expiraram!"
             this.liberado = true
-            console.log(Erro)
+            await registrarLog({
+                tipo: 'ERRO_EXECUCAO_USO_IA',
+                mensagem: error?.message || String(error),
+                fonte: 'componetes_acoes.js',
+                linha: null,
+                coluna: null,
+                stack: error?.stack || null,
+                contexto: 'Erro ocorreu após a tentativa de resumo usando a IA.'
+            });
 
         }
 
@@ -81,7 +89,7 @@ export class Componente_Acoes extends LitElement {
     _Fechar_Modal = (e) => {
         this.load_IA = false;
     }
-    _Gerar_Relatorio = (e) => {
+    _Gerar_Relatorio = async (e) => {
         try {
             let Texto = this.objeto_os.Finalizar_OS_Simplificado();
 
@@ -95,13 +103,22 @@ export class Componente_Acoes extends LitElement {
                     disparar_notificacao("erro", "Erro ao copiar o texto:", err)
 
                 });
-        } catch (err) {
-            disparar_notificacao("erro", err)
+        } catch (error) {
+            disparar_notificacao("erro", error)
+            await registrarLog({
+                tipo: 'ERRO_EXECUCAO_GERAR_RELATORIO',
+                mensagem: error?.message || String(error),
+                fonte: 'componetes_acoes.js',
+                linha: null,
+                coluna: null,
+                stack: error?.stack || null,
+                contexto: 'Ocorreu um erro ao tentar gerar o relatório da OS.'
+            });
         }
 
     }
 
-    _Gerar_Script_info_Cliente = (e) => {
+    _Gerar_Script_info_Cliente = async (e) => {
         try {
             let Texto = this.objeto_os.Export_Mensagem_Encaminhada_Cliente();
 
@@ -116,13 +133,22 @@ export class Componente_Acoes extends LitElement {
                     disparar_notificacao("erro", "Erro ao copiar o texto:", err)
 
                 });
-        } catch (err) {
-            disparar_notificacao("erro", err)
+        } catch (error) {
+            disparar_notificacao("erro", error);
+            await registrarLog({
+                tipo: 'ERRO_EXECUCAO_GERAR_INFO_PASSADA_CLIENTE',
+                mensagem: error?.message || String(error),
+                fonte: 'componetes_acoes.js',
+                linha: null,
+                coluna: null,
+                stack: error?.stack || null,
+                contexto: 'Ocorreu um erro ao tentar gerar o relatório da mensagem para repassar ao cliente.'
+            });
         }
 
     }
 
-    _Gerar_Relatorio_MD = (e) => {
+    _Gerar_Relatorio_MD = async (e) => {
         try {
             let Texto = this.objeto_os.Finalizar_OS_Markdown();
 
@@ -137,8 +163,17 @@ export class Componente_Acoes extends LitElement {
                     disparar_notificacao("erro", "Erro ao copiar o texto:", err)
 
                 });
-        } catch (err) {
-            disparar_notificacao("erro", err)
+        } catch (error) {
+            disparar_notificacao("erro", error);
+            await registrarLog({
+                tipo: 'ERRO_EXECUCAO_GERAR_RELATORIO_MARKDOWN',
+                mensagem: error?.message || String(error),
+                fonte: 'componetes_acoes.js',
+                linha: null,
+                coluna: null,
+                stack: error?.stack || null,
+                contexto: 'Ocorreu um erro ao tentar gerar o relatório no formato MARKDOWN.'
+            });
         }
 
     }
@@ -197,8 +232,17 @@ export class Componente_Acoes extends LitElement {
                 localStorage.setItem("aba", 'aba1');
                 window.location.href = '/';
                 return true;
-            } catch (erro) {
-                disparar_notificacao("erro", `Não consegui Finalizar a OS:\n${erro}`);
+            } catch (error) {
+                disparar_notificacao("erro", `Não consegui Finalizar a OS:\n${error}`);
+                await registrarLog({
+                    tipo: 'ERRO_EXECUCAO_LIMPAR_LOCALSTORAGE',
+                    mensagem: error?.message || String(error),
+                    fonte: 'componetes_acoes.js',
+                    linha: null,
+                    coluna: null,
+                    stack: error?.stack || null,
+                    contexto: 'Ocorreu um erro ao tentar limpar o local estorage após salvar a OS.'
+                });
             }
         }
     }

@@ -81,11 +81,13 @@ article {
 #acoes {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
     margin-top: .5rem;
 }
 
 .coluna-acoes {
-    flex: 1;
+    flex: grow shrink basis;
+    flex: 1 1 calc(50% - 8px);
     border-radius: 1rem;
     border-color: var(--btn-border-color);
     border-style: solid;

@@ -191,7 +191,7 @@ export class Verificacao_Fibra extends LitElement {
                     .Texto = ${this.objeto_os.OS.conferencia_tecnica.fibra.observacao}
                     .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_checagem_fibra.bind(this.objeto_os)}
                     .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
-                    .Categoria = "Fibra"
+                    categoria = "Fibra"
                     Placeholder = "Caso tenha alguma observação relacionado a Fibra adicione aqui para omitir no relatório final!"
                 ></caixa-texto> 
                 `: ""}

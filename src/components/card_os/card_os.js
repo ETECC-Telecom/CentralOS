@@ -56,8 +56,10 @@ export class Card_OS extends LitElement {
                 id="container-card-os" 
                  
                 style="border-color: ${this.cor_borda};">
-                ${this.icone}
-                <div>
+                <div style="flex:1">
+                    ${this.icone}
+                </div>
+                <div style="flex:6">
                     <h3>${this.titulo}</h3>
                     <p>${this.descricao}</p>
                 </div>

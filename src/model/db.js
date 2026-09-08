@@ -2,7 +2,7 @@ import { openDB } from "idb";
 
 
 const NOME_BANCO = "CentralOS_DB";
-const VERSAO_BANCO = 3;
+const VERSAO_BANCO = 4;
 
 async function iniciarDB() {
   const db = await openDB(NOME_BANCO, VERSAO_BANCO, {
@@ -36,6 +36,12 @@ async function iniciarDB() {
         store.createIndex("cod_conexao", "cod_conexao", { unique: false });
         store.createIndex("pppoe", "pppoe", { unique: false });
         store.createIndex("id_os_pai", "id_os_pai", { unique: false });
+      }
+      if (!db.objectStoreNames.contains("loggers")) {
+        const store = db.createObjectStore("loggers", {
+          keyPath: "id",
+          autoIncrement: true
+        });
       }
     }
   });

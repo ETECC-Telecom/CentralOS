@@ -164,7 +164,7 @@ export class Componente_Ping extends LitElement {
                     .Texto = ${this.objeto_os.OS.conferencia_tecnica.observacao_ping}
                     .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_ping.bind(this.objeto_os)}
                     .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
-                    .Categoria = "Ping"
+                    categoria = "Ping"
                     Placeholder = "Adicione aqui qualquer observação relacionado aos testes de Ping!"
                 ></caixa-texto>
 

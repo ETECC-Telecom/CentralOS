@@ -75,7 +75,7 @@ export class Componente_Encaminhar_Externa extends LitElement {
                     .Texto = ${this.objeto_os.OS.conferencia_tecnica.encaminhar_externa.observacao}
                     .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_encaminhar_externa.bind(this.objeto_os)}
                     .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
-                    .Categoria = "Encaminhar Externa"
+                    categoria = "Encaminhar Externa"
                     Placeholder = "Informe o Mótivo do porque é necessário encaminhar para a equipe externa!"
                 ></caixa-texto>  
             

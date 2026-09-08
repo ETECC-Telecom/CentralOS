@@ -76,7 +76,7 @@ export class Drawer_Scripts_Component extends LitElement {
         this.aberto = true;
         this.alvo = {};
         this.lista = [];
-        this.categoria = "Outro"
+        this.categoria = "Outros"
         this.cores = {
             "Ping" : "#1E3A8A",
             "Tracert" : "#065F46",
@@ -138,13 +138,14 @@ export class Drawer_Scripts_Component extends LitElement {
         
         <h2>Modelos de Scripts</h2>
         <hr>
-        <div style="display:flex; flex-direction:column;">
+        <div style="display: flex; flex-direction: column; overflow-y: auto; max-height: 80Vh;">
 
 
         ${this.lista.map((item, chave) => {
                 //Renderizando primeiro os da categoria do text chamado
-                
+                console.log("itens", item.categoria, this.categoria)
                 if(item.categoria === this.categoria){
+                    
                     return html`
                         <div @dblclick="${(e)=> this._Adicionar_texto(e, chave)}">
                             <h3 

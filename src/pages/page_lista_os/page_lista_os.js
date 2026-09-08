@@ -14,6 +14,9 @@ import { db_get_item_os } from '../../model/Service_Ordens_Servico';
 
 import { Card_Lista_OS } from '../../components/card_lista_os/card_lista_os';
 
+import { registrarLog } from '../../controller/logger';
+
+
 import Controller_Objeto_OS_Completa from '../../controller/controller_objeto_os_completa';
 import Controller_Objeto_OS_Los from '../../controller/controller_objeto_os_los';
 import Controller_Objeto_OS_Retirada from '../../controller/controller_objeto_os_retirada';
@@ -50,6 +53,7 @@ export class Page_Lista_OS extends LitElement {
     async connectedCallback() {
         super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
         this.lista_os = await db_ler_todos_OS();
+        
     }
 
     // Executado assim que o componente é renderizado na tela

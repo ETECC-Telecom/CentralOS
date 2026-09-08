@@ -117,7 +117,7 @@ export class Componente_Velocidade extends LitElement {
                     .Texto = ${this.objeto_os.OS.conferencia_tecnica.observacao_velocidade}
                     .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_velocidade.bind(this.objeto_os)}
                     .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
-                    .Categoria = "Velocidade"
+                    categoria = "Velocidade"
                     Placeholder = "Adicione aqui qualquer observação relacionado aos testes de Velocidade!"
                 ></caixa-texto>
 

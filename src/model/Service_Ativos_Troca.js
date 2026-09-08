@@ -1,7 +1,9 @@
 import iniciarDB from "./db";
 import { disparar_notificacao } from "../controller/disparar_notificacao";
+import { registrarLog } from "../controller/logger";
 
-export async function db_adicionar_Troca(Ativos){
+
+export async function db_adicionar_Troca(Ativos) {
     const db = await iniciarDB();
 
     try {
@@ -13,13 +15,22 @@ export async function db_adicionar_Troca(Ativos){
             pppoe: Ativos.pppoe,
             id_os_pai: Ativos.id_os_pai
         });
-        disparar_notificacao("sucesso",`Trocas de Ativos Registradas`);
+        disparar_notificacao("sucesso", `Trocas de Ativos Registradas`);
         return true;
     } catch (error) {
-        disparar_notificacao("erro",`OrNão consegui Registrar a Troca de ativos, erro:\n${error}`);
+        disparar_notificacao("erro", `OrNão consegui Registrar a Troca de ativos, erro:\n${error}`);
+        await registrarLog({
+            tipo: 'ERRO_EXECUCAO_ADICIONAR_TROCAS_DB',
+            mensagem: error?.message || String(error),
+            fonte: 'Service_Ativos_Troca.js',
+            linha: null,
+            coluna: null,
+            stack: error?.stack || null,
+            contexto: 'Ocorreu um erro ao tentar inserir o equipamento de troca no banco de dados.'
+        });
         return false;
     }
- 
+
 }
 
 

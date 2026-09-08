@@ -35,6 +35,7 @@ import { Componente_Acoes } from '../../components/componentes_formulario/compon
 
 //Componentes de Formulário
 
+import { registrarLog } from '../../controller/logger';
 
 export class Page_OS_Completa extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -84,6 +85,16 @@ export class Page_OS_Completa extends LitElement {
                 disparar_notificacao('erro', `Falha ao carregar coordenadas:\n${erro}`);
 
                 this.objeto_os.carregar_latitude_longitude(null);
+
+                await registrarLog({
+                    tipo: 'ERRO_EXECUCAO_ADICIONANDO_COORDENADAS',
+                    mensagem: error?.message || String(error),
+                    fonte: 'page_os_completa.js',
+                    linha: null,
+                    coluna: null,
+                    stack: error?.stack || null,
+                    contexto: 'Ocorreu um erro ao tentar adicionar uma nova coordenada a uma OS já criada.'
+                });
             }
         } else {
             //Caso contrário, apenas carrega a OS já existente
