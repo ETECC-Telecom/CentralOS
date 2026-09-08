@@ -35,6 +35,10 @@ export const CHARGELOG=[
                 tipo: 3, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
                 descricao: "Correção do bug na barra de rolagem nos modelos de Scripts;"
             },
+            {
+                tipo: 3, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Correção do bug no uso da IA;"
+            },
         ]
     },
     {

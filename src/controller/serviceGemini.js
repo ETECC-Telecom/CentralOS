@@ -37,10 +37,9 @@ Regras:
 Relatório:
 
     `;
-
-    // Endpoint oficial da API do Gemini
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-
+    // Endpoint atualizado para o Gemini 3.6 Flash
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+    
     // 3. Monta o corpo da requisição conforme a documentação do Gemini
     const payload = {
         contents: [{
