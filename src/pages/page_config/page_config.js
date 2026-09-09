@@ -194,7 +194,7 @@ export class Page_Config extends LitElement {
                 </div>
 
                 
-
+            <br><br><br><br>
             </main>
             <menu-inferior></menu-inferior>
         `;

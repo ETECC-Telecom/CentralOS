@@ -35,11 +35,11 @@ export async function db_adicionar_Troca(Ativos) {
 
 
 
-// export async function db_ler_todos_scripts() {
-//     const db = await iniciarDB();
-//     const scripts = await db.getAll('modelo_script');
-//     return scripts;
-// }
+export async function db_ler_todos_ativos() {
+    const db = await iniciarDB();
+    const scripts = await db.getAll('equipamentos_troca');
+    return scripts;
+}
 
 // export async function db_delete_item_script(id) {
 //     const db = await iniciarDB();

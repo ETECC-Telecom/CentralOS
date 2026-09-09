@@ -39,6 +39,7 @@ p {
     border-radius: var(--border-radius);
     padding: .5rem;
     margin: 1rem .5rem;
+    
 }
 
 /* Helper para organizar os blocos sem usar <br> */

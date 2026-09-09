@@ -1,5 +1,10 @@
 :root {
     /*Variáveis do Sistema*/
+    --color_sucess: #2dea50;
+    --border_color_sucess: #99f9aa;
+    --color_primary: #52a6fa;
+    --border_color_primary: #8bc3fb;
+
     --background-color: #F5F5F5;
     --header-color: #e4002b;
     --cards-background: #FFFFFF;
@@ -28,6 +33,8 @@
 /* Tema Escuro (ativado pela classe no body) */
 body.dark-theme {
     /*Variáveis do Sistema*/
+    --color_sucess: #007916;
+    --color_primary: #003d79;
     --background-color: #121212;
     --header-color: #1E1E1E;
     --cards-background: #252525;

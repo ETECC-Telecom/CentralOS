@@ -77,7 +77,7 @@ export class Page_Sobre extends LitElement {
                         })}
                     </article>
                 </div>
-                
+                <br><br><br><br>
             </main>
             <menu-inferior></menu-inferior>
         `;

@@ -48,12 +48,15 @@ export class Page_Lista_OS extends LitElement {
         this.relatorio = "";
         this.objeto_os = {};
         this.modal_relatorio = false;
+        this.data_inicial = Temporal.Now.plainDateISO();
+        this.data_final = this.data_inicial;
     }
 
     async connectedCallback() {
         super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
-        this.lista_os = await db_ler_todos_OS();
-        
+        this.lista_os_original = (await db_ler_todos_OS()).reverse();
+        this.lista_os = this.lista_os_original;
+
     }
 
     // Executado assim que o componente é renderizado na tela
@@ -175,6 +178,86 @@ export class Page_Lista_OS extends LitElement {
         this._Fechar_Modal();
     }
 
+    _Filtrar_OS_Nome = (e) => {
+
+        const termo = e?.target?.value || '';
+        const termoLower = termo.toLowerCase();
+
+        const lista = this.lista_os_original;
+
+        let teste = lista.filter(item =>
+            item.cliente && item.cliente.toLowerCase().startsWith(termoLower)
+        );
+
+        this.lista_os = teste
+
+    }
+    _Filtrar_OS_Categoria = (e) => {
+
+        const termo = e?.target?.value || '';
+        const termoLower = termo.toLowerCase();
+
+        if (termoLower === "todas") {
+            this.lista_os = this.lista_os_original;
+            return
+        }
+
+        console.log(termo);
+        console.log(this.lista_os_original);
+
+        const lista = this.lista_os_original;
+
+        let teste = lista.filter(item =>
+            item.categoria && item.categoria.toLowerCase().startsWith(termoLower)
+        );
+
+        this.lista_os = teste
+
+    }
+
+    _Filtrar_OS_Data = (e) => {
+        if (e.target.name === "de") {
+            this.data_inicial = Temporal.PlainDate.from(e.target.value)
+        } else {
+            this.data_final = Temporal.PlainDate.from(e.target.value)
+        }
+
+        const lista = this.lista_os_original;
+        let teste = ""
+        // Retornos do compare do Temporal para consulta
+        // -1: Se a primeira data for anterior à segunda.
+        // 0: Se as duas datas forem iguais.
+        // 1: Se a primeira data for posterior à segunda.
+
+        //Filtrando se as Datas forem iguais ou até for menor que de
+        if (Temporal.PlainDate.compare(this.data_inicial, this.data_final) === 0 || Temporal.PlainDate.compare(this.data_inicial, this.data_final) === 1) {
+
+
+        } else {
+            //Filtrando a Data dentro de um intervalo de Tempo
+            console.log("Até maior que DE")
+
+        }
+
+        teste = lista.filter(item => {
+            console.log("Teste")
+            if (!item.data_criacao) return false;
+
+            const dataOS = Temporal.PlainDate.from(item.data_criacao);
+
+            // dataOS >= this.data_inicial
+            const aposInicio = !this.data_inicial || Temporal.PlainDate.compare(dataOS, this.data_inicial) >= 0;
+
+            // dataOS <= this.data_final
+            const antesFim = !this.data_final || Temporal.PlainDate.compare(dataOS, this.data_final) <= 0;
+            
+            return aposInicio && antesFim;
+
+        });
+
+        this.lista_os = teste
+    }
+
     render() {
         return html`
             <!--Retorno renderizado-->
@@ -197,7 +280,7 @@ export class Page_Lista_OS extends LitElement {
                     <div style="flex:3">
                         <div class="form-group">
                             <select 
-                                @change=""
+                                @change="${this._Filtrar_OS_Categoria}"
                                 id="ativo" name="ativo" class="form-select">
                                 <option ?selected="" value="todas">Todas</option>
                                 <option ?selected="" value="completa">Completa</option>
@@ -212,13 +295,19 @@ export class Page_Lista_OS extends LitElement {
                         <div class="form-group">
                             <label class="form-label">De</label>
                             <div class="date-button">
-                                <input type="date" id="data">
+                                <input type="date"
+                                    name="de"
+                                    @change=${this._Filtrar_OS_Data}                                    
+                                    id="data">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Até</label>
                             <div class="date-button">
-                                <input type="date" id="data">
+                                <input type="date"
+                                    name="ate"
+                                    @change=${this._Filtrar_OS_Data}
+                                    id="data">
                             </div>
                         </div>
                     </div>
@@ -227,7 +316,7 @@ export class Page_Lista_OS extends LitElement {
                 <div class="form-group">
                     <label for="pesquisa" class="form-label"></label>
                     <input
-                        @input=""
+                        @input="${this._Filtrar_OS_Nome}"
                         type="text" id="pesquisa" name="pesquisa" value="" class="form-input"
                         placeholder="Insira o nome do cliente:">
                 </div>
