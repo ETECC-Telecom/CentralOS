@@ -1,6 +1,6 @@
 
-export const VERSAO = "0.0.2";
-export const DATA_ATUALIZACAO = "05/09/2026"
+export const VERSAO = "0.0.4";
+export const DATA_ATUALIZACAO = "11/09/2026"
 
 export const CHARGELOG = [
 
