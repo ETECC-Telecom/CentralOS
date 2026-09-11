@@ -1,7 +1,11 @@
 :root {
     /*Variáveis do Sistema*/
     --color_sucess: #2dea50;
+    --color_text_sucess:#006613;
     --border_color_sucess: #99f9aa;
+    --color_warning: #eac72d;
+    --color_text_warning:#665200;
+    --border_color_warning: #f9f699;
     --color_primary: #52a6fa;
     --border_color_primary: #8bc3fb;
 
@@ -34,6 +38,9 @@
 body.dark-theme {
     /*Variáveis do Sistema*/
     --color_sucess: #007916;
+    --color_text_sucess:#09ff36;
+    --color_warning: #735f05;
+    --color_text_warning:#edc422;
     --color_primary: #003d79;
     --background-color: #121212;
     --header-color: #1E1E1E;

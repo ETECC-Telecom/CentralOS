@@ -108,7 +108,7 @@ export class ADD_OS extends LitElement {
                 ></card-os>
                 
             </div>
-            
+            <br><br><br><br><br>
             <menu-inferior></menu-inferior>
 
             

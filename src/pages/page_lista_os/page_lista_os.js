@@ -12,6 +12,8 @@ import { db_ler_todos_OS } from '../../model/Service_Ordens_Servico';
 import { db_delete_item_os } from '../../model/Service_Ordens_Servico';
 import { db_get_item_os } from '../../model/Service_Ordens_Servico';
 
+import { Formatar_Data } from '../../controller/Formatar_data';
+
 import { Card_Lista_OS } from '../../components/card_lista_os/card_lista_os';
 
 import { registrarLog } from '../../controller/logger';
@@ -335,7 +337,7 @@ export class Page_Lista_OS extends LitElement {
                                 @editar-os="${this._editar_os}"
                                 nome = "${item.cliente}"
                                 categoria = "${item.categoria}"
-                                data = "${item.data_criacao}"
+                                data = "${Formatar_Data(item.data_criacao)}"
                                 id = "${item.id}"
                             ></card-lista_os>
                         `}

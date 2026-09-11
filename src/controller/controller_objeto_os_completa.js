@@ -135,7 +135,7 @@ export default class Controller_Objeto_OS_Completa {
         let nome_tecnico = Capturar_Nome_Tecnico();
         const URL = localStorage.getItem("formulario_feedback")
 
-        let corpo = `Boa tarde!\n\nAqui é *${nome_tecnico}* da Etecc Telecom, fui quem realizou o seu atendimento técnico. Para deixar tudo bem organizado e registrado, vou te encaminhar um resumo com os principais pontos que conversamos.\n\nNesse descritivo também incluí algumas orientações técnicas importantes que vão te ajudar bastante no dia a dia.\n\nQualquer dúvida que surgir depois, estamos à disposição 24h pelo *(13) 3421-1999*, combinado?\n\nAvalie seu atendimento em menos de 1 minuto.\nSua opinião faz toda a diferença!\n\n${URL}\n\n`;
+        let corpo = `Boa tarde!\n\nAqui é *${nome_tecnico}* da Etecc Telecom, fui quem realizou o seu atendimento técnico. Para deixar tudo bem organizado e registrado, vou te encaminhar um resumo com os principais pontos que conversamos.\n\nNesse descritivo também incluí algumas orientações técnicas importantes que vão te ajudar bastante no dia a dia.\n\nQUALQUER DÚVIDA QUE SURGIR DEPOIS, ESTAMOS À DISPOSIÇÃO 24H PELO *(13) 3421-1999*, COMBINADO?\n\nAvalie seu atendimento em menos de 1 minuto.\nSua opinião faz toda a diferença!\n\n${URL}\n\n`;
 
         //logica da estrutura da lista de infomações passadas ao cliente:
         let estaVazio = Object.keys(this.OS.educacao_cliente).length === 0;
@@ -349,7 +349,7 @@ export default class Controller_Objeto_OS_Completa {
                 corpo += `  - Observação.........: ${item.observacao === "" ? "Sem observação adicional!" : item.observacao};\n`
             })
         } else {
-            corpo += "Técnico não realizou testes em cabos de rede no Local!\n"
+            corpo += "Não foi necessário ou Não possui cabo de rede para validação (ONT)!\n"
         }
 
         return corpo;
@@ -974,7 +974,7 @@ export default class Controller_Objeto_OS_Completa {
                 corpo += `- Observação: ${item.observacao === "" ? "Sem observação adicional!" : item.observacao};\n`
             })
         } else {
-            corpo += "> Técnico não realizou testes em cabos de rede no Local!\n"
+            corpo += "> Não foi necessário ou Não possui cabo de rede para validação (ONT)!\n"
         }
 
         return corpo;

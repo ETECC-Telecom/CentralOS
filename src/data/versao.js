@@ -10,12 +10,31 @@ export const CHARGELOG = [
     //         data:"31 Julho, 2026",
     //         logs:[
     //             {
-    //                 tipo: '1', //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+    //                 tipo: 1, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
     //                 descricao: "Finalizado e lançado a primeira versão do aplicativo para testes em campo"
     //             },
     //         ]
     //     },
     {
+        versao: "0.0.4",
+        data: "11 Setembro, 2026",
+        logs: [
+            {
+                tipo: 1, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Adicionado a Função de sincronismo de dados de Informações ausentes e Informações adicionais passadas ao cliente;"
+            },
+            {
+                tipo: 1, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Adicionado contagem das Ordens de serviço realizadas no dia, semana e mês;"
+            },
+            {
+                tipo: 2, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Reformulado mensagem de encerramento para conferência de cabos de rede no local;"
+            },
+        ]
+    },
+    {
+
         versao: "0.0.3",
         data: "09 Setembro, 2026",
         logs: [
@@ -31,7 +50,7 @@ export const CHARGELOG = [
                 tipo: 2, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
                 descricao: "Adicionado lista de OS do mais recente para o mais antigo;"
             },
-            
+
         ]
     },
     {

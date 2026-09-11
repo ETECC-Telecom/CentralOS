@@ -4,9 +4,12 @@ import { Menu_Inferior } from '../../components/menu_inferior/menu_inferior';
 
 import globalStyle from "./home.css?inline";
 
+import { Contagen_OS_Dash } from '../../controller/Contagem_OS_Dash';
 //Componentes
 import { BotaoTema } from '../../components/btn_thema/btn-tema';
 import { Card_Continuar_OS } from '../../components/card_continuar_os/card_continuar_os';
+
+import { Botao_Sinc } from '../../components/btn_sinc/btn_sinc';
 
 import Controller_Objeto_OS_Completa from '../../controller/controller_objeto_os_completa';
 
@@ -19,7 +22,8 @@ export class Home_Page extends LitElement {
         nome: { type: String },
         url_config: { type: String },
         os_em_aberto: { type: Boolean },
-        url_nova_os: { type: String }
+        url_nova_os: { type: String },
+        os_dash: {type: Object}
     };
 
 
@@ -32,13 +36,17 @@ export class Home_Page extends LitElement {
         super();
         this.os_em_aberto = false;
         this.url_nova_os = ""
+        this.os_dash = {"dia":0,"semana":0,"mes":0}
 
     }
 
     async connectedCallback() {
         super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
         this._checar_os_aberta();
-
+        
+        //Carregando dados da Dash
+        this.os_dash = JSON.parse(localStorage.getItem("dash_os"));
+        
     }
 
     _checar_os_aberta = () => {
@@ -88,10 +96,7 @@ export class Home_Page extends LitElement {
             
             <header class="header-superior">
                 <img class="logo" src="letter-logo.svg" alt="letter-logo">
-                <div class="item-sync">
-                    <p style="margin-right:.4rem;">Em Aberto</p>
-                    <img class="logo-sync" src="sync.svg" alt="letter-logo">
-                </div>
+                <btn-sinc></btn-sinc>
                 
             </header>
             
@@ -100,15 +105,15 @@ export class Home_Page extends LitElement {
                 <div id="dashboard">
                     <div class="coluna">
                         <p class="dash-titulo">Hoje</p>
-                        <p class="dash-value">0</p>
+                        <p class="dash-value">${this.os_dash?.dia ||0}</p>
                     </div>
                     <div class="coluna">
                         <p class="dash-titulo">Semanal</p>
-                        <p class="dash-value">0</p>
+                        <p class="dash-value">${this.os_dash?.semana ||0}</p>
                     </div>
                     <div class="coluna">
                         <p class="dash-titulo">Mensal</p>
-                        <p class="dash-value">0</p>
+                        <p class="dash-value">${this.os_dash?.mes ||0}</p>
                     </div>
                 </div>
                 

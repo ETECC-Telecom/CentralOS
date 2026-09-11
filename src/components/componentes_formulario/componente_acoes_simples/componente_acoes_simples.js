@@ -2,7 +2,8 @@ import { LitElement, html, css, unsafeCSS } from 'lit';
 import globalStyle from "./index.css?inline";
 import { disparar_notificacao } from '../../../controller/disparar_notificacao';
 import { registrarLog } from '../../../controller/logger';
-
+import { Contagen_OS_Dash } from '../../../controller/Contagem_OS_Dash';
+import { Verificar_Salvar_Sync } from '../../../controller/controller_verificar_sinc';
 
 export class Componente_Acoes_Simples extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -68,11 +69,31 @@ export class Componente_Acoes_Simples extends LitElement {
             Retorno = await this.objeto_os.editar_OS_Banco();
         }
 
+
+
         if (Retorno[0]) {
+
+            //Adiciona Itens no Sinc para enviar a planilha:
+            try {
+                await Verificar_Salvar_Sync(this.objeto_os.OS);
+            } catch (error) {
+                disparar_notificacao("erro", `Não consegui adicionar os itens de sincronismo da OS:\n${error}`);
+                await registrarLog({
+                    tipo: 'ERRO_EXECUCAO_ADICIONAR_ITENS_SINC',
+                    mensagem: error?.message || String(error),
+                    fonte: 'componetes_acoes.js',
+                    linha: null,
+                    coluna: null,
+                    stack: error?.stack || null,
+                    contexto: 'Ocorreu um erro ao tentar adicionar itens de sincronismo ao final da OS.'
+                });
+            }
+
             //Limpamos o objeto OS salvo no local storage:
             try {
                 localStorage.setItem("OS", null);
                 localStorage.setItem("aba", 'aba1');
+                Contagen_OS_Dash();
                 window.location.href = '/';
                 return true;
             } catch (error) {

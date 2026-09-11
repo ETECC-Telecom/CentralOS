@@ -40,6 +40,31 @@ export async function db_ler_todos_OS() {
     return resumoOSs;
 }
 
+export async function db_ler_OS_filtro_mensal(ano, mes) {
+    const db = await iniciarDB();
+
+    // Formata o mês com dois dígitos (ex: 7 -> "07")
+    const mesFormatado = String(mes).padStart(2, '0');
+
+    // Define a data inicial do mês procurado
+    const inicioMes = `${ano}-${mesFormatado}-01`;
+
+    // Calcula o primeiro dia do mês seguinte para o limite superior
+    const proximoAno = mes === 12 ? ano + 1 : ano;
+    const proximoMes = mes === 12 ? 1 : mes + 1;
+    const proximoMesFormatado = String(proximoMes).padStart(2, '0');
+    const inicioProximoMes = `${proximoAno}-${proximoMesFormatado}-01`;
+
+    // Cria o intervalo: >= inicioMes E < inicioProximoMes
+    // O 4º parâmetro 'true' faz com que o limite superior seja EXCLUSIVO (<)
+    const range = IDBKeyRange.bound(inicioMes, inicioProximoMes, false, true);
+
+    // Consulta o índice passando o intervalo criado
+    const registros = await db.getAllFromIndex('ordens_servico', 'data_criacao', range);
+
+    return registros;
+}
+
 export async function db_delete_item_os(id) {
     try {
         const db = await iniciarDB();

@@ -42,7 +42,7 @@ export class Page_Lista_Troca extends LitElement {
         super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
         this.lista_ativos_original = (await db_ler_todos_ativos()).reverse();
         this.lista_ativos = this.lista_ativos_original;
-        console.log(this.lista_ativos)
+        
     }
 
     _filtrar_data_ativos = (data)=>{

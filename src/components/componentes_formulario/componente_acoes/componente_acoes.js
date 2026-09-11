@@ -5,6 +5,8 @@ import { gerarConclusaoScript } from '../../../controller/serviceGemini';
 import { Modal_IA } from '../../modal_IA/modal_IA';
 import { Modal_QR_Code } from '../../modal_qr_code/modal_qr_code';
 import { registrarLog } from '../../../controller/logger';
+import { Contagen_OS_Dash } from '../../../controller/Contagem_OS_Dash';
+import { Verificar_Salvar_Sync } from '../../../controller/controller_verificar_sinc';
 
 export class Componente_Acoes extends LitElement {
     // 1. Em vez de @property, use o objeto static properties
@@ -219,6 +221,8 @@ export class Componente_Acoes extends LitElement {
 
         const ID = this.objeto_os.OS.config_OS.id
         let Retorno = ""
+
+
         if (ID === null) {
             Retorno = await this.objeto_os.salvar_OS_Banco();
         } else {
@@ -226,10 +230,28 @@ export class Componente_Acoes extends LitElement {
         }
 
         if (Retorno[0]) {
+
+            //Adiciona Itens no Sinc para enviar a planilha:
+            try{
+                await Verificar_Salvar_Sync(this.objeto_os.OS);
+            }catch(error){
+                disparar_notificacao("erro", `Não consegui adicionar os itens de sincronismo da OS:\n${error}`);
+                await registrarLog({
+                    tipo: 'ERRO_EXECUCAO_ADICIONAR_ITENS_SINC',
+                    mensagem: error?.message || String(error),
+                    fonte: 'componetes_acoes.js',
+                    linha: null,
+                    coluna: null,
+                    stack: error?.stack || null,
+                    contexto: 'Ocorreu um erro ao tentar adicionar itens de sincronismo ao final da OS.'
+                });
+            }
+
             //Limpamos o objeto OS salvo no local storage:
             try {
                 localStorage.setItem("OS", null);
                 localStorage.setItem("aba", 'aba1');
+                Contagen_OS_Dash();
                 window.location.href = '/';
                 return true;
             } catch (error) {
@@ -326,6 +348,7 @@ export class Componente_Acoes extends LitElement {
                     style="display:flex; align-items: center; justify-content: center; gap:1rem">
                     <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2rem" height="2rem" viewBox="0 0 143.933 143.933"><path d="M-333.784 790.039c-2.165-.648-4.898-3.234-5.905-5.589-.658-1.537-.795-12.11-.795-61.306 0-40.517.195-59.967.612-61.074.912-2.418 3.969-5.313 6.29-5.958 1.126-.313 3.28-.57 4.79-.572h2.742v48.316l1.343 2.545c.739 1.4 2.45 3.324 3.803 4.277l2.459 1.732h48.876l2.504-1.74c1.463-1.017 3.043-2.807 3.802-4.308 1.286-2.542 1.3-2.82 1.3-26.695V655.54l3.608.022c6.274.022 6.816.458 22.89 18.384 7.998 8.92 14.92 17.126 15.384 18.234.713 1.706.842 8.79.842 46.164 0 29.727-.2 44.68-.613 45.774-.911 2.417-3.968 5.313-6.29 5.958-2.564.712-105.258.689-107.642-.024zm97.765-12.358c2.29-2.073 2.39-3.304 2.22-27.324l-.163-23.207-1.887-1.887-1.887-1.887-39.101-.157c-28.59-.113-39.534.024-40.713.511-.886.367-2.122 1.317-2.746 2.11-1.088 1.383-1.136 2.457-1.136 25.57v24.127l1.773 1.773 1.772 1.772 38.21.149c21.015.08 39.191-.022 40.391-.21 1.2-.196 2.67-.8 3.267-1.34zm-79.639-15.91v-5.205l37.961.148 37.962.149v9.815l-37.962.148-37.96.149zm0-21.358v-5.2h76.256l-.166 5.05-.167 5.053-37.962.148-37.96.149zm.289-32.719c-2.364-1.246-4.254-3.034-5.396-5.102-.843-1.53-.955-4.38-.955-24.25v-22.517l27.28-.15 27.28-.15v22.545c0 20.984-.076 22.694-1.093 24.688-1.35 2.646-2.662 3.86-5.405 5.006-3.195 1.336-39.16 1.274-41.711-.072z" style="fill:white;stroke-width:1" transform="translate(351.828 -651.095)"/></svg>
                     <span>Finalizar Relatório</span></button>
+
 
             </div>
             <modal-ia
