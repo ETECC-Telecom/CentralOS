@@ -103,7 +103,7 @@ export default class Controller_Objeto_OS_Retencao {
     //===============================================================================================================
 
     alterar_tipo_os = (tipo) => {
-        if (this.OS === {} || this.OS === null) {
+        if (Object.keys(this.OS).length === 0 || this.OS === null) {
             return
         }
         this.OS.config_OS.tipo_os = tipo;
@@ -205,6 +205,14 @@ export default class Controller_Objeto_OS_Retencao {
         const DATA = data;
         if (DATA !== "") {
             this.OS.conferencia_tecnica.encaminhar_externa.observacao = DATA;
+        }
+    }
+
+    callback_adicionar_texto_justificativa_educao_cliente(data){
+        const DATA = data;
+        if (DATA !== "") {
+            this.OS.relato_omissao = DATA;
+            this.salvar_os_localstorage();
         }
     }
     //===============================================================================================================
@@ -421,6 +429,10 @@ export default class Controller_Objeto_OS_Retencao {
             informacoes = '';
         }
 
+        if (this.OS.config_OS.info_encaminhadas === false){
+            corpo += this.OS?.relato_omissao !== null ? `\n${this.OS.relato_omissao}\n`:"\nNão foi informado uma Justificativa!\n"
+        }
+
         corpo += informacoes;
         return corpo;
     }
@@ -603,6 +615,10 @@ export default class Controller_Objeto_OS_Retencao {
             })
         } else {
             informacoes = '';
+        }
+
+        if (this.OS.config_OS.info_encaminhadas === false){
+            corpo += this.OS?.relato_omissao !== null ? `\n${this.OS.relato_omissao}\n`:"\nNão foi informado uma Justificativa!\n"
         }
 
         corpo += informacoes;

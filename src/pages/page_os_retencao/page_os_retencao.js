@@ -22,7 +22,7 @@ import { Tratativa_Retencao } from '../../components/componentes_formulario/trat
 import { Informacao_Passada_Cliente } from '../../components/componentes_formulario/info_passadas_cliente/info_passadas_cliente';
 import { Atendimento_Feito_Cliente } from '../../components/componentes_formulario/info_visita/info_visita';
 import { Informacao_Adicionais_Passadas } from '../../components/componentes_formulario/info_adicionais_passadas/info_adicionais_passadas';
-
+import { Componente_Just_Info_Cliente } from '../../components/componentes_formulario/componente_just_Info_Cliente/componente_just_info_cliente';
 
 //Finalização
 
@@ -182,6 +182,10 @@ export class Page_OS_Retencao extends LitElement {
                         <atendimento-feito-cliente
                             .objeto_os = "${this.objeto_os}"
                         ></atendimento-feito-cliente>
+                        
+                        <componente-just-info-cliete
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-just-info-cliete>
 
                         <informacoes-adicionais-passadas
                             .objeto_os = "${this.objeto_os}"

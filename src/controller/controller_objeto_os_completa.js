@@ -6,6 +6,9 @@ import { db_adicionar_OS } from "../model/Service_Ordens_Servico";
 import { db_adicionar_Troca } from "../model/Service_Ativos_Troca";
 import { db_editar_OS } from "../model/Service_Ordens_Servico";
 
+import { Capturar_Power_Mitter } from "../model/Service_Cod_Powermitter";
+import { Formatar_Data } from "./Formatar_data";
+
 import { registrarLog } from "./logger";
 
 export default class Controller_Objeto_OS_Completa {
@@ -135,7 +138,15 @@ export default class Controller_Objeto_OS_Completa {
         let nome_tecnico = Capturar_Nome_Tecnico();
         const URL = localStorage.getItem("formulario_feedback")
 
-        let corpo = `Boa tarde!\n\nAqui é *${nome_tecnico}* da Etecc Telecom, fui quem realizou o seu atendimento técnico. Para deixar tudo bem organizado e registrado, vou te encaminhar um resumo com os principais pontos que conversamos.\n\nNesse descritivo também incluí algumas orientações técnicas importantes que vão te ajudar bastante no dia a dia.\n\nQUALQUER DÚVIDA QUE SURGIR DEPOIS, ESTAMOS À DISPOSIÇÃO 24H PELO *(13) 3421-1999*, COMBINADO?\n\nAvalie seu atendimento em menos de 1 minuto.\nSua opinião faz toda a diferença!\n\n${URL}\n\n`;
+        //Ajustando Saudação:
+
+        // Pega o horário atual no sistema local
+        const agora = Temporal.Now.plainTimeISO();
+
+        // Se a hora for menor que 12, é AM. Caso contrário, PM.
+        const periodo = agora.hour < 12 ? 'AM' : 'PM';
+
+        let corpo = `${periodo === "AM"? "Bom dia!":"Boa tarde!"}\n\nAqui é *${nome_tecnico}* da Etecc Telecom, fui quem realizou o seu atendimento técnico. Para deixar tudo bem organizado e registrado, vou te encaminhar um resumo com os principais pontos que conversamos.\n\nNesse descritivo também incluí algumas orientações técnicas importantes que vão te ajudar bastante no dia a dia.\n\nQUALQUER DÚVIDA QUE SURGIR DEPOIS, ESTAMOS À DISPOSIÇÃO 24H PELO *(13) 3421-1999*, COMBINADO?\n\nAvalie seu atendimento em menos de 1 minuto.\nSua opinião faz toda a diferença!\n\n${URL}\n\n`;
 
         //logica da estrutura da lista de infomações passadas ao cliente:
         let estaVazio = Object.keys(this.OS.educacao_cliente).length === 0;
@@ -174,13 +185,36 @@ export default class Controller_Objeto_OS_Completa {
 
     }
 
+    Definir_Mitter_OS = () => {
+        const DATA = Capturar_Power_Mitter();
+        
+        if (DATA !== null) this.OS.config_OS.power_mitter = DATA;
+        
+    }
+
 
     //Função para Finalizar OS: 
     /*
         Essa função irá encerrar a OS gerando os script de info passadas ao cliente, e script final. A ideia é que, ao ser executada, ela faça algumas verificações
         Consulte a documentação do projeto!
     */
+    //Função Global de exportação
+    auditoria_power_mitter = (tipo) =>{
 
+        const DATA = this.OS.config_OS?.power_mitter || null;
+
+        //Configurando a mensagem de acordo com o tipo de saida solicitada "mk" ou "md"
+        if (tipo ==="mk"){
+            if (DATA === null) return "  - Power Mitter.........: Power Mitter Não Cadastrado;\n";
+
+            return `  - Power Mitter.........: ${DATA.cod};\n  - Revisão..............: ${Formatar_Data(DATA.data)};\n  - Revisor..............: ${DATA.auditor};\n`;
+        }else{
+            if (DATA === null) return "- Power Mitter: Power Mitter Não Cadastrado;\n";
+
+            return ` - Power Mitter: ${DATA.cod};\n - Revisão: ${Formatar_Data(DATA.data)};\n - Revisor: ${DATA.auditor};\n`;
+        }
+        
+    }
     /*
 ---------------------------------------------------------------------------------------------------------------------------------------------
         Funções Relacionadas a Exportação do Relatório Completo para Anexo no MK!
@@ -205,6 +239,8 @@ export default class Controller_Objeto_OS_Completa {
         //Relatório Final:
 
         script += this.relatorio_visita_simples();
+
+        script += this.relatorio_atraso_simples();
 
         // Retornando o script Montado.
         return script;
@@ -362,11 +398,14 @@ export default class Controller_Objeto_OS_Completa {
         } else {
             const limpeza = `${this.OS.conferencia_tecnica.fibra.limpeza === true ? "Realizado a limpeza dos conectores" : "Não realizado a limpeza dos conectores"}`;
             const anexo = `${this.OS.conferencia_tecnica.fibra.anexo_sinal === true ? "foto da medição anexada na OS." : "foto não anexada!"}`
-
+            
             corpo += `${limpeza}, ${anexo}\n\n`;
-            corpo += `  - Sinal PTO............: ${this.OS.conferencia_tecnica.fibra.sinal_pto === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pto + " dBm"};\n`;
-            corpo += `  - Sinal Patchcord......: ${this.OS.conferencia_tecnica.fibra.sinal_pathcord === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pathcord + " dBm"};\n`;
-            corpo += `  - Sinal AutoISP........: ${this.OS.conferencia_tecnica.fibra.sinal_autoisp === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_autoisp + " dBm"};\n`;
+            corpo += this.auditoria_power_mitter('mk');
+            if (this.OS.conferencia_tecnica.fibra.sinal_pto !== null) corpo += `  - Sinal PTO............: -${this.OS.conferencia_tecnica.fibra.sinal_pto} dBm;\n`;
+            if (this.OS.conferencia_tecnica.fibra.sinal_pathcord !== null) corpo += `  - Sinal Patchcord......: -${this.OS.conferencia_tecnica.fibra.sinal_pathcord} dBm;\n`;
+            if (this.OS.conferencia_tecnica.fibra.sinal_autoisp !== null) corpo += `  - Sinal AutoISP........: -${this.OS.conferencia_tecnica.fibra.sinal_autoisp} dBm;\n`;
+            
+            
 
         }
 
@@ -742,7 +781,13 @@ export default class Controller_Objeto_OS_Completa {
         corpo += '\t\t\tEDUCAÇÃO DO CLIENTE\n';
         corpo += '==========================================================================\n\n';
         corpo += `Mensagem Encaminhada via Whatsapp: ${this.OS.config_OS.info_encaminhadas === true ? "Mensagem Encaminhada." : "Não Encaminhado."}\n\n`
-        corpo += `Informações passadas ao cliente:\n${informacoes}`
+        
+        
+        if (this.OS.config_OS.info_encaminhadas === false){
+            corpo += this.OS?.relato_omissao !== null ? `${this.OS.relato_omissao}\n`:"Não foi informado uma Justificativa!\n"
+        }
+        
+        corpo += `\nInformações passadas ao cliente:\n${informacoes}`
         //Educação adicional fornecida pelo técnico:
 
         informacoes = "";
@@ -780,6 +825,9 @@ export default class Controller_Objeto_OS_Completa {
         return corpo;
     }
     relatorio_bat_simples = () => {
+
+        if (this.OS.relatorio_estabilidade === null) return "";
+
         let corpo = '\n==========================================================================\n';
         corpo += '\t\t\RELATÓRIO .BAT SIMPLIFICADO\n';
         corpo += '==========================================================================\n\n';
@@ -787,6 +835,18 @@ export default class Controller_Objeto_OS_Completa {
         if (!(this.OS.relatorio_estabilidade === null)) {
             corpo += `${this.OS.relatorio_estabilidade}`;
         }
+
+        return corpo;
+    }
+
+    relatorio_atraso_simples = ()=> {
+
+        if (this.OS.relato_atraso === null) return "";
+
+        let corpo = '\n==========================================================================\n';
+        corpo += '\t\t\RELATÓRIO ATRASO NA O.S.\n';
+        corpo += '==========================================================================\n\n';
+        corpo += `${this.OS.relato_atraso}`;
 
         return corpo;
     }
@@ -836,9 +896,14 @@ export default class Controller_Objeto_OS_Completa {
         script += this.relatorio_educacao_cliente();
         //Adicionando o .Bat:
         if (!(this.OS.relatorio_estabilidade === null)) {
-            script += `## Relatório .BAT\n\n${this.OS.relatorio_estabilidade}`;
+            script += `## Relatório .BAT\n\n${this.OS.relatorio_estabilidade}\n`;
         }
 
+        if (this.OS.relato_atraso !== null && this.OS.relato_atraso !== undefined){
+            script += `## RELATÓRIO ATRASO NA O.S.\n\n${this.OS.relato_atraso}`
+        }
+
+        
         // Retornando o script Montado.
         return script;
 
@@ -990,15 +1055,18 @@ export default class Controller_Objeto_OS_Completa {
             const anexo = `${this.OS.conferencia_tecnica.fibra.anexo_sinal === true ? "foto em anexo." : "foto não anexada!"}`
 
             corpo += `${limpeza}, ${anexo}\n`;
-            corpo += `- Sinal na PTO: ${this.OS.conferencia_tecnica.fibra.sinal_pto === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pto + " dBm"};\n`;
-            corpo += `- Sinal no Pathcord: ${this.OS.conferencia_tecnica.fibra.sinal_pathcord === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_pathcord + " dBm"};\n`;
-            corpo += `- Sinal AutoISP: ${this.OS.conferencia_tecnica.fibra.sinal_autoisp === null ? "Não Anexado" : "-" + this.OS.conferencia_tecnica.fibra.sinal_autoisp + " dBm"};\n`;
 
+            corpo += this.auditoria_power_mitter('md');
+            if (this.OS.conferencia_tecnica.fibra.sinal_pto !== null) corpo += `  - Sinal PTO: -${this.OS.conferencia_tecnica.fibra.sinal_pto} dBm;\n`;
+            if (this.OS.conferencia_tecnica.fibra.sinal_pathcord !== null) corpo += `  - Sinal Patchcord: -${this.OS.conferencia_tecnica.fibra.sinal_pathcord} dBm;\n`;
+            if (this.OS.conferencia_tecnica.fibra.sinal_autoisp !== null) corpo += `  - Sinal AutoISP: -${this.OS.conferencia_tecnica.fibra.sinal_autoisp} dBm;\n`;
+            
         }
 
         return corpo;
     }
 
+    
     conferencia_fontes = () => {
         let corpo = "### Fontes\n";
         corpo += `- ${this.OS.conferencia_tecnica.fontes.mau_contato === true ? "Foi realizada a verificação das conexões elétricas das fontes, não sendo identificado nenhum indício de mau contato." : "Não foi realizada a verificação das conexões elétricas das fontes durante este atendimento."};\n`;
@@ -1324,8 +1392,12 @@ export default class Controller_Objeto_OS_Completa {
             }
         }
 
-        corpo += `### Educação do Cliente:\n\n**Mensagem Encaminhada via Whatsapp:** ${this.OS.config_OS.info_encaminhadas === true ? "Mensagem Encaminhada." : "Não Encaminhado."}\n\n**Informações passadas ao cliente**:\n${informacoes}`
+        corpo += `### Educação do Cliente:\n\n**Mensagem Encaminhada via Whatsapp:** ${this.OS.config_OS.info_encaminhadas === true ? "Mensagem Encaminhada." : "Não Encaminhado."}\n\n**Informações passadas ao cliente**:\n${informacoes}\n`
         //Educação adicional fornecida pelo técnico:
+
+        if (this.OS.config_OS.info_encaminhadas === false){
+            corpo += this.OS?.relato_omissao !== null ? `${this.OS.relato_omissao}\n`:"Não foi informado uma Justificativa!\n"
+        }
 
         informacoes = "";
         if (this.OS.complemento_atendimento.length != 0) {
@@ -1365,8 +1437,7 @@ export default class Controller_Objeto_OS_Completa {
     //--------------------- Métodos para Alteração dos Atributos ---------------------
 
     alterar_tipo_os = (tipo) => {
-        if (this.OS === {} || this.OS === null) {
-            console.log("entrei")
+        if (Object.keys(this.OS).length === 0 || this.OS === null) {
             return
         }
         this.OS.config_OS.tipo_os = tipo;
@@ -1424,7 +1495,6 @@ export default class Controller_Objeto_OS_Completa {
             tipo: "cabo",
             url: velocidade_estruturado.share_url,
         }
-        console.log(ITEM)
         this.OS.conferencia_tecnica.velocidade_adicional.push(ITEM)
     }
 
@@ -1574,6 +1644,22 @@ export default class Controller_Objeto_OS_Completa {
         const DATA = data;
         if (DATA !== "") {
             this.OS.conferencia_tecnica.encaminhar_externa.observacao = DATA;
+        }
+    }
+
+    callback_adicionar_texto_justificativa_educao_cliente(data){
+        const DATA = data;
+        if (DATA !== "") {
+            this.OS.relato_omissao = DATA;
+            this.salvar_os_localstorage();
+        }
+    }
+
+    callback_adicionar_texto_relatorio_atraso(data){
+        const DATA = data;
+        if (DATA !== "") {
+            this.OS.relato_atraso = DATA;
+            this.salvar_os_localstorage();
         }
     }
 

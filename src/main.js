@@ -10,9 +10,10 @@ import { Page_OS_Chip } from './pages/page_os_chip/page_os_chip';
 import { Page_OS_Retencao } from './pages/page_os_retencao/page_os_retencao';
 import { Page_OS_Retirada } from './pages/page_os_retirada/page_os_retirada';
 import { Page_Lista_Troca } from './pages/page_lista_troca/page_lista_troca';
-
 import { Page_Config } from './pages/page_config/page_config';
 import { Page_Sobre } from './pages/page_sobre/page_sobre';
+import { Page_Lideranca } from './pages/page_lideranca/page_lidenranca';
+import { Page_Treinamento } from './pages/page_treino/page_treino';
 
 import { Gerenciar_Scripts } from './pages/gerenciar_scripts/gerenciar_scripts';
 import { Page_Lista_OS } from './pages/page_lista_os/page_lista_os';
@@ -138,8 +139,15 @@ export class Main extends LitElement {
                 path: `${BASE_PATH}/sobre`,
                 render: () => html`<page-sobre></page-sobre>`,
             },
+            {
+                path: `${BASE_PATH}/lideranca`,
+                render: () => html`<page-lideranca></page-lideranca>`,
+            },
+            {
+                path: `${BASE_PATH}/treinamento`,
+                render: () => html`<page-treinamento></page-treinamento>`,
+            },
             
-
             {
                 path: '/perfil/:name',
                 // Os parâmetros da URL chegam como um objeto no primeiro argumento

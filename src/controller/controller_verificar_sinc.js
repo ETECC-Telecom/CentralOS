@@ -5,10 +5,11 @@ export const Verificar_Salvar_Sync = async (data) => {
 
     const Informacoes_Extras = data.complemento_atendimento;
     const Informacoes_Anexadas = data.endereco_info_os;
+    const Relatorio_Atraso = data.relato_atraso;
     const Cliente = data.info_cliente.nome_cadastro;
     
     //Validando se temos alguma informação extra ou se falta de informacao:
-    if(Informacoes_Extras.length === 0 && Informacoes_Anexadas.info_necessaria){
+    if(Informacoes_Extras.length === 0 && Informacoes_Anexadas.info_necessari && Relatorio_Atraso === null){
         return
     }
 
@@ -51,6 +52,12 @@ export const Verificar_Salvar_Sync = async (data) => {
 
     } else {
         script += "> Não tivemos relatório referente a Informações necessárias na abertura da OS!"
+    }
+
+    // Construindo a estrutura de Atraso
+
+    if (Relatorio_Atraso !== null){
+        script += `\n## Relato de Atraso\n\n > [!quote] Motivo:\n>${Relatorio_Atraso}`
     }
 
     //Construindo o Payload

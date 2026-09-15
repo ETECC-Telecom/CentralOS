@@ -19,6 +19,7 @@ export class Componente_Acoes extends LitElement {
         legenda_botton: { type: String },
         exibir_modal_sinc: { type: Boolean },
         usando_ia: { type: Boolean },
+        autorizado_encaminhar: {type:Boolean},
     };
 
     static get styles() {
@@ -35,6 +36,7 @@ export class Componente_Acoes extends LitElement {
         this.legenda_botton = "";
         this.exibir_modal_sinc = false;
         this.usando_ia = false;
+        this.autorizado_encaminhar = true;
     }
 
     // Executado assim que o componente é renderizado na tela
@@ -43,7 +45,8 @@ export class Componente_Acoes extends LitElement {
 
     connectedCallback() {
         super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
-        this.usando_ia = this.objeto_os.OS.config_OS.usado_resumo_ia
+        this.usando_ia = this.objeto_os.OS.config_OS.usado_resumo_ia;
+        this.autorizado_encaminhar = this.objeto_os.OS.config_OS.info_encaminhadas;
     }
     _Desabilitar_uso_IA = () => {
         this.objeto_os.OS.config_OS.usado_resumo_ia = false;
@@ -320,13 +323,17 @@ export class Componente_Acoes extends LitElement {
                         `: ""}
                     
                 </div>
-
+                
+                ${this.autorizado_encaminhar? html`
                 <button 
                     @click="${this._Encaminhar_Mensagem_Whatsapp}"
                     type="button" class="form-button"
                     style="display:flex; align-items: center; justify-content: center; gap:1rem">
                     <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2rem" height="2rem" viewBox="0 0 143.933 143.933"><path d="M-313.173 785.763c-1.115-.323-3.112-2.13-3.682-3.332-.42-.883-6.28-31.837-6.071-32.061.07-.075 30.222 21.426 32.004 22.822.524.411.523.42-.132.96-1.294 1.068-16.256 10.917-17.313 11.397-1.152.523-3.397.623-4.806.214m49.106-5.103c-.655-.19-1.629-.574-2.164-.852-1.19-.618-38.843-27.967-38.768-28.159.03-.075 16.663-16.492 36.963-36.482s39.648-39.08 42.995-42.422l6.086-6.076-15.478 12.16c-8.513 6.687-30.464 23.949-48.78 38.36l-33.3 26.2-13.663-9.923c-7.514-5.457-14.222-10.463-14.905-11.123-1.79-1.73-2.456-3.378-2.433-6.012.028-3.219 1.36-5.651 3.91-7.136 1.955-1.14 127.454-49.088 128.48-49.088.52 0 1.211.186 1.535.413.696.487 1.38 1.72 1.38 2.484 0 .68-40.304 111.063-41.2 112.835-.941 1.864-2.877 3.644-4.737 4.356-1.919.734-4.345.925-5.92.465" style="fill:white"; transform="translate(351.828 -651.095)"></svg>
                     <span>Encaminhar Whatsapp</span></button>
+                    
+                    `:""}
+                
 
                 <button 
                     @click="${this._Abrir_Modal_Sinc}"

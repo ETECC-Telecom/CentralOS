@@ -235,14 +235,17 @@ export class Page_Lista_Troca extends LitElement {
                                     <p style="display:flex; align-items: center; gap:0.5rem"><icon-link></icon-link> <b>Cod. Conexão:</b> ${item?.cod_conexao || "Não Informado"}</p>
                                     <p style="display:flex; align-items: center; gap:0.5rem"><icone-usuario></icone-usuario> <b>PPPoE:</b> ${item?.pppoe || "Não Informado"}</p>
                                 </div>
-                                <div style="flex:1">
-                                    <h4 style="display:flex; align-items: center; gap:0.5rem" class="tag_retirado"><icone-up style="--icon-size: 1rem;"></icone-up>Retirados</h4>
-                                    ${this._filtrar_data_ativos(item.retirados)}
+                                <div style="flex:3">
+                                    <div style="flex:1">
+                                        <h4 style="display:flex; align-items: center; gap:0.5rem" class="tag_retirado"><icone-up style="--icon-size: 1rem;"></icone-up>Retirados</h4>
+                                        ${this._filtrar_data_ativos(item.retirados)}
+                                    </div>
+                                    <div style="flex:1">
+                                        <h4 style="display:flex; align-items: center; gap:0.5rem" class="tag_inserido"><icone-down style="--icon-size: 1rem;"></icone-down>Inseridos</h4>
+                                        ${this._filtrar_data_ativos(item.inseridos)}
+                                    </div>
                                 </div>
-                                <div style="flex:1">
-                                    <h4 style="display:flex; align-items: center; gap:0.5rem" class="tag_inserido"><icone-down style="--icon-size: 1rem;"></icone-down>Inseridos</h4>
-                                    ${this._filtrar_data_ativos(item.inseridos)}
-                                </div>
+                                
                             </div>
                         </div>
                         `}

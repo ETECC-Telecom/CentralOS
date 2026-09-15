@@ -56,6 +56,7 @@ export class Page_OS_Los extends LitElement {
         if (this.tipo == 'novo') {
             this.objeto_os = new Controller_Objeto_OS_Los(Ordem_Servico_Los);
             this.objeto_os.alterar_tipo_os("los");
+            this.objeto_os.Definir_Mitter_OS();
             localStorage.setItem('aba', "aba1");
             //Adiciona uma nova coordenada e data em uma OS recem criada!
             try {

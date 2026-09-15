@@ -8,6 +8,8 @@ export class Drawer_Scripts_Component extends LitElement {
         lista: {type: Array},
         categoria: {type:String},
         cores: {type: Object},
+        atualizar_db: {type: Function},
+        atualizar_texto: {type: Function},
     };
 
     static styles = css`
@@ -89,6 +91,8 @@ export class Drawer_Scripts_Component extends LitElement {
             "Encaminhar Externa" : "#374151",
             "Outros" : "#78350F",
         }
+        this.atualizar_db = null;
+        this.atualizar_texto = null;
     }
 
     _fechar = () => {
@@ -121,6 +125,8 @@ export class Drawer_Scripts_Component extends LitElement {
         campo.selectionStart = novaPosicaoCursor;
         campo.selectionEnd = novaPosicaoCursor;
 
+        this.atualizar_texto(campo.value);
+        this.atualizar_db();
         // 5. Devolve o foco visual para o campo
         campo.focus();
         this._fechar();
@@ -143,7 +149,7 @@ export class Drawer_Scripts_Component extends LitElement {
 
         ${this.lista.map((item, chave) => {
                 //Renderizando primeiro os da categoria do text chamado
-                console.log("itens", item.categoria, this.categoria)
+                
                 if(item.categoria === this.categoria){
                     
                     return html`
@@ -194,10 +200,12 @@ export class Drawer_Scripts_Component extends LitElement {
 
 customElements.define('drawer-scripts', Drawer_Scripts_Component);
 
-export async function estourar_drawer(e, categoria) {
+export async function estourar_drawer(e, categoria, atualizar_db, atualizar_texto) {
     const modalEl = document.createElement('drawer-scripts'); // Cria o elemento
     modalEl.alvo = e;
     modalEl.categoria = categoria;
+    modalEl.atualizar_db = atualizar_db; 
+    modalEl.atualizar_texto = atualizar_texto;
 
     document.body.appendChild(modalEl);                  // Injeta na página
 }

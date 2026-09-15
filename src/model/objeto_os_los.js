@@ -9,7 +9,7 @@ export const Ordem_Servico_Los = {
 		data_criacao: null,
 		data_alteracao: null,
 		usado_resumo_ia: false,
-
+		power_mitter: null,
 	},
 	info_cliente: {
 		nome_cliente: null, //Nome de quem acompanhou a visita;

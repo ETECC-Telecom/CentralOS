@@ -32,6 +32,7 @@ import { Componente_Ajuda_Interna } from '../../components/componentes_formulari
 import { Componente_Indicacao } from '../../components/componentes_formulario/componente_indicacao/componente_indicacao';
 import { Componente_Info_Extra } from '../../components/componentes_formulario/componente_inforcao_extra/componente_inforcao_extra';
 import { Componente_Acoes } from '../../components/componentes_formulario/componente_acoes/componente_acoes';
+import { Componente_Just_Info_Cliente } from '../../components/componentes_formulario/componente_just_Info_Cliente/componente_just_info_cliente';
 
 //Componentes de Formulário
 
@@ -69,6 +70,7 @@ export class Page_OS_Completa extends LitElement {
         if (this.tipo == 'novo') {
             this.objeto_os = new Controller_Objeto_OS_Completa(Ordem_Servico_Completa);
             this.objeto_os.alterar_tipo_os("completa");
+            this.objeto_os.Definir_Mitter_OS();
             localStorage.setItem('aba', "aba1");
             //Adiciona uma nova coordenada e data em uma OS recem criada!
             try {
@@ -234,6 +236,10 @@ export class Page_OS_Completa extends LitElement {
                         <atendimento-feito-cliente
                             .objeto_os = "${this.objeto_os}"
                         ></atendimento-feito-cliente>
+
+                        <componente-just-info-cliete
+                            .objeto_os = "${this.objeto_os}"
+                        ></componente-just-info-cliete>
 
                         <informacoes-adicionais-passadas
                             .objeto_os = "${this.objeto_os}"

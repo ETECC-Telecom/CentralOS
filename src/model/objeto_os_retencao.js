@@ -4,7 +4,7 @@ export const Ordem_Servico_Retencao = {
     config_OS: {
 		tipo_os: null, //Completa, Retenção e etc.
 		finalizada: false,
-		info_encaminhadas: false, //informação copiada/enviada ao cliente
+		info_encaminhadas: true, //informação copiada/enviada ao cliente
 		id: null, //id do banco
 		data_criacao: null,
 		data_alteracao: null,
@@ -82,5 +82,6 @@ export const Ordem_Servico_Retencao = {
 	],
 
     relato_adicional: null, //Informaçoes adicionais relacionadas a Visita
+	relato_omissao: null, // Relato do Técnico sobre o motivo de ter omitido as informações adicionais passadas ao cliente
 
 }

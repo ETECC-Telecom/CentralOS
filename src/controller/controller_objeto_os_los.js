@@ -4,6 +4,9 @@ import { Capturar_Nome_Tecnico } from "./capturar_nome_tecnico";
 import { db_adicionar_OS } from "../model/Service_Ordens_Servico";
 import { db_editar_OS } from "../model/Service_Ordens_Servico";
 
+import { Capturar_Power_Mitter } from "../model/Service_Cod_Powermitter";
+import { Formatar_Data } from "./Formatar_data";
+
 export default class Controller_Objeto_OS_Los {
     constructor(estrura_os = {}) {
         this.OS = estrura_os;
@@ -57,7 +60,7 @@ export default class Controller_Objeto_OS_Los {
     //===============================================================================================================
 
     alterar_tipo_os = (tipo) => {
-        if (this.OS === {} || this.OS === null) {
+        if (Object.keys(this.OS).length === 0 || this.OS === null) {
             return
         }
         this.OS.config_OS.tipo_os = tipo;
@@ -161,52 +164,78 @@ export default class Controller_Objeto_OS_Los {
             this.OS.conferencia_tecnica.encaminhar_externa.observacao = DATA;
         }
     }
+    Definir_Mitter_OS = () => {
+        const DATA = Capturar_Power_Mitter();
+
+        if (DATA !== null) this.OS.config_OS.power_mitter = DATA;
+
+    }
 
     //===============================================================================================================
     //                          Funções para Manipualção do Banco de Dados:
     //===============================================================================================================
-    async salvar_OS_Banco (){
-            //Coletando os dados para salvar no banco.
-            const cliente = this.OS.info_cliente.nome_cadastro === null?"Não Informado":this.OS.info_cliente.nome_cadastro;
-    
-                // Cria um objeto contendo apenas a data
-            const date = Temporal.PlainDate.from(this.OS.config_OS.data_criacao);
-            const data_criacao = date.toString()
-            
-            const categoria = this.OS.config_OS.tipo_os;
-            
-            //Coloca a OS em estado de finalizada:
-            this.OS.config_OS.finalizada = true;
-    
-            //Iniciando o Save no Banco de Dados:
-            const Resposta = await db_adicionar_OS(this.OS, cliente, data_criacao, categoria);
-            
-               
-            return Resposta
-    
-        }
-    
-    async editar_OS_Banco (){
-            //Coletando os dados para salvar no banco.
-            const cliente = this.OS.info_cliente.nome_cadastro === null?"Não Informado":this.OS.info_cliente.nome_cadastro;
-    
-                // Cria um objeto contendo apenas a data
-            const date = Temporal.PlainDate.from(this.OS.config_OS.data_criacao);
-            const data_criacao = date.toString()
-            
-            const categoria = this.OS.config_OS.tipo_os;
-            
-            const ID = this.OS.config_OS.id;
-    
-            //Iniciando o Save no Banco de Dados:
-            const Resposta = await db_editar_OS(this.OS, ID, cliente, data_criacao, categoria);
-    
-            return Resposta
-    
-        }
+    async salvar_OS_Banco() {
+        //Coletando os dados para salvar no banco.
+        const cliente = this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro;
+
+        // Cria um objeto contendo apenas a data
+        const date = Temporal.PlainDate.from(this.OS.config_OS.data_criacao);
+        const data_criacao = date.toString()
+
+        const categoria = this.OS.config_OS.tipo_os;
+
+        //Coloca a OS em estado de finalizada:
+        this.OS.config_OS.finalizada = true;
+
+        //Iniciando o Save no Banco de Dados:
+        const Resposta = await db_adicionar_OS(this.OS, cliente, data_criacao, categoria);
+
+
+        return Resposta
+
+    }
+
+    async editar_OS_Banco() {
+        //Coletando os dados para salvar no banco.
+        const cliente = this.OS.info_cliente.nome_cadastro === null ? "Não Informado" : this.OS.info_cliente.nome_cadastro;
+
+        // Cria um objeto contendo apenas a data
+        const date = Temporal.PlainDate.from(this.OS.config_OS.data_criacao);
+        const data_criacao = date.toString()
+
+        const categoria = this.OS.config_OS.tipo_os;
+
+        const ID = this.OS.config_OS.id;
+
+        //Iniciando o Save no Banco de Dados:
+        const Resposta = await db_editar_OS(this.OS, ID, cliente, data_criacao, categoria);
+
+        return Resposta
+
+    }
     //===============================================================================================================
     //                          Funções Gerar Relatório da OS:
     //===============================================================================================================
+
+    //Função Global de exportação
+    auditoria_power_mitter = (tipo) =>{
+
+        const DATA = this.OS.config_OS?.power_mitter || null;
+        console.log("Teste", DATA);
+
+        //Configurando a mensagem de acordo com o tipo de saida solicitada "mk" ou "md"
+        if (tipo ==="mk"){
+            if (DATA === null) return "Power Mitter.........................: Não Cadastrado;\n";
+
+            return `Power Mitter.........................: ${DATA.cod};\nRevisão..............................: ${Formatar_Data(DATA.data)};\nRevisor..............................: ${DATA.auditor};\n`;
+        }else{
+            if (DATA === null) return "- **Power Mitter**: Não Cadastrado;\n";
+
+            return ` - **Power Mitter**: ${DATA.cod};\n - **Revisão:** ${Formatar_Data(DATA.data)};\n - **Revisor:** ${DATA.auditor};\n`;
+        }
+        
+    }
+
     Finalizar_OS_Simplificado = () => {
         let script = '==========================================================================\n';
         script += '                    ORDEM DE SERVIÇO - LOS\n';
@@ -320,23 +349,23 @@ export default class Controller_Objeto_OS_Los {
         return corpo;
     }
 
-    relatorio_Script_Simples = () =>{
+    relatorio_Script_Simples = () => {
         let corpo = "\nCHECAGEM INTERNA\n--------------------------------------------\n";
-
-        corpo += `Verificação de rompimento externo....: ${this.OS.conferencias_tecnicas.rompimento_externo === true? "Realizada":"Não Identificado"}\n`;
-        corpo += `Fibra interna dentro do padrão.......: ${this.OS.conferencias_tecnicas.fibra_padrao === true? "Dentro do Padrão":"Fora do Padrão"}\n`;
-        corpo += `Instalação da PTO....................: ${this.OS.conferencias_tecnicas.pto === true? "Dentro do Padrão":"Fora do Padrão"}\n`;
-        corpo += `Cordão óptico........................: ${this.OS.conferencias_tecnicas.cordao_obtico === true? "Inspecionado":"Não inspecionado"}\n`;
-        corpo += `Limpeza óptica.......................: ${this.OS.conferencias_tecnicas.limpeza === true? "Realizada":"Não realizada"}\n`;
-        corpo += `Validação de falha no equipamento....: ${this.OS.conferencias_tecnicas.checagem === true? "Realizada":"Não realizada"}\n`;
-        corpo += `Fotos das verificações...............: ${this.OS.conferencias_tecnicas.anexos === true? "Anexadas":"Não anexadas"}\n`;
+        corpo += corpo += this.auditoria_power_mitter('mk');
+        corpo += `Verificação de rompimento externo....: ${this.OS.conferencias_tecnicas.rompimento_externo === true ? "Realizada" : "Não Identificado"}\n`;
+        corpo += `Fibra interna dentro do padrão.......: ${this.OS.conferencias_tecnicas.fibra_padrao === true ? "Dentro do Padrão" : "Fora do Padrão"}\n`;
+        corpo += `Instalação da PTO....................: ${this.OS.conferencias_tecnicas.pto === true ? "Dentro do Padrão" : "Fora do Padrão"}\n`;
+        corpo += `Cordão óptico........................: ${this.OS.conferencias_tecnicas.cordao_obtico === true ? "Inspecionado" : "Não inspecionado"}\n`;
+        corpo += `Limpeza óptica.......................: ${this.OS.conferencias_tecnicas.limpeza === true ? "Realizada" : "Não realizada"}\n`;
+        corpo += `Validação de falha no equipamento....: ${this.OS.conferencias_tecnicas.checagem === true ? "Realizada" : "Não realizada"}\n`;
+        corpo += `Fotos das verificações...............: ${this.OS.conferencias_tecnicas.anexos === true ? "Anexadas" : "Não anexadas"}\n`;
 
         return corpo
     }
 
-    Relato_cliente_simples = () =>{
+    Relato_cliente_simples = () => {
         let corpo = "";
-        if(this.OS.info_cliente.relato_cliente === null){
+        if (this.OS.info_cliente.relato_cliente === null) {
             return corpo;
         }
         corpo += "\nRELATO DO CLIENTE\n--------------------------------------------\n";
@@ -345,14 +374,14 @@ export default class Controller_Objeto_OS_Los {
         return corpo;
     }
 
-    Relato_Final_simples = () =>{
+    Relato_Final_simples = () => {
         let corpo = "";
-        if(this.OS.relato_adicional === null){
+        if (this.OS.relato_adicional === null) {
             return corpo;
         }
         corpo += "\nRELATÓRIO\n--------------------------------------------\n";
         corpo += `${this.OS.relato_adicional}\n`;
-        
+
         return corpo;
     }
 
@@ -375,7 +404,7 @@ export default class Controller_Objeto_OS_Los {
         //Finalização
         script += this.Relato_cliente_md();
         script += this.Relato_Final_md();
-        
+
         // Retornando o script Montado.
         return script;
 
@@ -473,23 +502,24 @@ export default class Controller_Objeto_OS_Los {
         return corpo;
     }
 
-    relatorio_Script_md = () =>{
+    relatorio_Script_md = () => {
         let corpo = "\n### CHECAGEM INTERNA\n";
 
-        corpo += `- **Verificação de rompimento externo**: ${this.OS.conferencias_tecnicas.rompimento_externo === true? "Realizada":"Não Identificado"}\n`;
-        corpo += `- **Fibra interna dentro do padrão**: ${this.OS.conferencias_tecnicas.fibra_padrao === true? "Dentro do Padrão":"Fora do Padrão"}\n`;
-        corpo += `- **Instalação da PTO**: ${this.OS.conferencias_tecnicas.pto === true? "Dentro do Padrão":"Fora do Padrão"}\n`;
-        corpo += `- **Cordão óptico**: ${this.OS.conferencias_tecnicas.cordao_obtico === true? "Inspecionado":"Não inspecionado"}\n`;
-        corpo += `- **Limpeza óptica**: ${this.OS.conferencias_tecnicas.limpeza === true? "Realizada":"Não realizada"}\n`;
-        corpo += `- **Validação de falha no equipamento**: ${this.OS.conferencias_tecnicas.checagem === true? "Realizada":"Não realizada"}\n`;
-        corpo += `- **Fotos das verificações**: ${this.OS.conferencias_tecnicas.anexos === true? "Anexadas":"Não anexadas"}\n`;
+        corpo += this.auditoria_power_mitter('md');
+        corpo += `- **Verificação de rompimento externo**: ${this.OS.conferencias_tecnicas.rompimento_externo === true ? "Realizada" : "Não Identificado"}\n`;
+        corpo += `- **Fibra interna dentro do padrão**: ${this.OS.conferencias_tecnicas.fibra_padrao === true ? "Dentro do Padrão" : "Fora do Padrão"}\n`;
+        corpo += `- **Instalação da PTO**: ${this.OS.conferencias_tecnicas.pto === true ? "Dentro do Padrão" : "Fora do Padrão"}\n`;
+        corpo += `- **Cordão óptico**: ${this.OS.conferencias_tecnicas.cordao_obtico === true ? "Inspecionado" : "Não inspecionado"}\n`;
+        corpo += `- **Limpeza óptica**: ${this.OS.conferencias_tecnicas.limpeza === true ? "Realizada" : "Não realizada"}\n`;
+        corpo += `- **Validação de falha no equipamento**: ${this.OS.conferencias_tecnicas.checagem === true ? "Realizada" : "Não realizada"}\n`;
+        corpo += `- **Fotos das verificações**: ${this.OS.conferencias_tecnicas.anexos === true ? "Anexadas" : "Não anexadas"}\n`;
 
         return corpo
     }
 
-    Relato_cliente_md = () =>{
+    Relato_cliente_md = () => {
         let corpo = "";
-        if(this.OS.info_cliente.relato_cliente === null){
+        if (this.OS.info_cliente.relato_cliente === null) {
             return corpo;
         }
         corpo += "\n### RELATO DO CLIENTE\n";
@@ -498,17 +528,16 @@ export default class Controller_Objeto_OS_Los {
         return corpo;
     }
 
-    Relato_Final_md = () =>{
+    Relato_Final_md = () => {
         let corpo = "";
-        if(this.OS.relato_adicional === null){
+        if (this.OS.relato_adicional === null) {
             return corpo;
         }
         corpo += "\n### RELATÓRIO\n";
         corpo += `${this.OS.relato_adicional}\n`;
-        
+
         return corpo;
     }
 }
 
-    
-    
+

@@ -75,6 +75,19 @@ export class Componente_Info_Extra extends LitElement {
                     name="message" rows="10" class="form-textarea"></textarea>
                 </div>
             `:""}
+            <br>
+            <div class="form-group">
+                <caixa-texto
+                    Titulo = "Relatório de Atraso:"
+                    .Tamanho = ${5}
+                    .Texto = ${this.objeto_os.OS.relato_atraso}
+                    .Campo_Texto = ${this.objeto_os.callback_adicionar_texto_relatorio_atraso.bind(this.objeto_os)}
+                    .Atualizar_BD = ${this.objeto_os.salvar_os_localstorage.bind(this.objeto_os)}
+                    categoria = "Outros"
+                    Placeholder = "Excedeu o tempo padrão? Justifique o motivo aqui para a auditoria de ofensores"
+                ></caixa-texto>
+
+            </div>
             
         `;
     }

@@ -85,7 +85,7 @@ export default class Controller_Objeto_OS_Retirada {
     //===============================================================================================================
 
     alterar_tipo_os = (tipo) => {
-        if (this.OS === {} || this.OS === null) {
+        if (Object.keys(this.OS).length === 0 || this.OS === null) {
             return
         }
         this.OS.config_OS.tipo_os = tipo;

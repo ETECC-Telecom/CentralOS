@@ -4,12 +4,13 @@ export const Ordem_Servico_Completa = {
 	config_OS: {
 		tipo_os: null, //Completa, Retenção e etc.
 		finalizada: false,
-		info_encaminhadas: false, //informação copiada/enviada ao cliente
+		info_encaminhadas: true, //informação copiada/enviada ao cliente
 		id: null, //id do banco
 		data_criacao: null,
 		data_alteracao: null,
 		usado_resumo_ia: false,
-
+		power_mitter: null,
+		
 	},
 	info_cliente: {
 		nome_cliente: null, //Nome de quem acompanhou a visita;
@@ -142,5 +143,7 @@ export const Ordem_Servico_Completa = {
 	relato_adicional: null, //Informaçoes adicionais relacionadas a Visita
 	relatorio_estabilidade: null, //campo para adição do .bat
 	relatorio_externo:null, // Relatório carregado do aplicativo desktop
+	relato_omissao: null, // Relato do Técnico sobre o motivo de ter omitido as informações adicionais passadas ao cliente
+	relato_atraso: null
 }
 

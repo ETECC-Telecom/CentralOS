@@ -1,7 +1,7 @@
 
-export const VERSAO = "0.0.4";
-export const DATA_ATUALIZACAO = "11/09/2026"
-
+export const VERSAO = "0.0.5";
+export const DATA_ATUALIZACAO = "15/09/2026"
+export const HASH = "0a3f5b11cb1a343e3184590ed685a389b51ae7fa16e08b96bdee7fd6bc4da1aa";
 export const CHARGELOG = [
 
     //Molde do Changelog
@@ -15,6 +15,41 @@ export const CHARGELOG = [
     //             },
     //         ]
     //     },
+
+    {
+        versao: "0.0.5",
+        data: "15 Setembro, 2026",
+        logs: [
+            {
+                tipo: 1, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Ajustado retorno do sinal de fibra, omitindo os mesmos no script final quando não é informado."
+            },
+            {
+                tipo: 1, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Novo formulário de cadastro e controle de calibragem do Power Mitter para registro automática na baixa da OS;"
+            },
+            {
+                tipo: 1, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Adicionado nova regra para mensagem encaminhada ao Cliente, do qual, na aba educação do cliente, o técnico pode justificar o motivo de não enviar via Whatsapp."
+            },
+            {
+                tipo: 1, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Adicionado campo de relato de atraso para auxilio na auditoria de ofensores, com função de sincronismo implementado;"
+            },
+            {
+                tipo: 1, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Adicionado função de reconhecimento automático de manha/tarde para encaminhar mensagem ao cliente;"
+            },
+            {
+                tipo: 2, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Corrigido o Bug da lista de troca de ativos;"
+            },
+            {
+                tipo: 3, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Correção do bug de Script padrão, no qual precisava digitar algo adicional após inserir o script para validar. Agora essa validação é automática;"
+            },
+        ]
+    },
     {
         versao: "0.0.4",
         data: "11 Setembro, 2026",

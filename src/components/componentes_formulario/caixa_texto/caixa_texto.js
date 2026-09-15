@@ -39,7 +39,7 @@ export class Caixa_Texto extends LitElement {
     }
     connectedCallback() {
         super.connectedCallback(); // ⚠️ Sempre chame o super PRIMEIRO no Lit
-
+        
     }
 
     _Iniciar_Drawer = () => {
