@@ -96,7 +96,7 @@ export class Componente_Acoes extends LitElement {
     }
     _Gerar_Relatorio = async (e) => {
         try {
-            let Texto = this.objeto_os.Finalizar_OS_Simplificado();
+            let Texto = await this.objeto_os.Finalizar_OS_Simplificado();
 
             navigator.clipboard.writeText(Texto)
                 .then(() => {

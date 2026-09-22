@@ -220,13 +220,13 @@ export default class Controller_Objeto_OS_Completa {
         Funções Relacionadas a Exportação do Relatório Completo para Anexo no MK!
 ---------------------------------------------------------------------------------------------------------------------------------------------
     */
-    Finalizar_OS_Simplificado = () => {
+    Finalizar_OS_Simplificado = async () => {
         let script = '==========================================================================\n';
         script += '                    ORDEM DE SERVIÇO - COMPLETA\n';
         script += '==========================================================================\n\n';
         //Construindo o Script a partir de suas Funções Construtoras
         //Header do Script:
-        script += this.abertura_script_simples();
+        script += await this.abertura_script_simples();
 
         //Conferências técnicas:
 
@@ -246,7 +246,7 @@ export default class Controller_Objeto_OS_Completa {
         return script;
     }
 
-    abertura_script_simples = () => {
+    abertura_script_simples = async () => {
         let corpo;
 
         //Construindo as coordenadas
@@ -266,12 +266,26 @@ export default class Controller_Objeto_OS_Completa {
         }
 
         //construindo a formatação da data:
-
-        const data_original = this.OS.config_OS.data_criacao;
-        // 1. Converte a string para um objeto ZonedDateTime
-        const zonedDateTime = Temporal.ZonedDateTime.from(data_original);
-        // 2. Transforma de volta em string, ocultando o nome do fuso horário
-        const data_formatada = zonedDateTime.toString({ timeZoneName: 'never' });
+        let data_formatada = ''
+        try {
+            
+            const data_original = this.OS.config_OS.data_criacao;
+            // 1. Converte a string para um objeto ZonedDateTime
+            const zonedDateTime = Temporal.ZonedDateTime.from(data_original);
+            // 2. Transforma de volta em string, ocultando o nome do fuso horário
+            data_formatada = zonedDateTime.toString({ timeZoneName: 'never' });
+        } catch (error) {
+            data_formatada = `Erro na formatação da Data (${this.OS.config_OS.data_criacao})`
+            await registrarLog({
+                tipo: 'ERRO_EXECUCAO_FORMATAÇÃO_DATA',
+                mensagem: error?.message || String(error),
+                fonte: 'controller_objeto_os_completa.js',
+                linha: 270,
+                coluna: null,
+                stack: error?.stack || null,
+                contexto: 'Ocorreu um erro ao tentar gerar o relatório de data na função abertura_script_simples.'
+            });
+        }
 
 
         //Construindo a Introdução

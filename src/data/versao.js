@@ -1,5 +1,5 @@
 
-export const VERSAO = "0.0.5";
+export const VERSAO = "0.0.6";
 export const DATA_ATUALIZACAO = "15/09/2026"
 export const HASH = "0a3f5b11cb1a343e3184590ed685a389b51ae7fa16e08b96bdee7fd6bc4da1aa";
 export const CHARGELOG = [
@@ -15,7 +15,16 @@ export const CHARGELOG = [
     //             },
     //         ]
     //     },
-
+    {
+            versao:"0.0.6",
+            data:"22 Setembro, 2026",
+            logs:[
+                {
+                    tipo: 3, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                    descricao: "Corrigido erro do TemporalDate ao tentar gerar o relatório final da O.S"
+                },
+            ]
+        },
     {
         versao: "0.0.5",
         data: "15 Setembro, 2026",
