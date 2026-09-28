@@ -1,6 +1,6 @@
 
-export const VERSAO = "0.0.6";
-export const DATA_ATUALIZACAO = "15/09/2026"
+export const VERSAO = "0.0.7";
+export const DATA_ATUALIZACAO = "28/09/2026"
 export const HASH = "0a3f5b11cb1a343e3184590ed685a389b51ae7fa16e08b96bdee7fd6bc4da1aa";
 export const CHARGELOG = [
 
@@ -16,15 +16,33 @@ export const CHARGELOG = [
     //         ]
     //     },
     {
-            versao:"0.0.6",
-            data:"22 Setembro, 2026",
-            logs:[
-                {
-                    tipo: 3, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
-                    descricao: "Corrigido erro do TemporalDate ao tentar gerar o relatório final da O.S"
-                },
-            ]
-        },
+        versao: "0.0.7",
+        data: "28 Setembro, 2026",
+        logs: [
+            {
+                tipo: 2, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Adicionado novo script de encerramento na sessão de educação do cliente relacionado a troca de equipamento no local."
+            },
+            {
+                tipo: 2, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Melhorada a leitura do campo de troca de equipamentos."
+            },
+            {
+                tipo: 2, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Adicionado relatório com motivo e relato da troca de equipamentos na sessão de Lista de Trocas."
+            },
+        ]
+    },
+    {
+        versao: "0.0.6",
+        data: "22 Setembro, 2026",
+        logs: [
+            {
+                tipo: 3, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Corrigido erro do TemporalDate ao tentar gerar o relatório final da O.S"
+            },
+        ]
+    },
     {
         versao: "0.0.5",
         data: "15 Setembro, 2026",

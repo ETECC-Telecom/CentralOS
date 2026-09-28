@@ -65,6 +65,10 @@
 	},
 	{
 		"titulo": "Viabilidade de Ponto Adicional",
-		"descricao": "Realizamos uma avaliação técnica estrutural no imóvel para analisar a cobertura do sinal Wi-Fi e constatamos a real necessidade de instalação de um ponto adicional cabeado para cobrir as áreas de sombra. "
+		"descricao": "Realizamos uma avaliação técnica estrutural no imóvel para analisar a cobertura do sinal Wi-Fi e constatamos a real necessidade de instalação de um ponto adicional cabeado para cobrir as áreas de sombra."
+	},
+	{
+		"titulo": "Troca de Equipamento",
+		"descricao": "Realizamos a troca dos equipamentos ativos no local para solucionar o problema relatado. O serviço foi concluído e os acessos já estão normalizados."
 	}
 ]

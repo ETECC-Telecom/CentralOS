@@ -247,6 +247,7 @@ export class Page_Lista_Troca extends LitElement {
                                 </div>
                                 
                             </div>
+                            <p class="relatorio">${item.relatorio !== undefined?item.relatorio:""}</p>
                         </div>
                         `}
                 ></lit-virtualizer>

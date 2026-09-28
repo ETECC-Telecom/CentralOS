@@ -72,12 +72,22 @@ export default class Controller_Objeto_OS_Completa {
             cod_conexao: "",
             pppoe: "",
             id_os_pai: "",
+            relatorio: "",
+        }
+        
+        let relatorio_completo = "";
+        const Obs = this.OS.conferencia_tecnica.equipamentos_local.observacao;
+        if (Obs != null){
+            relatorio_completo = `Motivo: ${this.OS.conferencia_tecnica.equipamentos_local.motivo_troca}\n\nRelato: ${Obs}`;
+        }else{
+            relatorio_completo = this.OS.conferencia_tecnica.equipamentos_local.motivo_troca
         }
 
         Data.data = Temporal.PlainDate.from(this.OS.config_OS.data_criacao).toString();
         Data.cod_conexao = this.OS.conferencia_tecnica.equipamentos_local.cod_conexao === null ? 0 : this.OS.conferencia_tecnica.equipamentos_local.cod_conexao;
         Data.pppoe = this.OS.conferencia_tecnica.equipamentos_local.pppoe === null ? 0 : this.OS.conferencia_tecnica.equipamentos_local.pppoe;
         Data.id_os_pai = id_os_pai;
+        Data.relatorio = relatorio_completo;
 
         // Gerendo os dados dos ativos trocados: 
         this.OS.conferencia_tecnica.equipamentos_local.ativos.map((valor, chave) => {

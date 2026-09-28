@@ -13,7 +13,8 @@ export async function db_adicionar_Troca(Ativos) {
             data: Ativos.data,
             cod_conexao: Ativos.cod_conexao,
             pppoe: Ativos.pppoe,
-            id_os_pai: Ativos.id_os_pai
+            id_os_pai: Ativos.id_os_pai,
+            relatorio: Ativos.relatorio
         });
         disparar_notificacao("sucesso", `Trocas de Ativos Registradas`);
         return true;

@@ -180,14 +180,23 @@ export class Componente_Equipamentos_Local extends LitElement {
 
             </div>
             
+            
                 `:""}
+            
+            <br>    
+            <hr>
+            <br> 
+            <h3>Equipamentos no Local</h3>
+            
+            <p class="paragraph_info"><b>Lembre-se que</b>: a categoria de Inseridos é valido para todos os ativos que estão no local, seja ele recém inserido, ou que já estavam no cliente!</p>
+
             <div class="form-group" style="margin-top: 10px;">
                 <button 
                     @click="${this._Abrir_Modal_Novo}"
                     type="button" class="form-button">Add Equipamentos</button>
             </div>
             <br>
-
+            
             <div class="container-equipamentos">
 
                 ${this.objeto_equipamentos.map((item, chave)=>html`

@@ -25,6 +25,13 @@ p {
     text-align: left;
 }
 
+.paragraph_info{
+    margin-top: .5rem;
+    font-size: var(--paragraph-info);
+    font-weight: 100;
+    text-align: left;
+    color: var(--color-text-info)
+}
 
 .container-equipamentos{
     display: flex;

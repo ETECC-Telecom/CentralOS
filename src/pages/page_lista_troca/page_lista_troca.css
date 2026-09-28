@@ -28,6 +28,12 @@ a {
     font-size: var(--paragraph)
 }
 
+.relatorio{
+    color: var(--color-text-info);
+    font-size: var(--paragraph-info);
+    white-space: pre-line;
+}
+
 nav {
     display: flex;
     justify-content: space-around;
