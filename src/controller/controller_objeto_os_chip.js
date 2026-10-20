@@ -208,7 +208,7 @@ export default class Controller_Objeto_OS_Chip {
     //===============================================================================================================
     Finalizar_OS_Simplificado = () => {
         let script = '==========================================================================\n';
-        script += '                    ORDEM DE SERVIÇO - LOS\n';
+        script += '                    ORDEM DE SERVIÇO - CHIP\n';
         script += '==========================================================================\n\n';
         //Construindo o Script a partir de suas Funções Construtoras
         //Header do Script:
@@ -348,7 +348,7 @@ export default class Controller_Objeto_OS_Chip {
         // Construindo o Script:
 
         // Gerando o Header:
-        script = "# Ordem de Serviço - Los\n---\n";
+        script = "# Ordem de Serviço - Chip\n---\n";
         script += this.abertura_script_md();
 
         script += '## CONFERÊNCIA TÉCNICA\n';

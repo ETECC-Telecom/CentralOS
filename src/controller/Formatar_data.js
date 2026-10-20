@@ -1,5 +1,11 @@
 
 export const Formatar_Data = (data) => {
+
+    //Filtra se a data n está vazia
+    if(!data){
+        return
+    }
+
     // 1. Cria o objeto Temporal.PlainDate a partir da string no formato ISO (AAAA-MM-DD)
     const dataIso = Temporal.PlainDate.from(data);
 

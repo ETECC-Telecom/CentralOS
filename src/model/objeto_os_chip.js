@@ -14,7 +14,7 @@ export const Ordem_Servico_chip = {
 	info_cliente: {
 		nome_cliente: null, //Nome de quem acompanhou a visita;
 		nome_cadastro: null, //Nome do Cliente em Cadastro para Mensagens Altomáticas
-		parentesco: null, //Titular, Esposa'o, Filho'a, Funcionário, Avó'ô, Tio'a, outro
+		parentesco: 'Titular', //Titular, Esposa'o, Filho'a, Funcionário, Avó'ô, Tio'a, outro
 		parentesco_info: null, //Em caso de outros
 		relato_cliente: null, //O problema relatado pelo Cleinte;
 		telefone: null

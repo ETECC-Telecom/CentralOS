@@ -1,0 +1,47 @@
+:host {
+    display: block;
+    box-sizing: border-box;
+    color: var(--text-color);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+.accordion {
+    color: var(--text-color);
+    cursor: pointer;
+    background-color:transparent;
+    padding: 1rem;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--text-color);
+}
+
+
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+}
+
+/* Quando o accordion estiver aberto, exibe o conteúdo */
+.panel.open {
+    display: block;
+    padding: 18px;
+}
+

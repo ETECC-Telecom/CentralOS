@@ -2,7 +2,7 @@ import { openDB } from "idb";
 
 
 const NOME_BANCO = "CentralOS_DB";
-const VERSAO_BANCO = 5;
+const VERSAO_BANCO = 7;
 
 async function iniciarDB() {
   const db = await openDB(NOME_BANCO, VERSAO_BANCO, {
@@ -45,6 +45,12 @@ async function iniciarDB() {
       }
       if (!db.objectStoreNames.contains("notificacao_sinc")) {
         const store = db.createObjectStore("notificacao_sinc", {
+          keyPath: "id",
+          autoIncrement: true
+        });
+      }
+      if (!db.objectStoreNames.contains("ficha_treino")) {
+        const store = db.createObjectStore("ficha_treino", {
           keyPath: "id",
           autoIncrement: true
         });

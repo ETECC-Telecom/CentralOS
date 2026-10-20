@@ -8,8 +8,11 @@
     --border_color_warning: #f9f699;
     --color_primary: #52a6fa;
     --border_color_primary: #8bc3fb;
+    --color_error: #fb3f3f;
+    --border_color_error: #fb8b8b;
 
     --background-color: #F5F5F5;
+    --background-color-alfa: #1717178c;
     --header-color: #e4002b;
     --cards-background: #FFFFFF;
     --text-color: #212121;
@@ -20,6 +23,7 @@
 
     /*Variáveis de Formulários*/
     --btn-background-color: #fefcf4;
+    --btn-background-color-invert: #212121;
     --btn-text-background-color: #212121;
     --btn-border-color: #E0E0E0;
     --border-radius:1rem;
@@ -42,7 +46,10 @@ body.dark-theme {
     --color_warning: #735f05;
     --color_text_warning:#edc422;
     --color_primary: #003d79;
+    --color_error: #d40000;
+
     --background-color: #121212;
+    --background-color-alfa: #fffcfc83;
     --header-color: #1E1E1E;
     --cards-background: #252525;
     --text-color: #FFFFFF;
@@ -52,6 +59,7 @@ body.dark-theme {
     
     /*Variáveis de Formulários*/
     --btn-background-color: #191919;
+    --btn-background-color-invert: #F5F5F5;
     --btn-text-background-color: #F5F5F5;
     --btn-border-color: #212121;
     --color-text-info:#b0b0b0;

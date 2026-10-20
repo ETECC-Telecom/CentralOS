@@ -16,6 +16,21 @@ export const CHARGELOG = [
     //         ]
     //     },
     {
+        versao: "0.1.0",
+        data: "20 Outubro, 2026",
+        logs: [
+            {
+                tipo: 1, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Desenvolvido uma nova página para criação e gestão da ficha de treinamento técnico;"
+            },
+            {
+                tipo: 2, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Reformulado alguns ícones do sistema;"
+            },
+        ]
+    },
+    {
+
         versao: "0.0.7",
         data: "28 Setembro, 2026",
         logs: [

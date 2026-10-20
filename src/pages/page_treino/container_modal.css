@@ -1,0 +1,86 @@
+.container_modal {
+    /* Posicionamento e Cobertura */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5000;
+    padding: 1rem;
+    /* Garante que fique acima de outros elementos */
+
+    /* Efeito Glassmorphism */
+    background: var(--background-color-alfa);
+    /* Cor de fundo semitransparente */
+    backdrop-filter: blur(10px);
+    /* Efeito de desfoque no fundo */
+    -webkit-backdrop-filter: blur(10px);
+    /* Suporte para Safari */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--cards-background);
+    color: var(--color-text);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-button {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;   
+}
+
+/* Estilização das Labels */
+.form-label {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--btn-text-background-color);
+}
+
+/* Reset e Estilo Flat para Inputs de Texto, Select e Textarea */
+.form-input,
+.form-select,
+.form-textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Zera o visual padrão do navegador */
+
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 12px;
+
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    /* Bordas levemente arredondadas */
+    background-color: #f8fafc;
+    color: #1a202c;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Estados de Foco */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--destaque-color);
+    /* Azul Flat */
+    background-color: #ffffff;
+}

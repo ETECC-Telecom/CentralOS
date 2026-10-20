@@ -17,7 +17,7 @@ import Controller_Objeto_OS_Completa from '../../controller/controller_objeto_os
 import { Capturar_Nivel_Lider } from '../../model/Service_Niveis_Usuario';
 import { Capturar_Nivel_Treino } from '../../model/Service_Niveis_Usuario';
 
-
+import { Disparar_PIN } from '../../components/componente_PIN/componente_pin';
 //Icones
 import { Icone_Lideranca } from '../../components/icones/icone_lideranca';
 import { Icone_Treinamento } from '../../components/icones/icone_treinamento';
@@ -95,6 +95,7 @@ export class Home_Page extends LitElement {
 
     }
 
+   
     render() {
         return html`
             <!--Retorno renderizado-->
@@ -121,7 +122,7 @@ export class Home_Page extends LitElement {
                         <p class="dash-value">${this.os_dash?.mes ||0}</p>
                     </div>
                 </div>
-                
+                                
                 <!--OS em Andamento!-->
                 ${this.os_em_aberto ? html`
                     <card-continuar-os
@@ -147,13 +148,17 @@ export class Home_Page extends LitElement {
 
                 <div id="acoes">
                     ${this.lideranca?html`
-                        <a href="/lideranca" class="coluna-acoes">
+                        <a 
+                            @click="${()=>{Disparar_PIN(()=>{window.location.href = "/lideranca";});}}"
+                            class="coluna-acoes">
                             <p>Liderança</p>
                             <icone-lideranca style="--icon-size: 4rem;"></icone-lideranca>                        
                         </a>
                     `:""}
                     ${this.treinamento?html`
-                        <a href="/treinamento" class="coluna-acoes">
+                        <a 
+                            @click="${()=>{Disparar_PIN(()=>{window.location.href = "/treinamento";});}}"
+                            class="coluna-acoes">
                             <p>Treinamento</p>
                             <icone-treinamento style="--icon-size: 4rem;"></icone-treinamento>  
                         </a>

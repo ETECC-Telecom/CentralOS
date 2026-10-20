@@ -260,12 +260,12 @@ export class Page_Config extends LitElement {
                                 <input
                                     style="flex:1"
                                     id="power-mitter-data"
-                                    placeholder="${this.formulario}" type="date" name="form_mitter_data" 
+                                    type="date" name="form_mitter_data" 
                                     value="${this.mitter.data}" class="form-input">
                                 <input
                                     style="flex:4"
                                     id="power-mitter-auditor"
-                                    placeholder="${this.formulario}" type="text" name="form_mitter_auditor" 
+                                    placeholder="${this.mitter?.auditor||'Não Informado'}" type="text" name="form_mitter_auditor" 
                                     .value="${this.mitter.auditor}" class="form-input">
                             </div>
                             <button 

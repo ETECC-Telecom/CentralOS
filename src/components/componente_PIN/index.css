@@ -1,0 +1,84 @@
+:host {
+    display: block;
+    box-sizing: border-box;
+    
+    color: var(--text-color);
+}
+
+/* Reset básico para o Shadow DOM */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: var(--text-color);
+    text-align: center;
+}
+
+p {
+    font-size: var(--paragraph);
+    font-weight: 100;
+    text-align: left;
+}
+
+.container {
+    /* Posicionamento e Cobertura */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    /* Garante que fique acima de outros elementos */
+
+    /* Efeito Glassmorphism */
+    background: var(--background-color-alfa);
+    /* Cor de fundo semitransparente */
+    backdrop-filter: blur(10px);
+    /* Efeito de desfoque no fundo */
+    -webkit-backdrop-filter: blur(10px);
+    /* Suporte para Safari */
+}
+
+.pin-digit{
+    padding: 1rem;
+    background-color: var(--background-color);
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.button-pin{
+    padding: 1rem;
+    background-color: var(--background-color);
+    border-radius: 1rem;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    user-select: none;
+    -webkit-user-select: none; 
+}
+
+.button-pin:hover{
+    padding: 1rem;
+    background-color: var(--destaque-color);
+    border-radius: 1.5rem;
+}
+
+.btn_alterar{
+    padding: 0.5rem 2rem;
+    background-color: var(--destaque-color);
+    border-radius: 1.5rem;
+    user-select: none;
+    -webkit-user-select: none; 
+}

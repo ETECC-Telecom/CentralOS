@@ -1,0 +1,40 @@
+
+
+export const SOFTSKILLS = [
+    {
+        nome:"Comunicação",
+        descricao: '<p><b>O que observar:</b> Avalie se o colaborador consegue transmitir informações de forma clara, objetiva e compreensível, tanto com a equipe quanto com clientes. Observe também se ele pratica <b>escuta ativa</b>, aguardando e compreendendo a informação antes de responder ou executar uma atividade. Durante o atendimento, verifique se consegue explicar situações técnicas em uma linguagem adequada ao interlocutor, sem gerar dúvidas ou interpretações equivocadas.</p><p><b>Orientação ao treinador:</b> Observe se o técnico demonstra que realmente compreendeu as instruções recebidas. Uma boa prática é verificar se ele consegue <b>repetir ou explicar com suas próprias palavras</b> aquilo que foi orientado. Avalie também como ele comunica problemas, dificuldades ou alterações encontradas em campo: a informação deve ser objetiva, precisa e acompanhada dos dados necessários para a tomada de decisão. Fique atento a situações em que uma comunicação incompleta ou precipitada possa gerar retrabalho, erro operacional ou insatisfação do cliente.</p><p><b>Ponto de atenção:</b> Comunicação eficiente não significa apenas falar bem. O técnico também precisa <b>saber ouvir, interpretar, confirmar o entendimento e transmitir a informação correta no momento adequado</b>.</p>',
+        nivel_atual: 0,
+        relatorio:[]
+    },
+    {
+        nome:"Organização",
+        descricao: '<p><b>O que observar:</b> Avalie como o colaborador organiza seu tempo, ferramentas, materiais e informações durante a rotina de trabalho. Observe se ele consegue seguir uma sequência lógica para executar as atividades, mantendo o ambiente de trabalho organizado e os equipamentos devidamente acondicionados. Verifique também se demonstra facilidade para localizar ferramentas, consultar informações e seguir os procedimentos estabelecidos pela empresa.</p><p><b>Orientação ao treinador:</b> Observe se o técnico utiliza os <b>checklists, procedimentos e orientações disponíveis</b> como apoio para sua execução ou se depende constantemente de novas orientações para lembrar etapas já apresentadas. Avalie também a capacidade de planejamento: um técnico organizado antecipa necessidades, separa previamente os materiais necessários e evita deslocamentos ou interrupções desnecessárias. Atenção especial para o desperdício de tempo procurando ferramentas, informações ou materiais que deveriam estar previamente organizados.</p><p><b>Ponto de atenção:</b> Organização não é apenas manter tudo limpo. É demonstrar <b>controle sobre o próprio trabalho</b>, sabendo o que precisa ser feito, em qual ordem e quais recursos serão necessários para concluir a atividade.</p>',
+        nivel_atual: 0,
+        relatorio:[]
+    },
+    {
+        nome:"Inteligência Emocional",
+        descricao: '<p><b>O que observar:</b> Avalie como o colaborador reage diante de erros, imprevistos, cobranças, feedbacks e situações de pressão. Observe se consegue manter uma postura profissional quando algo não acontece conforme o planejado, especialmente durante atendimentos complexos, dificuldades técnicas ou momentos de maior volume de trabalho.</p><p><b>Orientação ao treinador:</b> Ao apresentar um erro ou corrigir uma execução, observe a reação do técnico. Ele consegue receber o feedback e utilizar a informação para melhorar ou demonstra resistência, frustração excessiva ou desmotivação? Em situações inesperadas, verifique se ele fica <b>estagnado diante do problema</b> ou se consegue respirar, analisar o cenário e buscar alternativas para solucioná-lo. O objetivo não é avaliar se o técnico fica nervoso ou frustrado, mas sim <b>como ele administra essas emoções e transforma a situação em uma ação produtiva</b>.</p><p><b>Ponto de atenção:</b> Inteligência emocional não significa não cometer erros ou nunca demonstrar frustração. Significa conseguir <b>recuperar o controle, aprender com a situação e continuar buscando uma solução</b> sem comprometer a qualidade do trabalho ou o relacionamento com as pessoas.</p>',
+        nivel_atual: 0,
+        relatorio:[]
+    },
+    {
+        nome:"Uso de EPIs (Segurança)",
+        descricao: '<p><b>O que observar:</b> Avalie se o colaborador utiliza corretamente os Equipamentos de Proteção Individual necessários para cada atividade e se demonstra preocupação espontânea com a própria segurança. Observe se os EPIs são utilizados como parte natural da execução ou somente após uma cobrança do treinador. Verifique também as condições de conservação, armazenamento e cuidado com os equipamentos.</p><p><b>Orientação ao treinador:</b> Observe principalmente o comportamento do técnico diante de atividades consideradas simples ou rápidas. Situações como “é só um minuto”, “é só uma verificação” ou “não precisa porque já fiz isso antes” podem indicar uma percepção inadequada de risco. Avalie se o técnico <b>identifica previamente a necessidade de proteção</b> e interrompe a execução quando não possui as condições adequadas de segurança.</p><p><b>Ponto de atenção:</b> O principal indicador é a <b>autonomia na segurança</b>. O comportamento esperado é que o técnico utilize os EPIs porque reconhece o risco da atividade, e não simplesmente porque existe alguém fiscalizando.</p>',
+        nivel_atual: 0,
+        relatorio:[]
+    },
+    {
+        nome:"Condução Veicular",
+        descricao: '<p><b>O que observar:</b> Avalie se o colaborador conduz o veículo de acordo com as leis de trânsito, praticando uma direção defensiva e segura. Observe o comportamento diante de outros veículos, pedestres, cruzamentos, mudanças de faixa e situações de risco. Também avalie o cuidado com o patrimônio da empresa, considerando limpeza, conservação, utilização adequada e percepção de possíveis problemas mecânicos.</p><p><b>Orientação ao treinador:</b> Observe se a condução é <b>preventiva, previsível e suave</b>, ou se apresenta comportamentos como acelerações excessivas, frenagens bruscas, manobras desnecessárias, distrações ou condução agressiva. Avalie também se o técnico demonstra responsabilidade pelo veículo mesmo quando não está sendo diretamente supervisionado. O veículo representa um patrimônio da empresa e, durante a circulação, também representa visualmente a própria organização perante clientes e sociedade.</p><p><b>Ponto de atenção:</b> Uma boa condução não deve ser avaliada apenas pela chegada ao destino. O comportamento esperado envolve <b>segurança, responsabilidade, conservação do patrimônio e respeito aos demais usuários da via</b>.</p>',
+        nivel_atual: 0,
+        relatorio:[]
+    },
+    {
+        nome:"Relacionamento Interpessoal",
+        descricao: '<p><b>O que observar:</b> Avalie como o colaborador se relaciona com técnicos, liderança, clientes e demais pessoas envolvidas na operação. Observe se demonstra cordialidade, respeito, colaboração e disposição para trabalhar em equipe. Verifique também sua postura diante de opiniões diferentes, correções e situações em que precisa solicitar ou oferecer ajuda.</p><p><b>Orientação ao treinador:</b> Observe o comportamento do técnico não apenas durante a execução das atividades, mas também nos momentos de integração, reuniões, deslocamentos e atendimentos em campo. Analise se ele demonstra <b>espírito colaborativo</b>, contribuindo para o ambiente e ajudando quando necessário, ou se apresenta comportamentos que podem gerar isolamento, conflitos ou dificuldades de integração. Também é importante observar como ele trata pessoas que não possuem relação direta de autoridade sobre ele, pois esse comportamento ajuda a identificar sua postura profissional de forma mais ampla.</p><p><b>Ponto de atenção:</b> Bom relacionamento interpessoal não significa concordar com todos. Significa conseguir <b>discordar, receber críticas, trabalhar em conjunto e resolver diferenças mantendo o respeito e o profissionalismo</b>.</p>',
+        nivel_atual: 0,
+        relatorio:[]
+    },
+]

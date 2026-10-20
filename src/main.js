@@ -1,6 +1,7 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
 import { Router } from '@lit-labs/router';
 
+
 //Import das páginas
 import { Home_Page } from './pages/home/home';
 import { ADD_OS } from './pages/add_os/add_os';
@@ -14,6 +15,7 @@ import { Page_Config } from './pages/page_config/page_config';
 import { Page_Sobre } from './pages/page_sobre/page_sobre';
 import { Page_Lideranca } from './pages/page_lideranca/page_lidenranca';
 import { Page_Treinamento } from './pages/page_treino/page_treino';
+import { Page_Ficha_Treino } from './pages/pagina_ficha_treino/page_ficha_treino';
 
 import { Gerenciar_Scripts } from './pages/gerenciar_scripts/gerenciar_scripts';
 import { Page_Lista_OS } from './pages/page_lista_os/page_lista_os';
@@ -21,8 +23,10 @@ import { Page_Lista_OS } from './pages/page_lista_os/page_lista_os';
 //Import dos Componentes
 import { Notificacao } from './components/notificacao/notificacao';
 import { registrarLog } from './controller/logger';
+import { Componente_PIN } from './components/componente_PIN/componente_pin';
 
 import { Page_Relatorio } from './pages/page_relatorio/page_relatorio';
+
 
 // Detecta se estamos no GitHub Pages ou Localhost
 const BASE_PATH = window.location.hostname.includes('github.io')
@@ -147,7 +151,11 @@ export class Main extends LitElement {
                 path: `${BASE_PATH}/treinamento`,
                 render: () => html`<page-treinamento></page-treinamento>`,
             },
-            
+            {
+                path: `${BASE_PATH}/ficha_treino`,
+                render: () => html`<page-ficha-treino></page-ficha-treino>`,
+            },
+
             {
                 path: '/perfil/:name',
                 // Os parâmetros da URL chegam como um objeto no primeiro argumento
@@ -188,6 +196,7 @@ export class Main extends LitElement {
     render() {
         return html`
         <componente-notificacao></componente-notificacao>
+        <componente-pin></componente-pin>
         <main class="meu-container">
             ${this._router.outlet()}
         </main>
@@ -196,3 +205,5 @@ export class Main extends LitElement {
 }
 
 customElements.define('main-element', Main);
+
+
