@@ -242,6 +242,12 @@ export const HABILIDADES = [
         obrigatorio: true
     },
     {
+        nome: "Gestão das senhas pessoais de Login das plataformas da Empresa",
+        categoria: "Boas Práticas",
+        link: null,
+        obrigatorio: true
+    },
+    {
         nome: "Registro correto de clientes sem contato",
         categoria: "Instruções de Trabalho",
         link: null,

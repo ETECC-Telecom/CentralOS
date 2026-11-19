@@ -27,6 +27,8 @@ import { Componente_PIN } from './components/componente_PIN/componente_pin';
 
 import { Page_Relatorio } from './pages/page_relatorio/page_relatorio';
 
+//Imports novas Páginas de OS
+import { Page_Ordem_Servico_Completa_Remaster } from './pages/Paginas_Scripts_OS/Pagina_OS_Completa/Pagina_OS_Completa_Remaster';
 
 // Detecta se estamos no GitHub Pages ou Localhost
 const BASE_PATH = window.location.hostname.includes('github.io')
@@ -131,6 +133,13 @@ export class Main extends LitElement {
                 path: `${BASE_PATH}/iniciar_os_chip`,
                 render: () => html`<page-os-chip></page-os-chip>`,
             },
+
+            //Páginas de OSs reformuladas
+            {
+                path: `${BASE_PATH}/iniciar_os_completa_remaster`,
+                render: () => html`<page-os-completa-remaster></page-os-completa-remaster>`,
+            },
+
             {
                 path: `${BASE_PATH}/relatorio_os`,
                 render: () => html`<page-relatorio></page-relatorio>`,

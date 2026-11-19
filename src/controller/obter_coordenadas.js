@@ -13,6 +13,7 @@ export async function obterCoordenadas() {
 
         // Se o usuário já negou anteriormente
         if (permissao.state === "denied") {
+            console.log("Dei erro")
             throw new Error(
                 "Permissão de localização negada. Altere nas configurações do navegador."
             );
@@ -49,6 +50,7 @@ export async function obterCoordenadas() {
                     default:
                         reject(new Error("Erro desconhecido ao obter localização."));
                 }
+        
             },
             {
                 enableHighAccuracy: true,

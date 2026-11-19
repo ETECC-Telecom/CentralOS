@@ -235,20 +235,21 @@ export class Componente_Acoes extends LitElement {
         if (Retorno[0]) {
 
             //Adiciona Itens no Sinc para enviar a planilha:
-            try{
-                await Verificar_Salvar_Sync(this.objeto_os.OS);
-            }catch(error){
-                disparar_notificacao("erro", `Não consegui adicionar os itens de sincronismo da OS:\n${error}`);
-                await registrarLog({
-                    tipo: 'ERRO_EXECUCAO_ADICIONAR_ITENS_SINC',
-                    mensagem: error?.message || String(error),
-                    fonte: 'componetes_acoes.js',
-                    linha: null,
-                    coluna: null,
-                    stack: error?.stack || null,
-                    contexto: 'Ocorreu um erro ao tentar adicionar itens de sincronismo ao final da OS.'
-                });
-            }
+            //Comentato para melhoria de logica pois está sincronizando todas as OS's 
+            // try{
+            //     await Verificar_Salvar_Sync(this.objeto_os.OS);
+            // }catch(error){
+            //     disparar_notificacao("erro", `Não consegui adicionar os itens de sincronismo da OS:\n${error}`);
+            //     await registrarLog({
+            //         tipo: 'ERRO_EXECUCAO_ADICIONAR_ITENS_SINC',
+            //         mensagem: error?.message || String(error),
+            //         fonte: 'componetes_acoes.js',
+            //         linha: null,
+            //         coluna: null,
+            //         stack: error?.stack || null,
+            //         contexto: 'Ocorreu um erro ao tentar adicionar itens de sincronismo ao final da OS.'
+            //     });
+            // }
 
             //Limpamos o objeto OS salvo no local storage:
             try {

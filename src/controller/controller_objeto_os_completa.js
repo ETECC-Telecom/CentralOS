@@ -279,11 +279,22 @@ export default class Controller_Objeto_OS_Completa {
         let data_formatada = ''
         try {
             
-            const data_original = this.OS.config_OS.data_criacao;
-            // 1. Converte a string para um objeto ZonedDateTime
+            // const data_original = this.OS.config_OS.data_criacao;
+            // // 1. Converte a string para um objeto ZonedDateTime
+            // const zonedDateTime = Temporal.ZonedDateTime.from(data_original);
+            // // 2. Transforma de volta em string, ocultando o nome do fuso horário
+            // data_formatada = zonedDateTime.toString({ timeZoneName: 'never' });
+
+
+            // 1. Pega a data original ou usa uma string de data válida como fallback caso seja null/undefined
+            const data_original = this.OS.config_OS.data_criacao ?? '2026-01-01T00:00:00[UTC]';
+
+            // 2. Converte a string (ou o fallback) para um objeto ZonedDateTime
             const zonedDateTime = Temporal.ZonedDateTime.from(data_original);
-            // 2. Transforma de volta em string, ocultando o nome do fuso horário
+
+            // 3. Transforma de volta em string, ocultando o nome do fuso horário
             data_formatada = zonedDateTime.toString({ timeZoneName: 'never' });
+            
         } catch (error) {
             data_formatada = `Erro na formatação da Data (${this.OS.config_OS.data_criacao})`
             await registrarLog({

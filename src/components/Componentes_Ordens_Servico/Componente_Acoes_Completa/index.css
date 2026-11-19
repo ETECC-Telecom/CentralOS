@@ -1,0 +1,51 @@
+:host {
+    display: block;
+    box-sizing: border-box;
+    color: var(--text-color);
+  }
+
+  /* Reset básico para o Shadow DOM */
+  *, *::before, *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+  }
+  
+h2 {
+    color: var(--text-color);
+    text-align: center;
+}
+
+p {
+    font-size: var(--paragraph);
+    font-weight: 100;
+    text-align: left;
+}
+
+.form-button {
+    -webkit-appearance: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:.3rem;
+    appearance: none;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: var(--destaque-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+}
+
+.form-button:hover {
+    background-color: var(--destaque-color);
+}
+
+.form-button:active {
+    background-color: var(--destaque-color);
+}

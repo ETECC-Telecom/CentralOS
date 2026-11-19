@@ -1,0 +1,327 @@
+:host {
+    display: block;
+    box-sizing: border-box;
+    color: var(--text-color);
+}
+
+/* Reset básico para o Shadow DOM */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: var(--text-color);
+    text-align: center;
+}
+
+p {
+    font-size: var(--paragraph);
+    font-weight: 100;
+    text-align: left;
+}
+
+/* Estilo Base da Div Callout */
+.callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 8px;
+    border-left: 5px solid;
+    /* Borda de destaque na esquerda */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Tamanho e alinhamento do ícone */
+.callout-icon {
+    font-size: 1.25rem;
+    line-height: 1.2;
+    flex-shrink: 0;
+    /* Impede o ícone de encolher */
+}
+
+/* Conteúdo de texto */
+.callout-content {
+    flex: 1;
+}
+
+.callout-title {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.callout-content p {
+    margin: 0;
+    font-size: 0.925rem;
+    line-height: 1.5;
+}
+
+/* ==============================================
+   ESTILO ESPECÍFICO: AVISO / ALERTA (WARNING)
+   ============================================== */
+.callout-warning {
+    background-color: #fffbeb;
+    /* Fundo amarelo suave */
+    border-color: #f59e0b;
+    /* Borda amarela/laranja */
+    color: #78350f;
+    /* Texto num tom escuro contrastante */
+}
+
+.callout-warning .callout-title {
+    color: #92400e;
+    /* Título um pouco mais destacado */
+}
+
+/* Responsividade para telas muito pequenas */
+@media (max-width: 480px) {
+    .callout {
+        padding: 12px 16px;
+        gap: 12px;
+    }
+}
+
+
+
+.radio-input input {
+    display: none;
+}
+
+.radio-input {
+    --container_width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #000000;
+    width: var(--container_width);
+    overflow: hidden;
+    border: 1px solid rgba(53, 52, 52, 0.226);
+}
+
+.radio-input label {
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    font-weight: 600;
+    letter-spacing: -1px;
+    font-size: 14px;
+}
+
+.selection {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    transition: 0.15s ease;
+}
+
+.radio-input label:has(input:checked) {
+    color: #fff;
+}
+
+.radio-input label:has(input:checked)~.selection {
+    background-color: var(--destaque-color);
+    display: inline-block;
+}
+
+.radio-input label:nth-child(1):has(input:checked)~.selection {
+    transform: translateX(calc(50% / 20%));
+}
+
+.radio-input label:nth-child(2):has(input:checked)~.selection {
+    transform: translateX(calc(50% * 2));
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilização das Labels */
+.form-label {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--btn-text-background-color);
+}
+
+/* Reset e Estilo Flat para Inputs de Texto, Select e Textarea */
+.form-input,
+.form-select,
+.form-textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Zera o visual padrão do navegador */
+
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 12px;
+
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    /* Bordas levemente arredondadas */
+    background-color: #f8fafc;
+    color: #1a202c;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Estados de Foco */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--destaque-color);
+    /* Azul Flat */
+    background-color: #ffffff;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap:.5rem;
+}
+/* Customizações específicas do Select */
+.form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+    /* Espaço para a seta customizada */
+}
+
+/* Reset e Estilo Flat para Inputs de Texto, Select e Textarea */
+
+.form-select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Zera o visual padrão do navegador */
+
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 12px;
+
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    /* Bordas levemente arredondadas */
+    background-color: #f8fafc;
+    color: #1a202c;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    
+}
+
+/* Estados de Foco */
+.form-select:focus {
+    outline: none;
+    border-color: var(--destaque-color);
+    /* Azul Flat */
+    background-color: #ffffff;
+    
+}
+
+.form-button-quadrado {
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: var(--destaque-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: .5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width:43px;
+    height: 43px;
+}
+
+.form-button-quadrado:hover {
+    background-color: var(--destaque-color);
+}
+
+.form-button:active {
+    background-color: var(--destaque-color);
+    
+}
+
+/* Lista */
+.lista-container {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+/* Item da Lista */
+.item-lista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--btn-background-color-invert);
+    border: 1px solid var(--btn-border-color);
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.item-lista:hover {
+    border-color: #cbd5d9;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+/* Texto */
+.texto-item {
+    color: var(--btn-background-color);
+    font-size: 0.95rem;
+    word-break: break-word;
+    margin-right: 15px;
+}
+
+/* Botão de Exclusão */
+.btn-excluir {
+    background: transparent;
+    border: none;
+    color: var(--destaque-color);
+    font-size: 1.25rem;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-excluir:hover {
+    background-color: #ffeef0;
+    color: #b31d28;
+}
