@@ -12,7 +12,7 @@
     --border_color_error: #fb8b8b;
 
     --background-color: #F5F5F5;
-    --background-color-alfa: #1717178c;
+    --background-color-alfa: #171717e6;
     --header-color: #e4002b;
     --cards-background: #FFFFFF;
     --text-color: #212121;
@@ -49,7 +49,7 @@ body.dark-theme {
     --color_error: #d40000;
 
     --background-color: #121212;
-    --background-color-alfa: #fffcfc83;
+    --background-color-alfa: #fffcfcd4;
     --header-color: #1E1E1E;
     --cards-background: #252525;
     --text-color: #FFFFFF;
