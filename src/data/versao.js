@@ -1,6 +1,6 @@
 
-export const VERSAO = "0.0.7";
-export const DATA_ATUALIZACAO = "28/09/2026"
+export const VERSAO = "0.1.2";
+export const DATA_ATUALIZACAO = "19/11/2026"
 export const HASH = "0a3f5b11cb1a343e3184590ed685a389b51ae7fa16e08b96bdee7fd6bc4da1aa";
 export const CHARGELOG = [
 
@@ -15,6 +15,20 @@ export const CHARGELOG = [
     //             },
     //         ]
     //     },
+    {
+        versao: "0.1.2",
+        data: "19 Novembro, 2026",
+        logs: [
+            {
+                tipo: 1, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Nova função de import e export para as fichas de treino, para que técnicos treinadores possam revisar o treino de novos colaboradores."
+            },
+            {
+                tipo: 2, //1 = Novidades / Features, 2 = Melhorias e 3 = Correções (Bug Fixes)
+                descricao: "Corrigido o problema do fundo extremamente transparente na Ficha de treinamento dos técnicos."
+            },
+        ]
+    },
     {
         versao: "0.1.0",
         data: "20 Outubro, 2026",
